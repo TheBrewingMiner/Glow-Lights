@@ -11,8 +11,9 @@ import net.thebrewingminer.glowlights.GlowLights;
 public class ModItems {
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, GlowLights.MODID);
 
-    public static final RegistryObject<Item> GLOW_LANTERN = ITEMS.register("glow_lantern",
-            () -> new Item(new Item.Properties().tab(CreativeModeTab.TAB_BUILDING_BLOCKS)));
+//  Item registered prior to my understanding of the code used within the ModBlocks class.
+//    public static final RegistryObject<Item> GLOW_LANTERN = ITEMS.register("glow_lantern",
+//            () -> new Item(new Item.Properties().tab(CreativeModeTab.TAB_BUILDING_BLOCKS)));
 
     public static void register(IEventBus eventBus){
         ITEMS.register(eventBus);
