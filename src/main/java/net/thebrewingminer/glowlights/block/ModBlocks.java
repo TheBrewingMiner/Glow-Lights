@@ -11,6 +11,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import net.thebrewingminer.glowlights.GlowLights;
+import net.thebrewingminer.glowlights.block.custom.GlowLanternBlock;
 import net.thebrewingminer.glowlights.items.ModItems;
 
 import java.util.function.Supplier;
@@ -19,7 +20,7 @@ public class ModBlocks {
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, GlowLights.MODID);
 
     public static final RegistryObject<Block> GLOW_LANTERN_BLOCK = registerBlock("glow_lantern_block",
-            () -> new Block(BlockBehaviour.Properties.of(Material.GLASS).strength(6f)), CreativeModeTab.TAB_BUILDING_BLOCKS);
+            () -> new GlowLanternBlock(BlockBehaviour.Properties.of(Material.GLASS).strength(6f).lightLevel(state -> state.getValue(GlowLanternBlock.WATERLOGGED) ? 15 : 10)), CreativeModeTab.TAB_BUILDING_BLOCKS);
 
     private static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<T> block, CreativeModeTab tab){
         RegistryObject<T> toReturn = BLOCKS.register(name, block);
