@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model":  "glowlights:block/glow_lantern"
+      "model":  "glowlights:block/glow_lantern_block"
     }
   }
 }

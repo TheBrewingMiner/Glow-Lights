@@ -1,6 +1,6 @@
 {
   "parent": "block/cube_all",
   "textures": {
-    "all": "glowlights:block/glow_lantern"
+    "all": "glowlights:block/glow_lantern_block"
   }
 }
