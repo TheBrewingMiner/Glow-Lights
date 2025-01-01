@@ -72,13 +72,17 @@ public class GlowWallTorchBlock extends WallTorchBlock implements SimpleWaterlog
         Direction[] var6 = $$4;
         int var7 = $$4.length;
 
+        LevelAccessor levelaccessor = context.getLevel();
+        BlockPos blockpos = context.getClickedPos();
+        boolean flag = levelaccessor.getFluidState(blockpos).getType() == Fluids.WATER;
+
         for(int var8 = 0; var8 < var7; ++var8) {
             Direction $$5 = var6[var8];
             if ($$5.getAxis().isHorizontal()) {
                 Direction $$6 = $$5.getOpposite();
                 $$1 = (BlockState)$$1.setValue(FACING, $$6);
                 if ($$1.canSurvive($$2, $$3)) {
-                    return $$1;
+                    return $$1.setValue(WATERLOGGED, flag);
                 }
             }
         }
@@ -86,7 +90,7 @@ public class GlowWallTorchBlock extends WallTorchBlock implements SimpleWaterlog
         return null;
     }
 
-@Override
+    @Override
     public PushReaction getPistonPushReaction(BlockState p_153494_) {
         return PushReaction.DESTROY;
     }
