@@ -25,13 +25,20 @@ public class ModBlocks {
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, GlowLights.MODID);
 
     public static final RegistryObject<Block> GLOW_LANTERN_BLOCK = registerBlock("glow_lantern_block",
-            () -> new GlowLanternBlock(BlockBehaviour.Properties.of(Material.GLASS).strength(6f).lightLevel(state -> state.getValue(GlowLanternBlock.WATERLOGGED) ? 15 : 10)), CreativeModeTab.TAB_BUILDING_BLOCKS);
+            () -> new GlowLanternBlock(BlockBehaviour.Properties.copy(Blocks.SEA_LANTERN)
+                    .lightLevel(state -> state.getValue(GlowLanternBlock.WATERLOGGED) ? 15 : 10)), CreativeModeTab.TAB_BUILDING_BLOCKS);
 
-    public static final RegistryObject<Block> GLOW_TORCH_BLOCK = registerBlock("glow_torch",
-            () -> new GlowTorchBlock(BlockBehaviour.Properties.of(Material.DECORATION).noCollission().instabreak().lightLevel(state -> state.getValue(GlowTorchBlock.WATERLOGGED) ? 15 : 10).sound(SoundType.WOOD), ParticleTypes.FLAME), CreativeModeTab.TAB_DECORATIONS);
+    public static final RegistryObject<Block> GLOW_TORCH_BLOCK = BLOCKS.register("glow_torch",
+            () -> new GlowTorchBlock(BlockBehaviour.Properties.of(Material.DECORATION)
+                    .noCollission()
+                    .instabreak()
+                    .lightLevel(state -> state.getValue(GlowTorchBlock.WATERLOGGED) ? 15 : 10)
+                    .sound(SoundType.WOOD), ParticleTypes.GLOW_SQUID_INK));
 
     public static final RegistryObject<Block> GLOW_WALL_TORCH_BLOCK = BLOCKS.register("glow_wall_torch",
-            () -> new GlowWallTorchBlock(BlockBehaviour.Properties.copy(Blocks.WALL_TORCH).lightLevel(state -> state.getValue(GlowWallTorchBlock.WATERLOGGED) ? 15 : 10).sound(SoundType.WOOD), ParticleTypes.FLAME));
+            () -> new GlowWallTorchBlock(BlockBehaviour.Properties.of(Material.DECORATION)
+                    .lightLevel(state -> state.getValue(GlowWallTorchBlock.WATERLOGGED) ? 15 : 10)
+                    .sound(SoundType.WOOD), ParticleTypes.GLOW_SQUID_INK));
 
     private static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<T> block, CreativeModeTab tab){
         RegistryObject<T> toReturn = BLOCKS.register(name, block);

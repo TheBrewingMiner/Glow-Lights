@@ -14,16 +14,15 @@ public class ModItems {
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, GlowLights.MODID);
 
 //  Item registered prior to my understanding of the code used within the ModBlocks class.
-//    public static final RegistryObject<Item> GLOW_LANTERN = ITEMS.register("glow_lantern",
-//            () -> new Item(new Item.Properties().tab(CreativeModeTab.TAB_BUILDING_BLOCKS)));
 
-//    public static final RegistryObject<Item> GLOW_TORCH = ITEMS.register("glow_torch",
-//            () -> new StandingAndWallBlockItem(
-//                    ModBlocks.GLOW_TORCH_BLOCK.get(),
-//                    ModBlocks.GLOW_WALL_TORCH_BLOCK.get(),
-//                    new Item.Properties().tab(CreativeModeTab.TAB_DECORATIONS)
-//            )
-//    );
+    public static final RegistryObject<Item> GLOW_TORCH = ITEMS.register("glow_torch",
+            () -> new StandingAndWallBlockItem(
+                    ModBlocks.GLOW_TORCH_BLOCK.get(),
+                    ModBlocks.GLOW_WALL_TORCH_BLOCK.get(),
+                    new Item.Properties().tab(CreativeModeTab.TAB_DECORATIONS)
+            )
+    );
+
     public static void register(IEventBus eventBus){
         ITEMS.register(eventBus);
     }
