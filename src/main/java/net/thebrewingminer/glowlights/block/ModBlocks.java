@@ -37,6 +37,8 @@ public class ModBlocks {
 
     public static final RegistryObject<Block> GLOW_WALL_TORCH_BLOCK = BLOCKS.register("glow_wall_torch",
             () -> new GlowWallTorchBlock(BlockBehaviour.Properties.of(Material.DECORATION)
+                    .noCollission()
+                    .instabreak()
                     .lightLevel(state -> state.getValue(GlowWallTorchBlock.WATERLOGGED) ? 15 : 10)
                     .sound(SoundType.WOOD), ParticleTypes.GLOW_SQUID_INK));
 

@@ -8,6 +8,9 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -21,6 +24,10 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.level.block.state.properties.Property;
+import net.minecraft.world.level.material.FluidState;
+import net.minecraft.world.level.material.Fluids;
+import net.minecraft.world.level.material.PushReaction;
+import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
@@ -79,6 +86,11 @@ public class GlowWallTorchBlock extends WallTorchBlock implements SimpleWaterlog
         return null;
     }
 
+@Override
+    public PushReaction getPistonPushReaction(BlockState p_153494_) {
+        return PushReaction.DESTROY;
+    }
+
     @Override
     public BlockState updateShape(BlockState state, Direction direction, BlockState state2, LevelAccessor level, BlockPos pos, BlockPos pos2) {
         return direction.getOpposite() == state.getValue(FACING) && !state.canSurvive(level, pos) ? Blocks.AIR.defaultBlockState() : state;
@@ -93,7 +105,7 @@ public class GlowWallTorchBlock extends WallTorchBlock implements SimpleWaterlog
         double $$8 = 0.22;
         double $$9 = 0.27;
         Direction $$10 = $$4.getOpposite();
-        level.addParticle(ParticleTypes.SMOKE, $$5 + 0.27 * (double)$$10.getStepX(), $$6 + 0.22, $$7 + 0.27 * (double)$$10.getStepZ(), 0.0, 0.0, 0.0);
+        level.addParticle(ParticleTypes.GLOW_SQUID_INK, $$5 + 0.27 * (double)$$10.getStepX(), $$6 + 0.22, $$7 + 0.27 * (double)$$10.getStepZ(), 0.0, 0.0, 0.0);
         level.addParticle(this.flameParticle, $$5 + 0.27 * (double)$$10.getStepX(), $$6 + 0.22, $$7 + 0.27 * (double)$$10.getStepZ(), 0.0, 0.0, 0.0);
     }
 
@@ -109,21 +121,21 @@ public class GlowWallTorchBlock extends WallTorchBlock implements SimpleWaterlog
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(new Property[]{FACING}).add(WATERLOGGED);
+        builder.add(new Property[]{FACING, WATERLOGGED});
     }
 
-//    @Override
-//    public FluidState getFluidState(BlockState state) {
-//        return (Boolean) state.getValue(WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(state);
-//    }
-//
-//    @Override
-//    public InteractionResult use(BlockState state, Level level, BlockPos blockPos, Player player, InteractionHand hand, BlockHitResult result){
-//        if(!level.isClientSide() && hand == InteractionHand.MAIN_HAND){
-//            level.setBlock(blockPos, state, 3);
-//        }
-//        return super.use(state, level, blockPos, player, hand, result);
-//    }
+    @Override
+    public FluidState getFluidState(BlockState state) {
+        return (Boolean) state.getValue(WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(state);
+    }
+
+    @Override
+    public InteractionResult use(BlockState state, Level level, BlockPos blockPos, Player player, InteractionHand hand, BlockHitResult result){
+        if(!level.isClientSide() && hand == InteractionHand.MAIN_HAND){
+            level.setBlock(blockPos, state, 3);
+        }
+        return super.use(state, level, blockPos, player, hand, result);
+    }
 
     static {
         FACING = HorizontalDirectionalBlock.FACING;
