@@ -5,6 +5,7 @@ import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.Material;
@@ -15,6 +16,7 @@ import net.minecraftforge.registries.RegistryObject;
 import net.thebrewingminer.glowlights.GlowLights;
 import net.thebrewingminer.glowlights.block.custom.GlowLanternBlock;
 import net.thebrewingminer.glowlights.block.custom.GlowTorchBlock;
+import net.thebrewingminer.glowlights.block.custom.GlowWallTorchBlock;
 import net.thebrewingminer.glowlights.items.ModItems;
 
 import java.util.function.Supplier;
@@ -26,7 +28,10 @@ public class ModBlocks {
             () -> new GlowLanternBlock(BlockBehaviour.Properties.of(Material.GLASS).strength(6f).lightLevel(state -> state.getValue(GlowLanternBlock.WATERLOGGED) ? 15 : 10)), CreativeModeTab.TAB_BUILDING_BLOCKS);
 
     public static final RegistryObject<Block> GLOW_TORCH_BLOCK = registerBlock("glow_torch",
-            () ->new GlowTorchBlock(BlockBehaviour.Properties.of(Material.DECORATION).noCollission().instabreak().lightLevel(state -> state.getValue(GlowTorchBlock.WATERLOGGED) ? 15 : 10).sound(SoundType.WOOD), ParticleTypes.FLAME), CreativeModeTab.TAB_BUILDING_BLOCKS);
+            () -> new GlowTorchBlock(BlockBehaviour.Properties.of(Material.DECORATION).noCollission().instabreak().lightLevel(state -> state.getValue(GlowTorchBlock.WATERLOGGED) ? 15 : 10).sound(SoundType.WOOD), ParticleTypes.FLAME), CreativeModeTab.TAB_DECORATIONS);
+
+    public static final RegistryObject<Block> GLOW_WALL_TORCH_BLOCK = BLOCKS.register("glow_wall_torch",
+            () -> new GlowWallTorchBlock(BlockBehaviour.Properties.copy(Blocks.WALL_TORCH).lightLevel(state -> state.getValue(GlowWallTorchBlock.WATERLOGGED) ? 15 : 10).sound(SoundType.WOOD), ParticleTypes.FLAME));
 
     private static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<T> block, CreativeModeTab tab){
         RegistryObject<T> toReturn = BLOCKS.register(name, block);

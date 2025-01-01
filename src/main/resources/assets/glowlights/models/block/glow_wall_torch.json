@@ -1,0 +1,6 @@
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "glowlights:block/glow_torch"
+  }
+}

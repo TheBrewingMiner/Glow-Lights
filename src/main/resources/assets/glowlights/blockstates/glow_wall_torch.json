@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model":  "glowlights:block/glow_wall_torch"
+    }
+  }
+}
