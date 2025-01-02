@@ -9,11 +9,13 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.Material;
+import net.minecraft.world.level.material.MaterialColor;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import net.thebrewingminer.glowlights.GlowLights;
+import net.thebrewingminer.glowlights.block.custom.GlowCampfireBlock;
 import net.thebrewingminer.glowlights.block.custom.GlowLanternBlock;
 import net.thebrewingminer.glowlights.block.custom.GlowTorchBlock;
 import net.thebrewingminer.glowlights.block.custom.GlowWallTorchBlock;
@@ -41,6 +43,12 @@ public class ModBlocks {
                     .instabreak()
                     .lightLevel(state -> state.getValue(GlowWallTorchBlock.WATERLOGGED) ? 15 : 10)
                     .sound(SoundType.WOOD), ParticleTypes.GLOW));
+
+    public static final RegistryObject<Block> PRISMARINE_GLOW_CAMPFIRE = registerBlock("prismarine_glow_campfire",
+            () -> new GlowCampfireBlock(BlockBehaviour.Properties.of(Material.STONE, MaterialColor.QUARTZ)
+                    .strength(2.0F)
+                    .lightLevel(state -> state.getValue(GlowWallTorchBlock.WATERLOGGED) ? 15 : 10)
+                    .noOcclusion()), CreativeModeTab.TAB_DECORATIONS);
 
     private static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<T> block, CreativeModeTab tab){
         RegistryObject<T> toReturn = BLOCKS.register(name, block);
