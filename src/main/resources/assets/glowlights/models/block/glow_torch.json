@@ -1,6 +1,7 @@
 {
-  "parent": "block/cube_all",
+  "parent": "minecraft:block/template_torch",
+  "render_type": "minecraft:cutout",
   "textures": {
-    "all": "minecraft:block/torch"
+    "torch": "glowlights:block/glow_torch"
   }
 }
