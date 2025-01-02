@@ -109,8 +109,23 @@ public class GlowWallTorchBlock extends WallTorchBlock implements SimpleWaterlog
         double $$8 = 0.22;
         double $$9 = 0.27;
         Direction $$10 = $$4.getOpposite();
-        level.addParticle(ParticleTypes.GLOW_SQUID_INK, $$5 + 0.27 * (double)$$10.getStepX(), $$6 + 0.22, $$7 + 0.27 * (double)$$10.getStepZ(), 0.0, 0.0, 0.0);
-        level.addParticle(this.flameParticle, $$5 + 0.27 * (double)$$10.getStepX(), $$6 + 0.22, $$7 + 0.27 * (double)$$10.getStepZ(), 0.0, 0.0, 0.0);
+
+        if (state.getValue(WATERLOGGED)){
+            if (source.nextInt(7) == 0){
+                level.addParticle(ParticleTypes.SMOKE, $$5 + 0.27 * (double)$$10.getStepX(), $$6 + 0.22, $$7 + 0.27 * (double)$$10.getStepZ(), 0.0, 0.0, 0.0);
+            }
+            if(source.nextInt(3) == 0){
+                level.addParticle(this.flameParticle, $$5 + 0.27 * (double)$$10.getStepX(), $$6 + 0.22, $$7 + 0.27 * (double)$$10.getStepZ(), 0.0, 0.0, 0.0);
+            }
+        } else {
+            if (source.nextInt(2) == 0){
+                level.addParticle(ParticleTypes.SMOKE, $$5 + 0.27 * (double)$$10.getStepX(), $$6 + 0.22, $$7 + 0.27 * (double)$$10.getStepZ(), 0.0, 0.0, 0.0);
+            }
+
+            if (source.nextInt(7) == 0){
+                level.addParticle(this.flameParticle, $$5 + 0.27 * (double)$$10.getStepX(), $$6 + 0.22, $$7 + 0.27 * (double)$$10.getStepZ(), 0.0, 0.0, 0.0);
+            }
+        }
     }
 
     @Override

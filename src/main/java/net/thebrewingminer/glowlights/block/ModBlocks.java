@@ -33,14 +33,14 @@ public class ModBlocks {
                     .noCollission()
                     .instabreak()
                     .lightLevel(state -> state.getValue(GlowTorchBlock.WATERLOGGED) ? 15 : 10)
-                    .sound(SoundType.WOOD), ParticleTypes.GLOW_SQUID_INK));
+                    .sound(SoundType.WOOD), ParticleTypes.GLOW));
 
     public static final RegistryObject<Block> GLOW_WALL_TORCH_BLOCK = BLOCKS.register("glow_wall_torch",
             () -> new GlowWallTorchBlock(BlockBehaviour.Properties.of(Material.DECORATION)
                     .noCollission()
                     .instabreak()
                     .lightLevel(state -> state.getValue(GlowWallTorchBlock.WATERLOGGED) ? 15 : 10)
-                    .sound(SoundType.WOOD), ParticleTypes.GLOW_SQUID_INK));
+                    .sound(SoundType.WOOD), ParticleTypes.GLOW));
 
     private static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<T> block, CreativeModeTab tab){
         RegistryObject<T> toReturn = BLOCKS.register(name, block);

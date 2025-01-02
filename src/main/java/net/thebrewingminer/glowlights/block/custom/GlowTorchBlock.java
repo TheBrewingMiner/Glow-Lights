@@ -95,7 +95,21 @@ public class GlowTorchBlock extends TorchBlock implements SimpleWaterloggedBlock
         double $$4 = (double)pos.getX() + 0.5;
         double $$5 = (double)pos.getY() + 0.7;
         double $$6 = (double)pos.getZ() + 0.5;
-        level.addParticle(ParticleTypes.GLOW_SQUID_INK, $$4, $$5, $$6, 0.0, 0.0, 0.0);
-        level.addParticle(this.flameParticle, $$4, $$5, $$6, 0.0, 0.0, 0.0);
+
+        if (state.getValue(WATERLOGGED)) {
+            if (source.nextInt(7) == 0){
+                level.addParticle(ParticleTypes.SMOKE, $$4, $$5, $$6, 0.0, 0.0, 0.0);
+            }
+            if(source.nextInt(3) == 0){
+                level.addParticle(this.flameParticle, $$4, $$5, $$6, 0.0, 0.0, 0.0);
+            }
+        } else {
+            if (source.nextInt(2) == 0){
+                level.addParticle(ParticleTypes.SMOKE, $$4, $$5, $$6, 0.0, 0.0, 0.0);
+            }
+            if (source.nextInt(7) == 0) {
+                level.addParticle(this.flameParticle, $$4, $$5, $$6, 0.0, 0.0, 0.0);
+            }
+        }
     }
 }
