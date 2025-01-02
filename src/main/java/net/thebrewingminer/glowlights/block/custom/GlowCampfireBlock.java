@@ -109,6 +109,19 @@ public class GlowCampfireBlock extends Block implements SimpleWaterloggedBlock {
     public boolean isPathfindable(BlockState state, BlockGetter getter, BlockPos pos, PathComputationType type) {
         return false;
     }
+
+    @Override
+    public FluidState getFluidState(BlockState state) {
+        return (Boolean) state.getValue(WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(state);
+    }
+
+    @Override
+    public InteractionResult use(BlockState state, Level level, BlockPos blockPos, Player player, InteractionHand hand, BlockHitResult result){
+        if(!level.isClientSide() && hand == InteractionHand.MAIN_HAND){
+            level.setBlock(blockPos, state, 3);
+        }
+        return super.use(state, level, blockPos, player, hand, result);
+    }
 }
 
 /* */
