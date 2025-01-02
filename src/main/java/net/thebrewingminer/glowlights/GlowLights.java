@@ -20,6 +20,7 @@ public class GlowLights {
     public static final String MODID = "glowlights";
     // Directly reference a slf4j logger
     private static final Logger LOGGER = LogUtils.getLogger();
+
     // Create a Deferred Register to hold Blocks which will all be registered under the "glowlights" namespace
     public GlowLights() {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
