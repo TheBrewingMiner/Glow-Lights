@@ -1,5 +1,10 @@
 {
+  // Blocks
   "block.glowlights.glow_lantern_block": "Glow Lantern",
   "block.glowlights.glow_torch": "Glow Torch",
-  "block.glowlights.glow_wall_torch": "Glow Torch"
+  "block.glowlights.glow_wall_torch": "Glow Torch",
+  "block.glowlights.prismarine_glow_campfire": "Prismarine Campfire",
+
+  // Items
+  "item.glowlights.prismarine_glow_campfire": "Prismarine Campfire"
 }

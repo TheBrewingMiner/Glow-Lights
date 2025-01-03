@@ -44,11 +44,11 @@ public class ModBlocks {
                     .lightLevel(state -> state.getValue(GlowWallTorchBlock.WATERLOGGED) ? 15 : 10)
                     .sound(SoundType.WOOD), ParticleTypes.GLOW));
 
-    public static final RegistryObject<Block> PRISMARINE_GLOW_CAMPFIRE = registerBlock("prismarine_glow_campfire",
+    public static final RegistryObject<Block> PRISMARINE_GLOW_CAMPFIRE = BLOCKS.register("prismarine_glow_campfire",
             () -> new GlowCampfireBlock(BlockBehaviour.Properties.of(Material.STONE, MaterialColor.QUARTZ)
                     .strength(2.0F)
                     .lightLevel(state -> state.getValue(GlowWallTorchBlock.WATERLOGGED) ? 15 : 10)
-                    .noOcclusion()), CreativeModeTab.TAB_DECORATIONS);
+                    .noOcclusion()));
 
     private static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<T> block, CreativeModeTab tab){
         RegistryObject<T> toReturn = BLOCKS.register(name, block);

@@ -1,8 +1,6 @@
 package net.thebrewingminer.glowlights.items;
 
-import net.minecraft.world.item.CreativeModeTab;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.StandingAndWallBlockItem;
+import net.minecraft.world.item.*;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -22,6 +20,10 @@ public class ModItems {
                     new Item.Properties().tab(CreativeModeTab.TAB_DECORATIONS)
             )
     );
+
+    public static final RegistryObject<Item> PRISMARINE_GLOW_CAMPFIRE = ITEMS.register("prismarine_glow_campfire",
+            () -> new ItemNameBlockItem(ModBlocks.PRISMARINE_GLOW_CAMPFIRE.get(),
+            new Item.Properties().tab(CreativeModeTab.TAB_DECORATIONS)));
 
     public static void register(IEventBus eventBus){
         ITEMS.register(eventBus);
