@@ -1,9 +1,9 @@
 {
   "credit": "Made with Blockbench",
   "textures": {
-    "0": "block/prismarine",
+    "0": "minecraft:block/dark_prismarine",
     "1": "glowlights:block/glow_ash",
-    "particle": "block/prismarine"
+    "particle": "minecraft:block/dark_prismarine"
   },
   "elements": [
     {
