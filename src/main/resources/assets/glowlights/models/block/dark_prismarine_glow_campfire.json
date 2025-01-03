@@ -1,8 +1,9 @@
 {
   "credit": "Made with Blockbench",
+  "render_type": "minecraft:cutout",
   "textures": {
     "0": "minecraft:block/dark_prismarine",
-    "1": "glowlights:block/glow_ash",
+    "1": "glowlights:block/glow_ash_empty",
     "particle": "minecraft:block/dark_prismarine"
   },
   "elements": [
