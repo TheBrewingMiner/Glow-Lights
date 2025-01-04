@@ -6,5 +6,7 @@
   "block.glowlights.prismarine_glow_campfire": "Prismarine Campfire",
 
   // Items
-  "item.glowlights.prismarine_glow_campfire": "Prismarine Campfire"
+  "item.glowlights.prismarine_glow_campfire": "Prismarine Campfire",
+  "item.glowlights.prismarine_brick_glow_campfire": "Prismarine Brick Campfire",
+  "item.glowlights.dark_prismarine_glow_campfire": "Dark Prismarine Campfire"
 }

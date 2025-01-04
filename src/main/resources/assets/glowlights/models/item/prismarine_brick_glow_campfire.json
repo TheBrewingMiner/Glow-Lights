@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "glowlights:item/prismarine_brick_glow_campfire"
+  }
+}
