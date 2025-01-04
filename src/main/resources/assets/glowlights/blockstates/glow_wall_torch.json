@@ -1,18 +1,18 @@
 {
   "variants": {
     "facing=east": {
-      "model": "glowlights:block/glow_wall_torch"
+      "model": "glowlights:block/glow_torch/glow_wall_torch"
     },
     "facing=north": {
-      "model": "glowlights:block/glow_wall_torch",
+      "model": "glowlights:block/glow_torch/glow_wall_torch",
       "y": 270
     },
     "facing=south": {
-      "model": "glowlights:block/glow_wall_torch",
+      "model": "glowlights:block/glow_torch/glow_wall_torch",
       "y": 90
     },
     "facing=west": {
-      "model": "glowlights:block/glow_wall_torch",
+      "model": "glowlights:block/glow_torch/glow_wall_torch",
       "y": 180
     }
   }

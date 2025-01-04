@@ -66,8 +66,8 @@ public class GlowCampfireBlock extends Block implements SimpleWaterloggedBlock {
     }
 
     @Override
-    public BlockState rotate(BlockState blockState, Rotation rotation) {
-        return (BlockState)blockState.setValue(FACING, rotation.rotate((Direction)blockState.getValue(FACING)));
+    public BlockState rotate(BlockState state, Rotation rotation) {
+        return (BlockState)state.setValue(FACING, rotation.rotate((Direction)state.getValue(FACING)));
     }
 
     @Override

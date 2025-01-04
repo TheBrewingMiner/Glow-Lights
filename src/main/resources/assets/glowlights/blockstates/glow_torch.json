@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model":  "glowlights:block/glow_torch"
+      "model": "glowlights:block/glow_torch/glow_torch"
     }
   }
 }
