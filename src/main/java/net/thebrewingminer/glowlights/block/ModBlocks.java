@@ -28,20 +28,20 @@ public class ModBlocks {
 
     public static final RegistryObject<Block> GLOW_LANTERN_BLOCK = registerBlock("glow_lantern_block",
             () -> new GlowLanternBlock(BlockBehaviour.Properties.copy(Blocks.SEA_LANTERN)
-                    .lightLevel(state -> state.getValue(GlowLanternBlock.WATERLOGGED) ? 15 : 10)), CreativeModeTab.TAB_BUILDING_BLOCKS);
+                    .lightLevel(GlowLanternBlock::getLightLevel)), CreativeModeTab.TAB_BUILDING_BLOCKS);
 
     public static final RegistryObject<Block> GLOW_TORCH_BLOCK = BLOCKS.register("glow_torch",
             () -> new GlowTorchBlock(BlockBehaviour.Properties.of(Material.DECORATION)
                     .noCollission()
                     .instabreak()
-                    .lightLevel(state -> state.getValue(GlowTorchBlock.WATERLOGGED) ? 15 : 10)
+                    .lightLevel(GlowTorchBlock::getLightLevel)
                     .sound(SoundType.WOOD), ParticleTypes.GLOW));
 
     public static final RegistryObject<Block> GLOW_WALL_TORCH_BLOCK = BLOCKS.register("glow_wall_torch",
             () -> new GlowWallTorchBlock(BlockBehaviour.Properties.of(Material.DECORATION)
                     .noCollission()
                     .instabreak()
-                    .lightLevel(state -> state.getValue(GlowWallTorchBlock.WATERLOGGED) ? 15 : 10)
+                    .lightLevel(GlowWallTorchBlock::getLightLevel)
                     .sound(SoundType.WOOD), ParticleTypes.GLOW));
 
     public static final RegistryObject<Block> PRISMARINE_GLOW_CAMPFIRE = BLOCKS.register("prismarine_glow_campfire",

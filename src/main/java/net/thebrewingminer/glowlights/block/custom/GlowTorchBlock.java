@@ -80,6 +80,15 @@ public class GlowTorchBlock extends TorchBlock implements SimpleWaterloggedBlock
         return super.use(state, level, blockPos, player, hand, result);
     }
 
+    public static boolean isWaterlogged(BlockState state){
+        return state.getValue(WATERLOGGED);
+    }
+
+    public static int getLightLevel(BlockState state){
+        int lightLevel = (isWaterlogged(state)) ? 15 : 10;
+        return lightLevel;
+    }
+
     @Override
     public PushReaction getPistonPushReaction(BlockState p_153494_) {
         return PushReaction.DESTROY;

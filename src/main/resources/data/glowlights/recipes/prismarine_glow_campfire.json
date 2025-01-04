@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "C": {
+      "tag": "minecraft:coals"
+    },
+    "P": {
+      "item": "minecraft:prismarine"
+    },
+    "S": {
+      "item": "minecraft:glow_ink_sac"
+    }
+  },
+  "pattern": [
+    " S ",
+    "SCS",
+    "PPP"
+  ],
+  "result": {
+    "item": "glowlights:prismarine_glow_campfire"
+  }
+}

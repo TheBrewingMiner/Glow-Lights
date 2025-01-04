@@ -148,6 +148,15 @@ public class GlowWallTorchBlock extends WallTorchBlock implements SimpleWaterlog
         return (Boolean) state.getValue(WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(state);
     }
 
+    public static boolean isWaterlogged(BlockState state){
+        return state.getValue(WATERLOGGED);
+    }
+
+    public static int getLightLevel(BlockState state){
+        int lightLevel = (isWaterlogged(state)) ? 15 : 10;
+        return lightLevel;
+    }
+
     @Override
     public InteractionResult use(BlockState state, Level level, BlockPos blockPos, Player player, InteractionHand hand, BlockHitResult result){
         if(!level.isClientSide() && hand == InteractionHand.MAIN_HAND){

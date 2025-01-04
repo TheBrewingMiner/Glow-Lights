@@ -40,6 +40,15 @@ public class GlowLanternBlock extends Block implements SimpleWaterloggedBlock {
         return super.use(state, level, blockPos, player, hand, result);
     }
 
+    public static boolean isWaterlogged(BlockState state){
+        return state.getValue(WATERLOGGED);
+    }
+
+    public static int getLightLevel(BlockState state){
+        int lightLevel = (isWaterlogged(state)) ? 15 : 10;
+        return lightLevel;
+    }
+
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder){
         builder.add(WATERLOGGED);
