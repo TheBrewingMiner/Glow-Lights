@@ -2,6 +2,7 @@ package net.thebrewingminer.glowlights.block.custom;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -84,10 +85,10 @@ public class GlowCampfireBlock extends Block implements SimpleWaterloggedBlock {
     }
 
     public static int getLightLevel(BlockState state){
-        int lightLevel;
+        int lightLevel = 0;
         if (isLit(state)){
             lightLevel = (isWaterlogged(state)) ? 15 : 10;
-        } else lightLevel = 0;
+        }
 
         return lightLevel;
     }
@@ -117,6 +118,7 @@ public class GlowCampfireBlock extends Block implements SimpleWaterloggedBlock {
                         heldItem.shrink(1);
                     }
                 }
+                player.awardStat(Stats.INTERACT_WITH_CAMPFIRE);
                 return InteractionResult.sidedSuccess(level.isClientSide);
             }
         } else if (state.getValue(LIT)){
@@ -125,6 +127,7 @@ public class GlowCampfireBlock extends Block implements SimpleWaterloggedBlock {
                 if (playerInSurvival){
                     heldItem.hurtAndBreak(1, player, (p) -> p.broadcastBreakEvent(hand));
                 }
+                player.awardStat(Stats.INTERACT_WITH_CAMPFIRE);
                 return InteractionResult.sidedSuccess(level.isClientSide);
             }
         }
