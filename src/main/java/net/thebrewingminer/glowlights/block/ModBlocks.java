@@ -47,19 +47,19 @@ public class ModBlocks {
     public static final RegistryObject<Block> PRISMARINE_GLOW_CAMPFIRE = BLOCKS.register("prismarine_glow_campfire",
             () -> new GlowCampfireBlock(BlockBehaviour.Properties.of(Material.STONE, MaterialColor.QUARTZ)
                     .strength(2.0F)
-                    .lightLevel(state -> state.getValue(GlowCampfireBlock.WATERLOGGED) ? 15 : 10)
+                    .lightLevel(GlowCampfireBlock::getLightLevel)
                     .noOcclusion()));
 
     public static final RegistryObject<Block> PRISMARINE_BRICK_GLOW_CAMPFIRE = BLOCKS.register("prismarine_brick_glow_campfire",
             () -> new GlowCampfireBlock(BlockBehaviour.Properties.of(Material.STONE, MaterialColor.QUARTZ)
                     .strength(2.0F)
-                    .lightLevel(state -> state.getValue(GlowCampfireBlock.WATERLOGGED) ? 15 : 10)
+                    .lightLevel(GlowCampfireBlock::getLightLevel)
                     .noOcclusion()));
 
     public static final RegistryObject<Block> DARK_PRISMARINE_GLOW_CAMPFIRE = BLOCKS.register("dark_prismarine_glow_campfire",
             () -> new GlowCampfireBlock(BlockBehaviour.Properties.of(Material.STONE, MaterialColor.QUARTZ)
                     .strength(2.0F)
-                    .lightLevel(state -> state.getValue(GlowCampfireBlock.WATERLOGGED) ? 15 : 10)
+                    .lightLevel(GlowCampfireBlock::getLightLevel)
                     .noOcclusion()));
 
     private static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<T> block, CreativeModeTab tab){
