@@ -1,6 +1,6 @@
 modLoader="javafml"
 loaderVersion="[43,)"
-license="All rights reserved"
+license="Custom License"
 [[mods]]
 modId="glowlights"
 version="0.0.1-1.19"
