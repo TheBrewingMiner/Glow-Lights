@@ -2,7 +2,7 @@
   "type": "minecraft:block",
   "pools": [
     {
-      "bonus_rolls": 0.0,
+      "bonus_rolls": 0,
       "entries": [
         {
           "type": "minecraft:alternatives",
@@ -27,25 +27,57 @@
               "name": "glowlights:prismarine_brick_glow_campfire"
             },
             {
-              "type": "minecraft:item",
-              "conditions": [
+              "type": "minecraft:group",
+              "children": [
                 {
-                  "condition": "minecraft:survives_explosion"
-                }
-              ],
-              "functions": [
+                  "type": "minecraft:item",
+                  "name": "minecraft:charcoal",
+                  "weight": 2,
+                  "functions": [
+                    {
+                      "function": "minecraft:set_count",
+                      "count": 1,
+                      "add": false
+                    }
+                  ]
+                },
                 {
-                  "add": false,
-                  "count": 1.0,
-                  "function": "minecraft:set_count"
+                  "type": "minecraft:item",
+                  "name": "minecraft:prismarine_bricks",
+                  "weight": 2,
+                  "functions": [
+                    {
+                      "function": "minecraft:set_count",
+                      "count": {
+                        "type": "minecraft:uniform",
+                        "min": 1,
+                        "max": 2
+                      },
+                      "add": false
+                    }
+                  ]
+                },
+                {
+                  "type": "minecraft:item",
+                  "name": "minecraft:prismarine_brick_slab",
+                  "weight": 2,
+                  "functions": [
+                    {
+                      "function": "minecraft:set_count",
+                      "count": {
+                        "type": "minecraft:uniform",
+                        "min": 0,
+                        "max": 1
+                      }
+                    }
+                  ]
                 }
-              ],
-              "name": "minecraft:charcoal"
+              ]
             }
           ]
         }
       ],
-      "rolls": 1.0
+      "rolls": 1
     }
   ]
 }
