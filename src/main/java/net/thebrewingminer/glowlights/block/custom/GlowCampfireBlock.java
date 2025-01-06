@@ -2,7 +2,9 @@ package net.thebrewingminer.glowlights.block.custom;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.stats.Stats;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -132,5 +134,18 @@ public class GlowCampfireBlock extends Block implements SimpleWaterloggedBlock {
             }
         }
         return super.use(state, level, pos, player, hand, hit);
+    }
+
+    @Override
+    public void animateTick(BlockState state, Level level, BlockPos pos, RandomSource source) {
+        if (state.getValue(LIT)) {
+            if (state.getValue(WATERLOGGED)){
+                if (source.nextInt(6) == 0) {
+                    level.addParticle(ParticleTypes.GLOW, (double)pos.getX() + 0.5, (double)pos.getY() + 0.5, (double)pos.getZ() + 0.5, (double)(source.nextFloat() / 2.0F), 5.0E-5, (double)(source.nextFloat() / 2.0F));
+                }
+            }  else if (source.nextInt(10) == 0) {
+                level.addParticle(ParticleTypes.GLOW, (double) pos.getX() + 0.5, (double) pos.getY() + 0.5, (double) pos.getZ() + 0.5, (double) (source.nextFloat() / 2.0F), 5.0E-5, (double) (source.nextFloat() / 2.0F));
+            }
+        }
     }
 }
