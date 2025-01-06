@@ -39,12 +39,8 @@ public class GlowWallTorchBlock extends WallTorchBlock implements SimpleWaterlog
 
     public GlowWallTorchBlock(BlockBehaviour.Properties properties, ParticleOptions particle) {
         super(properties, particle);
-        this.registerDefaultState((BlockState)((BlockState)this.stateDefinition.any()).setValue(FACING, Direction.NORTH).setValue(WATERLOGGED, false));
+        this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(WATERLOGGED, false));
     }
-
-//    public String getDescriptionId() {
-//        return this.asItem().getDescriptionId();
-//    }
 
     @Override
     public VoxelShape getShape(BlockState state, BlockGetter getter, BlockPos pos, CollisionContext context) {
@@ -52,12 +48,12 @@ public class GlowWallTorchBlock extends WallTorchBlock implements SimpleWaterlog
     }
 
     public static VoxelShape getShape(BlockState state) {
-        return (VoxelShape)AABBS.get(state.getValue(FACING));
+        return AABBS.get(state.getValue(FACING));
     }
 
     @Override
     public boolean canSurvive(BlockState state, LevelReader reader, BlockPos pos) {
-        Direction $$3 = (Direction)state.getValue(FACING);
+        Direction $$3 = state.getValue(FACING);
         BlockPos $$4 = pos.relative($$3.getOpposite());
         BlockState $$5 = reader.getBlockState($$4);
         return $$5.isFaceSturdy(reader, $$4, $$3);
@@ -80,7 +76,7 @@ public class GlowWallTorchBlock extends WallTorchBlock implements SimpleWaterlog
             Direction $$5 = var6[var8];
             if ($$5.getAxis().isHorizontal()) {
                 Direction $$6 = $$5.getOpposite();
-                $$1 = (BlockState)$$1.setValue(FACING, $$6);
+                $$1 = $$1.setValue(FACING, $$6);
                 if ($$1.canSurvive($$2, $$3)) {
                     return $$1.setValue(WATERLOGGED, flag);
                 }
@@ -102,7 +98,7 @@ public class GlowWallTorchBlock extends WallTorchBlock implements SimpleWaterlog
 
     @Override
     public void animateTick(BlockState state, Level level, BlockPos pos, RandomSource source) {
-        Direction $$4 = (Direction)state.getValue(FACING);
+        Direction $$4 = state.getValue(FACING);
         double $$5 = (double)pos.getX() + 0.5;
         double $$6 = (double)pos.getY() + 0.7;
         double $$7 = (double)pos.getZ() + 0.5;
@@ -130,22 +126,22 @@ public class GlowWallTorchBlock extends WallTorchBlock implements SimpleWaterlog
 
     @Override
     public BlockState rotate(BlockState state, Rotation rotation) {
-        return (BlockState)state.setValue(FACING, rotation.rotate((Direction)state.getValue(FACING)));
+        return state.setValue(FACING, rotation.rotate(state.getValue(FACING)));
     }
 
     @Override
     public BlockState mirror(BlockState state, Mirror mirror) {
-        return state.rotate(mirror.getRotation((Direction)state.getValue(FACING)));
+        return state.rotate(mirror.getRotation(state.getValue(FACING)));
     }
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(new Property[]{FACING, WATERLOGGED});
+        builder.add(FACING, WATERLOGGED);
     }
 
     @Override
     public FluidState getFluidState(BlockState state) {
-        return (Boolean) state.getValue(WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(state);
+        return state.getValue(WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(state);
     }
 
     public static boolean isWaterlogged(BlockState state){

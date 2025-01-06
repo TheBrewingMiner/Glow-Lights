@@ -54,7 +54,7 @@ public class GlowTorchBlock extends TorchBlock implements SimpleWaterloggedBlock
         LevelAccessor levelaccessor = context.getLevel();
         BlockPos blockpos = context.getClickedPos();
         boolean flag = levelaccessor.getFluidState(blockpos).getType() == Fluids.WATER;
-        return ((BlockState)this.defaultBlockState().setValue(WATERLOGGED, flag));
+        return this.defaultBlockState().setValue(WATERLOGGED, flag);
     }
     
     @Override
@@ -69,7 +69,7 @@ public class GlowTorchBlock extends TorchBlock implements SimpleWaterloggedBlock
 
     @Override
     public FluidState getFluidState(BlockState state) {
-        return (Boolean) state.getValue(WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(state);
+        return state.getValue(WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(state);
     }
 
     @Override

@@ -25,11 +25,11 @@ public class GlowLanternBlock extends Block implements SimpleWaterloggedBlock {
 
     public GlowLanternBlock(Properties properties){
         super(properties);
-        this.registerDefaultState((BlockState)this.stateDefinition.any().setValue(WATERLOGGED, false));
+        this.registerDefaultState(this.stateDefinition.any().setValue(WATERLOGGED, false));
     }
     @Override
     public FluidState getFluidState(BlockState state) {
-        return (Boolean) state.getValue(WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(state);
+        return state.getValue(WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(state);
     }
 
     @Override
