@@ -43,6 +43,11 @@ public class GlowWallTorchBlock extends WallTorchBlock implements SimpleWaterlog
     }
 
     @Override
+    public String getDescriptionId() {
+        return this.asItem().getDescriptionId();
+    }
+
+    @Override
     public VoxelShape getShape(BlockState state, BlockGetter getter, BlockPos pos, CollisionContext context) {
         return getShape(state);
     }
