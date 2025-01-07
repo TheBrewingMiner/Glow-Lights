@@ -1,5 +1,6 @@
 package net.thebrewingminer.glowlights.items;
 
+import net.minecraft.core.Direction;
 import net.minecraft.world.item.*;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
@@ -17,23 +18,22 @@ public class ModItems {
             () -> new StandingAndWallBlockItem(
                     ModBlocks.GLOW_TORCH_BLOCK.get(),
                     ModBlocks.GLOW_WALL_TORCH_BLOCK.get(),
-                    new Item.Properties().tab(CreativeModeTab.TAB_DECORATIONS)
-            )
+                    new Item.Properties(), Direction.DOWN)
     );
 
     public static final RegistryObject<Item> PRISMARINE_GLOW_CAMPFIRE = ITEMS.register("prismarine_glow_campfire",
             () -> new ItemNameBlockItem(ModBlocks.PRISMARINE_GLOW_CAMPFIRE.get(),
-            new Item.Properties().tab(CreativeModeTab.TAB_DECORATIONS))
+            new Item.Properties())
     );
 
     public static final RegistryObject<Item> PRISMARINE_BRICK_GLOW_CAMPFIRE = ITEMS.register("prismarine_brick_glow_campfire",
             () -> new ItemNameBlockItem(ModBlocks.PRISMARINE_BRICK_GLOW_CAMPFIRE.get(),
-                    new Item.Properties().tab(CreativeModeTab.TAB_DECORATIONS))
+                    new Item.Properties())
     );
 
     public static final RegistryObject<Item> DARK_PRISMARINE_GLOW_CAMPFIRE = ITEMS.register("dark_prismarine_glow_campfire",
             () -> new ItemNameBlockItem(ModBlocks.DARK_PRISMARINE_GLOW_CAMPFIRE.get(),
-                    new Item.Properties().tab(CreativeModeTab.TAB_DECORATIONS))
+                    new Item.Properties())
     );
 
     public static void register(IEventBus eventBus){
