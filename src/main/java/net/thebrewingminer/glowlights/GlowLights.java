@@ -1,8 +1,10 @@
 package net.thebrewingminer.glowlights;
 
 import com.mojang.logging.LogUtils;
+import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.CreativeModeTabEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -29,9 +31,26 @@ public class GlowLights {
 
         // Register ourselves for server and other game events we are interested in
         MinecraftForge.EVENT_BUS.register(this);
+
+        // Add items to proper creative tabs.
+        modEventBus.addListener(this::addCreative);
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {}
+
+    private void addCreative(CreativeModeTabEvent.BuildContents event){
+        if (event.getTab() == CreativeModeTabs.FUNCTIONAL_BLOCKS){
+            event.accept(ModItems.GLOW_TORCH);
+            event.accept(ModBlocks.GLOW_LANTERN_BLOCK);
+            event.accept(ModItems.PRISMARINE_GLOW_CAMPFIRE);
+            event.accept(ModItems.PRISMARINE_BRICK_GLOW_CAMPFIRE);
+            event.accept(ModItems.DARK_PRISMARINE_GLOW_CAMPFIRE);
+        }
+
+        if (event.getTab() == CreativeModeTabs.BUILDING_BLOCKS){
+            event.accept(ModBlocks.GLOW_LANTERN_BLOCK);
+        }
+    }
 
     @Mod.EventBusSubscriber(modid = MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
     public static class ClientModEvents {
