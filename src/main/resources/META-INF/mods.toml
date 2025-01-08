@@ -3,7 +3,7 @@ loaderVersion="[43,)"
 license="Custom License"
 [[mods]]
 modId="glowlights"
-version="1.0.0-1.19"
+version="1.0.0-1.19.4"
 displayName="Glow Lights"
 logoFile="pack.png"
 credits="Thanks to KaupenJoe and his tutorials."
