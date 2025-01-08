@@ -4,12 +4,14 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.stats.Stats;
+import net.minecraft.tags.TagKey;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ShovelItem;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -30,6 +32,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.common.Tags;
 
 import java.util.Optional;
+import java.util.function.Predicate;
 
 public class GlowCampfireBlock extends Block implements SimpleWaterloggedBlock {
     protected static final VoxelShape SHAPE = Block.box(0.0, 0.0, 0.0, 16.0, 7.0, 16.0);
@@ -124,7 +127,7 @@ public class GlowCampfireBlock extends Block implements SimpleWaterloggedBlock {
                 return InteractionResult.sidedSuccess(level.isClientSide);
             }
         } else if (state.getValue(LIT)){
-            if (heldItem.is(Tags.Items.TOOLS_SHOVELS)){
+            if (heldItem.getItem() instanceof ShovelItem){
                 level.setBlock(pos, state.setValue(LIT, false), 3);
                 if (playerInSurvival){
                     heldItem.hurtAndBreak(1, player, (p) -> p.broadcastBreakEvent(hand));
