@@ -90,11 +90,6 @@ public class GlowTorchBlock extends TorchBlock implements SimpleWaterloggedBlock
     }
 
     @Override
-    public PushReaction getPistonPushReaction(BlockState p_153494_) {
-        return PushReaction.DESTROY;
-    }
-
-    @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder){
         builder.add(WATERLOGGED);
     }

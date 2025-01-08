@@ -92,11 +92,6 @@ public class GlowWallTorchBlock extends WallTorchBlock implements SimpleWaterlog
     }
 
     @Override
-    public PushReaction getPistonPushReaction(BlockState p_153494_) {
-        return PushReaction.DESTROY;
-    }
-
-    @Override
     public BlockState updateShape(BlockState state, Direction direction, BlockState state2, LevelAccessor level, BlockPos pos, BlockPos pos2) {
         return direction.getOpposite() == state.getValue(FACING) && !state.canSurvive(level, pos) ? Blocks.AIR.defaultBlockState() : state;
     }
