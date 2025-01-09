@@ -6,6 +6,8 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
+import net.minecraft.world.level.material.MapColor;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -36,6 +38,10 @@ public class ModBlocks {
 
     public static final RegistryObject<Block> PRISMARINE_GLOW_CAMPFIRE = BLOCKS.register("prismarine_glow_campfire",
             () -> new GlowCampfireBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.PRISMARINE)
+//                    .mapColor(MapColor.COLOR_CYAN)
+//                    .instrument(NoteBlockInstrument.BASEDRUM)
+//                    .requiresCorrectToolForDrops()
+//                    .strength(1.5F, 6.0F)
                     .lightLevel(GlowCampfireBlock::getLightLevel)
                     .noOcclusion()
             )
@@ -43,13 +49,21 @@ public class ModBlocks {
 
     public static final RegistryObject<Block> PRISMARINE_BRICK_GLOW_CAMPFIRE = BLOCKS.register("prismarine_brick_glow_campfire",
             () -> new GlowCampfireBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.PRISMARINE_BRICKS)
+//                    .mapColor(MapColor.DIAMOND)
+//                    .instrument(NoteBlockInstrument.BASEDRUM)
+//                    .requiresCorrectToolForDrops()
+//                    .strength(1.5F, 6.0F)
                     .lightLevel(GlowCampfireBlock::getLightLevel)
                     .noOcclusion()
             )
     );
 
     public static final RegistryObject<Block> DARK_PRISMARINE_GLOW_CAMPFIRE = BLOCKS.register("dark_prismarine_glow_campfire",
-            () -> new GlowCampfireBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.DARK_PRISMARINE)
+            () -> new GlowCampfireBlock(BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.DIAMOND)
+                    .instrument(NoteBlockInstrument.BASEDRUM)
+                    .requiresCorrectToolForDrops()
+                    .strength(1.5F, 6.0F)
                     .lightLevel(GlowCampfireBlock::getLightLevel)
                     .noOcclusion()
             )
