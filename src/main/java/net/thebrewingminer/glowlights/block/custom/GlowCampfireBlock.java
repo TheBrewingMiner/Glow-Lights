@@ -28,7 +28,6 @@ import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.minecraftforge.common.Tags;
 
 public class GlowCampfireBlock extends Block implements SimpleWaterloggedBlock {
     protected static final VoxelShape SHAPE = Block.box(0.0, 0.0, 0.0, 16.0, 7.0, 16.0);
@@ -149,7 +148,7 @@ public class GlowCampfireBlock extends Block implements SimpleWaterloggedBlock {
                     }
                 }
                 player.awardStat(Stats.INTERACT_WITH_CAMPFIRE);
-                return ItemInteractionResult.sidedSuccess(level.isClientSide);
+                return ItemInteractionResult.SUCCESS;
             }
         } else if (blockState.getValue(LIT)){
             if(heldItem.getItem() instanceof ShovelItem){
@@ -158,7 +157,7 @@ public class GlowCampfireBlock extends Block implements SimpleWaterloggedBlock {
                     heldItem.hurtAndBreak(1, player, EquipmentSlot.MAINHAND);
                 }
                 player.awardStat(Stats.INTERACT_WITH_CAMPFIRE);
-                return ItemInteractionResult.sidedSuccess(level.isClientSide);
+                return ItemInteractionResult.SUCCESS;
             }
         }
 
