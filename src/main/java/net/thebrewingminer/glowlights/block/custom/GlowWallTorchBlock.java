@@ -5,8 +5,8 @@ import com.google.common.collect.Maps;
 import java.util.Map;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -35,8 +35,8 @@ public class GlowWallTorchBlock extends WallTorchBlock implements SimpleWaterlog
     private static final Map<Direction, VoxelShape> AABBS;
     public static final BooleanProperty WATERLOGGED;
 
-    public GlowWallTorchBlock(BlockBehaviour.Properties properties, ParticleOptions particle) {
-        super(properties, particle);
+    public GlowWallTorchBlock(BlockBehaviour.Properties properties, SimpleParticleType particle) {
+        super(particle, properties);
         this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(WATERLOGGED, false));
     }
 

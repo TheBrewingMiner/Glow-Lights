@@ -4,6 +4,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -38,8 +39,8 @@ public class GlowTorchBlock extends TorchBlock implements SimpleWaterloggedBlock
         WATERLOGGED = BlockStateProperties.WATERLOGGED;
     }
 
-    public GlowTorchBlock(BlockBehaviour.Properties properties, ParticleOptions particle) {
-        super(properties, particle);
+    public GlowTorchBlock(BlockBehaviour.Properties properties, SimpleParticleType particle) {
+        super(particle, properties);
         this.flameParticle = particle;
         this.registerDefaultState(this.stateDefinition.any().setValue(WATERLOGGED, false));
     }
