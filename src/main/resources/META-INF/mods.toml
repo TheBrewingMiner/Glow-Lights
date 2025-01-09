@@ -1,9 +1,9 @@
 modLoader="javafml"
-loaderVersion="[48,)"
+loaderVersion="[49,)"
 license="Custom License"
 [[mods]]
 modId="glowlights"
-version="1.0.0-1.20.2"
+version="1.0.0-1.20.3"
 displayName="Glow Lights"
 logoFile="pack.png"
 credits="Thanks to KaupenJoe and his tutorials."
@@ -18,7 +18,7 @@ A lightweight mod aiming to make glow ink more useful with palatable blocks.
 [[dependencies.glowlights]]
     modId="forge"
     mandatory=true
-    versionRange="[48,)"
+    versionRange="[49,)"
     ordering="NONE"
     side="BOTH"
 [[dependencies.glowlights]]
