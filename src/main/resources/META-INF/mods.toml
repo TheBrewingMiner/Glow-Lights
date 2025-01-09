@@ -77,7 +77,7 @@ license="Custom License"
 
 [[mods]]
 modId="glowlights"
-version="1.0.0-1.20.3"
+version="1.0.0-1.20.4"
 displayName="Glow Lights"
 logoFile="pack.png"
 credits="Thanks to KaupenJoe and his tutorials."
@@ -98,6 +98,6 @@ A lightweight mod aiming to make glow ink more useful with palatable blocks.
 [[dependencies.glowlights]]
     modId="minecraft"
     mandatory=true
-    versionRange="[1.20.3,1.21)"
+    versionRange="[1.20.4,1.21)"
     ordering="NONE"
     side="BOTH"
