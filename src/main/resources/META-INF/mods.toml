@@ -98,6 +98,6 @@ A lightweight mod aiming to make glow ink more useful with palatable blocks.
 [[dependencies.glowlights]]
     modId="minecraft"
     mandatory=true
-    versionRange="[1.20,1.21)"
+    versionRange="[1.20.3,1.21)"
     ordering="NONE"
     side="BOTH"
