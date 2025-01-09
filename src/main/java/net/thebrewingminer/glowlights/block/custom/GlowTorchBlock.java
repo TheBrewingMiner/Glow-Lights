@@ -85,8 +85,7 @@ public class GlowTorchBlock extends TorchBlock implements SimpleWaterloggedBlock
     }
 
     public static int getLightLevel(BlockState state){
-        int lightLevel = (isWaterlogged(state)) ? 15 : 10;
-        return lightLevel;
+        return (isWaterlogged(state)) ? 15 : 10;
     }
 
     @Override
