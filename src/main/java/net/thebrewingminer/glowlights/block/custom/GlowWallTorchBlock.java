@@ -9,8 +9,9 @@ import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
+import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -150,12 +151,20 @@ public class GlowWallTorchBlock extends WallTorchBlock implements SimpleWaterlog
         return (isWaterlogged(state)) ? 15 : 10;
     }
 
+//    @Override
+//    public InteractionResult use(BlockState state, Level level, BlockPos blockPos, Player player, InteractionHand hand, BlockHitResult result){
+//        if(!level.isClientSide() && hand == InteractionHand.MAIN_HAND){
+//            level.setBlock(blockPos, state, 3);
+//        }
+//        return super.use(state, level, blockPos, player, hand, result);
+//    }
+
     @Override
-    public InteractionResult use(BlockState state, Level level, BlockPos blockPos, Player player, InteractionHand hand, BlockHitResult result){
-        if(!level.isClientSide() && hand == InteractionHand.MAIN_HAND){
-            level.setBlock(blockPos, state, 3);
+    protected ItemInteractionResult useItemOn(ItemStack itemStack, BlockState blockState, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult result) {
+        if (!level.isClientSide() && hand == InteractionHand.MAIN_HAND){
+            level.setBlock(pos, blockState, 3);
         }
-        return super.use(state, level, blockPos, player, hand, result);
+        return super.useItemOn(itemStack, blockState, level, pos, player, hand, result);
     }
 
     static {

@@ -2,8 +2,9 @@ package net.thebrewingminer.glowlights.block.custom;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
+import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SimpleWaterloggedBlock;
@@ -32,13 +33,22 @@ public class GlowLanternBlock extends Block implements SimpleWaterloggedBlock {
         return state.getValue(WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(state);
     }
 
+//    @Override
+//    public InteractionResult use(BlockState state, Level level, BlockPos blockPos, Player player, InteractionHand hand, BlockHitResult result){
+//        if(!level.isClientSide() && hand == InteractionHand.MAIN_HAND){
+//            level.setBlock(blockPos, state, 3);
+//        }
+//        return super.use(state, level, blockPos, player, hand, result);
+//    }
+
     @Override
-    public InteractionResult use(BlockState state, Level level, BlockPos blockPos, Player player, InteractionHand hand, BlockHitResult result){
-        if(!level.isClientSide() && hand == InteractionHand.MAIN_HAND){
-            level.setBlock(blockPos, state, 3);
+    protected ItemInteractionResult useItemOn(ItemStack itemStack, BlockState blockState, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult result) {
+        if (!level.isClientSide() && hand == InteractionHand.MAIN_HAND){
+            level.setBlock(pos, blockState, 3);
         }
-        return super.use(state, level, blockPos, player, hand, result);
+        return super.useItemOn(itemStack, blockState, level, pos, player, hand, result);
     }
+
 
     public static boolean isWaterlogged(BlockState state){
         return state.getValue(WATERLOGGED);

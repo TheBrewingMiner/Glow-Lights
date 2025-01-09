@@ -4,10 +4,10 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.stats.Stats;
-import net.minecraft.tags.TagKey;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
+import net.minecraft.world.ItemInteractionResult;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.ItemStack;
@@ -25,14 +25,10 @@ import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
-import net.minecraft.world.level.pathfinder.PathComputationType;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.common.Tags;
-
-import java.util.Optional;
-import java.util.function.Predicate;
 
 public class GlowCampfireBlock extends Block implements SimpleWaterloggedBlock {
     protected static final VoxelShape SHAPE = Block.box(0.0, 0.0, 0.0, 16.0, 7.0, 16.0);
@@ -99,44 +95,71 @@ public class GlowCampfireBlock extends Block implements SimpleWaterloggedBlock {
     }
 
     @Override
-    public boolean isPathfindable(BlockState state, BlockGetter getter, BlockPos pos, PathComputationType type) {
-        return false;
-    }
-
-    @Override
     public FluidState getFluidState(BlockState state) {
-        return (Boolean) state.getValue(WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(state);
+        return state.getValue(WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(state);
     }
 
+//    @Override
+//    public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
+//        ItemStack heldItem = player.getItemInHand(hand);
+//        boolean playerInSurvival = !player.isCreative();
+//
+//        if (!state.getValue(LIT)){
+//            if (heldItem.is(Items.FLINT_AND_STEEL) || heldItem.is(Items.FIRE_CHARGE)){
+//                level.setBlock(pos, state.setValue(LIT, true), 3);
+//                if (playerInSurvival){
+//                    if (heldItem.is(Items.FLINT_AND_STEEL)){
+//                        heldItem.hurtAndBreak(1, player, (p) -> p.broadcastBreakEvent(hand));
+//                    } else if (heldItem.is((Items.FIRE_CHARGE))){
+//                        heldItem.shrink(1);
+//                    }
+//                }
+//                player.awardStat(Stats.INTERACT_WITH_CAMPFIRE);
+//                return InteractionResult.sidedSuccess(level.isClientSide);
+//            }
+//        } else if (state.getValue(LIT)){
+//            if (heldItem.getItem() instanceof ShovelItem){
+//                level.setBlock(pos, state.setValue(LIT, false), 3);
+//                if (playerInSurvival){
+//                    heldItem.hurtAndBreak(1, player, (p) -> p.broadcastBreakEvent(hand));
+//                }
+//                player.awardStat(Stats.INTERACT_WITH_CAMPFIRE);
+//                return InteractionResult.sidedSuccess(level.isClientSide);
+//            }
+//        }
+//        return super.use(state, level, pos, player, hand, hit);
+//    }
+
     @Override
-    public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
+    protected ItemInteractionResult useItemOn(ItemStack itemStack, BlockState blockState, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult result) {
         ItemStack heldItem = player.getItemInHand(hand);
         boolean playerInSurvival = !player.isCreative();
 
-        if (!state.getValue(LIT)){
+        if (!blockState.getValue(LIT)){
             if (heldItem.is(Items.FLINT_AND_STEEL) || heldItem.is(Items.FIRE_CHARGE)){
-                level.setBlock(pos, state.setValue(LIT, true), 3);
+                level.setBlock(pos, blockState.setValue(LIT, true), 3);
                 if (playerInSurvival){
                     if (heldItem.is(Items.FLINT_AND_STEEL)){
-                        heldItem.hurtAndBreak(1, player, (p) -> p.broadcastBreakEvent(hand));
-                    } else if (heldItem.is((Items.FIRE_CHARGE))){
+                        heldItem.hurtAndBreak(1, player, EquipmentSlot.MAINHAND);
+                    } else if (heldItem.is(Items.FIRE_CHARGE)){
                         heldItem.shrink(1);
                     }
                 }
                 player.awardStat(Stats.INTERACT_WITH_CAMPFIRE);
-                return InteractionResult.sidedSuccess(level.isClientSide);
+                return ItemInteractionResult.sidedSuccess(level.isClientSide);
             }
-        } else if (state.getValue(LIT)){
-            if (heldItem.getItem() instanceof ShovelItem){
-                level.setBlock(pos, state.setValue(LIT, false), 3);
+        } else if (blockState.getValue(LIT)){
+            if(heldItem.getItem() instanceof ShovelItem){
+                level.setBlock(pos, blockState.setValue(LIT, false), 3);
                 if (playerInSurvival){
-                    heldItem.hurtAndBreak(1, player, (p) -> p.broadcastBreakEvent(hand));
+                    heldItem.hurtAndBreak(1, player, EquipmentSlot.MAINHAND);
                 }
                 player.awardStat(Stats.INTERACT_WITH_CAMPFIRE);
-                return InteractionResult.sidedSuccess(level.isClientSide);
+                return ItemInteractionResult.sidedSuccess(level.isClientSide);
             }
         }
-        return super.use(state, level, pos, player, hand, hit);
+
+        return super.useItemOn(itemStack, blockState, level, pos, player, hand, result);
     }
 
     @Override
