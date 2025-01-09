@@ -1,5 +1,6 @@
 {
   "type": "minecraft:crafting_shaped",
+  "category": "building",
   "key": {
     "C": {
       "item": "minecraft:prismarine_crystals"
@@ -17,6 +18,7 @@
     "SCS"
   ],
   "result": {
-    "item": "glowlights:glow_lantern_block"
+    "id": "glowlights:glow_lantern_block",
+    "count": 1
   }
 }

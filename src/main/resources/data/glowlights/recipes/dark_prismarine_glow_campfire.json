@@ -1,5 +1,6 @@
 {
   "type": "minecraft:crafting_shaped",
+  "category": "building",
   "key": {
     "C": {
       "tag": "minecraft:coals"
@@ -17,6 +18,7 @@
     "PPP"
   ],
   "result": {
-    "item": "glowlights:dark_prismarine_glow_campfire"
+    "id": "glowlights:dark_prismarine_glow_campfire",
+    "count": 1
   }
 }

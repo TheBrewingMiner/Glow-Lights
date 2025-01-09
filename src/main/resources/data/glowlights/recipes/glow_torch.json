@@ -1,5 +1,6 @@
 {
   "type": "minecraft:crafting_shaped",
+  "category": "building",
   "pattern": [
     "O",
     "X",
@@ -22,7 +23,7 @@
     }
   },
   "result": {
-    "item": "glowlights:glow_torch",
+    "id": "glowlights:glow_torch",
     "count": 4
   }
 }
