@@ -38,10 +38,6 @@ public class ModBlocks {
 
     public static final RegistryObject<Block> PRISMARINE_GLOW_CAMPFIRE = BLOCKS.register("prismarine_glow_campfire",
             () -> new GlowCampfireBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.PRISMARINE)
-//                    .mapColor(MapColor.COLOR_CYAN)
-//                    .instrument(NoteBlockInstrument.BASEDRUM)
-//                    .requiresCorrectToolForDrops()
-//                    .strength(1.5F, 6.0F)
                     .lightLevel(GlowCampfireBlock::getLightLevel)
                     .noOcclusion()
             )
@@ -49,21 +45,13 @@ public class ModBlocks {
 
     public static final RegistryObject<Block> PRISMARINE_BRICK_GLOW_CAMPFIRE = BLOCKS.register("prismarine_brick_glow_campfire",
             () -> new GlowCampfireBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.PRISMARINE_BRICKS)
-//                    .mapColor(MapColor.DIAMOND)
-//                    .instrument(NoteBlockInstrument.BASEDRUM)
-//                    .requiresCorrectToolForDrops()
-//                    .strength(1.5F, 6.0F)
                     .lightLevel(GlowCampfireBlock::getLightLevel)
                     .noOcclusion()
             )
     );
 
     public static final RegistryObject<Block> DARK_PRISMARINE_GLOW_CAMPFIRE = BLOCKS.register("dark_prismarine_glow_campfire",
-            () -> new GlowCampfireBlock(BlockBehaviour.Properties.of()
-                    .mapColor(MapColor.DIAMOND)
-                    .instrument(NoteBlockInstrument.BASEDRUM)
-                    .requiresCorrectToolForDrops()
-                    .strength(1.5F, 6.0F)
+            () -> new GlowCampfireBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.DARK_PRISMARINE)
                     .lightLevel(GlowCampfireBlock::getLightLevel)
                     .noOcclusion()
             )
