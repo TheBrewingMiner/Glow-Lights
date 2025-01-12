@@ -12,8 +12,6 @@ import net.thebrewingminer.glowlights.block.ModBlocks;
 public class ModItems {
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, GlowLights.MODID);
 
-//  Item registered prior to my understanding of the code used within the ModBlocks class.
-
     public static final RegistryObject<Item> GLOW_TORCH = ITEMS.register("glow_torch",
             () -> new StandingAndWallBlockItem(
                     ModBlocks.GLOW_TORCH_BLOCK.get(),
