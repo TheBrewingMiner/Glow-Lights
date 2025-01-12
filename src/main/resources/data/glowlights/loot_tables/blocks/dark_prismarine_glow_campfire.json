@@ -17,16 +17,14 @@
                       "minecraft:enchantments": [
                         {
                           "enchantment": "minecraft:silk_touch",
-                          "levels": {
-                            "min": 1
-                          }
+                          "levels": 1
                         }
                       ]
                     }
                   }
                 }
               ],
-              "name": "glowlights:blocks/dark_prismarine_glow_campfire"
+              "name": "glowlights:dark_prismarine_glow_campfire"
             },
             {
               "type": "minecraft:group",
