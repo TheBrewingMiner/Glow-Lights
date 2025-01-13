@@ -101,37 +101,6 @@ public class GlowCampfireBlock extends Block implements SimpleWaterloggedBlock {
         return state.getValue(WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(state);
     }
 
-//    @Override
-//    public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
-//        ItemStack heldItem = player.getItemInHand(hand);
-//        boolean playerInSurvival = !player.isCreative();
-//
-//        if (!state.getValue(LIT)){
-//            if (heldItem.is(Items.FLINT_AND_STEEL) || heldItem.is(Items.FIRE_CHARGE)){
-//                level.setBlock(pos, state.setValue(LIT, true), 3);
-//                if (playerInSurvival){
-//                    if (heldItem.is(Items.FLINT_AND_STEEL)){
-//                        heldItem.hurtAndBreak(1, player, (p) -> p.broadcastBreakEvent(hand));
-//                    } else if (heldItem.is((Items.FIRE_CHARGE))){
-//                        heldItem.shrink(1);
-//                    }
-//                }
-//                player.awardStat(Stats.INTERACT_WITH_CAMPFIRE);
-//                return InteractionResult.sidedSuccess(level.isClientSide);
-//            }
-//        } else if (state.getValue(LIT)){
-//            if (heldItem.getItem() instanceof ShovelItem){
-//                level.setBlock(pos, state.setValue(LIT, false), 3);
-//                if (playerInSurvival){
-//                    heldItem.hurtAndBreak(1, player, (p) -> p.broadcastBreakEvent(hand));
-//                }
-//                player.awardStat(Stats.INTERACT_WITH_CAMPFIRE);
-//                return InteractionResult.sidedSuccess(level.isClientSide);
-//            }
-//        }
-//        return super.use(state, level, pos, player, hand, hit);
-//    }
-
     @Override
     protected ItemInteractionResult useItemOn(ItemStack itemStack, BlockState blockState, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult result) {
         ItemStack heldItem = player.getItemInHand(hand);
