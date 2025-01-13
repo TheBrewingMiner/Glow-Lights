@@ -20,8 +20,8 @@ public class GlowLights {
     public static final String MODID = "glowlights";
     private static final Logger LOGGER = LogUtils.getLogger();
 
-    public GlowLights() {
-        IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
+    public GlowLights(FMLJavaModLoadingContext context) {
+        IEventBus modEventBus = context.getModEventBus();
 
         ModItems.register(modEventBus);
         ModBlocks.register(modEventBus);
