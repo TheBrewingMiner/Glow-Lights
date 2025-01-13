@@ -31,7 +31,7 @@ public class ModBlocks {
     );
 
     public static final RegistryObject<Block> GLOW_WALL_TORCH_BLOCK = BLOCKS.register("glow_wall_torch",
-            () -> new GlowWallTorchBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.WALL_TORCH).lightLevel(GlowWallTorchBlock::getLightLevel), ParticleTypes.GLOW)
+            () -> new GlowWallTorchBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.TORCH).lightLevel(GlowWallTorchBlock::getLightLevel), ParticleTypes.GLOW)
     );
 
     public static final RegistryObject<Block> PRISMARINE_GLOW_CAMPFIRE = BLOCKS.register("prismarine_glow_campfire",
