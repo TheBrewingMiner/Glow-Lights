@@ -20,18 +20,21 @@ public class ModItems {
     );
 
     public static final RegistryObject<Item> PRISMARINE_GLOW_CAMPFIRE = ITEMS.register("prismarine_glow_campfire",
-            () -> new ItemNameBlockItem(ModBlocks.PRISMARINE_GLOW_CAMPFIRE.get(),
-            new Item.Properties())
+            () -> new BlockItem(ModBlocks.PRISMARINE_GLOW_CAMPFIRE.get(),
+                new Item.Properties()
+            )
     );
 
     public static final RegistryObject<Item> PRISMARINE_BRICK_GLOW_CAMPFIRE = ITEMS.register("prismarine_brick_glow_campfire",
-            () -> new ItemNameBlockItem(ModBlocks.PRISMARINE_BRICK_GLOW_CAMPFIRE.get(),
-                    new Item.Properties())
+            () -> new BlockItem(ModBlocks.PRISMARINE_BRICK_GLOW_CAMPFIRE.get(),
+                    new Item.Properties()
+            )
     );
 
     public static final RegistryObject<Item> DARK_PRISMARINE_GLOW_CAMPFIRE = ITEMS.register("dark_prismarine_glow_campfire",
-            () -> new ItemNameBlockItem(ModBlocks.DARK_PRISMARINE_GLOW_CAMPFIRE.get(),
-                    new Item.Properties())
+            () -> new BlockItem(ModBlocks.DARK_PRISMARINE_GLOW_CAMPFIRE.get(),
+                    new Item.Properties()
+            )
     );
 
     public static void register(IEventBus eventBus){
