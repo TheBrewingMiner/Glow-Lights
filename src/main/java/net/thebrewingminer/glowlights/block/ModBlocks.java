@@ -61,7 +61,7 @@ public class ModBlocks {
             () -> new GlowCampfireBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.DARK_PRISMARINE)
                     .lightLevel(GlowCampfireBlock::getLightLevel)
                     .noOcclusion()
-                    .setId(ResourceKey.create(Registries.BLOCK, ResourceLocation.fromNamespaceAndPath(GlowLights.MODID, "dark_pirsmarine_glow_campfire")))
+                    .setId(ResourceKey.create(Registries.BLOCK, ResourceLocation.fromNamespaceAndPath(GlowLights.MODID, "dark_prismarine_glow_campfire")))
             )
     );
 
