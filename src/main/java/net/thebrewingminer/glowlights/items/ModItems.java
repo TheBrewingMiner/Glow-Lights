@@ -16,7 +16,7 @@ public class ModItems {
             () -> new StandingAndWallBlockItem(
                     ModBlocks.GLOW_TORCH_BLOCK.get(),
                     ModBlocks.GLOW_WALL_TORCH_BLOCK.get(),
-                    new Item.Properties(), Direction.DOWN)
+                    Direction.DOWN, new Item.Properties())
     );
 
     public static final RegistryObject<Item> PRISMARINE_GLOW_CAMPFIRE = ITEMS.register("prismarine_glow_campfire",
