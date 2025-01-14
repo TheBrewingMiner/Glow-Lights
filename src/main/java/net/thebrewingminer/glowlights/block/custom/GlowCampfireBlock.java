@@ -6,7 +6,7 @@ import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.stats.Stats;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.ItemInteractionResult;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Items;
@@ -22,7 +22,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
-import net.minecraft.world.level.block.state.properties.DirectionProperty;
+import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.BlockHitResult;
@@ -33,7 +33,7 @@ public class GlowCampfireBlock extends Block implements SimpleWaterloggedBlock {
     protected static final VoxelShape SHAPE = Block.box(0.0, 0.0, 0.0, 16.0, 7.0, 16.0);
     public static final BooleanProperty LIT;
     public static final BooleanProperty WATERLOGGED;
-    public static final DirectionProperty FACING;
+    public static final EnumProperty<Direction> FACING;
     public static final VoxelShape VIRTUAL_FENCE_POST;
 
     static {
@@ -102,7 +102,7 @@ public class GlowCampfireBlock extends Block implements SimpleWaterloggedBlock {
     }
 
     @Override
-    protected ItemInteractionResult useItemOn(ItemStack itemStack, BlockState blockState, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult result) {
+    protected InteractionResult useItemOn(ItemStack itemStack, BlockState blockState, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult result) {
         ItemStack heldItem = player.getItemInHand(hand);
         boolean playerInSurvival = !player.isCreative();
 
@@ -117,7 +117,7 @@ public class GlowCampfireBlock extends Block implements SimpleWaterloggedBlock {
                     }
                 }
                 player.awardStat(Stats.INTERACT_WITH_CAMPFIRE);
-                return ItemInteractionResult.SUCCESS;
+                return InteractionResult.SUCCESS;
             }
         } else if (blockState.getValue(LIT)){
             if(heldItem.getItem() instanceof ShovelItem){
@@ -126,7 +126,7 @@ public class GlowCampfireBlock extends Block implements SimpleWaterloggedBlock {
                     heldItem.hurtAndBreak(1, player, EquipmentSlot.MAINHAND);
                 }
                 player.awardStat(Stats.INTERACT_WITH_CAMPFIRE);
-                return ItemInteractionResult.SUCCESS;
+                return InteractionResult.SUCCESS;
             }
         }
 
