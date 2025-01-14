@@ -9,21 +9,18 @@ import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.ItemInteractionResult;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
-import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.LevelAccessor;
-import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.*;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
-import net.minecraft.world.level.block.state.properties.DirectionProperty;
+import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.BlockHitResult;
@@ -31,19 +28,20 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
 public class GlowWallTorchBlock extends WallTorchBlock implements SimpleWaterloggedBlock{
-    public static final DirectionProperty FACING;
+    public static final EnumProperty<Direction> FACING;
     protected static final float AABB_OFFSET = 2.5F;
     private static final Map<Direction, VoxelShape> AABBS;
     public static final BooleanProperty WATERLOGGED;
 
+    static {
+        FACING = HorizontalDirectionalBlock.FACING;
+        AABBS = Maps.newEnumMap(ImmutableMap.of(Direction.NORTH, Block.box(5.5, 3.0, 11.0, 10.5, 13.0, 16.0), Direction.SOUTH, Block.box(5.5, 3.0, 0.0, 10.5, 13.0, 5.0), Direction.WEST, Block.box(11.0, 3.0, 5.5, 16.0, 13.0, 10.5), Direction.EAST, Block.box(0.0, 3.0, 5.5, 5.0, 13.0, 10.5)));
+        WATERLOGGED = BlockStateProperties.WATERLOGGED;
+    }
+
     public GlowWallTorchBlock(BlockBehaviour.Properties properties, SimpleParticleType particle) {
         super(particle, properties);
         this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(WATERLOGGED, false));
-    }
-
-    @Override
-    public String getDescriptionId() {
-        return this.asItem().getDescriptionId();
     }
 
     @Override
@@ -91,8 +89,8 @@ public class GlowWallTorchBlock extends WallTorchBlock implements SimpleWaterlog
     }
 
     @Override
-    public BlockState updateShape(BlockState state, Direction direction, BlockState state2, LevelAccessor level, BlockPos pos, BlockPos pos2) {
-        return direction.getOpposite() == state.getValue(FACING) && !state.canSurvive(level, pos) ? Blocks.AIR.defaultBlockState() : state;
+    protected BlockState updateShape(BlockState state1, LevelReader level, ScheduledTickAccess tickAccess, BlockPos pos1, Direction direction, BlockPos pos2, BlockState state2, RandomSource source) {
+        return direction.getOpposite() == state1.getValue(FACING) && !state1.canSurvive(level, pos1) ? Blocks.AIR.defaultBlockState() : state1;
     }
 
     @Override
@@ -152,16 +150,10 @@ public class GlowWallTorchBlock extends WallTorchBlock implements SimpleWaterlog
     }
 
     @Override
-    protected ItemInteractionResult useItemOn(ItemStack itemStack, BlockState blockState, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult result) {
+    protected InteractionResult useItemOn(ItemStack itemStack, BlockState blockState, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult result) {
         if (!level.isClientSide() && hand == InteractionHand.MAIN_HAND){
             level.setBlock(pos, blockState, 3);
         }
         return super.useItemOn(itemStack, blockState, level, pos, player, hand, result);
-    }
-
-    static {
-        FACING = HorizontalDirectionalBlock.FACING;
-        AABBS = Maps.newEnumMap(ImmutableMap.of(Direction.NORTH, Block.box(5.5, 3.0, 11.0, 10.5, 13.0, 16.0), Direction.SOUTH, Block.box(5.5, 3.0, 0.0, 10.5, 13.0, 5.0), Direction.WEST, Block.box(11.0, 3.0, 5.5, 16.0, 13.0, 10.5), Direction.EAST, Block.box(0.0, 3.0, 5.5, 5.0, 13.0, 10.5)));
-        WATERLOGGED = BlockStateProperties.WATERLOGGED;
     }
 }
