@@ -1,29 +1,23 @@
 {
   "type": "minecraft:crafting_shaped",
-  "category": "building",
+  "category": "misc",
+  "key": {
+    "#": "#forge:rods/wooden",
+    "X": [
+      "minecraft:coal",
+      "minecraft:charcoal"
+    ],
+    "I": [
+      "minecraft:glow_ink_sac"
+    ]
+  },
   "pattern": [
-    "O",
+    "I",
     "X",
     "#"
   ],
-  "key": {
-    "#": {
-      "tag": "forge:rods/wooden"
-    },
-    "X": [
-      {
-        "item": "minecraft:coal"
-      },
-      {
-        "item": "minecraft:charcoal"
-      }
-    ],
-    "O": {
-      "item": "minecraft:glow_ink_sac"
-    }
-  },
   "result": {
-    "id": "glowlights:glow_torch",
-    "count": 4
+    "count": 4,
+    "id": "glowlights:glow_torch"
   }
 }

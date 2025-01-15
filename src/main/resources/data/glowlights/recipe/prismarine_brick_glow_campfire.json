@@ -1,24 +1,18 @@
 {
   "type": "minecraft:crafting_shaped",
-  "category": "building",
+  "category": "misc",
   "key": {
-    "C": {
-      "tag": "minecraft:coals"
-    },
-    "P": {
-      "item": "minecraft:prismarine_bricks"
-    },
-    "S": {
-      "item": "minecraft:glow_ink_sac"
-    }
+    "C": "#minecraft:coals",
+    "I": "minecraft:glow_ink_sac",
+    "P": "minecraft:prismarine_bricks"
   },
   "pattern": [
-    " S ",
-    "SCS",
+    " I ",
+    "ICI",
     "PPP"
   ],
   "result": {
-    "id": "glowlights:prismarine_brick_glow_campfire",
-    "count": 1
+    "count": 1,
+    "id": "glowlights:prismarine_brick_glow_campfire"
   }
 }

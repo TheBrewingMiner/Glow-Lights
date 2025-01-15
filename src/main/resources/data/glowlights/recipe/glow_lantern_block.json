@@ -2,15 +2,9 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "C": {
-      "item": "minecraft:prismarine_crystals"
-    },
-    "S": {
-      "item": "minecraft:prismarine_shard"
-    },
-    "I": {
-      "item": "minecraft:glow_ink_sac"
-    }
+    "C": "minecraft:prismarine_crystals",
+    "S": "minecraft:prismarine_shard",
+    "I": "minecraft:glow_ink_sac"
   },
   "pattern": [
     "SCS",
@@ -18,7 +12,7 @@
     "SCS"
   ],
   "result": {
-    "id": "glowlights:glow_lantern_block",
-    "count": 1
+    "count": 1,
+    "id": "glowlights:glow_lantern_block"
   }
 }
