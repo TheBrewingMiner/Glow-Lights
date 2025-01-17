@@ -1,0 +1,6 @@
+{
+  "model": {
+    "type": "minecraft:model",
+    "model": "glowlights:block/glow_lantern_block"
+  }
+}
