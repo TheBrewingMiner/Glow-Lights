@@ -9,7 +9,7 @@ import net.thebrewingminer.glowlights.GlowLights;
 import net.thebrewingminer.glowlights.block.ModBlocks;
 
 public class ModItems {
-    public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, GlowLights.MODID);
+    public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, GlowLights.MOD_ID);
 
 //  Item registered prior to my understanding of the code used within the ModBlocks class.
 
