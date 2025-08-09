@@ -122,9 +122,10 @@ public class GlowCampfireBlock extends Block implements SimpleWaterloggedBlock {
             if (heldItem.is(Tags.Items.TOOLS_SHOVELS)){
                 level.setBlock(pos, state.setValue(LIT, false), 3);
                 if (survivalMode){ heldItem.hurtAndBreak(1, player, (p) -> p.broadcastBreakEvent(playerHand)); }
+
+                player.awardStat(Stats.INTERACT_WITH_CAMPFIRE);
+                return InteractionResult.sidedSuccess(level.isClientSide);
             }
-            player.awardStat(Stats.INTERACT_WITH_CAMPFIRE);
-            return InteractionResult.sidedSuccess(level.isClientSide);
         }
         return super.use(state, level, pos, player, playerHand, hitResult);
     }
