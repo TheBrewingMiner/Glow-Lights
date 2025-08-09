@@ -8,13 +8,15 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
-import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Mirror;
+import net.minecraft.world.level.block.SimpleWaterloggedBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
@@ -29,13 +31,12 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.common.Tags;
 
-import java.util.Optional;
-
+@SuppressWarnings({"NullableProblems", "deprecation"})
 public class GlowCampfireBlock extends Block implements SimpleWaterloggedBlock {
-    protected static final VoxelShape SHAPE = Block.box(0.0, 0.0, 0.0, 16.0, 7.0, 16.0);
     public static final BooleanProperty LIT;
     public static final BooleanProperty WATERLOGGED;
     public static final DirectionProperty FACING;
+    public static final VoxelShape SHAPE = Block.box(0.0, 0.0, 0.0, 16.0, 7.0, 16.0);
     public static final VoxelShape VIRTUAL_FENCE_POST;
 
     static {
@@ -51,26 +52,31 @@ public class GlowCampfireBlock extends Block implements SimpleWaterloggedBlock {
     }
 
     @Override
-    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder){
-        builder.add(LIT, WATERLOGGED, FACING);
-    }
-
-    @Override
-    public BlockState getStateForPlacement(BlockPlaceContext context){
-        LevelAccessor levelaccessor = context.getLevel();
-        BlockPos blockpos = context.getClickedPos();
-        boolean flag = levelaccessor.getFluidState(blockpos).getType() == Fluids.WATER;
-        return this.defaultBlockState().setValue(WATERLOGGED, flag).setValue(LIT, false).setValue(FACING, context.getHorizontalDirection());
-    }
-
-    @Override
     public VoxelShape getShape(BlockState state, BlockGetter getter, BlockPos pos, CollisionContext context) {
         return SHAPE;
     }
 
     @Override
-    public BlockState rotate(BlockState state, Rotation rotation) {
-        return state.setValue(FACING, rotation.rotate(state.getValue(FACING)));
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder){
+        builder.add(LIT, WATERLOGGED, FACING);
+    }
+
+    @Override
+    public BlockState getStateForPlacement(BlockPlaceContext blockPlaceContext){
+        LevelAccessor level = blockPlaceContext.getLevel();
+        BlockPos pos = blockPlaceContext.getClickedPos();
+        boolean inWater = level.getFluidState(pos).getType() == Fluids.WATER;
+        return ( this.defaultBlockState().setValue(WATERLOGGED, inWater).setValue(LIT, false).setValue(FACING, blockPlaceContext.getHorizontalDirection()) );
+    }
+
+    @Override
+    public boolean isPathfindable(BlockState state, BlockGetter getter, BlockPos pos, PathComputationType type) {
+        return false;
+    }
+
+    @Override
+    public FluidState getFluidState(BlockState state) {
+        return state.getValue(WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(state);
     }
 
     @Override
@@ -88,64 +94,53 @@ public class GlowCampfireBlock extends Block implements SimpleWaterloggedBlock {
 
     public static int getLightLevel(BlockState state){
         int lightLevel = 0;
-        if (isLit(state)){
-            lightLevel = (isWaterlogged(state)) ? 15 : 10;
-        }
+        if (isLit(state)){ lightLevel = (isWaterlogged(state)) ? 15 : 10; }
 
         return lightLevel;
     }
 
     @Override
-    public boolean isPathfindable(BlockState state, BlockGetter getter, BlockPos pos, PathComputationType type) {
-        return false;
-    }
+    public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand playerHand, BlockHitResult hitResult){
+        ItemStack heldItem = player.getItemInHand(playerHand);
+        boolean survivalMode = !(player.isCreative());
 
-    @Override
-    public FluidState getFluidState(BlockState state) {
-        return (Boolean) state.getValue(WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(state);
-    }
-
-    @Override
-    public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
-        ItemStack heldItem = player.getItemInHand(hand);
-        boolean playerInSurvival = !player.isCreative();
-
-        if (!state.getValue(LIT)){
+        if (!(state.getValue(LIT))){
             if (heldItem.is(Items.FLINT_AND_STEEL) || heldItem.is(Items.FIRE_CHARGE)){
                 level.setBlock(pos, state.setValue(LIT, true), 3);
-                if (playerInSurvival){
+                if (survivalMode){
                     if (heldItem.is(Items.FLINT_AND_STEEL)){
-                        heldItem.hurtAndBreak(1, player, (p) -> p.broadcastBreakEvent(hand));
-                    } else if (heldItem.is((Items.FIRE_CHARGE))){
+                        heldItem.hurtAndBreak(1, player, (p) -> p.broadcastBreakEvent(playerHand));
+                    } else {
                         heldItem.shrink(1);
                     }
                 }
+
                 player.awardStat(Stats.INTERACT_WITH_CAMPFIRE);
                 return InteractionResult.sidedSuccess(level.isClientSide);
             }
-        } else if (state.getValue(LIT)){
+        } else {
             if (heldItem.is(Tags.Items.TOOLS_SHOVELS)){
                 level.setBlock(pos, state.setValue(LIT, false), 3);
-                if (playerInSurvival){
-                    heldItem.hurtAndBreak(1, player, (p) -> p.broadcastBreakEvent(hand));
-                }
-                player.awardStat(Stats.INTERACT_WITH_CAMPFIRE);
-                return InteractionResult.sidedSuccess(level.isClientSide);
+                if (survivalMode){ heldItem.hurtAndBreak(1, player, (p) -> p.broadcastBreakEvent(playerHand)); }
             }
+            player.awardStat(Stats.INTERACT_WITH_CAMPFIRE);
+            return InteractionResult.sidedSuccess(level.isClientSide);
         }
-        return super.use(state, level, pos, player, hand, hit);
+        return super.use(state, level, pos, player, playerHand, hitResult);
+    }
+
+    public void addGlowParticle(Level level, BlockPos pos, RandomSource randomSource){
+        level.addParticle(ParticleTypes.GLOW, (double)pos.getX() + 0.5, (double)pos.getY() + 0.5, (double)pos.getZ() + 0.5, randomSource.nextFloat() / 2.0F, 5.0E-5, randomSource.nextFloat() / 2.0F);
     }
 
     @Override
-    public void animateTick(BlockState state, Level level, BlockPos pos, RandomSource source) {
-        if (state.getValue(LIT)) {
-            if (state.getValue(WATERLOGGED)){
-                if (source.nextInt(6) == 0) {
-                    level.addParticle(ParticleTypes.GLOW, (double)pos.getX() + 0.5, (double)pos.getY() + 0.5, (double)pos.getZ() + 0.5, (double)(source.nextFloat() / 2.0F), 5.0E-5, (double)(source.nextFloat() / 2.0F));
-                }
-            }  else if (source.nextInt(10) == 0) {
-                level.addParticle(ParticleTypes.GLOW, (double) pos.getX() + 0.5, (double) pos.getY() + 0.5, (double) pos.getZ() + 0.5, (double) (source.nextFloat() / 2.0F), 5.0E-5, (double) (source.nextFloat() / 2.0F));
-            }
+    public void animateTick(BlockState blockState, Level level, BlockPos pos, RandomSource randomSource){
+        if (!(blockState.getValue(LIT))) return;
+
+        if (blockState.getValue(WATERLOGGED)){
+            if (randomSource.nextInt(6) == 0){ addGlowParticle(level, pos, randomSource); }
+        } else {
+            if (randomSource.nextInt(10) == 0){ addGlowParticle(level, pos, randomSource); }
         }
     }
 }
