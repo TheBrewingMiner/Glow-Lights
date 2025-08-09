@@ -39,8 +39,8 @@ public class GlowCampfireBlock extends Block implements SimpleWaterloggedBlock {
     public static final VoxelShape SHAPE = Block.box(0.0, 0.0, 0.0, 16.0, 7.0, 16.0);
     public static final VoxelShape VIRTUAL_FENCE_POST;
 
-    public final int WATERLOGGED_PARTICLE_DELAY = 6;
-    public final int DRY_PARTICLE_DELAY = 10;
+    public static final int WATERLOGGED_PARTICLE_DELAY = 6;
+    public static final int DRY_PARTICLE_DELAY = 10;
 
     static {
         LIT = BlockStateProperties.LIT;
