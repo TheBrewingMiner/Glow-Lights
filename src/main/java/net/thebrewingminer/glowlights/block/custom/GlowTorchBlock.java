@@ -84,7 +84,7 @@ public class GlowTorchBlock extends TorchBlock implements SimpleWaterloggedBlock
         return (isWaterlogged(state)) ? 15 : 10;
     }
 
-    public static void addFlameParticle(ParticleOptions particle, Level level, BlockPos pos, RandomSource randomSource, int integer){
+    public static void addFlameParticle(ParticleOptions particle, Level level, BlockPos pos, RandomSource randomSource, int delay){
         double x = (double)pos.getX() + 0.5;
         double y = (double)pos.getY() + 0.7;
         double z = (double)pos.getZ() + 0.5;
@@ -92,7 +92,7 @@ public class GlowTorchBlock extends TorchBlock implements SimpleWaterloggedBlock
         double ySpeed = 0.0;
         double zSpeed = 0.0;
 
-        if (randomSource.nextInt(integer) == 0) {
+        if (randomSource.nextInt(delay) == 0) {
             level.addParticle(particle, x, y, z, xSpeed, ySpeed, zSpeed);
         }
     }

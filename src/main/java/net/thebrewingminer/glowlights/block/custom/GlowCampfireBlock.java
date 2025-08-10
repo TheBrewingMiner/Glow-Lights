@@ -139,8 +139,8 @@ public class GlowCampfireBlock extends Block implements SimpleWaterloggedBlock {
         return super.use(state, level, pos, player, playerHand, hitResult);
     }
 
-    public static void addGlowParticle(Level level, BlockPos pos, RandomSource randomSource, int integer){
-        if (randomSource.nextInt(integer) == 0) {
+    public static void addGlowParticle(Level level, BlockPos pos, RandomSource randomSource, int delay){
+        if (randomSource.nextInt(delay) == 0) {
             level.addParticle(ParticleTypes.GLOW, (double) pos.getX() + 0.5, (double) pos.getY() + 0.5, (double) pos.getZ() + 0.5, randomSource.nextFloat() / 2.0F, 5.0E-5, randomSource.nextFloat() / 2.0F);
         }
     }
