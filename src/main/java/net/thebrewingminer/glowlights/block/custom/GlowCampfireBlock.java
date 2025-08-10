@@ -3,6 +3,8 @@ package net.thebrewingminer.glowlights.block.custom;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
@@ -42,6 +44,9 @@ public class GlowCampfireBlock extends Block implements SimpleWaterloggedBlock {
 
     public static final int WATERLOGGED_PARTICLE_DELAY = 6;
     public static final int DRY_PARTICLE_DELAY = 10;
+
+    public static final int WATERLOGGED_SOUND_DELAY = 75;
+    public static final int DRY_SOUND_DELAY = 32;
 
     static {
         LIT = BlockStateProperties.LIT;
@@ -145,14 +150,22 @@ public class GlowCampfireBlock extends Block implements SimpleWaterloggedBlock {
         }
     }
 
+    public static void playSound(Level level, BlockPos pos, RandomSource randomSource, int delay){
+        if (randomSource.nextInt(delay) == 0){
+            level.playLocalSound((double)pos.getX() + 0.5, (double)pos.getY() + 0.5, (double)pos.getZ() + 0.5, SoundEvents.CAMPFIRE_CRACKLE, SoundSource.BLOCKS, 0.5F + randomSource.nextFloat(), randomSource.nextFloat() * 0.7F + 0.6F, false);
+        }
+    }
+
     @Override
     public void animateTick(BlockState blockState, Level level, BlockPos pos, RandomSource randomSource){
         if (!(blockState.getValue(LIT))) return;
 
         if (blockState.getValue(WATERLOGGED)){
             addGlowParticle(level, pos, randomSource, WATERLOGGED_PARTICLE_DELAY);
+            playSound(level, pos, randomSource, WATERLOGGED_SOUND_DELAY);
         } else {
             addGlowParticle(level, pos, randomSource, DRY_PARTICLE_DELAY);
+            playSound(level, pos, randomSource, DRY_SOUND_DELAY);
         }
     }
 }
