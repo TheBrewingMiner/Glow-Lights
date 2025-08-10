@@ -1,33 +1,48 @@
 {
   "variants": {
     "facing=east,lit=false": {
-      "model": "glowlights:block/glow_campfire/prismarine_glow_campfire_off",
+      "model": "glowlights:block/glow_campfire/prismarine/unlit",
       "y": 270
     },
-    "facing=east,lit=true": {
-      "model": "glowlights:block/glow_campfire/prismarine_glow_campfire",
+    "facing=east,lit=true,waterlogged=false": {
+      "model": "glowlights:block/glow_campfire/prismarine/lit",
+      "y": 270
+    },
+    "facing=east,lit=true,waterlogged=true": {
+      "model": "glowlights:block/glow_campfire/prismarine/lit_submerged",
       "y": 270
     },
     "facing=north,lit=false": {
-      "model": "glowlights:block/glow_campfire/prismarine_glow_campfire_off",
+      "model": "glowlights:block/glow_campfire/prismarine/unlit",
       "y": 180
     },
-    "facing=north,lit=true": {
-      "model": "glowlights:block/glow_campfire/prismarine_glow_campfire",
+    "facing=north,lit=true,waterlogged=false": {
+      "model": "glowlights:block/glow_campfire/prismarine/lit",
+      "y": 180
+    },
+    "facing=north,lit=true,waterlogged=true": {
+      "model": "glowlights:block/glow_campfire/prismarine/lit_submerged",
       "y": 180
     },
     "facing=south,lit=false": {
-      "model": "glowlights:block/glow_campfire/prismarine_glow_campfire_off"
+      "model": "glowlights:block/glow_campfire/prismarine/unlit"
     },
-    "facing=south,lit=true": {
-      "model": "glowlights:block/glow_campfire/prismarine_glow_campfire"
+    "facing=south,lit=true,waterlogged=false": {
+      "model": "glowlights:block/glow_campfire/prismarine/lit"
+    },
+    "facing=south,lit=true,waterlogged=true": {
+      "model": "glowlights:block/glow_campfire/prismarine/lit_submerged"
     },
     "facing=west,lit=false": {
-      "model": "glowlights:block/glow_campfire/prismarine_glow_campfire_off",
+      "model": "glowlights:block/glow_campfire/prismarine/unlit",
       "y": 90
     },
-    "facing=west,lit=true": {
-      "model": "glowlights:block/glow_campfire/prismarine_glow_campfire",
+    "facing=west,lit=true,waterlogged=false": {
+      "model": "glowlights:block/glow_campfire/prismarine/lit",
+      "y": 90
+    },
+    "facing=west,lit=true,waterlogged=true": {
+      "model": "glowlights:block/glow_campfire/prismarine/lit_submerged",
       "y": 90
     }
   }

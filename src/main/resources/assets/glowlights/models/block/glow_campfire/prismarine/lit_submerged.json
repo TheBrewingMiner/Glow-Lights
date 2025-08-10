@@ -1,0 +1,10 @@
+{
+  "parent": "glowlights:block/glow_campfire_template",
+  "textures": {
+    "logs": "minecraft:block/prismarine",
+    "unlit_ash": "minecraft:block/campfire_log",
+    "ash": "glowlights:block/glow_ash",
+    "fire": "glowlights:block/empty",
+    "particle": "minecraft:block/prismarine"
+  }
+}
