@@ -88,9 +88,12 @@ public class GlowTorchBlock extends TorchBlock implements SimpleWaterloggedBlock
         double x = (double)pos.getX() + 0.5;
         double y = (double)pos.getY() + 0.7;
         double z = (double)pos.getZ() + 0.5;
+        double xSpeed = 0.0;
+        double ySpeed = 0.0;
+        double zSpeed = 0.0;
 
         if (randomSource.nextInt(integer) == 0) {
-            level.addParticle(particle, x, y, z, 0.0, 0.0, 0.0);
+            level.addParticle(particle, x, y, z, xSpeed, ySpeed, zSpeed);
         }
     }
     
