@@ -20,6 +20,7 @@ import net.thebrewingminer.glowlights.items.ModItems;
 
 import java.util.function.Supplier;
 
+
 public class ModBlocks {
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, GlowLights.MOD_ID);
 
@@ -27,21 +28,22 @@ public class ModBlocks {
         return ModItems.ITEMS.register(name, () -> new BlockItem(block.get(), new Item.Properties().tab(tab)));
     }
 
-    private static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<T> block, CreativeModeTab tab){
+    private static <T extends Block> RegistryObject<T> registerBlockAndItem(String name, Supplier<T> block, CreativeModeTab tab){
         RegistryObject<T> toReturn = BLOCKS.register(name, block);
         registerBlockItem(name, toReturn, tab);
 
         return toReturn;
     }
 
-    /* Blocks */
-    public static final RegistryObject<Block> GLOW_LANTERN_BLOCK = registerBlock(
+/* Blocks */
+
+    public static final RegistryObject<Block> GLOW_LANTERN_BLOCK = registerBlockAndItem(
         "glow_lantern_block",
         () -> new GlowLanternBlock(BlockBehaviour.Properties.copy(Blocks.SEA_LANTERN).lightLevel(GlowLanternBlock::getLightLevel)),
         CreativeModeTab.TAB_BUILDING_BLOCKS
     );
 
-    public static final RegistryObject<Block> GLOW_LANTERN = registerBlock(
+    public static final RegistryObject<Block> GLOW_LANTERN = registerBlockAndItem(
         "glow_lantern",
         () -> new GlowLantern(BlockBehaviour.Properties.copy(Blocks.LANTERN).lightLevel(GlowLantern::getLightLevel)),
         CreativeModeTab.TAB_DECORATIONS
@@ -90,7 +92,7 @@ public class ModBlocks {
         )
     );
 
-        /* Copper */
+        /* Copper  Variants */
 
     public static final RegistryObject<Block> COPPER_GLOW_TORCH_BLOCK = BLOCKS.register(
         "copper_glow_torch",
@@ -123,6 +125,42 @@ public class ModBlocks {
         "exposed_copper_glow_wall_torch",
         () -> new CopperGlowWallTorchBlock(
             WeatheringCopper.WeatherState.EXPOSED,
+            BlockBehaviour.Properties.copy(Blocks.WALL_TORCH).lightLevel(CopperGlowWallTorchBlock::getLightLevel),
+            ParticleTypes.GLOW
+        )
+    );
+
+    public static final RegistryObject<Block> WEATHERED_COPPER_GLOW_TORCH_BLOCK = BLOCKS.register(
+        "weathered_copper_glow_torch",
+        () -> new CopperGlowTorchBlock(
+            WeatheringCopper.WeatherState.WEATHERED,
+            BlockBehaviour.Properties.copy(Blocks.TORCH).lightLevel(CopperGlowTorchBlock::getLightLevel),
+            ParticleTypes.GLOW
+        )
+    );
+
+    public static final RegistryObject<Block> WEATHERED_COPPER_GLOW_WALL_TORCH_BLOCK = BLOCKS.register(
+        "weathered_copper_glow_wall_torch",
+        () -> new CopperGlowWallTorchBlock(
+            WeatheringCopper.WeatherState.WEATHERED,
+            BlockBehaviour.Properties.copy(Blocks.WALL_TORCH).lightLevel(CopperGlowWallTorchBlock::getLightLevel),
+            ParticleTypes.GLOW
+        )
+    );
+
+    public static final RegistryObject<Block> OXIDIZED_COPPER_GLOW_TORCH_BLOCK = BLOCKS.register(
+        "oxidized_copper_glow_torch",
+        () -> new CopperGlowTorchBlock(
+            WeatheringCopper.WeatherState.OXIDIZED,
+            BlockBehaviour.Properties.copy(Blocks.TORCH).lightLevel(CopperGlowTorchBlock::getLightLevel),
+            ParticleTypes.GLOW
+        )
+    );
+
+    public static final RegistryObject<Block> OXIDIZED_COPPER_GLOW_WALL_TORCH_BLOCK = BLOCKS.register(
+        "oxidized_copper_glow_wall_torch",
+        () -> new CopperGlowWallTorchBlock(
+            WeatheringCopper.WeatherState.OXIDIZED,
             BlockBehaviour.Properties.copy(Blocks.WALL_TORCH).lightLevel(CopperGlowWallTorchBlock::getLightLevel),
             ParticleTypes.GLOW
         )

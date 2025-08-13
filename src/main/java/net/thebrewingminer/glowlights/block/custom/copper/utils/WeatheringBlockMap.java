@@ -1,0 +1,24 @@
+package net.thebrewingminer.glowlights.block.custom.copper.utils;
+
+import com.google.common.base.Suppliers;
+import com.google.common.collect.BiMap;
+import com.google.common.collect.ImmutableBiMap;
+import net.minecraft.world.level.block.Block;
+import net.thebrewingminer.glowlights.block.ModBlocks;
+
+import java.util.function.Supplier;
+
+public class WeatheringBlockMap {
+    public static Supplier<BiMap<Block, Block>> NEXT_BY_BLOCK = Suppliers.memoize(() -> {
+        return ImmutableBiMap.<Block, Block>builder()
+                .put(ModBlocks.COPPER_GLOW_TORCH_BLOCK.get(), ModBlocks.EXPOSED_COPPER_GLOW_TORCH_BLOCK.get())
+                .put(ModBlocks.EXPOSED_COPPER_GLOW_TORCH_BLOCK.get(), ModBlocks.WEATHERED_COPPER_GLOW_TORCH_BLOCK.get())
+                .put(ModBlocks.WEATHERED_COPPER_GLOW_TORCH_BLOCK.get(), ModBlocks.OXIDIZED_COPPER_GLOW_TORCH_BLOCK.get())
+                .put(ModBlocks.COPPER_GLOW_WALL_TORCH_BLOCK.get(), ModBlocks.EXPOSED_COPPER_GLOW_WALL_TORCH_BLOCK.get())
+                .put(ModBlocks.EXPOSED_COPPER_GLOW_WALL_TORCH_BLOCK.get(), ModBlocks.WEATHERED_COPPER_GLOW_WALL_TORCH_BLOCK.get())
+                .put(ModBlocks.WEATHERED_COPPER_GLOW_WALL_TORCH_BLOCK.get(), ModBlocks.OXIDIZED_COPPER_GLOW_WALL_TORCH_BLOCK.get())
+            .build();
+    });
+
+    public static Supplier<BiMap<Block, Block>> PREVIOUS_BY_BLOCK = Suppliers.memoize(() -> ((BiMap)NEXT_BY_BLOCK.get()).inverse());
+}

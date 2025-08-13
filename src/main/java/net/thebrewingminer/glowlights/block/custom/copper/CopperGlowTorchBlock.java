@@ -8,8 +8,9 @@ import net.minecraft.world.level.block.WeatheringCopper;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.thebrewingminer.glowlights.block.custom.GlowTorchBlock;
+import net.thebrewingminer.glowlights.block.custom.copper.utils.IWeatheringCopper;
 
-public class CopperGlowTorchBlock extends GlowTorchBlock implements WeatheringCopper {
+public class CopperGlowTorchBlock extends GlowTorchBlock implements IWeatheringCopper {
     private final WeatheringCopper.WeatherState weatherState;
 
     public CopperGlowTorchBlock(WeatheringCopper.WeatherState weatherState, BlockBehaviour.Properties properties, ParticleOptions particle) {
@@ -24,7 +25,7 @@ public class CopperGlowTorchBlock extends GlowTorchBlock implements WeatheringCo
 
     @Override
     public boolean isRandomlyTicking(BlockState state) {
-        return WeatheringCopper.getNext(state.getBlock()).isPresent();
+        return IWeatheringCopper.getNext(state.getBlock()).isPresent();
     }
 
     @Override

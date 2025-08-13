@@ -58,6 +58,24 @@ public class ModItems {
         )
     );
 
+    public static final RegistryObject<Item> WEATHERED_COPPER_GLOW_TORCH = ITEMS.register(
+        "weathered_copper_glow_torch",
+        () -> new StandingAndWallBlockItem(
+            ModBlocks.WEATHERED_COPPER_GLOW_TORCH_BLOCK.get(),
+            ModBlocks.WEATHERED_COPPER_GLOW_WALL_TORCH_BLOCK.get(),
+            new Item.Properties().tab(CreativeModeTab.TAB_DECORATIONS)
+        )
+    );
+
+    public static final RegistryObject<Item> OXIDIZED_COPPER_GLOW_TORCH = ITEMS.register(
+        "oxidized_copper_glow_torch",
+        () -> new StandingAndWallBlockItem(
+            ModBlocks.OXIDIZED_COPPER_GLOW_TORCH_BLOCK.get(),
+            ModBlocks.OXIDIZED_COPPER_GLOW_WALL_TORCH_BLOCK.get(),
+            new Item.Properties().tab(CreativeModeTab.TAB_DECORATIONS)
+        )
+    );
+
     public static void register(IEventBus eventBus){
         ITEMS.register(eventBus);
     }
