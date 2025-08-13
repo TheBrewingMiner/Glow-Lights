@@ -6,6 +6,7 @@ import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.WeatheringCopper;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
@@ -13,6 +14,8 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import net.thebrewingminer.glowlights.GlowLights;
 import net.thebrewingminer.glowlights.block.custom.*;
+import net.thebrewingminer.glowlights.block.custom.copper.CopperGlowTorchBlock;
+import net.thebrewingminer.glowlights.block.custom.copper.CopperGlowWallTorchBlock;
 import net.thebrewingminer.glowlights.items.ModItems;
 
 import java.util.function.Supplier;
@@ -46,35 +49,82 @@ public class ModBlocks {
 
     public static final RegistryObject<Block> GLOW_TORCH_BLOCK = BLOCKS.register(
         "glow_torch",
-        () -> new GlowTorchBlock(BlockBehaviour.Properties.copy(Blocks.TORCH).lightLevel(GlowTorchBlock::getLightLevel), ParticleTypes.GLOW)
+        () -> new GlowTorchBlock(
+                BlockBehaviour.Properties.copy(Blocks.TORCH).lightLevel(GlowTorchBlock::getLightLevel),
+                ParticleTypes.GLOW
+        )
     );
 
     public static final RegistryObject<Block> GLOW_WALL_TORCH_BLOCK = BLOCKS.register(
         "glow_wall_torch",
-        () -> new GlowWallTorchBlock(BlockBehaviour.Properties.copy(Blocks.WALL_TORCH).lightLevel(GlowWallTorchBlock::getLightLevel), ParticleTypes.GLOW)
+        () -> new GlowWallTorchBlock(
+                BlockBehaviour.Properties.copy(Blocks.WALL_TORCH).lightLevel(GlowWallTorchBlock::getLightLevel),
+                ParticleTypes.GLOW
+        )
     );
 
     public static final RegistryObject<Block> PRISMARINE_GLOW_CAMPFIRE = BLOCKS.register(
         "prismarine_glow_campfire",
-        () -> new GlowCampfireBlock(BlockBehaviour.Properties.copy(Blocks.PRISMARINE)
-            .lightLevel(GlowCampfireBlock::getLightLevel)
-            .noOcclusion()
+        () -> new GlowCampfireBlock(
+                BlockBehaviour.Properties.copy(Blocks.PRISMARINE)
+                .lightLevel(GlowCampfireBlock::getLightLevel)
+                .noOcclusion()
         )
     );
 
     public static final RegistryObject<Block> PRISMARINE_BRICK_GLOW_CAMPFIRE = BLOCKS.register(
         "prismarine_brick_glow_campfire",
-        () -> new GlowCampfireBlock(BlockBehaviour.Properties.copy(Blocks.PRISMARINE_BRICKS)
-            .lightLevel(GlowCampfireBlock::getLightLevel)
-            .noOcclusion()
+        () -> new GlowCampfireBlock(
+                BlockBehaviour.Properties.copy(Blocks.PRISMARINE_BRICKS)
+                .lightLevel(GlowCampfireBlock::getLightLevel)
+                .noOcclusion()
         )
     );
 
     public static final RegistryObject<Block> DARK_PRISMARINE_GLOW_CAMPFIRE = BLOCKS.register(
         "dark_prismarine_glow_campfire",
-        () -> new GlowCampfireBlock(BlockBehaviour.Properties.copy(Blocks.DARK_PRISMARINE)
-            .lightLevel(GlowCampfireBlock::getLightLevel)
-            .noOcclusion()
+        () -> new GlowCampfireBlock(
+                BlockBehaviour.Properties.copy(Blocks.DARK_PRISMARINE)
+                .lightLevel(GlowCampfireBlock::getLightLevel)
+                .noOcclusion()
+        )
+    );
+
+        /* Copper */
+
+    public static final RegistryObject<Block> COPPER_GLOW_TORCH_BLOCK = BLOCKS.register(
+        "copper_glow_torch",
+        () -> new CopperGlowTorchBlock(
+            WeatheringCopper.WeatherState.UNAFFECTED,
+            BlockBehaviour.Properties.copy(Blocks.TORCH).lightLevel(CopperGlowTorchBlock::getLightLevel),
+            ParticleTypes.GLOW
+        )
+    );
+
+    public static final RegistryObject<Block> COPPER_GLOW_WALL_TORCH_BLOCK = BLOCKS.register(
+        "copper_glow_wall_torch",
+        () -> new CopperGlowWallTorchBlock(
+            WeatheringCopper.WeatherState.UNAFFECTED,
+            BlockBehaviour.Properties.copy(Blocks.WALL_TORCH).lightLevel(CopperGlowWallTorchBlock::getLightLevel),
+            ParticleTypes.GLOW
+        )
+    );
+
+    public static final RegistryObject<Block> EXPOSED_COPPER_GLOW_TORCH_BLOCK = BLOCKS.register(
+        "exposed_copper_glow_torch",
+        () -> new CopperGlowTorchBlock(
+            WeatheringCopper.WeatherState.EXPOSED,
+            BlockBehaviour.Properties.copy(Blocks.TORCH).lightLevel(CopperGlowTorchBlock::getLightLevel),
+            ParticleTypes.GLOW
+        )
+    );
+
+    public static final RegistryObject<Block> EXPOSED_COPPER_GLOW_WALL_TORCH_BLOCK = BLOCKS.register(
+        "exposed_copper_glow_wall_torch",
+        () -> new CopperGlowWallTorchBlock(
+            WeatheringCopper.WeatherState.EXPOSED,
+            BlockBehaviour.Properties.copy(Blocks.WALL_TORCH).lightLevel(CopperGlowWallTorchBlock::getLightLevel),
+            ParticleTypes.GLOW
         )
     );
 

@@ -38,6 +38,26 @@ public class ModItems {
         new Item.Properties().tab(CreativeModeTab.TAB_DECORATIONS))
     );
 
+        /* Copper */
+
+    public static final RegistryObject<Item> COPPER_GLOW_TORCH = ITEMS.register(
+        "copper_glow_torch",
+        () -> new StandingAndWallBlockItem(
+            ModBlocks.COPPER_GLOW_TORCH_BLOCK.get(),
+            ModBlocks.COPPER_GLOW_WALL_TORCH_BLOCK.get(),
+            new Item.Properties().tab(CreativeModeTab.TAB_DECORATIONS)
+        )
+    );
+
+    public static final RegistryObject<Item> EXPOSED_COPPER_GLOW_TORCH = ITEMS.register(
+        "exposed_copper_glow_torch",
+        () -> new StandingAndWallBlockItem(
+            ModBlocks.EXPOSED_COPPER_GLOW_TORCH_BLOCK.get(),
+            ModBlocks.EXPOSED_COPPER_GLOW_WALL_TORCH_BLOCK.get(),
+            new Item.Properties().tab(CreativeModeTab.TAB_DECORATIONS)
+        )
+    );
+
     public static void register(IEventBus eventBus){
         ITEMS.register(eventBus);
     }
