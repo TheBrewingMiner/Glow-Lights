@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "glowlights:block/glow_torch/copper/oxidized_copper_glow_torch"
+    }
+  }
+}
