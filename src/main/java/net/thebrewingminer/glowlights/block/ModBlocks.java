@@ -49,7 +49,7 @@ public class ModBlocks {
         CreativeModeTab.TAB_DECORATIONS
     );
 
-    public static final RegistryObject<Block> GLOW_TORCH_BLOCK = BLOCKS.register(
+    public static final RegistryObject<Block> GLOW_TORCH = BLOCKS.register(
         "glow_torch",
         () -> new GlowTorchBlock(
                 BlockBehaviour.Properties.copy(Blocks.TORCH).lightLevel(GlowTorchBlock::getLightLevel),
@@ -57,7 +57,7 @@ public class ModBlocks {
         )
     );
 
-    public static final RegistryObject<Block> GLOW_WALL_TORCH_BLOCK = BLOCKS.register(
+    public static final RegistryObject<Block> GLOW_WALL_TORCH = BLOCKS.register(
         "glow_wall_torch",
         () -> new GlowWallTorchBlock(
                 BlockBehaviour.Properties.copy(Blocks.WALL_TORCH).lightLevel(GlowWallTorchBlock::getLightLevel),
@@ -94,7 +94,7 @@ public class ModBlocks {
 
         /* Copper  Variants */
 
-    public static final RegistryObject<Block> COPPER_GLOW_TORCH_BLOCK = BLOCKS.register(
+    public static final RegistryObject<Block> COPPER_GLOW_TORCH = BLOCKS.register(
         "copper_glow_torch",
         () -> new CopperGlowTorchBlock(
             WeatheringCopper.WeatherState.UNAFFECTED,
@@ -103,7 +103,7 @@ public class ModBlocks {
         )
     );
 
-    public static final RegistryObject<Block> COPPER_GLOW_WALL_TORCH_BLOCK = BLOCKS.register(
+    public static final RegistryObject<Block> COPPER_GLOW_WALL_TORCH = BLOCKS.register(
         "copper_glow_wall_torch",
         () -> new CopperGlowWallTorchBlock(
             WeatheringCopper.WeatherState.UNAFFECTED,
@@ -112,7 +112,7 @@ public class ModBlocks {
         )
     );
 
-    public static final RegistryObject<Block> EXPOSED_COPPER_GLOW_TORCH_BLOCK = BLOCKS.register(
+    public static final RegistryObject<Block> EXPOSED_COPPER_GLOW_TORCH = BLOCKS.register(
         "exposed_copper_glow_torch",
         () -> new CopperGlowTorchBlock(
             WeatheringCopper.WeatherState.EXPOSED,
@@ -121,7 +121,7 @@ public class ModBlocks {
         )
     );
 
-    public static final RegistryObject<Block> EXPOSED_COPPER_GLOW_WALL_TORCH_BLOCK = BLOCKS.register(
+    public static final RegistryObject<Block> EXPOSED_COPPER_GLOW_WALL_TORCH = BLOCKS.register(
         "exposed_copper_glow_wall_torch",
         () -> new CopperGlowWallTorchBlock(
             WeatheringCopper.WeatherState.EXPOSED,
@@ -130,7 +130,7 @@ public class ModBlocks {
         )
     );
 
-    public static final RegistryObject<Block> WEATHERED_COPPER_GLOW_TORCH_BLOCK = BLOCKS.register(
+    public static final RegistryObject<Block> WEATHERED_COPPER_GLOW_TORCH = BLOCKS.register(
         "weathered_copper_glow_torch",
         () -> new CopperGlowTorchBlock(
             WeatheringCopper.WeatherState.WEATHERED,
@@ -139,7 +139,7 @@ public class ModBlocks {
         )
     );
 
-    public static final RegistryObject<Block> WEATHERED_COPPER_GLOW_WALL_TORCH_BLOCK = BLOCKS.register(
+    public static final RegistryObject<Block> WEATHERED_COPPER_GLOW_WALL_TORCH = BLOCKS.register(
         "weathered_copper_glow_wall_torch",
         () -> new CopperGlowWallTorchBlock(
             WeatheringCopper.WeatherState.WEATHERED,
@@ -148,7 +148,7 @@ public class ModBlocks {
         )
     );
 
-    public static final RegistryObject<Block> OXIDIZED_COPPER_GLOW_TORCH_BLOCK = BLOCKS.register(
+    public static final RegistryObject<Block> OXIDIZED_COPPER_GLOW_TORCH = BLOCKS.register(
         "oxidized_copper_glow_torch",
         () -> new CopperGlowTorchBlock(
             WeatheringCopper.WeatherState.OXIDIZED,
@@ -157,7 +157,7 @@ public class ModBlocks {
         )
     );
 
-    public static final RegistryObject<Block> OXIDIZED_COPPER_GLOW_WALL_TORCH_BLOCK = BLOCKS.register(
+    public static final RegistryObject<Block> OXIDIZED_COPPER_GLOW_WALL_TORCH = BLOCKS.register(
         "oxidized_copper_glow_wall_torch",
         () -> new CopperGlowWallTorchBlock(
             WeatheringCopper.WeatherState.OXIDIZED,
@@ -165,6 +165,8 @@ public class ModBlocks {
             ParticleTypes.GLOW
         )
     );
+
+
 
     public static void register(IEventBus eventBus) {
         BLOCKS.register(eventBus);

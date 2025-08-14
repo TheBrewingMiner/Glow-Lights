@@ -15,8 +15,8 @@ public class ModItems {
     public static final RegistryObject<Item> GLOW_TORCH = ITEMS.register(
         "glow_torch",
         () -> new StandingAndWallBlockItem(
-            ModBlocks.GLOW_TORCH_BLOCK.get(),
-            ModBlocks.GLOW_WALL_TORCH_BLOCK.get(),
+            ModBlocks.GLOW_TORCH.get(),
+            ModBlocks.GLOW_WALL_TORCH.get(),
             new Item.Properties().tab(CreativeModeTab.TAB_DECORATIONS)
         )
     );
@@ -43,8 +43,8 @@ public class ModItems {
     public static final RegistryObject<Item> COPPER_GLOW_TORCH = ITEMS.register(
         "copper_glow_torch",
         () -> new StandingAndWallBlockItem(
-            ModBlocks.COPPER_GLOW_TORCH_BLOCK.get(),
-            ModBlocks.COPPER_GLOW_WALL_TORCH_BLOCK.get(),
+            ModBlocks.COPPER_GLOW_TORCH.get(),
+            ModBlocks.COPPER_GLOW_WALL_TORCH.get(),
             new Item.Properties().tab(CreativeModeTab.TAB_DECORATIONS)
         )
     );
@@ -52,8 +52,8 @@ public class ModItems {
     public static final RegistryObject<Item> EXPOSED_COPPER_GLOW_TORCH = ITEMS.register(
         "exposed_copper_glow_torch",
         () -> new StandingAndWallBlockItem(
-            ModBlocks.EXPOSED_COPPER_GLOW_TORCH_BLOCK.get(),
-            ModBlocks.EXPOSED_COPPER_GLOW_WALL_TORCH_BLOCK.get(),
+            ModBlocks.EXPOSED_COPPER_GLOW_TORCH.get(),
+            ModBlocks.EXPOSED_COPPER_GLOW_WALL_TORCH.get(),
             new Item.Properties().tab(CreativeModeTab.TAB_DECORATIONS)
         )
     );
@@ -61,8 +61,8 @@ public class ModItems {
     public static final RegistryObject<Item> WEATHERED_COPPER_GLOW_TORCH = ITEMS.register(
         "weathered_copper_glow_torch",
         () -> new StandingAndWallBlockItem(
-            ModBlocks.WEATHERED_COPPER_GLOW_TORCH_BLOCK.get(),
-            ModBlocks.WEATHERED_COPPER_GLOW_WALL_TORCH_BLOCK.get(),
+            ModBlocks.WEATHERED_COPPER_GLOW_TORCH.get(),
+            ModBlocks.WEATHERED_COPPER_GLOW_WALL_TORCH.get(),
             new Item.Properties().tab(CreativeModeTab.TAB_DECORATIONS)
         )
     );
@@ -70,8 +70,8 @@ public class ModItems {
     public static final RegistryObject<Item> OXIDIZED_COPPER_GLOW_TORCH = ITEMS.register(
         "oxidized_copper_glow_torch",
         () -> new StandingAndWallBlockItem(
-            ModBlocks.OXIDIZED_COPPER_GLOW_TORCH_BLOCK.get(),
-            ModBlocks.OXIDIZED_COPPER_GLOW_WALL_TORCH_BLOCK.get(),
+            ModBlocks.OXIDIZED_COPPER_GLOW_TORCH.get(),
+            ModBlocks.OXIDIZED_COPPER_GLOW_WALL_TORCH.get(),
             new Item.Properties().tab(CreativeModeTab.TAB_DECORATIONS)
         )
     );
