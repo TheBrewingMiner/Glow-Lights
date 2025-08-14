@@ -6,8 +6,10 @@ import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.WeatheringCopper;
 import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.material.Material;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -98,7 +100,7 @@ public class ModBlocks {
         "copper_glow_torch",
         () -> new CopperGlowTorchBlock(
             WeatheringCopper.WeatherState.UNAFFECTED,
-            BlockBehaviour.Properties.copy(Blocks.TORCH).lightLevel(CopperGlowTorchBlock::getLightLevel),
+            BlockBehaviour.Properties.copy(Blocks.TORCH).sound(SoundType.COPPER).lightLevel(CopperGlowTorchBlock::getLightLevel),
             ParticleTypes.GLOW
         )
     );
@@ -107,7 +109,7 @@ public class ModBlocks {
         "copper_glow_wall_torch",
         () -> new CopperGlowWallTorchBlock(
             WeatheringCopper.WeatherState.UNAFFECTED,
-            BlockBehaviour.Properties.copy(Blocks.WALL_TORCH).lightLevel(CopperGlowWallTorchBlock::getLightLevel),
+            BlockBehaviour.Properties.copy(Blocks.WALL_TORCH).sound(SoundType.COPPER).sound(SoundType.COPPER).lightLevel(CopperGlowWallTorchBlock::getLightLevel),
             ParticleTypes.GLOW
         )
     );
@@ -116,7 +118,7 @@ public class ModBlocks {
         "exposed_copper_glow_torch",
         () -> new CopperGlowTorchBlock(
             WeatheringCopper.WeatherState.EXPOSED,
-            BlockBehaviour.Properties.copy(Blocks.TORCH).lightLevel(CopperGlowTorchBlock::getLightLevel),
+            BlockBehaviour.Properties.copy(Blocks.TORCH).sound(SoundType.COPPER).lightLevel(CopperGlowTorchBlock::getLightLevel),
             ParticleTypes.GLOW
         )
     );
@@ -125,7 +127,7 @@ public class ModBlocks {
         "exposed_copper_glow_wall_torch",
         () -> new CopperGlowWallTorchBlock(
             WeatheringCopper.WeatherState.EXPOSED,
-            BlockBehaviour.Properties.copy(Blocks.WALL_TORCH).lightLevel(CopperGlowWallTorchBlock::getLightLevel),
+            BlockBehaviour.Properties.copy(Blocks.WALL_TORCH).sound(SoundType.COPPER).lightLevel(CopperGlowWallTorchBlock::getLightLevel),
             ParticleTypes.GLOW
         )
     );
@@ -134,7 +136,7 @@ public class ModBlocks {
         "weathered_copper_glow_torch",
         () -> new CopperGlowTorchBlock(
             WeatheringCopper.WeatherState.WEATHERED,
-            BlockBehaviour.Properties.copy(Blocks.TORCH).lightLevel(CopperGlowTorchBlock::getLightLevel),
+            BlockBehaviour.Properties.copy(Blocks.TORCH).sound(SoundType.COPPER).lightLevel(CopperGlowTorchBlock::getLightLevel),
             ParticleTypes.GLOW
         )
     );
@@ -143,7 +145,7 @@ public class ModBlocks {
         "weathered_copper_glow_wall_torch",
         () -> new CopperGlowWallTorchBlock(
             WeatheringCopper.WeatherState.WEATHERED,
-            BlockBehaviour.Properties.copy(Blocks.WALL_TORCH).lightLevel(CopperGlowWallTorchBlock::getLightLevel),
+            BlockBehaviour.Properties.copy(Blocks.WALL_TORCH).sound(SoundType.COPPER).lightLevel(CopperGlowWallTorchBlock::getLightLevel),
             ParticleTypes.GLOW
         )
     );
@@ -152,7 +154,7 @@ public class ModBlocks {
         "oxidized_copper_glow_torch",
         () -> new CopperGlowTorchBlock(
             WeatheringCopper.WeatherState.OXIDIZED,
-            BlockBehaviour.Properties.copy(Blocks.TORCH).lightLevel(CopperGlowTorchBlock::getLightLevel),
+            BlockBehaviour.Properties.copy(Blocks.TORCH).sound(SoundType.COPPER).lightLevel(CopperGlowTorchBlock::getLightLevel),
             ParticleTypes.GLOW
         )
     );
@@ -161,7 +163,7 @@ public class ModBlocks {
         "oxidized_copper_glow_wall_torch",
         () -> new CopperGlowWallTorchBlock(
             WeatheringCopper.WeatherState.OXIDIZED,
-            BlockBehaviour.Properties.copy(Blocks.WALL_TORCH).lightLevel(CopperGlowWallTorchBlock::getLightLevel),
+            BlockBehaviour.Properties.copy(Blocks.WALL_TORCH).sound(SoundType.COPPER).lightLevel(CopperGlowWallTorchBlock::getLightLevel),
             ParticleTypes.GLOW
         )
     );
