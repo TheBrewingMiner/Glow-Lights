@@ -11,12 +11,12 @@ import java.util.function.Supplier;
 public class WeatheringBlockMap {
     public static Supplier<BiMap<Block, Block>> NEXT_BY_BLOCK = Suppliers.memoize(() -> {
         return ImmutableBiMap.<Block, Block>builder()
-                .put(ModBlocks.COPPER_GLOW_TORCH_BLOCK.get(), ModBlocks.EXPOSED_COPPER_GLOW_TORCH_BLOCK.get())
-                .put(ModBlocks.EXPOSED_COPPER_GLOW_TORCH_BLOCK.get(), ModBlocks.WEATHERED_COPPER_GLOW_TORCH_BLOCK.get())
-                .put(ModBlocks.WEATHERED_COPPER_GLOW_TORCH_BLOCK.get(), ModBlocks.OXIDIZED_COPPER_GLOW_TORCH_BLOCK.get())
-                .put(ModBlocks.COPPER_GLOW_WALL_TORCH_BLOCK.get(), ModBlocks.EXPOSED_COPPER_GLOW_WALL_TORCH_BLOCK.get())
-                .put(ModBlocks.EXPOSED_COPPER_GLOW_WALL_TORCH_BLOCK.get(), ModBlocks.WEATHERED_COPPER_GLOW_WALL_TORCH_BLOCK.get())
-                .put(ModBlocks.WEATHERED_COPPER_GLOW_WALL_TORCH_BLOCK.get(), ModBlocks.OXIDIZED_COPPER_GLOW_WALL_TORCH_BLOCK.get())
+                .put(ModBlocks.COPPER_GLOW_TORCH.get(), ModBlocks.EXPOSED_COPPER_GLOW_TORCH.get())
+                .put(ModBlocks.EXPOSED_COPPER_GLOW_TORCH.get(), ModBlocks.WEATHERED_COPPER_GLOW_TORCH.get())
+                .put(ModBlocks.WEATHERED_COPPER_GLOW_TORCH.get(), ModBlocks.OXIDIZED_COPPER_GLOW_TORCH.get())
+                .put(ModBlocks.COPPER_GLOW_WALL_TORCH.get(), ModBlocks.EXPOSED_COPPER_GLOW_WALL_TORCH.get())
+                .put(ModBlocks.EXPOSED_COPPER_GLOW_WALL_TORCH.get(), ModBlocks.WEATHERED_COPPER_GLOW_WALL_TORCH.get())
+                .put(ModBlocks.WEATHERED_COPPER_GLOW_WALL_TORCH.get(), ModBlocks.OXIDIZED_COPPER_GLOW_WALL_TORCH.get())
             .build();
     });
 
