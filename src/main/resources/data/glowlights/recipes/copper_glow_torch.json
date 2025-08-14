@@ -7,7 +7,7 @@
   ],
   "key": {
     "#": {
-      "tag": "forge:rods/wooden"
+      "item": "minecraft:copper_ingot"
     },
     "X": {
       "tag": "minecraft:coals"
@@ -17,7 +17,7 @@
     }
   },
   "result": {
-    "item": "glowlights:glow_torch",
+    "item": "glowlights:copper_glow_torch",
     "count": 4
   }
 }
