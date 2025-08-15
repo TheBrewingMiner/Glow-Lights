@@ -186,6 +186,54 @@ public class ModBlocks {
         )
     );
 
+    public static final RegistryObject<Block> WAXED_EXPOSED_COPPER_GLOW_TORCH = BLOCKS.register(
+        "waxed_exposed_copper_glow_torch",
+        () -> new GlowTorchBlock(
+            BlockBehaviour.Properties.copy(Blocks.TORCH).sound(SoundType.COPPER).lightLevel(GlowTorchBlock::getLightLevel),
+            ParticleTypes.GLOW
+        )
+    );
+
+    public static final RegistryObject<Block> WAXED_EXPOSED_COPPER_GLOW_WALL_TORCH = BLOCKS.register(
+        "waxed_exposed_copper_glow_wall_torch",
+        () -> new GlowWallTorchBlock(
+            BlockBehaviour.Properties.copy(Blocks.WALL_TORCH).sound(SoundType.COPPER).sound(SoundType.COPPER).lightLevel(GlowWallTorchBlock::getLightLevel),
+            ParticleTypes.GLOW
+        )
+    );
+
+    public static final RegistryObject<Block> WAXED_WEATHERED_COPPER_GLOW_TORCH = BLOCKS.register(
+        "waxed_weathered_copper_glow_torch",
+        () -> new GlowTorchBlock(
+            BlockBehaviour.Properties.copy(Blocks.TORCH).sound(SoundType.COPPER).lightLevel(GlowTorchBlock::getLightLevel),
+            ParticleTypes.GLOW
+        )
+    );
+
+    public static final RegistryObject<Block> WAXED_WEATHERED_COPPER_GLOW_WALL_TORCH = BLOCKS.register(
+        "waxed_weathered_copper_glow_wall_torch",
+        () -> new GlowWallTorchBlock(
+            BlockBehaviour.Properties.copy(Blocks.WALL_TORCH).sound(SoundType.COPPER).sound(SoundType.COPPER).lightLevel(GlowWallTorchBlock::getLightLevel),
+            ParticleTypes.GLOW
+        )
+    );
+
+    public static final RegistryObject<Block> WAXED_OXIDIZED_COPPER_GLOW_TORCH = BLOCKS.register(
+    "waxed_oxidized_copper_glow_torch",
+        () -> new GlowTorchBlock(
+            BlockBehaviour.Properties.copy(Blocks.TORCH).sound(SoundType.COPPER).lightLevel(GlowTorchBlock::getLightLevel),
+            ParticleTypes.GLOW
+        )
+    );
+
+    public static final RegistryObject<Block> WAXED_OXIDIZED_COPPER_GLOW_WALL_TORCH = BLOCKS.register(
+        "waxed_oxidized_copper_glow_wall_torch",
+        () -> new GlowWallTorchBlock(
+            BlockBehaviour.Properties.copy(Blocks.WALL_TORCH).sound(SoundType.COPPER).sound(SoundType.COPPER).lightLevel(GlowWallTorchBlock::getLightLevel),
+            ParticleTypes.GLOW
+        )
+    );
+
 
     public static void register(IEventBus eventBus) {
         BLOCKS.register(eventBus);

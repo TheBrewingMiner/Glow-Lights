@@ -76,6 +76,44 @@ public class ModItems {
         )
     );
 
+    /* Waxed Copper Items */
+
+    public static final RegistryObject<Item> WAXED_COPPER_GLOW_TORCH = ITEMS.register(
+        "waxed_copper_glow_torch",
+        () -> new StandingAndWallBlockItem(
+            ModBlocks.WAXED_COPPER_GLOW_TORCH.get(),
+            ModBlocks.WAXED_COPPER_GLOW_WALL_TORCH.get(),
+            new Item.Properties().tab(CreativeModeTab.TAB_DECORATIONS)
+        )
+    );
+
+    public static final RegistryObject<Item> WAXED_EXPOSED_COPPER_GLOW_TORCH = ITEMS.register(
+        "waxed_exposed_copper_glow_torch",
+        () -> new StandingAndWallBlockItem(
+            ModBlocks.WAXED_EXPOSED_COPPER_GLOW_TORCH.get(),
+            ModBlocks.WAXED_EXPOSED_COPPER_GLOW_WALL_TORCH.get(),
+            new Item.Properties().tab(CreativeModeTab.TAB_DECORATIONS)
+        )
+    );
+
+    public static final RegistryObject<Item> WAXED_WEATHERED_COPPER_GLOW_TORCH = ITEMS.register(
+        "waxed_weathered_copper_glow_torch",
+        () -> new StandingAndWallBlockItem(
+            ModBlocks.WAXED_WEATHERED_COPPER_GLOW_TORCH.get(),
+            ModBlocks.WAXED_WEATHERED_COPPER_GLOW_WALL_TORCH.get(),
+            new Item.Properties().tab(CreativeModeTab.TAB_DECORATIONS)
+        )
+    );
+
+    public static final RegistryObject<Item> WAXED_OXIDIZED_COPPER_GLOW_TORCH = ITEMS.register(
+        "waxed_oxidized_copper_glow_torch",
+        () -> new StandingAndWallBlockItem(
+            ModBlocks.WAXED_OXIDIZED_COPPER_GLOW_TORCH.get(),
+            ModBlocks.WAXED_OXIDIZED_COPPER_GLOW_WALL_TORCH.get(),
+            new Item.Properties().tab(CreativeModeTab.TAB_DECORATIONS)
+        )
+    );
+
     public static void register(IEventBus eventBus){
         ITEMS.register(eventBus);
     }

@@ -25,6 +25,13 @@ public class WeatheringBlockMap {
     public static Supplier<BiMap<Block, Block>> WAXABLES = Suppliers.memoize(() -> {
         return ImmutableBiMap.<Block, Block>builder()
                 .put(ModBlocks.COPPER_GLOW_TORCH.get(), ModBlocks.WAXED_COPPER_GLOW_TORCH.get())
+                .put(ModBlocks.COPPER_GLOW_WALL_TORCH.get(), ModBlocks.WAXED_COPPER_GLOW_WALL_TORCH.get())
+                .put(ModBlocks.EXPOSED_COPPER_GLOW_TORCH.get(), ModBlocks.WAXED_EXPOSED_COPPER_GLOW_TORCH.get())
+                .put(ModBlocks.EXPOSED_COPPER_GLOW_WALL_TORCH.get(), ModBlocks.WAXED_EXPOSED_COPPER_GLOW_WALL_TORCH.get())
+                .put(ModBlocks.WEATHERED_COPPER_GLOW_TORCH.get(), ModBlocks.WAXED_WEATHERED_COPPER_GLOW_TORCH.get())
+                .put(ModBlocks.WEATHERED_COPPER_GLOW_WALL_TORCH.get(), ModBlocks.WAXED_WEATHERED_COPPER_GLOW_WALL_TORCH.get())
+                .put(ModBlocks.OXIDIZED_COPPER_GLOW_TORCH.get(), ModBlocks.WAXED_OXIDIZED_COPPER_GLOW_TORCH.get())
+                .put(ModBlocks.OXIDIZED_COPPER_GLOW_WALL_TORCH.get(), ModBlocks.WAXED_OXIDIZED_COPPER_GLOW_WALL_TORCH.get())
             .build();
     });
 
