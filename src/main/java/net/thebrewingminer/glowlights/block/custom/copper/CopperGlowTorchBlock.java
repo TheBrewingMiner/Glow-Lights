@@ -52,12 +52,11 @@ public class CopperGlowTorchBlock extends GlowTorchBlock implements IWeatheringC
         if (!(heldItem.is(Items.HONEYCOMB))) return super.use(state, level, pos, player, playerHand, hitResult);
 
         IWeatheringCopper.getWaxed(block).ifPresent(waxed -> level.setBlock(pos, waxed.withPropertiesOf(state), 3));
-
         if (survivalMode){ heldItem.shrink(1); }
 
-        if (player instanceof ServerPlayer serverPlayer) {
-            CriteriaTriggers.ITEM_USED_ON_BLOCK.trigger(serverPlayer, pos, heldItem);
-        }
+//        if (player instanceof ServerPlayer serverPlayer) {
+//            CriteriaTriggers.ITEM_USED_ON_BLOCK.trigger(serverPlayer, pos, heldItem);
+//        }
 
         return InteractionResult.sidedSuccess(level.isClientSide);
     }
