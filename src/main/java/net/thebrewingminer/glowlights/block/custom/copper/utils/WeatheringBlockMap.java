@@ -22,11 +22,11 @@ public class WeatheringBlockMap {
 
     public static Supplier<BiMap<Block, Block>> PREVIOUS_BY_BLOCK = Suppliers.memoize(() -> NEXT_BY_BLOCK.get().inverse());
 
-    public static Supplier<BiMap<Block, Block>> WAX_ON_BY_BLOCK = Suppliers.memoize(() -> {
+    public static Supplier<BiMap<Block, Block>> WAXABLES = Suppliers.memoize(() -> {
         return ImmutableBiMap.<Block, Block>builder()
                 .put(ModBlocks.COPPER_GLOW_TORCH.get(), ModBlocks.WAXED_COPPER_GLOW_TORCH.get())
             .build();
     });
 
-    public static Supplier<BiMap<Block, Block>> WAX_OFF_BY_BLOCK = Suppliers.memoize(() -> WAX_ON_BY_BLOCK.get().inverse());
+    public static Supplier<BiMap<Block, Block>> WAX_OFF_BY_BLOCK = Suppliers.memoize(() -> WAXABLES.get().inverse());
 }
