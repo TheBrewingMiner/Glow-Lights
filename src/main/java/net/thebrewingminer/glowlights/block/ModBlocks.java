@@ -9,7 +9,6 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.WeatheringCopper;
 import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.minecraft.world.level.material.Material;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -69,9 +68,9 @@ public class ModBlocks {
 
     public static final RegistryObject<Block> PRISMARINE_GLOW_CAMPFIRE = registerBlockAndItem(
         "prismarine_glow_campfire",
-        () -> new GlowCampfireBlock(
+        () -> new GlowCampfireBlockDeprecated(
                 BlockBehaviour.Properties.copy(Blocks.PRISMARINE)
-                .lightLevel(GlowCampfireBlock::getLightLevel)
+                .lightLevel(GlowCampfireBlockDeprecated::getLightLevel)
                 .noOcclusion()
         ),
         CreativeModeTab.TAB_DECORATIONS
@@ -79,9 +78,9 @@ public class ModBlocks {
 
     public static final RegistryObject<Block> PRISMARINE_BRICK_GLOW_CAMPFIRE = registerBlockAndItem(
         "prismarine_brick_glow_campfire",
-        () -> new GlowCampfireBlock(
+        () -> new GlowCampfireBlockDeprecated(
                 BlockBehaviour.Properties.copy(Blocks.PRISMARINE_BRICKS)
-                .lightLevel(GlowCampfireBlock::getLightLevel)
+                .lightLevel(GlowCampfireBlockDeprecated::getLightLevel)
                 .noOcclusion()
         ),
         CreativeModeTab.TAB_DECORATIONS
@@ -89,9 +88,9 @@ public class ModBlocks {
 
     public static final RegistryObject<Block> DARK_PRISMARINE_GLOW_CAMPFIRE = registerBlockAndItem(
         "dark_prismarine_glow_campfire",
-        () -> new GlowCampfireBlock(
+        () -> new GlowCampfireBlockDeprecated(
                 BlockBehaviour.Properties.copy(Blocks.DARK_PRISMARINE)
-                .lightLevel(GlowCampfireBlock::getLightLevel)
+                .lightLevel(GlowCampfireBlockDeprecated::getLightLevel)
                 .noOcclusion()
         ),
         CreativeModeTab.TAB_DECORATIONS
