@@ -12,7 +12,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "glowlights:oxidized_copper_glow_torch"
+          "name": "glowlights:waxed_copper_glow_torch"
         }
       ]
     }

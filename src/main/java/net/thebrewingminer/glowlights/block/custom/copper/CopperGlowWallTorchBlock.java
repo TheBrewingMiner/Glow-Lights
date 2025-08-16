@@ -53,6 +53,7 @@ public class CopperGlowWallTorchBlock extends GlowWallTorchBlock implements IWea
 
         IWeatheringCopper.getWaxed(block).ifPresent(waxed -> level.setBlock(pos, waxed.withPropertiesOf(state), 3));
         if (survivalMode){ heldItem.shrink(1); }
+        level.levelEvent(player, 3003, pos, 0);
 
 //        if (player instanceof ServerPlayer serverPlayer) {
 //            CriteriaTriggers.ITEM_USED_ON_BLOCK.trigger(serverPlayer, pos, heldItem);

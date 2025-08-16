@@ -67,31 +67,34 @@ public class ModBlocks {
         )
     );
 
-    public static final RegistryObject<Block> PRISMARINE_GLOW_CAMPFIRE = BLOCKS.register(
+    public static final RegistryObject<Block> PRISMARINE_GLOW_CAMPFIRE = registerBlockAndItem(
         "prismarine_glow_campfire",
         () -> new GlowCampfireBlock(
                 BlockBehaviour.Properties.copy(Blocks.PRISMARINE)
                 .lightLevel(GlowCampfireBlock::getLightLevel)
                 .noOcclusion()
-        )
+        ),
+        CreativeModeTab.TAB_DECORATIONS
     );
 
-    public static final RegistryObject<Block> PRISMARINE_BRICK_GLOW_CAMPFIRE = BLOCKS.register(
+    public static final RegistryObject<Block> PRISMARINE_BRICK_GLOW_CAMPFIRE = registerBlockAndItem(
         "prismarine_brick_glow_campfire",
         () -> new GlowCampfireBlock(
                 BlockBehaviour.Properties.copy(Blocks.PRISMARINE_BRICKS)
                 .lightLevel(GlowCampfireBlock::getLightLevel)
                 .noOcclusion()
-        )
+        ),
+        CreativeModeTab.TAB_DECORATIONS
     );
 
-    public static final RegistryObject<Block> DARK_PRISMARINE_GLOW_CAMPFIRE = BLOCKS.register(
+    public static final RegistryObject<Block> DARK_PRISMARINE_GLOW_CAMPFIRE = registerBlockAndItem(
         "dark_prismarine_glow_campfire",
         () -> new GlowCampfireBlock(
                 BlockBehaviour.Properties.copy(Blocks.DARK_PRISMARINE)
                 .lightLevel(GlowCampfireBlock::getLightLevel)
                 .noOcclusion()
-        )
+        ),
+        CreativeModeTab.TAB_DECORATIONS
     );
 
         /* Copper  Variants */

@@ -7,8 +7,20 @@
   "block.glowlights.dark_prismarine_glow_campfire": "Dark Prismarine Campfire",
   "block.glowlights.glow_lantern": "Glow Lantern",
 
-  "item.glowlights.prismarine_glow_campfire": "Prismarine Campfire",
-  "item.glowlights.prismarine_brick_glow_campfire": "Prismarine Brick Campfire",
-  "item.glowlights.dark_prismarine_glow_campfire": "Dark Prismarine Campfire",
-  "item.glowlights.glow_lantern": "Glow Lantern"
+  "block.glowlights.copper_glow_torch": "Copper Glow Torch",
+  "block.glowlights.copper_glow_wall_torch": "Copper Glow Wall Torch",
+  "block.glowlights.exposed_copper_glow_torch": "Exposed Copper Glow Torch",
+  "block.glowlights.exposed_copper_glow_wall_torch": "Exposed Copper Glow Wall Torch",
+  "block.glowlights.weathered_copper_glow_torch": "Weathered Copper Glow Torch",
+  "block.glowlights.weathered_copper_glow_wall_torch": "Weathered Copper Glow Wall Torch",
+  "block.glowlights.oxidized_copper_glow_torch": "Oxidized Copper Glow Torch",
+  "block.glowlights.oxidized_copper_glow_wall_torch": "Oxidized Copper Glow Wall Torch",
+  "block.glowlights.waxed_copper_glow_torch": "Waxed Copper Glow Torch",
+  "block.glowlights.waxed_copper_glow_wall_torch": "Waxed Copper Glow Wall Torch",
+  "block.glowlights.waxed_exposed_copper_glow_torch": "Waxed Exposed Copper Glow Torch",
+  "block.glowlights.waxed_exposed_copper_glow_wall_torch": "Waxed Exposed Copper Glow Wall Torch",
+  "block.glowlights.waxed_weathered_copper_glow_torch": "Waxed Weathered Copper Glow Torch",
+  "block.glowlights.waxed_weathered_copper_glow_wall_torch": "Waxed Weathered Copper Glow Wall Torch",
+  "block.glowlights.waxed_oxidized_copper_glow_torch": "Waxed Oxidized Copper Glow Torch",
+  "block.glowlights.waxed_oxidized_copper_glow_wall_torch": "Waxed Oxidized Copper Glow Wall Torch"
 }

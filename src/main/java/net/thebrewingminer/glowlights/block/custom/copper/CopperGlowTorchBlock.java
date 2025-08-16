@@ -1,10 +1,14 @@
 package net.thebrewingminer.glowlights.block.custom.copper;
 
 import net.minecraft.advancements.CriteriaTriggers;
+import net.minecraft.client.particle.GlowParticle;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleOptions;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -53,6 +57,7 @@ public class CopperGlowTorchBlock extends GlowTorchBlock implements IWeatheringC
 
         IWeatheringCopper.getWaxed(block).ifPresent(waxed -> level.setBlock(pos, waxed.withPropertiesOf(state), 3));
         if (survivalMode){ heldItem.shrink(1); }
+        level.levelEvent(player, 3003, pos, 0);
 
 //        if (player instanceof ServerPlayer serverPlayer) {
 //            CriteriaTriggers.ITEM_USED_ON_BLOCK.trigger(serverPlayer, pos, heldItem);

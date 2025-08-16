@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "glowlights:block/copper/exposed_copper_glow_torch"
+  }
+}
