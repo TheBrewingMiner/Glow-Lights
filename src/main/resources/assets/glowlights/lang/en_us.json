@@ -22,5 +22,10 @@
   "block.glowlights.waxed_weathered_copper_glow_torch": "Waxed Weathered Copper Glow Torch",
   "block.glowlights.waxed_weathered_copper_glow_wall_torch": "Waxed Weathered Copper Glow Wall Torch",
   "block.glowlights.waxed_oxidized_copper_glow_torch": "Waxed Oxidized Copper Glow Torch",
-  "block.glowlights.waxed_oxidized_copper_glow_wall_torch": "Waxed Oxidized Copper Glow Wall Torch"
+  "block.glowlights.waxed_oxidized_copper_glow_wall_torch": "Waxed Oxidized Copper Glow Wall Torch",
+
+  "advancements.husbandry.wax_on_glowlight.title": "Glow Wax On",
+  "advancements.husbandry.wax_on_glowlight.description": "Apply Honeycomb to a Copper Glowlight!",
+  "advancements.husbandry.wax_off_glowlight.title": "Glow Wax Off",
+  "advancements.husbandry.wax_off_glowlight.description": "Scrape Wax off of a Copper Glowlight!"
 }
