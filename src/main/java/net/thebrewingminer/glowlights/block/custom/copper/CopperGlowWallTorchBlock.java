@@ -1,10 +1,8 @@
 package net.thebrewingminer.glowlights.block.custom.copper;
 
-import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -54,10 +52,6 @@ public class CopperGlowWallTorchBlock extends GlowWallTorchBlock implements IWea
         IWeatheringCopper.getWaxed(block).ifPresent(waxed -> level.setBlock(pos, waxed.withPropertiesOf(state), 3));
         if (survivalMode){ heldItem.shrink(1); }
         level.levelEvent(player, 3003, pos, 0);
-
-//        if (player instanceof ServerPlayer serverPlayer) {
-//            CriteriaTriggers.ITEM_USED_ON_BLOCK.trigger(serverPlayer, pos, heldItem);
-//        }
 
         return InteractionResult.sidedSuccess(level.isClientSide);
     }
