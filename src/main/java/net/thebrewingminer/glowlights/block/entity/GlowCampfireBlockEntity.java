@@ -15,7 +15,6 @@ import net.minecraft.world.item.crafting.CampfireCookingRecipe;
 import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.CampfireBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
@@ -33,6 +32,8 @@ public class GlowCampfireBlockEntity extends BlockEntity implements Clearable {
     protected final int[] cookingProgress;
     protected final int[] cookingTime;
     protected final RecipeManager.CachedCheck<Container, CampfireCookingRecipe> quickCheck;
+
+    public static final int SMOKE_DELAY = 20;
 
     public GlowCampfireBlockEntity(BlockPos pos, BlockState blockState) {
         super(ModBlockEntities.GLOW_CAMPFIRE.get(), pos, blockState);
@@ -78,10 +79,7 @@ public class GlowCampfireBlockEntity extends BlockEntity implements Clearable {
             }
         }
 
-        if (flag) {
-            setChanged(level, pos, blockState);
-        }
-
+        if (flag) { setChanged(level, pos, blockState); }
     }
 
     public static void particleTick(Level level, BlockPos pos, BlockState blockState, GlowCampfireBlockEntity blockEntity) {
@@ -103,8 +101,12 @@ public class GlowCampfireBlockEntity extends BlockEntity implements Clearable {
                 double y = (double)pos.getY() + 0.5;
                 double z = (double)pos.getZ() + 0.5 - (double)((float)direction.getStepZ() * 0.3125F) + (double)((float)direction.getClockWise().getStepZ() * factor);
 
-                for(int j = 0; j < NUM_SLOTS; ++j) {
-                    level.addParticle(ParticleTypes.GLOW, x, y, z, 0.0, 5.0E-4, 0.0);
+                for (int j = 0; j < NUM_SLOTS; ++j) {
+                    if (randomSource.nextInt(SMOKE_DELAY) == 0) {
+                        level.addParticle(ParticleTypes.GLOW, x, y, z, 0.0, 5.0E-4, 0.0);
+                    } else if (randomSource.nextInt(SMOKE_DELAY) <= 5){
+                        level.addParticle(ParticleTypes.SMOKE, x, y, z, 0.0, 5.0E-4, 0.0);
+                    }
                 }
             }
         }
@@ -180,5 +182,9 @@ public class GlowCampfireBlockEntity extends BlockEntity implements Clearable {
     @Override
     public void clearContent() {
         this.items.clear();
+    }
+
+    public void dowse() {
+        if (this.level != null) { this.markUpdated(); }
     }
 }

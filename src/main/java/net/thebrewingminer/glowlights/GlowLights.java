@@ -6,6 +6,7 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.thebrewingminer.glowlights.init.ModBlocks;
 import net.thebrewingminer.glowlights.init.ModBlockEntities;
 import net.thebrewingminer.glowlights.init.ModItems;
+import net.thebrewingminer.glowlights.init.ModParticles;
 
 @Mod(GlowLights.MOD_ID)
 public class GlowLights {
@@ -17,5 +18,6 @@ public class GlowLights {
         ModItems.register(modEventBus);
         ModBlocks.register(modEventBus);
         ModBlockEntities.register(modEventBus);
+        ModParticles.register(modEventBus);
     }
 }

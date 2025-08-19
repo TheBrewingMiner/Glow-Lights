@@ -34,6 +34,7 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
+import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.level.pathfinder.PathComputationType;
@@ -43,6 +44,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.common.Tags;
 import net.thebrewingminer.glowlights.block.entity.GlowCampfireBlockEntity;
 import net.thebrewingminer.glowlights.init.ModBlockEntities;
+import net.thebrewingminer.glowlights.init.ModParticles;
 
 import javax.annotation.Nullable;
 import java.util.Optional;
@@ -177,6 +179,7 @@ public class GlowCampfireBlock extends BaseEntityBlock implements SimpleWaterlog
                     } else {
                         level.playSound(null, pos, SoundEvents.GENERIC_EXTINGUISH_FIRE, SoundSource.BLOCKS, 0.4F, 0.25F);
                     }
+                    dowse(player, level, pos, state);
                     if (survivalMode){ heldItem.hurtAndBreak(1, player, (p) -> p.broadcastBreakEvent(playerHand)); }
 
                     player.awardStat(Stats.INTERACT_WITH_CAMPFIRE);
@@ -189,9 +192,9 @@ public class GlowCampfireBlock extends BaseEntityBlock implements SimpleWaterlog
 
         // Handle actions for campfire recipes (Vanilla).
         if (blockEntity instanceof GlowCampfireBlockEntity glowCampfireBlockEntity) {
-            Optional<CampfireCookingRecipe> optional = glowCampfireBlockEntity.getCookableRecipe(heldItem);
-            if (optional.isPresent()) {
-                if (!level.isClientSide() && glowCampfireBlockEntity.placeFood(player, player.getAbilities().instabuild ? heldItem.copy() : heldItem, optional.get().getCookingTime())) {
+            Optional<CampfireCookingRecipe> recipe = glowCampfireBlockEntity.getCookableRecipe(heldItem);
+            if (recipe.isPresent()) {
+                if (!level.isClientSide() && glowCampfireBlockEntity.placeFood(player, player.getAbilities().instabuild ? heldItem.copy() : heldItem, recipe.get().getCookingTime())) {
                     player.awardStat(Stats.INTERACT_WITH_CAMPFIRE);
                     return InteractionResult.SUCCESS;
                 }
@@ -272,12 +275,26 @@ public class GlowCampfireBlock extends BaseEntityBlock implements SimpleWaterlog
 
     public static void makeParticles(Level level, BlockPos pos, boolean isSignalFire, boolean spawnExtraSmoke) {
         RandomSource randomsource = level.getRandom();
-        SimpleParticleType simpleparticletype = isSignalFire ? ParticleTypes.GLOW_SQUID_INK : ParticleTypes.GLOW;
-        level.addAlwaysVisibleParticle(simpleparticletype, true, (double)pos.getX() + 0.5 + randomsource.nextDouble() / 3.0 * (double)(randomsource.nextBoolean() ? 1 : -1), (double)pos.getY() + randomsource.nextDouble() + randomsource.nextDouble(), (double)pos.getZ() + 0.5 + randomsource.nextDouble() / 3.0 * (double)(randomsource.nextBoolean() ? 1 : -1), 0.0, 0.07, 0.0);
+        SimpleParticleType simpleParticleType = isSignalFire ? ModParticles.SIGNAL_GLOW_SMOKE.get() : ModParticles.COZY_GLOW_SMOKE.get();
+        level.addAlwaysVisibleParticle(simpleParticleType, true, (double)pos.getX() + 0.5 + randomsource.nextDouble() / 3.0 * (double)(randomsource.nextBoolean() ? 1 : -1), (double)pos.getY() + randomsource.nextDouble() + randomsource.nextDouble(), (double)pos.getZ() + 0.5 + randomsource.nextDouble() / 3.0 * (double)(randomsource.nextBoolean() ? 1 : -1), 0.0, 0.07, 0.0);
         if (spawnExtraSmoke) {
             level.addParticle(ParticleTypes.GLOW_SQUID_INK, (double)pos.getX() + 0.5 + randomsource.nextDouble() / 4.0 * (double)(randomsource.nextBoolean() ? 1 : -1), (double)pos.getY() + 0.4, (double)pos.getZ() + 0.5 + randomsource.nextDouble() / 4.0 * (double)(randomsource.nextBoolean() ? 1 : -1), 0.0, 0.005, 0.0);
         }
+    }
 
+    public static void dowse(@Nullable Entity entity, LevelAccessor levelAccessor, BlockPos pos, BlockState state) {
+        if (levelAccessor.isClientSide()){
+            for (int i = 0; i < 20; ++i){
+                makeParticles((Level)levelAccessor, pos, state.getValue(SIGNAL_FIRE), true);
+            }
+        }
+
+        BlockEntity blockEntity = levelAccessor.getBlockEntity(pos);
+        if (blockEntity instanceof GlowCampfireBlockEntity glowCampfireBlockEntity){
+            glowCampfireBlockEntity.dowse();
+        }
+
+        levelAccessor.gameEvent(entity, GameEvent.BLOCK_CHANGE, pos);
     }
 
     @Override
