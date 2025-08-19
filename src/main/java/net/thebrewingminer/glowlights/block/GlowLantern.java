@@ -1,4 +1,4 @@
-package net.thebrewingminer.glowlights.block.custom;
+package net.thebrewingminer.glowlights.block;
 
 import net.minecraft.world.level.block.LanternBlock;
 import net.minecraft.world.level.block.SimpleWaterloggedBlock;

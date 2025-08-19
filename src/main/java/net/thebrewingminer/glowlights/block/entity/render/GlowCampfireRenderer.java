@@ -1,4 +1,4 @@
-package net.thebrewingminer.glowlights.block.custom.entity.render;
+package net.thebrewingminer.glowlights.block.entity.render;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Vector3f;
@@ -11,7 +11,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.NonNullList;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.CampfireBlock;
-import net.thebrewingminer.glowlights.block.custom.entity.GlowCampfireBlockEntity;
+import net.thebrewingminer.glowlights.block.entity.GlowCampfireBlockEntity;
 
 public class GlowCampfireRenderer implements BlockEntityRenderer<GlowCampfireBlockEntity> {
     private static final float SIZE = 0.375F;

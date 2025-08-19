@@ -1,4 +1,4 @@
-package net.thebrewingminer.glowlights.block.custom.entity;
+package net.thebrewingminer.glowlights.block.entity;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -20,7 +20,8 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.level.gameevent.GameEvent.Context;
-import net.thebrewingminer.glowlights.block.custom.GlowCampfireBlock;
+import net.thebrewingminer.glowlights.block.GlowCampfireBlock;
+import net.thebrewingminer.glowlights.init.ModBlockEntities;
 
 import javax.annotation.Nullable;
 import java.util.Optional;

@@ -1,4 +1,4 @@
-package net.thebrewingminer.glowlights.block.custom;
+package net.thebrewingminer.glowlights.block;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -7,7 +7,6 @@ import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
-import net.minecraft.tags.BlockTags;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
@@ -29,7 +28,6 @@ import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
-import net.minecraft.world.level.block.entity.CampfireBlockEntity;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
@@ -43,8 +41,8 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.common.Tags;
-import net.thebrewingminer.glowlights.block.custom.entity.GlowCampfireBlockEntity;
-import net.thebrewingminer.glowlights.block.custom.entity.ModBlockEntities;
+import net.thebrewingminer.glowlights.block.entity.GlowCampfireBlockEntity;
+import net.thebrewingminer.glowlights.init.ModBlockEntities;
 
 import javax.annotation.Nullable;
 import java.util.Optional;

@@ -1,4 +1,4 @@
-package net.thebrewingminer.glowlights.block.custom.copper.utils;
+package net.thebrewingminer.glowlights.block.copper.utils;
 
 import com.google.common.collect.BiMap;
 import net.minecraft.world.level.block.Block;

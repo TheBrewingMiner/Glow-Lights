@@ -1,4 +1,4 @@
-package net.thebrewingminer.glowlights.block;
+package net.thebrewingminer.glowlights.init;
 
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.world.item.BlockItem;
@@ -14,10 +14,9 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import net.thebrewingminer.glowlights.GlowLights;
-import net.thebrewingminer.glowlights.block.custom.*;
-import net.thebrewingminer.glowlights.block.custom.copper.CopperGlowTorchBlock;
-import net.thebrewingminer.glowlights.block.custom.copper.CopperGlowWallTorchBlock;
-import net.thebrewingminer.glowlights.items.ModItems;
+import net.thebrewingminer.glowlights.block.*;
+import net.thebrewingminer.glowlights.block.copper.CopperGlowTorchBlock;
+import net.thebrewingminer.glowlights.block.copper.CopperGlowWallTorchBlock;
 
 import java.util.function.Supplier;
 

@@ -1,4 +1,4 @@
-package net.thebrewingminer.glowlights.block.custom.copper;
+package net.thebrewingminer.glowlights.block.copper;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleOptions;
@@ -15,8 +15,8 @@ import net.minecraft.world.level.block.WeatheringCopper;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
-import net.thebrewingminer.glowlights.block.custom.GlowWallTorchBlock;
-import net.thebrewingminer.glowlights.block.custom.copper.utils.IWeatheringCopper;
+import net.thebrewingminer.glowlights.block.GlowWallTorchBlock;
+import net.thebrewingminer.glowlights.block.copper.utils.IWeatheringCopper;
 
 public class CopperGlowWallTorchBlock extends GlowWallTorchBlock implements IWeatheringCopper {
     private final WeatheringCopper.WeatherState weatherState;

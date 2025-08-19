@@ -1,10 +1,10 @@
-package net.thebrewingminer.glowlights.block.custom.copper.utils;
+package net.thebrewingminer.glowlights.block.copper.utils;
 
 import com.google.common.base.Suppliers;
 import com.google.common.collect.BiMap;
 import com.google.common.collect.ImmutableBiMap;
 import net.minecraft.world.level.block.Block;
-import net.thebrewingminer.glowlights.block.ModBlocks;
+import net.thebrewingminer.glowlights.init.ModBlocks;
 
 import java.util.function.Supplier;
 

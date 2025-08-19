@@ -10,7 +10,7 @@ import net.minecraftforge.event.level.BlockEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.thebrewingminer.glowlights.GlowLights;
-import net.thebrewingminer.glowlights.block.custom.copper.utils.IWeatheringCopper;
+import net.thebrewingminer.glowlights.block.copper.utils.IWeatheringCopper;
 
 @Mod.EventBusSubscriber(modid = GlowLights.MOD_ID)
 public class ScrapeEvent {

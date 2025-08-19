@@ -1,4 +1,4 @@
-package net.thebrewingminer.glowlights.items;
+package net.thebrewingminer.glowlights.init;
 
 import net.minecraft.world.item.*;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -6,7 +6,6 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import net.thebrewingminer.glowlights.GlowLights;
-import net.thebrewingminer.glowlights.block.ModBlocks;
 
 public class ModItems {
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, GlowLights.MOD_ID);
