@@ -17,6 +17,7 @@ import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.level.gameevent.GameEvent.Context;
 import net.thebrewingminer.glowlights.block.GlowCampfireBlock;
@@ -85,8 +86,9 @@ public class GlowCampfireBlockEntity extends BlockEntity implements Clearable {
     public static void particleTick(Level level, BlockPos pos, BlockState blockState, GlowCampfireBlockEntity blockEntity) {
         RandomSource randomSource = level.random;
         int i;
+        int particleAmount = blockState.getValue(BlockStateProperties.WATERLOGGED) ? randomSource.nextInt(2) + 2 : randomSource.nextInt(2);
         if (randomSource.nextFloat() < 0.11F) {
-            for(i = 0; i < randomSource.nextInt(2) + 2; ++i) {
+            for(i = 0; i < particleAmount; ++i) {
                 GlowCampfireBlock.makeParticles(level, pos, blockState.getValue(GlowCampfireBlock.SIGNAL_FIRE), false);
             }
         }
