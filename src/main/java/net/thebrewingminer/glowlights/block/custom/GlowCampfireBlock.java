@@ -3,23 +3,33 @@ package net.thebrewingminer.glowlights.block.custom;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.item.crafting.CampfireCookingRecipe;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Mirror;
-import net.minecraft.world.level.block.RenderShape;
-import net.minecraft.world.level.block.SimpleWaterloggedBlock;
+import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityTicker;
+import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.entity.CampfireBlockEntity;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
@@ -33,14 +43,24 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.common.Tags;
+import net.thebrewingminer.glowlights.block.custom.entity.GlowCampfireBlockEntity;
+import net.thebrewingminer.glowlights.block.custom.entity.ModBlockEntities;
+
+import javax.annotation.Nullable;
+import java.util.Optional;
 
 @SuppressWarnings({"NullableProblems", "deprecation"})
-public class GlowCampfireBlock extends Block implements SimpleWaterloggedBlock {
+public class GlowCampfireBlock extends BaseEntityBlock implements SimpleWaterloggedBlock {
     public static final BooleanProperty LIT;
     public static final BooleanProperty WATERLOGGED;
+    public static final BooleanProperty SIGNAL_FIRE;
+    public static final BooleanProperty HAS_ASH_UNLIT;
     public static final DirectionProperty FACING;
     public static final VoxelShape SHAPE = Block.box(0.0, 0.0, 0.0, 16.0, 7.0, 16.0);
     public static final VoxelShape VIRTUAL_FENCE_POST;
+
+    public final float fireDamage;
+    public final float fireDamageDelay;
 
     public static final int WATERLOGGED_PARTICLE_DELAY = 6;
     public static final int DRY_PARTICLE_DELAY = 10;
@@ -51,13 +71,17 @@ public class GlowCampfireBlock extends Block implements SimpleWaterloggedBlock {
     static {
         LIT = BlockStateProperties.LIT;
         WATERLOGGED = BlockStateProperties.WATERLOGGED;
+        SIGNAL_FIRE = BlockStateProperties.SIGNAL_FIRE;
+        HAS_ASH_UNLIT = BooleanProperty.create("has_ash_unlit");
         FACING = BlockStateProperties.HORIZONTAL_FACING;
         VIRTUAL_FENCE_POST = Block.box(6.0, 0.0, 6.0, 10.0, 16.0, 10.0);
     }
 
-    public GlowCampfireBlock(BlockBehaviour.Properties properties) {
+    public GlowCampfireBlock(BlockBehaviour.Properties properties, float fireDamage, float fireDamageDelay) {
         super(properties);
-        this.registerDefaultState(this.stateDefinition.any().setValue(LIT, false).setValue(WATERLOGGED, false).setValue(FACING, Direction.NORTH));
+        this.fireDamage = fireDamage;
+        this.fireDamageDelay = fireDamageDelay;
+        this.registerDefaultState(this.stateDefinition.any().setValue(LIT, false).setValue(WATERLOGGED, false).setValue(FACING, Direction.NORTH).setValue(SIGNAL_FIRE, false));
     }
 
     @Override
@@ -72,15 +96,16 @@ public class GlowCampfireBlock extends Block implements SimpleWaterloggedBlock {
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder){
-        builder.add(LIT, WATERLOGGED, FACING);
+        builder.add(LIT, WATERLOGGED, FACING, SIGNAL_FIRE, HAS_ASH_UNLIT);
     }
 
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext blockPlaceContext){
         LevelAccessor level = blockPlaceContext.getLevel();
+        LevelAccessor levelAccessor = blockPlaceContext.getLevel();
         BlockPos pos = blockPlaceContext.getClickedPos();
         boolean inWater = level.getFluidState(pos).getType() == Fluids.WATER;
-        return ( this.defaultBlockState().setValue(WATERLOGGED, inWater).setValue(LIT, false).setValue(FACING, blockPlaceContext.getHorizontalDirection()) );
+        return ( this.defaultBlockState().setValue(WATERLOGGED, inWater).setValue(LIT, false).setValue(FACING, blockPlaceContext.getHorizontalDirection()).setValue(SIGNAL_FIRE, this.isSmokeSource(levelAccessor.getBlockState(pos.below()))) );
     }
 
     public BlockState updateShape(BlockState blockState, Direction facing, BlockState facingState, LevelAccessor level, BlockPos currentPos, BlockPos facingPos) {
@@ -124,18 +149,19 @@ public class GlowCampfireBlock extends Block implements SimpleWaterloggedBlock {
     @Override
     public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand playerHand, BlockHitResult hitResult){
         ItemStack heldItem = player.getItemInHand(playerHand);
+        RandomSource randomSource = level.getRandom();
         boolean survivalMode = !(player.isCreative());
 
         if (!(state.getValue(LIT))){
             if (heldItem.is(Items.FLINT_AND_STEEL) || heldItem.is(Items.FIRE_CHARGE)){
                 level.setBlock(pos, state.setValue(LIT, true), 3);
-                if (survivalMode){
                     if (heldItem.is(Items.FLINT_AND_STEEL)){
-                        heldItem.hurtAndBreak(1, player, (p) -> p.broadcastBreakEvent(playerHand));
+                        level.playSound(player, pos, SoundEvents.FLINTANDSTEEL_USE, SoundSource.BLOCKS, 1.0F, level.getRandom().nextFloat() * 0.4F + 0.8F);
+                        if (survivalMode) heldItem.hurtAndBreak(1, player, (p) -> p.broadcastBreakEvent(playerHand));
                     } else {
-                        heldItem.shrink(1);
+                        level.playSound(null, pos, SoundEvents.FIRECHARGE_USE, SoundSource.BLOCKS, 1.0F, (randomSource.nextFloat() - randomSource.nextFloat()) * 0.2F + 1.0F);
+                        if (survivalMode) heldItem.shrink(1);
                     }
-                }
 
                 player.awardStat(Stats.INTERACT_WITH_CAMPFIRE);
                 return InteractionResult.sidedSuccess(level.isClientSide);
@@ -149,7 +175,21 @@ public class GlowCampfireBlock extends Block implements SimpleWaterloggedBlock {
                 return InteractionResult.sidedSuccess(level.isClientSide);
             }
         }
-        return super.use(state, level, pos, player, playerHand, hitResult);
+
+        BlockEntity blockEntity = level.getBlockEntity(pos);
+        if (blockEntity instanceof GlowCampfireBlockEntity glowCampfireBlockEntity) {
+            Optional<CampfireCookingRecipe> optional = glowCampfireBlockEntity.getCookableRecipe(heldItem);
+            if (optional.isPresent()) {
+                if (!level.isClientSide && glowCampfireBlockEntity.placeFood(player, player.getAbilities().instabuild ? heldItem.copy() : heldItem, optional.get().getCookingTime())) {
+                    player.awardStat(Stats.INTERACT_WITH_CAMPFIRE);
+                    return InteractionResult.SUCCESS;
+                }
+
+                return InteractionResult.CONSUME;
+            }
+        }
+
+        return InteractionResult.PASS;
     }
 
     public static void addGlowParticle(Level level, BlockPos pos, RandomSource randomSource, int delay){
@@ -174,6 +214,64 @@ public class GlowCampfireBlock extends Block implements SimpleWaterloggedBlock {
         } else {
             addGlowParticle(level, pos, randomSource, DRY_PARTICLE_DELAY);
             playSound(level, pos, randomSource, DRY_SOUND_DELAY);
+        }
+    }
+
+    @Override
+    public void entityInside(BlockState state, Level level, BlockPos pos, Entity entity) {
+        if (state.getValue(LIT) && entity instanceof LivingEntity && !EnchantmentHelper.hasFrostWalker((LivingEntity)entity)) {
+            entity.hurt(DamageSource.IN_FIRE, (float)this.fireDamage);
+        }
+
+        super.entityInside(state, level, pos, entity);
+    }
+
+    @Override
+    public BlockEntity newBlockEntity(BlockPos pos, BlockState blockState) {
+        return new GlowCampfireBlockEntity(pos, blockState);
+    }
+
+    @Override
+    public void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean isMoving) {
+        if (!state.is(newState.getBlock())) {
+            BlockEntity blockEntity = level.getBlockEntity(pos);
+            if (blockEntity instanceof GlowCampfireBlockEntity) {
+                Containers.dropContents(level, pos, ((GlowCampfireBlockEntity) blockEntity).getItems());
+            }
+
+            super.onRemove(state, level, pos, newState, isMoving);
+        }
+    }
+
+    protected boolean isSmokeSource(BlockState pState) {
+        return pState.is(Blocks.HAY_BLOCK);
+    }
+
+    @Override
+    public void onProjectileHit(Level pLevel, BlockState pState, BlockHitResult pHit, Projectile pProjectile) {
+        BlockPos blockpos = pHit.getBlockPos();
+        if (!pLevel.isClientSide && pProjectile.isOnFire() && pProjectile.mayInteract(pLevel, blockpos) && !(Boolean)pState.getValue(LIT) && !(Boolean)pState.getValue(WATERLOGGED)) {
+            pLevel.setBlock(blockpos, pState.setValue(BlockStateProperties.LIT, true), 11);
+        }
+    }
+
+    public static void makeParticles(Level level, BlockPos pos, boolean isSignalFire, boolean spawnExtraSmoke) {
+        RandomSource randomsource = level.getRandom();
+        SimpleParticleType simpleparticletype = isSignalFire ? ParticleTypes.CAMPFIRE_SIGNAL_SMOKE : ParticleTypes.CAMPFIRE_COSY_SMOKE;
+        level.addAlwaysVisibleParticle(simpleparticletype, true, (double)pos.getX() + 0.5 + randomsource.nextDouble() / 3.0 * (double)(randomsource.nextBoolean() ? 1 : -1), (double)pos.getY() + randomsource.nextDouble() + randomsource.nextDouble(), (double)pos.getZ() + 0.5 + randomsource.nextDouble() / 3.0 * (double)(randomsource.nextBoolean() ? 1 : -1), 0.0, 0.07, 0.0);
+        if (spawnExtraSmoke) {
+            level.addParticle(ParticleTypes.GLOW_SQUID_INK, (double)pos.getX() + 0.5 + randomsource.nextDouble() / 4.0 * (double)(randomsource.nextBoolean() ? 1 : -1), (double)pos.getY() + 0.4, (double)pos.getZ() + 0.5 + randomsource.nextDouble() / 4.0 * (double)(randomsource.nextBoolean() ? 1 : -1), 0.0, 0.005, 0.0);
+        }
+
+    }
+
+    @Override
+    @Nullable
+    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState blockState, BlockEntityType<T> blockEntityType) {
+        if (level.isClientSide) {
+            return blockState.getValue(LIT) ? createTickerHelper(blockEntityType, ModBlockEntities.GLOW_CAMPFIRE.get(), GlowCampfireBlockEntity::particleTick) : null;
+        } else {
+            return blockState.getValue(LIT) ? createTickerHelper(blockEntityType, ModBlockEntities.GLOW_CAMPFIRE.get(), GlowCampfireBlockEntity::cookTick) : createTickerHelper(blockEntityType, ModBlockEntities.GLOW_CAMPFIRE.get(), GlowCampfireBlockEntity::cooldownTick);
         }
     }
 }

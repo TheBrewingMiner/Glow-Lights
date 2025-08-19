@@ -68,30 +68,36 @@ public class ModBlocks {
 
     public static final RegistryObject<Block> PRISMARINE_GLOW_CAMPFIRE = registerBlockAndItem(
         "prismarine_glow_campfire",
-        () -> new GlowCampfireBlockDeprecated(
+        () -> new GlowCampfireBlock(
                 BlockBehaviour.Properties.copy(Blocks.PRISMARINE)
-                .lightLevel(GlowCampfireBlockDeprecated::getLightLevel)
-                .noOcclusion()
+                .lightLevel(GlowCampfireBlock::getLightLevel)
+                .noOcclusion(),
+                0.5f,
+                5
         ),
         CreativeModeTab.TAB_DECORATIONS
     );
 
     public static final RegistryObject<Block> PRISMARINE_BRICK_GLOW_CAMPFIRE = registerBlockAndItem(
         "prismarine_brick_glow_campfire",
-        () -> new GlowCampfireBlockDeprecated(
+        () -> new GlowCampfireBlock(
                 BlockBehaviour.Properties.copy(Blocks.PRISMARINE_BRICKS)
-                .lightLevel(GlowCampfireBlockDeprecated::getLightLevel)
-                .noOcclusion()
+                .lightLevel(GlowCampfireBlock::getLightLevel)
+                .noOcclusion(),
+                0.5f,
+                5
         ),
         CreativeModeTab.TAB_DECORATIONS
     );
 
     public static final RegistryObject<Block> DARK_PRISMARINE_GLOW_CAMPFIRE = registerBlockAndItem(
         "dark_prismarine_glow_campfire",
-        () -> new GlowCampfireBlockDeprecated(
+        () -> new GlowCampfireBlock(
                 BlockBehaviour.Properties.copy(Blocks.DARK_PRISMARINE)
-                .lightLevel(GlowCampfireBlockDeprecated::getLightLevel)
-                .noOcclusion()
+                .lightLevel(GlowCampfireBlock::getLightLevel)
+                .noOcclusion(),
+                0.5f,
+                5
         ),
         CreativeModeTab.TAB_DECORATIONS
     );

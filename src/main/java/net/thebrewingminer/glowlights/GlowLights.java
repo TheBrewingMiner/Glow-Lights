@@ -5,6 +5,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.thebrewingminer.glowlights.block.ModBlocks;
+import net.thebrewingminer.glowlights.block.custom.entity.ModBlockEntities;
 import net.thebrewingminer.glowlights.items.ModItems;
 
 @Mod(GlowLights.MOD_ID)
@@ -16,10 +17,6 @@ public class GlowLights {
 
         ModItems.register(modEventBus);
         ModBlocks.register(modEventBus);
-
-        // Register the commonSetup method for modloading
-        modEventBus.addListener(this::commonSetup);
+        ModBlockEntities.register(modEventBus);
     }
-
-    private void commonSetup(final FMLCommonSetupEvent event) {}
 }
