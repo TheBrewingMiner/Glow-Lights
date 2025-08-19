@@ -89,7 +89,7 @@ public class GlowCampfireBlockEntity extends BlockEntity implements Clearable {
         int i;
         if (randomSource.nextFloat() < 0.11F) {
             for(i = 0; i < randomSource.nextInt(2) + 2; ++i) {
-                CampfireBlock.makeParticles(level, pos, blockState.getValue(GlowCampfireBlock.SIGNAL_FIRE), false);
+                GlowCampfireBlock.makeParticles(level, pos, blockState.getValue(GlowCampfireBlock.SIGNAL_FIRE), false);
             }
         }
 

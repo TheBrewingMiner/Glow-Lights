@@ -99,10 +99,9 @@ public class GlowCampfireBlock extends BaseEntityBlock implements SimpleWaterlog
 
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext blockPlaceContext){
-        LevelAccessor level = blockPlaceContext.getLevel();
         LevelAccessor levelAccessor = blockPlaceContext.getLevel();
         BlockPos pos = blockPlaceContext.getClickedPos();
-        boolean inWater = level.getFluidState(pos).getType() == Fluids.WATER;
+        boolean inWater = levelAccessor.getFluidState(pos).getType() == Fluids.WATER;
         return ( this.defaultBlockState().setValue(WATERLOGGED, inWater).setValue(LIT, false).setValue(FACING, blockPlaceContext.getHorizontalDirection()).setValue(SIGNAL_FIRE, this.isSmokeSource(levelAccessor.getBlockState(pos.below()))) );
     }
 
@@ -147,38 +146,52 @@ public class GlowCampfireBlock extends BaseEntityBlock implements SimpleWaterlog
     @Override
     public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand playerHand, BlockHitResult hitResult){
         ItemStack heldItem = player.getItemInHand(playerHand);
-        RandomSource randomSource = level.getRandom();
+        BlockEntity blockEntity = level.getBlockEntity(pos);
         boolean survivalMode = !(player.isCreative());
 
-        if (!(state.getValue(LIT))){
+        RandomSource randomSource = level.getRandom();
+
+        // Messily handle interactions related to tools.
+        if (!isLit(state)){
             if (heldItem.is(Items.FLINT_AND_STEEL) || heldItem.is(Items.FIRE_CHARGE)){
                 level.setBlock(pos, state.setValue(LIT, true), 3);
-                    if (heldItem.is(Items.FLINT_AND_STEEL)){
-                        level.playSound(player, pos, SoundEvents.FLINTANDSTEEL_USE, SoundSource.BLOCKS, 1.0F, level.getRandom().nextFloat() * 0.4F + 0.8F);
-                        if (survivalMode) heldItem.hurtAndBreak(1, player, (p) -> p.broadcastBreakEvent(playerHand));
-                    } else {
-                        level.playSound(null, pos, SoundEvents.FIRECHARGE_USE, SoundSource.BLOCKS, 1.0F, (randomSource.nextFloat() - randomSource.nextFloat()) * 0.2F + 1.0F);
-                        if (survivalMode) heldItem.shrink(1);
-                    }
-
-                player.awardStat(Stats.INTERACT_WITH_CAMPFIRE);
+               if (!level.isClientSide()){
+                   if (heldItem.is(Items.FLINT_AND_STEEL)){
+                       level.playSound(player, pos, SoundEvents.FLINTANDSTEEL_USE, SoundSource.BLOCKS, 1.0F, level.getRandom().nextFloat() * 0.4F + 0.8F);
+                       if (survivalMode) heldItem.hurtAndBreak(1, player, (p) -> p.broadcastBreakEvent(playerHand));
+                   } else {
+                       level.playSound(null, pos, SoundEvents.FIRECHARGE_USE, SoundSource.BLOCKS, 1.0F, (randomSource.nextFloat() - randomSource.nextFloat()) * 0.2F + 1.0F);
+                       if (survivalMode) heldItem.shrink(1);
+                   }
+                   player.awardStat(Stats.INTERACT_WITH_CAMPFIRE);
+                   return InteractionResult.SUCCESS;
+               }
                 return InteractionResult.sidedSuccess(level.isClientSide);
             }
         } else {
             if (heldItem.is(Tags.Items.TOOLS_SHOVELS)){
-                level.setBlock(pos, state.setValue(LIT, false), 3);
-                if (survivalMode){ heldItem.hurtAndBreak(1, player, (p) -> p.broadcastBreakEvent(playerHand)); }
+                if (!level.isClientSide()){
+                    level.setBlock(pos, state.setValue(LIT, false), 3);
+                    if (isWaterlogged(state)){
+                        level.playSound(null, pos, SoundEvents.GENERIC_EXTINGUISH_FIRE, SoundSource.BLOCKS, 0.5F, 0.6F);
+                    } else {
+                        level.playSound(null, pos, SoundEvents.GENERIC_EXTINGUISH_FIRE, SoundSource.BLOCKS, 0.4F, 0.25F);
+                    }
+                    if (survivalMode){ heldItem.hurtAndBreak(1, player, (p) -> p.broadcastBreakEvent(playerHand)); }
 
-                player.awardStat(Stats.INTERACT_WITH_CAMPFIRE);
+                    player.awardStat(Stats.INTERACT_WITH_CAMPFIRE);
+                    return InteractionResult.SUCCESS;
+                }
+
                 return InteractionResult.sidedSuccess(level.isClientSide);
             }
         }
 
-        BlockEntity blockEntity = level.getBlockEntity(pos);
+        // Handle actions for campfire recipes (Vanilla).
         if (blockEntity instanceof GlowCampfireBlockEntity glowCampfireBlockEntity) {
             Optional<CampfireCookingRecipe> optional = glowCampfireBlockEntity.getCookableRecipe(heldItem);
             if (optional.isPresent()) {
-                if (!level.isClientSide && glowCampfireBlockEntity.placeFood(player, player.getAbilities().instabuild ? heldItem.copy() : heldItem, optional.get().getCookingTime())) {
+                if (!level.isClientSide() && glowCampfireBlockEntity.placeFood(player, player.getAbilities().instabuild ? heldItem.copy() : heldItem, optional.get().getCookingTime())) {
                     player.awardStat(Stats.INTERACT_WITH_CAMPFIRE);
                     return InteractionResult.SUCCESS;
                 }
@@ -190,13 +203,13 @@ public class GlowCampfireBlock extends BaseEntityBlock implements SimpleWaterlog
         return InteractionResult.PASS;
     }
 
-    public static void addGlowParticle(Level level, BlockPos pos, RandomSource randomSource, int delay){
+    public static void addAmbientGlowParticle(Level level, BlockPos pos, RandomSource randomSource, int delay){
         if (randomSource.nextInt(delay) == 0) {
             level.addParticle(ParticleTypes.GLOW, (double) pos.getX() + 0.5, (double) pos.getY() + 0.5, (double) pos.getZ() + 0.5, randomSource.nextFloat() / 2.0F, 5.0E-5, randomSource.nextFloat() / 2.0F);
         }
     }
 
-    public static void playSound(Level level, BlockPos pos, RandomSource randomSource, int delay){
+    public static void playAmbientSound(Level level, BlockPos pos, RandomSource randomSource, int delay){
         if (randomSource.nextInt(delay) == 0){
             level.playLocalSound((double)pos.getX() + 0.5, (double)pos.getY() + 0.5, (double)pos.getZ() + 0.5, SoundEvents.CAMPFIRE_CRACKLE, SoundSource.BLOCKS, 0.5F + randomSource.nextFloat(), randomSource.nextFloat() * 0.7F + 0.6F, false);
         }
@@ -207,18 +220,22 @@ public class GlowCampfireBlock extends BaseEntityBlock implements SimpleWaterlog
         if (!(blockState.getValue(LIT))) return;
 
         if (blockState.getValue(WATERLOGGED)){
-            addGlowParticle(level, pos, randomSource, WATERLOGGED_PARTICLE_DELAY);
-            playSound(level, pos, randomSource, WATERLOGGED_SOUND_DELAY);
+            addAmbientGlowParticle(level, pos, randomSource, WATERLOGGED_PARTICLE_DELAY);
+            playAmbientSound(level, pos, randomSource, WATERLOGGED_SOUND_DELAY);
         } else {
-            addGlowParticle(level, pos, randomSource, DRY_PARTICLE_DELAY);
-            playSound(level, pos, randomSource, DRY_SOUND_DELAY);
+            addAmbientGlowParticle(level, pos, randomSource, DRY_PARTICLE_DELAY);
+            playAmbientSound(level, pos, randomSource, DRY_SOUND_DELAY);
         }
     }
 
     @Override
     public void entityInside(BlockState state, Level level, BlockPos pos, Entity entity) {
         if (state.getValue(LIT) && entity instanceof LivingEntity && !EnchantmentHelper.hasFrostWalker((LivingEntity)entity)) {
-            entity.hurt(DamageSource.IN_FIRE, (float)this.fireDamage);
+            if (state.getValue(WATERLOGGED)){
+                entity.hurt(DamageSource.IN_FIRE, this.fireDamage * 2.5f);
+            } else {
+                entity.hurt(DamageSource.IN_FIRE, this.fireDamage);
+            }
         }
 
         super.entityInside(state, level, pos, entity);
@@ -246,16 +263,16 @@ public class GlowCampfireBlock extends BaseEntityBlock implements SimpleWaterlog
     }
 
     @Override
-    public void onProjectileHit(Level pLevel, BlockState pState, BlockHitResult pHit, Projectile pProjectile) {
-        BlockPos blockpos = pHit.getBlockPos();
-        if (!pLevel.isClientSide && pProjectile.isOnFire() && pProjectile.mayInteract(pLevel, blockpos) && !(Boolean)pState.getValue(LIT) && !(Boolean)pState.getValue(WATERLOGGED)) {
-            pLevel.setBlock(blockpos, pState.setValue(BlockStateProperties.LIT, true), 11);
+    public void onProjectileHit(Level level, BlockState blockState, BlockHitResult blockHitResult, Projectile projectile) {
+        BlockPos blockpos = blockHitResult.getBlockPos();
+        if (!level.isClientSide() && projectile.isOnFire() && projectile.mayInteract(level, blockpos) && !isLit(blockState)) {
+            level.setBlock(blockpos, blockState.setValue(BlockStateProperties.LIT, true), 11);
         }
     }
 
     public static void makeParticles(Level level, BlockPos pos, boolean isSignalFire, boolean spawnExtraSmoke) {
         RandomSource randomsource = level.getRandom();
-        SimpleParticleType simpleparticletype = isSignalFire ? ParticleTypes.CAMPFIRE_SIGNAL_SMOKE : ParticleTypes.CAMPFIRE_COSY_SMOKE;
+        SimpleParticleType simpleparticletype = isSignalFire ? ParticleTypes.GLOW_SQUID_INK : ParticleTypes.GLOW;
         level.addAlwaysVisibleParticle(simpleparticletype, true, (double)pos.getX() + 0.5 + randomsource.nextDouble() / 3.0 * (double)(randomsource.nextBoolean() ? 1 : -1), (double)pos.getY() + randomsource.nextDouble() + randomsource.nextDouble(), (double)pos.getZ() + 0.5 + randomsource.nextDouble() / 3.0 * (double)(randomsource.nextBoolean() ? 1 : -1), 0.0, 0.07, 0.0);
         if (spawnExtraSmoke) {
             level.addParticle(ParticleTypes.GLOW_SQUID_INK, (double)pos.getX() + 0.5 + randomsource.nextDouble() / 4.0 * (double)(randomsource.nextBoolean() ? 1 : -1), (double)pos.getY() + 0.4, (double)pos.getZ() + 0.5 + randomsource.nextDouble() / 4.0 * (double)(randomsource.nextBoolean() ? 1 : -1), 0.0, 0.005, 0.0);
