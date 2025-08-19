@@ -157,9 +157,9 @@ public class GlowCampfireBlock extends BaseEntityBlock implements SimpleWaterlog
         if (!isLit(state)){
             if (heldItem.is(Items.FLINT_AND_STEEL) || heldItem.is(Items.FIRE_CHARGE)){
                 level.setBlock(pos, state.setValue(LIT, true), 3);
-               if (!level.isClientSide()){
+                if (!level.isClientSide()){
                    if (heldItem.is(Items.FLINT_AND_STEEL)){
-                       level.playSound(player, pos, SoundEvents.FLINTANDSTEEL_USE, SoundSource.BLOCKS, 1.0F, level.getRandom().nextFloat() * 0.4F + 0.8F);
+                       level.playSound(null, pos, SoundEvents.FLINTANDSTEEL_USE, SoundSource.BLOCKS, 1.0F, level.getRandom().nextFloat() * 0.4F + 0.8F);
                        if (survivalMode) heldItem.hurtAndBreak(1, player, (p) -> p.broadcastBreakEvent(playerHand));
                    } else {
                        level.playSound(null, pos, SoundEvents.FIRECHARGE_USE, SoundSource.BLOCKS, 1.0F, (randomSource.nextFloat() - randomSource.nextFloat()) * 0.2F + 1.0F);
@@ -167,7 +167,7 @@ public class GlowCampfireBlock extends BaseEntityBlock implements SimpleWaterlog
                    }
                    player.awardStat(Stats.INTERACT_WITH_CAMPFIRE);
                    return InteractionResult.SUCCESS;
-               }
+                }
                 return InteractionResult.sidedSuccess(level.isClientSide);
             }
         } else {
@@ -175,9 +175,9 @@ public class GlowCampfireBlock extends BaseEntityBlock implements SimpleWaterlog
                 if (!level.isClientSide()){
                     level.setBlock(pos, state.setValue(LIT, false), 3);
                     if (isWaterlogged(state)){
-                        level.playSound(null, pos, SoundEvents.GENERIC_EXTINGUISH_FIRE, SoundSource.BLOCKS, 0.5F, 0.6F);
+                        level.playSound(null, pos, SoundEvents.GENERIC_EXTINGUISH_FIRE, SoundSource.BLOCKS, 0.5F, 1.0F);
                     } else {
-                        level.playSound(null, pos, SoundEvents.GENERIC_EXTINGUISH_FIRE, SoundSource.BLOCKS, 0.4F, 0.25F);
+                        level.playSound(null, pos, SoundEvents.GENERIC_EXTINGUISH_FIRE, SoundSource.BLOCKS, 0.3F, 1.0F);
                     }
                     dowse(player, level, pos, state);
                     if (survivalMode){ heldItem.hurtAndBreak(1, player, (p) -> p.broadcastBreakEvent(playerHand)); }
@@ -198,11 +198,9 @@ public class GlowCampfireBlock extends BaseEntityBlock implements SimpleWaterlog
                     player.awardStat(Stats.INTERACT_WITH_CAMPFIRE);
                     return InteractionResult.SUCCESS;
                 }
-
                 return InteractionResult.CONSUME;
             }
         }
-
         return InteractionResult.PASS;
     }
 
