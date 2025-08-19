@@ -35,9 +35,9 @@ public class GlowCampfireBlockEntity extends BlockEntity implements Clearable {
 
     public GlowCampfireBlockEntity(BlockPos pos, BlockState blockState) {
         super(ModBlockEntities.GLOW_CAMPFIRE.get(), pos, blockState);
-        this.items = NonNullList.withSize(4, ItemStack.EMPTY);
-        this.cookingProgress = new int[4];
-        this.cookingTime = new int[4];
+        this.items = NonNullList.withSize(NUM_SLOTS, ItemStack.EMPTY);
+        this.cookingProgress = new int[NUM_SLOTS];
+        this.cookingTime = new int[NUM_SLOTS];
         this.quickCheck = RecipeManager.createCheck(RecipeType.CAMPFIRE_COOKING);
     }
 
@@ -96,13 +96,13 @@ public class GlowCampfireBlockEntity extends BlockEntity implements Clearable {
 
         for(int itemIndex = 0; itemIndex < blockEntity.items.size(); ++itemIndex) {
             if (!blockEntity.items.get(itemIndex).isEmpty() && randomSource.nextFloat() < 0.2F) {
-                Direction direction = Direction.from2DDataValue(Math.floorMod(itemIndex + i, 4));
+                Direction direction = Direction.from2DDataValue(Math.floorMod(itemIndex + i, NUM_SLOTS));
                 float factor = 0.3125F;
                 double x = (double)pos.getX() + 0.5 - (double)((float)direction.getStepX() * 0.3125F) + (double)((float)direction.getClockWise().getStepX() * factor);
                 double y = (double)pos.getY() + 0.5;
                 double z = (double)pos.getZ() + 0.5 - (double)((float)direction.getStepZ() * 0.3125F) + (double)((float)direction.getClockWise().getStepZ() * factor);
 
-                for(int j = 0; j < 4; ++j) {
+                for(int j = 0; j < NUM_SLOTS; ++j) {
                     level.addParticle(ParticleTypes.GLOW, x, y, z, 0.0, 5.0E-4, 0.0);
                 }
             }
