@@ -15,6 +15,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import net.thebrewingminer.glowlights.GlowLights;
 import net.thebrewingminer.glowlights.block.*;
+import net.thebrewingminer.glowlights.block.copper.CopperGlowLantern;
 import net.thebrewingminer.glowlights.block.copper.CopperGlowTorchBlock;
 import net.thebrewingminer.glowlights.block.copper.CopperGlowWallTorchBlock;
 
@@ -175,7 +176,43 @@ public class ModBlocks {
         )
     );
 
-        /* Waxed Copper Blocks */
+    public static final RegistryObject<Block> COPPER_GLOW_LANTERN = registerBlockAndItem(
+        "copper_glow_lantern",
+        () -> new CopperGlowLantern(
+                WeatheringCopper.WeatherState.UNAFFECTED,
+                BlockBehaviour.Properties.copy(GLOW_LANTERN.get()).lightLevel(CopperGlowLantern::getLightLevel)
+        ),
+        CreativeModeTab.TAB_DECORATIONS
+    );
+
+    public static final RegistryObject<Block> EXPOSED_COPPER_GLOW_LANTERN = registerBlockAndItem(
+        "exposed_copper_glow_lantern",
+        () -> new CopperGlowLantern(
+            WeatheringCopper.WeatherState.EXPOSED,
+            BlockBehaviour.Properties.copy(GLOW_LANTERN.get()).lightLevel(CopperGlowLantern::getLightLevel)
+        ),
+        CreativeModeTab.TAB_DECORATIONS
+    );
+
+    public static final RegistryObject<Block> WEATHERED_COPPER_GLOW_LANTERN = registerBlockAndItem(
+        "weathered_copper_glow_lantern",
+        () -> new CopperGlowLantern(
+            WeatheringCopper.WeatherState.WEATHERED,
+            BlockBehaviour.Properties.copy(GLOW_LANTERN.get()).lightLevel(CopperGlowLantern::getLightLevel)
+        ),
+        CreativeModeTab.TAB_DECORATIONS
+    );
+
+    public static final RegistryObject<Block> OXIDIZED_COPPER_GLOW_LANTERN = registerBlockAndItem(
+        "oxidized_copper_glow_lantern",
+        () -> new CopperGlowLantern(
+            WeatheringCopper.WeatherState.OXIDIZED,
+            BlockBehaviour.Properties.copy(GLOW_LANTERN.get()).lightLevel(CopperGlowLantern::getLightLevel)
+        ),
+        CreativeModeTab.TAB_DECORATIONS
+    );
+
+    /* Waxed Copper Blocks */
 
     public static final RegistryObject<Block> WAXED_COPPER_GLOW_TORCH = BLOCKS.register(
         "waxed_copper_glow_torch",
@@ -241,6 +278,29 @@ public class ModBlocks {
         )
     );
 
+    public static final RegistryObject<Block> WAXED_COPPER_GLOW_LANTERN = registerBlockAndItem(
+        "waxed_copper_glow_lantern",
+        () -> new GlowLantern(BlockBehaviour.Properties.copy(COPPER_GLOW_LANTERN.get()).lightLevel(GlowLantern::getLightLevel)),
+        CreativeModeTab.TAB_DECORATIONS
+    );
+
+    public static final RegistryObject<Block> WAXED_EXPOSED_COPPER_GLOW_LANTERN = registerBlockAndItem(
+        "waxed_exposed_copper_glow_lantern",
+        () -> new GlowLantern(BlockBehaviour.Properties.copy(GLOW_LANTERN.get()).lightLevel(GlowLantern::getLightLevel)),
+        CreativeModeTab.TAB_DECORATIONS
+    );
+
+    public static final RegistryObject<Block> WAXED_WEATHERED_COPPER_GLOW_LANTERN = registerBlockAndItem(
+        "waxed_weathered_copper_glow_lantern",
+        () -> new GlowLantern(BlockBehaviour.Properties.copy(GLOW_LANTERN.get()).lightLevel(GlowLantern::getLightLevel)),
+        CreativeModeTab.TAB_DECORATIONS
+    );
+
+    public static final RegistryObject<Block> WAXED_OXIDIZED_COPPER_GLOW_LANTERN = registerBlockAndItem(
+        "waxed_oxidized_copper_glow_lantern",
+        () -> new GlowLantern(BlockBehaviour.Properties.copy(GLOW_LANTERN.get()).lightLevel(GlowLantern::getLightLevel)),
+        CreativeModeTab.TAB_DECORATIONS
+    );
 
     public static void register(IEventBus eventBus) {
         BLOCKS.register(eventBus);
