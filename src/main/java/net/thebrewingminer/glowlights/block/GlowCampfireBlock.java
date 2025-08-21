@@ -7,6 +7,7 @@ import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
@@ -81,7 +82,7 @@ public class GlowCampfireBlock extends BaseEntityBlock implements SimpleWaterlog
         super(properties);
         this.fireDamage = fireDamage;
         this.fireDamageDelay = fireDamageDelay;
-        this.registerDefaultState(this.stateDefinition.any().setValue(LIT, false).setValue(WATERLOGGED, false).setValue(FACING, Direction.NORTH).setValue(SIGNAL_FIRE, false));
+        this.registerDefaultState(this.stateDefinition.any().setValue(LIT, false).setValue(WATERLOGGED, false).setValue(FACING, Direction.NORTH).setValue(SIGNAL_FIRE, false).setValue(HAS_ASH_UNLIT, true));
     }
 
     @Override
@@ -134,6 +135,14 @@ public class GlowCampfireBlock extends BaseEntityBlock implements SimpleWaterlog
         return state.getValue(LIT);
     }
 
+    public static boolean isUnlit(BlockState state){
+        return !isLit(state);
+    }
+
+    public static boolean hasAshWhenUnlit(BlockState state){
+        return state.getValue(HAS_ASH_UNLIT);
+    }
+
     public static boolean isWaterlogged(BlockState state){
         return state.getValue(WATERLOGGED);
     }
@@ -145,52 +154,7 @@ public class GlowCampfireBlock extends BaseEntityBlock implements SimpleWaterlog
         return lightLevel;
     }
 
-    @Override
-    public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand playerHand, BlockHitResult hitResult){
-        ItemStack heldItem = player.getItemInHand(playerHand);
-        BlockEntity blockEntity = level.getBlockEntity(pos);
-        boolean survivalMode = !(player.isCreative());
-
-        RandomSource randomSource = level.getRandom();
-
-        // Messily handle interactions related to tools.
-        if (!isLit(state)){
-            if (heldItem.is(Items.FLINT_AND_STEEL) || heldItem.is(Items.FIRE_CHARGE)){
-                level.setBlock(pos, state.setValue(LIT, true), 3);
-                if (!level.isClientSide()){
-                   if (heldItem.is(Items.FLINT_AND_STEEL)){
-                       level.playSound(null, pos, SoundEvents.FLINTANDSTEEL_USE, SoundSource.BLOCKS, 1.0F, level.getRandom().nextFloat() * 0.4F + 0.8F);
-                       if (survivalMode) heldItem.hurtAndBreak(1, player, (p) -> p.broadcastBreakEvent(playerHand));
-                   } else {
-                       level.playSound(null, pos, SoundEvents.FIRECHARGE_USE, SoundSource.BLOCKS, 1.0F, (randomSource.nextFloat() - randomSource.nextFloat()) * 0.2F + 1.0F);
-                       if (survivalMode) heldItem.shrink(1);
-                   }
-                   player.awardStat(Stats.INTERACT_WITH_CAMPFIRE);
-                   return InteractionResult.SUCCESS;
-                }
-                return InteractionResult.sidedSuccess(level.isClientSide);
-            }
-        } else {
-            if (heldItem.is(Tags.Items.TOOLS_SHOVELS)){
-                if (!level.isClientSide()){
-                    level.setBlock(pos, state.setValue(LIT, false), 3);
-                    if (isWaterlogged(state)){
-                        level.playSound(null, pos, SoundEvents.GENERIC_EXTINGUISH_FIRE, SoundSource.BLOCKS, 0.5F, 1.0F);
-                    } else {
-                        level.playSound(null, pos, SoundEvents.GENERIC_EXTINGUISH_FIRE, SoundSource.BLOCKS, 0.3F, 1.0F);
-                    }
-                    dowse(player, level, pos, state);
-                    if (survivalMode){ heldItem.hurtAndBreak(1, player, (p) -> p.broadcastBreakEvent(playerHand)); }
-
-                    player.awardStat(Stats.INTERACT_WITH_CAMPFIRE);
-                    return InteractionResult.SUCCESS;
-                }
-
-                return InteractionResult.sidedSuccess(level.isClientSide);
-            }
-        }
-
-        // Handle actions for campfire recipes (Vanilla).
+    public static InteractionResult handleCampfireRecipe(Level level, Player player, ItemStack heldItem, BlockEntity blockEntity){
         if (blockEntity instanceof GlowCampfireBlockEntity glowCampfireBlockEntity) {
             Optional<CampfireCookingRecipe> recipe = glowCampfireBlockEntity.getCookableRecipe(heldItem);
             if (recipe.isPresent()) {
@@ -202,6 +166,80 @@ public class GlowCampfireBlock extends BaseEntityBlock implements SimpleWaterlog
             }
         }
         return InteractionResult.PASS;
+    }
+
+    public InteractionResult handleLightingCampfire(Level level, Player player, InteractionHand playerHand, ItemStack heldItem, BlockState state, BlockPos pos, boolean survivalMode){
+        RandomSource randomSource = level.getRandom();
+        level.setBlock(pos, state.setValue(LIT, true).setValue(HAS_ASH_UNLIT, false), 3);
+
+        if (heldItem.is(Items.FLINT_AND_STEEL)){
+            level.playSound(null, pos, SoundEvents.FLINTANDSTEEL_USE, SoundSource.BLOCKS, 1.0F, level.getRandom().nextFloat() * 0.4F + 0.8F);
+            if (survivalMode) heldItem.hurtAndBreak(1, player, (p) -> p.broadcastBreakEvent(playerHand));
+        } else {
+            level.playSound(null, pos, SoundEvents.FIRECHARGE_USE, SoundSource.BLOCKS, 1.0F, (randomSource.nextFloat() - randomSource.nextFloat()) * 0.2F + 1.0F);
+            if (survivalMode) heldItem.shrink(1);
+        }
+
+        return InteractionResult.SUCCESS;
+    }
+
+    public InteractionResult handleCleaningCampfire(Level level, Player player, InteractionHand playerHand, ItemStack heldItem, BlockState state, BlockPos pos, boolean survivalMode){
+        level.setBlock(pos, state.setValue(HAS_ASH_UNLIT, false), 3);
+        level.playSound(null, pos, SoundEvents.SHOVEL_FLATTEN, SoundSource.BLOCKS, 1.0F, 1.0F);
+        if (survivalMode) heldItem.hurtAndBreak(1, player, (p) -> p.broadcastBreakEvent(playerHand));
+        return InteractionResult.SUCCESS;
+    }
+
+    public InteractionResult handleRefuelingCampfire(Level level, BlockState state, BlockPos pos, ItemStack heldItem, boolean survivalMode){
+        level.setBlock(pos, state.setValue(HAS_ASH_UNLIT, true), 3);
+        level.playSound(null, pos, SoundEvents.BASALT_BREAK, SoundSource.BLOCKS, 1.0F, 1.0F);
+        if (survivalMode) heldItem.shrink(1);
+        return InteractionResult.SUCCESS;
+    }
+
+    public InteractionResult handleDowsing(Level level, Player player, InteractionHand playerHand, ItemStack heldItem, BlockState state, BlockPos pos, boolean survivalMode){
+        level.setBlock(pos, state.setValue(LIT, false).setValue(HAS_ASH_UNLIT, true), 3);
+
+        if (isWaterlogged(state)){
+            level.playSound(null, pos, SoundEvents.GENERIC_EXTINGUISH_FIRE, SoundSource.BLOCKS, 0.5F, 1.0F);
+        } else {
+            level.playSound(null, pos, SoundEvents.GENERIC_EXTINGUISH_FIRE, SoundSource.BLOCKS, 0.3F, 1.0F);
+        }
+
+        dowse(player, level, pos, state);
+        if (survivalMode){ heldItem.hurtAndBreak(1, player, (p) -> p.broadcastBreakEvent(playerHand)); }
+
+        return InteractionResult.SUCCESS;
+    }
+
+    @Override
+    public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand playerHand, BlockHitResult hitResult){
+        ItemStack heldItem = player.getItemInHand(playerHand);
+        BlockEntity blockEntity = level.getBlockEntity(pos);
+        boolean survivalMode = !(player.isCreative());
+        boolean coalsPresent = hasAshWhenUnlit(state);
+
+        if (level.isClientSide()) return InteractionResult.PASS;
+
+        if (isUnlit(state)){
+            // If the campfire is NOT lit.
+            if (coalsPresent){ // If the coals are still in the campfire
+
+                // Handle lighting when appropriate.
+                if ((heldItem.is(Items.FLINT_AND_STEEL) || heldItem.is(Items.FIRE_CHARGE)) && state.getValue(HAS_ASH_UNLIT)) return handleLightingCampfire(level, player, playerHand, heldItem, state, pos, survivalMode);
+
+                // Handle "cleaning" the coals from the campfire.
+                if (heldItem.is(Tags.Items.TOOLS_SHOVELS)) return handleCleaningCampfire(level, player, playerHand, heldItem, state, pos, survivalMode);
+            } else {
+                // If coals are not still in the campfire
+                if (heldItem.is(ItemTags.COALS)) return handleRefuelingCampfire(level, state, pos, heldItem, survivalMode); // Handle refueling.
+            }
+        } else { // Handle interactions with a LIT campfire.
+            if (heldItem.is(Tags.Items.TOOLS_SHOVELS)) return handleDowsing(level, player, playerHand, heldItem, state, pos, survivalMode);
+        }
+
+        // Handle actions for campfire recipes (Vanilla).
+        return handleCampfireRecipe(level, player, heldItem, blockEntity);
     }
 
     public static void addAmbientGlowParticle(Level level, BlockPos pos, RandomSource randomSource, int delay){
@@ -266,7 +304,7 @@ public class GlowCampfireBlock extends BaseEntityBlock implements SimpleWaterlog
     @Override
     public void onProjectileHit(Level level, BlockState blockState, BlockHitResult blockHitResult, Projectile projectile) {
         BlockPos blockpos = blockHitResult.getBlockPos();
-        if (!level.isClientSide() && projectile.isOnFire() && projectile.mayInteract(level, blockpos) && !isLit(blockState)) {
+        if (!level.isClientSide() && projectile.isOnFire() && projectile.mayInteract(level, blockpos) && hasAshWhenUnlit(blockState)) {
             level.setBlock(blockpos, blockState.setValue(BlockStateProperties.LIT, true), 11);
         }
     }
@@ -288,10 +326,7 @@ public class GlowCampfireBlock extends BaseEntityBlock implements SimpleWaterlog
         }
 
         BlockEntity blockEntity = levelAccessor.getBlockEntity(pos);
-        if (blockEntity instanceof GlowCampfireBlockEntity glowCampfireBlockEntity){
-            glowCampfireBlockEntity.dowse();
-        }
-
+        if (blockEntity instanceof GlowCampfireBlockEntity glowCampfireBlockEntity) glowCampfireBlockEntity.dowse();
         levelAccessor.gameEvent(entity, GameEvent.BLOCK_CHANGE, pos);
     }
 
