@@ -11,7 +11,7 @@ public class GlowSmokeParticle extends TextureSheetParticle {
         this.friction = 0.96F;
         this.quadSize *= 0.75F;
         this.speedUpWhenYMotionIsBlocked = true;
-        this.hasPhysics = false;
+        this.hasPhysics = true;
 
         if (isSignal) {
             this.lifetime = this.random.nextInt(50) + 210;
