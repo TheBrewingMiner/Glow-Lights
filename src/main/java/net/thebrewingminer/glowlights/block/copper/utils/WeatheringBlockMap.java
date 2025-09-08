@@ -17,6 +17,7 @@ public class WeatheringBlockMap {
                 .put(ModBlocks.COPPER_GLOW_WALL_TORCH.get(), ModBlocks.EXPOSED_COPPER_GLOW_WALL_TORCH.get())
                 .put(ModBlocks.EXPOSED_COPPER_GLOW_WALL_TORCH.get(), ModBlocks.WEATHERED_COPPER_GLOW_WALL_TORCH.get())
                 .put(ModBlocks.WEATHERED_COPPER_GLOW_WALL_TORCH.get(), ModBlocks.OXIDIZED_COPPER_GLOW_WALL_TORCH.get())
+
                 .put(ModBlocks.COPPER_GLOW_LANTERN.get(), ModBlocks.EXPOSED_COPPER_GLOW_LANTERN.get())
                 .put(ModBlocks.EXPOSED_COPPER_GLOW_LANTERN.get(), ModBlocks.WEATHERED_COPPER_GLOW_LANTERN.get())
                 .put(ModBlocks.WEATHERED_COPPER_GLOW_LANTERN.get(), ModBlocks.OXIDIZED_COPPER_GLOW_LANTERN.get())
@@ -33,6 +34,7 @@ public class WeatheringBlockMap {
                 .put(ModBlocks.WEATHERED_COPPER_GLOW_WALL_TORCH.get(), ModBlocks.WAXED_WEATHERED_COPPER_GLOW_WALL_TORCH.get())
                 .put(ModBlocks.OXIDIZED_COPPER_GLOW_TORCH.get(), ModBlocks.WAXED_OXIDIZED_COPPER_GLOW_TORCH.get())
                 .put(ModBlocks.OXIDIZED_COPPER_GLOW_WALL_TORCH.get(), ModBlocks.WAXED_OXIDIZED_COPPER_GLOW_WALL_TORCH.get())
+
                 .put(ModBlocks.COPPER_GLOW_LANTERN.get(), ModBlocks.WAXED_COPPER_GLOW_LANTERN.get())
                 .put(ModBlocks.EXPOSED_COPPER_GLOW_LANTERN.get(), ModBlocks.WAXED_EXPOSED_COPPER_GLOW_LANTERN.get())
                 .put(ModBlocks.WEATHERED_COPPER_GLOW_LANTERN.get(), ModBlocks.WAXED_WEATHERED_COPPER_GLOW_LANTERN.get())
