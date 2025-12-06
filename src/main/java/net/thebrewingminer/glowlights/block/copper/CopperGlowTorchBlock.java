@@ -20,6 +20,7 @@ import net.thebrewingminer.glowlights.block.copper.utils.IWeatheringCopper;
 
 public class CopperGlowTorchBlock extends GlowTorchBlock implements IWeatheringCopper {
     private final WeatheringCopper.WeatherState weatherState;
+    public static final int SUBMERGED_OXIDATION_FACTOR = 7;
 
     public CopperGlowTorchBlock(WeatheringCopper.WeatherState weatherState, BlockBehaviour.Properties properties, ParticleOptions particle) {
         super(properties, particle);
@@ -28,7 +29,9 @@ public class CopperGlowTorchBlock extends GlowTorchBlock implements IWeatheringC
 
     @Override
     public void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource randomSource) {
-        this.onRandomTick(state, level, pos, randomSource);
+        if (randomSource.nextInt(SUBMERGED_OXIDATION_FACTOR) == 0) {
+            this.onRandomTick(state, level, pos, randomSource);
+        }
     }
 
     @Override
