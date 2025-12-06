@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "glowlights:item/exposed_copper_glow_lantern"
+    "layer0": "glowlights:item/glow_lantern/copper/exposed_copper_glow_lantern"
   }
 }
