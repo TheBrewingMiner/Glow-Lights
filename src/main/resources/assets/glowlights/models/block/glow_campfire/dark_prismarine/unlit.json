@@ -1,5 +1,5 @@
 {
-  "parent": "glowlights:block/glow_campfire_template",
+  "parent": "glowlights:block/glow_campfire/glow_campfire_template",
   "textures": {
     "logs": "minecraft:block/dark_prismarine",
     "unlit_ash": "glowlights:block/empty",
