@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "glowlights:block/glow_torch/copper/weathered_copper_glow_torch"
+    }
+  }
+}

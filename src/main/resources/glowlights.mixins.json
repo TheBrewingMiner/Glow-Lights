@@ -1,0 +1,14 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "net.thebrewingminer.glowlights.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "refmap": "atmosphericnether.refmap.json",
+  "mixins": [
+    "FlintAndSteelItemMixin",
+    "FireChargeItemMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
