@@ -1,6 +1,0 @@
-{
-  "parent": "minecraft:item/generated",
-  "textures": {
-    "layer0": "glowlights:block/glow_torch/copper/weathered_copper_glow_torch"
-  }
-}
