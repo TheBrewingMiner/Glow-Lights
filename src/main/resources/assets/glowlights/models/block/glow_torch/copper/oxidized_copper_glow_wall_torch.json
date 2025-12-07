@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/template_torch_wall",
+  "render_type": "minecraft:cutout",
+  "textures": {
+    "torch": "glowlights:block/glow_torch/copper/oxidized_copper_glow_torch"
+  }
+}
