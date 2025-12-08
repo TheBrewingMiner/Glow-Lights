@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "hanging=false": {
+      "model": "glowlights:block/glow_lantern/copper/oxidized_copper_glow_lantern"
+    },
+    "hanging=true": {
+      "model": "glowlights:block/glow_lantern/copper/oxidized_copper_glow_lantern_hanging"
+    }
+  }
+}

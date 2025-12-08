@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/template_lantern",
+  "textures": {
+    "lantern": "glowlights:block/glow_lantern/copper/copper_glow_lantern"
+  }
+}
