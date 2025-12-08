@@ -1,5 +1,6 @@
 {
   "parent": "minecraft:block/template_lantern",
+  "render_type": "minecraft:cutout",
   "textures": {
     "lantern": "glowlights:block/glow_lantern/copper/oxidized_copper_glow_lantern"
   }
