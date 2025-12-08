@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/template_hanging_lantern",
   "textures": {
-    "lantern": "glowlights:block/lantern/glow_lantern"
+    "lantern": "glowlights:block/glow_lantern/glow_lantern"
   }
 }
