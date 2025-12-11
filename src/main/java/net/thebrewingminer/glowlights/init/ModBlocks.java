@@ -4,10 +4,7 @@ import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.SoundType;
-import net.minecraft.world.level.block.WeatheringCopper;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
@@ -15,6 +12,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import net.thebrewingminer.glowlights.GlowLights;
 import net.thebrewingminer.glowlights.block.*;
+import net.thebrewingminer.glowlights.block.copper.CopperChainBlock;
 import net.thebrewingminer.glowlights.block.copper.CopperGlowLantern;
 import net.thebrewingminer.glowlights.block.copper.CopperGlowTorchBlock;
 import net.thebrewingminer.glowlights.block.copper.CopperGlowWallTorchBlock;
@@ -212,6 +210,42 @@ public class ModBlocks {
         CreativeModeTab.TAB_DECORATIONS
     );
 
+    public static final RegistryObject<Block> COPPER_CHAIN = registerBlockAndItem(
+        "copper_chain",
+        () -> new CopperChainBlock(
+            WeatheringCopper.WeatherState.UNAFFECTED,
+            BlockBehaviour.Properties.copy(Blocks.CHAIN)
+        ),
+        CreativeModeTab.TAB_BUILDING_BLOCKS
+    );
+
+    public static final RegistryObject<Block> EXPOSED_COPPER_CHAIN = registerBlockAndItem(
+            "exposed_copper_chain",
+        () -> new CopperChainBlock(
+            WeatheringCopper.WeatherState.EXPOSED,
+            BlockBehaviour.Properties.copy(Blocks.CHAIN)
+        ),
+        CreativeModeTab.TAB_BUILDING_BLOCKS
+    );
+
+    public static final RegistryObject<Block> WEATHERED_COPPER_CHAIN = registerBlockAndItem(
+        "weathered_copper_chain",
+        () -> new CopperChainBlock(
+            WeatheringCopper.WeatherState.WEATHERED,
+            BlockBehaviour.Properties.copy(Blocks.CHAIN)
+        ),
+        CreativeModeTab.TAB_BUILDING_BLOCKS
+    );
+
+    public static final RegistryObject<Block> OXIDIZED_COPPER_CHAIN = registerBlockAndItem(
+            "oxidized_copper_chain",
+            () -> new CopperChainBlock(
+                    WeatheringCopper.WeatherState.OXIDIZED,
+                    BlockBehaviour.Properties.copy(Blocks.CHAIN)
+            ),
+            CreativeModeTab.TAB_BUILDING_BLOCKS
+    );
+
     /* Waxed Copper Blocks */
 
     public static final RegistryObject<Block> WAXED_COPPER_GLOW_TORCH = BLOCKS.register(
@@ -300,6 +334,30 @@ public class ModBlocks {
         "waxed_oxidized_copper_glow_lantern",
         () -> new GlowLantern(BlockBehaviour.Properties.copy(COPPER_GLOW_LANTERN.get()).lightLevel(GlowLantern::getLightLevel)),
         CreativeModeTab.TAB_DECORATIONS
+    );
+
+    public static final RegistryObject<Block> WAXED_COPPER_CHAIN = registerBlockAndItem(
+        "waxed_copper_chain",
+        () -> new ChainBlock(BlockBehaviour.Properties.copy(Blocks.CHAIN)),
+        CreativeModeTab.TAB_BUILDING_BLOCKS
+    );
+
+    public static final RegistryObject<Block> WAXED_EXPOSED_COPPER_CHAIN = registerBlockAndItem(
+        "waxed_exposed_copper_chain",
+        () -> new ChainBlock(BlockBehaviour.Properties.copy(Blocks.CHAIN)),
+        CreativeModeTab.TAB_BUILDING_BLOCKS
+    );
+
+    public static final RegistryObject<Block> WAXED_WEATHERED_COPPER_CHAIN = registerBlockAndItem(
+            "waxed_weathered_copper_chain",
+            () -> new ChainBlock(BlockBehaviour.Properties.copy(Blocks.CHAIN)),
+            CreativeModeTab.TAB_BUILDING_BLOCKS
+    );
+
+    public static final RegistryObject<Block> WAXED_OXIDIZED_COPPER_CHAIN = registerBlockAndItem(
+            "waxed_oxidized_copper_chain",
+            () -> new ChainBlock(BlockBehaviour.Properties.copy(Blocks.CHAIN)),
+            CreativeModeTab.TAB_BUILDING_BLOCKS
     );
 
     public static void register(IEventBus eventBus) {

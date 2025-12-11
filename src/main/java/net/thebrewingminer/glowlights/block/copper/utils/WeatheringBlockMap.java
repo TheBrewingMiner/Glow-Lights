@@ -21,6 +21,10 @@ public class WeatheringBlockMap {
                 .put(ModBlocks.COPPER_GLOW_LANTERN.get(), ModBlocks.EXPOSED_COPPER_GLOW_LANTERN.get())
                 .put(ModBlocks.EXPOSED_COPPER_GLOW_LANTERN.get(), ModBlocks.WEATHERED_COPPER_GLOW_LANTERN.get())
                 .put(ModBlocks.WEATHERED_COPPER_GLOW_LANTERN.get(), ModBlocks.OXIDIZED_COPPER_GLOW_LANTERN.get())
+
+                .put(ModBlocks.COPPER_CHAIN.get(), ModBlocks.EXPOSED_COPPER_CHAIN.get())
+                .put(ModBlocks.EXPOSED_COPPER_CHAIN.get(), ModBlocks.WEATHERED_COPPER_CHAIN.get())
+                .put(ModBlocks.WEATHERED_COPPER_CHAIN.get(), ModBlocks.OXIDIZED_COPPER_CHAIN.get())
             .build();
     });
 
@@ -39,6 +43,11 @@ public class WeatheringBlockMap {
                 .put(ModBlocks.EXPOSED_COPPER_GLOW_LANTERN.get(), ModBlocks.WAXED_EXPOSED_COPPER_GLOW_LANTERN.get())
                 .put(ModBlocks.WEATHERED_COPPER_GLOW_LANTERN.get(), ModBlocks.WAXED_WEATHERED_COPPER_GLOW_LANTERN.get())
                 .put(ModBlocks.OXIDIZED_COPPER_GLOW_LANTERN.get(), ModBlocks.WAXED_OXIDIZED_COPPER_GLOW_LANTERN.get())
+
+                .put(ModBlocks.COPPER_CHAIN.get(), ModBlocks.WAXED_COPPER_CHAIN.get())
+                .put(ModBlocks.EXPOSED_COPPER_CHAIN.get(), ModBlocks.WAXED_EXPOSED_COPPER_CHAIN.get())
+                .put(ModBlocks.WEATHERED_COPPER_CHAIN.get(), ModBlocks.WAXED_WEATHERED_COPPER_CHAIN.get())
+                .put(ModBlocks.OXIDIZED_COPPER_CHAIN.get(), ModBlocks.WAXED_OXIDIZED_COPPER_CHAIN.get())
             .build();
     });
 
