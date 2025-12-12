@@ -38,7 +38,17 @@
   "block.glowlights.waxed_weathered_copper_glow_lantern": "Waxed Weathered Copper Glow Lantern",
   "block.glowlights.waxed_oxidized_copper_glow_lantern": "Waxed Oxidized Copper Glow Lantern",
 
+  "block.glowlights.copper_chain": "Copper Chain",
+  "block.glowlights.exposed_copper_chain": "Exposed Copper Chain",
+  "block.glowlights.weathered_copper_chain": "Weathered Copper Chain",
+  "block.glowlights.oxidized_copper_chain": "Oxidized Copper Chain",
 
+  "block.glowlights.waxed_copper_chain": "Waxed Copper Chain",
+  "block.glowlights.waxed_exposed_copper_chain": "Waxed Exposed Copper Chain",
+  "block.glowlights.waxed_weathered_copper_chain": "Waxed Weathered Copper Chain",
+  "block.glowlights.waxed_oxidized_copper_chain": "Waxed Oxidized Copper Chain",
+
+  "item.glowlights.copper_nugget": "Copper Nugget",
 
   "advancements.husbandry.wax_on_glowlight.title": "Glow Wax On",
   "advancements.husbandry.wax_on_glowlight.description": "Apply Honeycomb to a Copper Glowlight!",

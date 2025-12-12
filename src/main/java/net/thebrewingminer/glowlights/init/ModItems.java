@@ -96,6 +96,13 @@ public class ModItems {
         )
     );
 
+    public static final RegistryObject<Item> COPPER_NUGGET = ITEMS.register(
+        "copper_nugget",
+        () -> new Item(
+            new Item.Properties().tab(CreativeModeTab.TAB_MATERIALS)
+        )
+    );
+
     public static void register(IEventBus eventBus){
         ITEMS.register(eventBus);
     }
