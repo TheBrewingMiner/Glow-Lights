@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "glowlights:item/chain/copper/weathered_copper_chain"
+  }
+}

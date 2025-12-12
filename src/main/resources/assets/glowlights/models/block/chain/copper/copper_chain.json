@@ -1,0 +1,7 @@
+{
+  "parent": "glowlights:block/chain/chain_template",
+  "render_type": "minecraft:cutout",
+  "textures": {
+    "chain": "glowlights:block/chain/copper/copper_chain"
+  }
+}
