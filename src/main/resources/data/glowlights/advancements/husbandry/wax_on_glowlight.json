@@ -14,7 +14,15 @@
               "glowlights:copper_glow_torch",
               "glowlights:exposed_copper_glow_torch",
               "glowlights:weathered_copper_glow_torch",
-              "glowlights:oxidized_copper_glow_torch"
+              "glowlights:oxidized_copper_glow_torch",
+              "glowlights:copper_chain",
+              "glowlights:exposed_copper_chain",
+              "glowlights:weathered_copper_chain",
+              "glowlights:oxidized_copper_chain",
+              "glowlights:copper_glow_lantern",
+              "glowlights:exposed_copper_glow_lantern",
+              "glowlights:weathered_copper_glow_lantern",
+              "glowlights:oxidized_copper_glow_lantern"
             ]
           }
         }
