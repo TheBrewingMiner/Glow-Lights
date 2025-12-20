@@ -5,15 +5,15 @@
       "item": "minecraft:copper_ingot"
     },
     "N": {
-      "item": "minecraft:copper_nugget"
+      "item": "glowlights:copper_nugget"
     }
   },
   "pattern": [
-    "N",
-    "I",
-    "N"
+    "  N",
+    " I ",
+    "N  "
   ],
   "result": {
-    "item": "minecraft:chain"
+    "item": "glowlights:copper_chain"
   }
 }
