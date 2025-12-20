@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "T": {
+      "item": "glowlights:glow_torch"
+    },
+    "N": {
+      "item": "glowlights:copper_nugget"
+    }
+  },
+  "pattern": [
+    "NNN",
+    "NTN",
+    "NNN"
+  ],
+  "result": {
+    "item": "glowlights:copper_glow_lantern"
+  }
+}
