@@ -521,7 +521,7 @@ public class ModBlocks {
         CreativeModeTab.TAB_DECORATIONS
     );
 
-    public static final RegistryObject<Block> WAXED_XPOSED_CUT_COPPER_GLOW_CAMPFIRE = registerBlockAndItem(
+    public static final RegistryObject<Block> WAXED_EXPOSED_CUT_COPPER_GLOW_CAMPFIRE = registerBlockAndItem(
         "waxed_exposed_cut_copper_glow_campfire",
         () -> new GlowCampfireBlock(
             BlockBehaviour.Properties.copy(Blocks.WAXED_EXPOSED_CUT_COPPER)
