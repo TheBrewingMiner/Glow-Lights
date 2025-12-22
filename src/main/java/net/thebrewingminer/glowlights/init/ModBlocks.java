@@ -12,10 +12,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import net.thebrewingminer.glowlights.GlowLights;
 import net.thebrewingminer.glowlights.block.*;
-import net.thebrewingminer.glowlights.block.copper.CopperChainBlock;
-import net.thebrewingminer.glowlights.block.copper.CopperGlowLantern;
-import net.thebrewingminer.glowlights.block.copper.CopperGlowTorchBlock;
-import net.thebrewingminer.glowlights.block.copper.CopperGlowWallTorchBlock;
+import net.thebrewingminer.glowlights.block.copper.*;
 
 import java.util.function.Supplier;
 
@@ -238,12 +235,116 @@ public class ModBlocks {
     );
 
     public static final RegistryObject<Block> OXIDIZED_COPPER_CHAIN = registerBlockAndItem(
-            "oxidized_copper_chain",
-            () -> new CopperChainBlock(
-                    WeatheringCopper.WeatherState.OXIDIZED,
-                    BlockBehaviour.Properties.copy(Blocks.CHAIN)
+        "oxidized_copper_chain",
+        () -> new CopperChainBlock(
+            WeatheringCopper.WeatherState.OXIDIZED,
+            BlockBehaviour.Properties.copy(Blocks.CHAIN)
+        ),
+        CreativeModeTab.TAB_BUILDING_BLOCKS
+    );
+
+    public static final RegistryObject<Block> COPPER_GLOW_CAMPFIRE = registerBlockAndItem(
+    "copper_glow_campfire",
+        () -> new CopperGlowCampfireBlock(
+            WeatheringCopper.WeatherState.UNAFFECTED,
+                BlockBehaviour.Properties.copy(Blocks.COPPER_BLOCK)
+                    .lightLevel(CopperGlowCampfireBlock::getLightLevel)
+                    .noOcclusion(),
+                0.75f,
+                5
             ),
-            CreativeModeTab.TAB_BUILDING_BLOCKS
+        CreativeModeTab.TAB_DECORATIONS
+    );
+
+    public static final RegistryObject<Block> EXPOSED_COPPER_GLOW_CAMPFIRE = registerBlockAndItem(
+        "exposed_copper_glow_campfire",
+        () -> new CopperGlowCampfireBlock(
+            WeatheringCopper.WeatherState.EXPOSED,
+            BlockBehaviour.Properties.copy(Blocks.EXPOSED_COPPER)
+                .lightLevel(CopperGlowCampfireBlock::getLightLevel)
+                .noOcclusion(),
+            0.65f,
+            5
+        ),
+        CreativeModeTab.TAB_DECORATIONS
+    );
+
+    public static final RegistryObject<Block> WEATHERED_COPPER_GLOW_CAMPFIRE = registerBlockAndItem(
+        "weathered_copper_glow_campfire",
+        () -> new CopperGlowCampfireBlock(
+            WeatheringCopper.WeatherState.WEATHERED,
+            BlockBehaviour.Properties.copy(Blocks.WEATHERED_COPPER)
+                .lightLevel(CopperGlowCampfireBlock::getLightLevel)
+                .noOcclusion(),
+            0.5f,
+            5
+        ),
+        CreativeModeTab.TAB_DECORATIONS
+    );
+
+    public static final RegistryObject<Block> OXIDIZED_COPPER_GLOW_CAMPFIRE = registerBlockAndItem(
+        "oxidized_copper_glow_campfire",
+        () -> new CopperGlowCampfireBlock(
+            WeatheringCopper.WeatherState.OXIDIZED,
+            BlockBehaviour.Properties.copy(Blocks.OXIDIZED_COPPER)
+                .lightLevel(CopperGlowCampfireBlock::getLightLevel)
+                .noOcclusion(),
+            0.5f,
+            5
+        ),
+        CreativeModeTab.TAB_DECORATIONS
+    );
+
+    public static final RegistryObject<Block> CUT_COPPER_GLOW_CAMPFIRE = registerBlockAndItem(
+        "cut_copper_glow_campfire",
+        () -> new CopperGlowCampfireBlock(
+            WeatheringCopper.WeatherState.UNAFFECTED,
+            BlockBehaviour.Properties.copy(Blocks.CUT_COPPER)
+                .lightLevel(CopperGlowCampfireBlock::getLightLevel)
+                .noOcclusion(),
+            0.75f,
+            5
+        ),
+        CreativeModeTab.TAB_DECORATIONS
+    );
+
+    public static final RegistryObject<Block> EXPOSED_CUT_COPPER_GLOW_CAMPFIRE = registerBlockAndItem(
+        "exposed_cut_copper_glow_campfire",
+        () -> new CopperGlowCampfireBlock(
+            WeatheringCopper.WeatherState.EXPOSED,
+            BlockBehaviour.Properties.copy(Blocks.EXPOSED_CUT_COPPER)
+                .lightLevel(CopperGlowCampfireBlock::getLightLevel)
+                .noOcclusion(),
+            0.65f,
+            5
+        ),
+        CreativeModeTab.TAB_DECORATIONS
+    );
+
+    public static final RegistryObject<Block> WEATHERED_CUT_COPPER_GLOW_CAMPFIRE = registerBlockAndItem(
+        "weathered_cut_copper_glow_campfire",
+        () -> new CopperGlowCampfireBlock(
+            WeatheringCopper.WeatherState.WEATHERED,
+            BlockBehaviour.Properties.copy(Blocks.WEATHERED_CUT_COPPER)
+                .lightLevel(CopperGlowCampfireBlock::getLightLevel)
+                .noOcclusion(),
+            0.5f,
+            5
+        ),
+        CreativeModeTab.TAB_DECORATIONS
+    );
+
+    public static final RegistryObject<Block> OXIDIZED_CUT_COPPER_GLOW_CAMPFIRE = registerBlockAndItem(
+        "oxidized_cut_copper_glow_campfire",
+        () -> new CopperGlowCampfireBlock(
+            WeatheringCopper.WeatherState.OXIDIZED,
+            BlockBehaviour.Properties.copy(Blocks.OXIDIZED_CUT_COPPER)
+                .lightLevel(CopperGlowCampfireBlock::getLightLevel)
+                .noOcclusion(),
+            0.5f,
+            5
+        ),
+        CreativeModeTab.TAB_DECORATIONS
     );
 
     /* Waxed Copper Blocks */
@@ -358,6 +459,102 @@ public class ModBlocks {
             "waxed_oxidized_copper_chain",
             () -> new ChainBlock(BlockBehaviour.Properties.copy(Blocks.CHAIN)),
             CreativeModeTab.TAB_BUILDING_BLOCKS
+    );
+
+    public static final RegistryObject<Block> WAXED_COPPER_GLOW_CAMPFIRE = registerBlockAndItem(
+        "waxed_copper_glow_campfire",
+        () -> new GlowCampfireBlock(
+            BlockBehaviour.Properties.copy(Blocks.WAXED_COPPER_BLOCK)
+                .lightLevel(GlowCampfireBlock::getLightLevel)
+                .noOcclusion(),
+            0.75f,
+            5
+        ),
+        CreativeModeTab.TAB_DECORATIONS
+    );
+
+    public static final RegistryObject<Block> WAXED_EXPOSED_COPPER_GLOW_CAMPFIRE = registerBlockAndItem(
+        "waxed_exposed_copper_glow_campfire",
+        () -> new GlowCampfireBlock(
+            BlockBehaviour.Properties.copy(Blocks.WAXED_EXPOSED_COPPER)
+                .lightLevel(GlowCampfireBlock::getLightLevel)
+                .noOcclusion(),
+            0.65f,
+            5
+        ),
+        CreativeModeTab.TAB_DECORATIONS
+    );
+
+    public static final RegistryObject<Block> WAXED_WEATHERED_COPPER_GLOW_CAMPFIRE = registerBlockAndItem(
+        "waxed_weathered_copper_glow_campfire",
+        () -> new GlowCampfireBlock(
+            BlockBehaviour.Properties.copy(Blocks.WAXED_WEATHERED_COPPER)
+                .lightLevel(GlowCampfireBlock::getLightLevel)
+                .noOcclusion(),
+            0.5f,
+            5
+        ),
+        CreativeModeTab.TAB_DECORATIONS
+    );
+
+    public static final RegistryObject<Block> WAXED_OXIDIZED_COPPER_GLOW_CAMPFIRE = registerBlockAndItem(
+        "waxed_oxidized_copper_glow_campfire",
+        () -> new GlowCampfireBlock(
+            BlockBehaviour.Properties.copy(Blocks.WAXED_OXIDIZED_COPPER)
+                .lightLevel(GlowCampfireBlock::getLightLevel)
+                .noOcclusion(),
+            0.5f,
+            5
+        ),
+        CreativeModeTab.TAB_DECORATIONS
+    );
+
+    public static final RegistryObject<Block> WAXED_CUT_COPPER_GLOW_CAMPFIRE = registerBlockAndItem(
+        "waxed_cut_copper_glow_campfire",
+        () -> new GlowCampfireBlock(
+            BlockBehaviour.Properties.copy(Blocks.WAXED_CUT_COPPER)
+                .lightLevel(GlowCampfireBlock::getLightLevel)
+                .noOcclusion(),
+            0.75f,
+            5
+        ),
+        CreativeModeTab.TAB_DECORATIONS
+    );
+
+    public static final RegistryObject<Block> WAXED_XPOSED_CUT_COPPER_GLOW_CAMPFIRE = registerBlockAndItem(
+        "waxed_exposed_cut_copper_glow_campfire",
+        () -> new GlowCampfireBlock(
+            BlockBehaviour.Properties.copy(Blocks.WAXED_EXPOSED_CUT_COPPER)
+                .lightLevel(GlowCampfireBlock::getLightLevel)
+                .noOcclusion(),
+            0.65f,
+            5
+        ),
+        CreativeModeTab.TAB_DECORATIONS
+    );
+
+    public static final RegistryObject<Block> WAXED_WEATHERED_CUT_COPPER_GLOW_CAMPFIRE = registerBlockAndItem(
+        "waxed_weathered_cut_copper_glow_campfire",
+        () -> new GlowCampfireBlock(
+            BlockBehaviour.Properties.copy(Blocks.WAXED_WEATHERED_CUT_COPPER)
+                .lightLevel(GlowCampfireBlock::getLightLevel)
+                .noOcclusion(),
+            0.5f,
+            5
+        ),
+        CreativeModeTab.TAB_DECORATIONS
+    );
+
+    public static final RegistryObject<Block> WAXED_OXIDIZED_CUT_COPPER_GLOW_CAMPFIRE = registerBlockAndItem(
+        "waxed_oxidized_cut_copper_glow_campfire",
+        () -> new GlowCampfireBlock(
+            BlockBehaviour.Properties.copy(Blocks.WAXED_OXIDIZED_CUT_COPPER)
+                .lightLevel(GlowCampfireBlock::getLightLevel)
+                .noOcclusion(),
+            0.5f,
+            5
+        ),
+        CreativeModeTab.TAB_DECORATIONS
     );
 
     public static void register(IEventBus eventBus) {
