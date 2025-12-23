@@ -4,14 +4,11 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.Container;
-import net.minecraft.world.ContainerHelper;
 import net.minecraft.world.Containers;
 import net.minecraft.world.SimpleContainer;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.CampfireCookingRecipe;
 import net.minecraft.world.item.crafting.RecipeManager;
@@ -25,9 +22,6 @@ import net.minecraft.world.level.gameevent.GameEvent;
 import net.thebrewingminer.glowlights.block.copper.CopperGlowCampfireBlock;
 import net.thebrewingminer.glowlights.block.copper.utils.IWeatheringCopper;
 import net.thebrewingminer.glowlights.block.copper.utils.WeatheringBlockMap;
-
-import javax.annotation.Nullable;
-import java.util.Optional;
 
 public class CopperGlowCampfireBlockEntity extends GlowCampfireBlockEntity {
     protected static final int NUM_SLOTS = 4;
@@ -143,74 +137,8 @@ public class CopperGlowCampfireBlockEntity extends GlowCampfireBlockEntity {
         }
     }
 
-    public NonNullList<ItemStack> getItems() {
-        return this.items;
-    }
-
-    @Override
-    public void load(CompoundTag compoundTag) {
-        super.load(compoundTag);
-        this.items.clear();
-        ContainerHelper.loadAllItems(compoundTag, this.items);
-        int[] $$2;
-        if (compoundTag.contains("CookingTimes", 11)) {
-            $$2 = compoundTag.getIntArray("CookingTimes");
-            System.arraycopy($$2, 0, this.cookingProgress, 0, Math.min(this.cookingTime.length, $$2.length));
-        }
-
-        if (compoundTag.contains("CookingTotalTimes", 11)) {
-            $$2 = compoundTag.getIntArray("CookingTotalTimes");
-            System.arraycopy($$2, 0, this.cookingTime, 0, Math.min(this.cookingTime.length, $$2.length));
-        }
-
-    }
-
-    @Override
-    protected void saveAdditional(CompoundTag compoundTag) {
-        super.saveAdditional(compoundTag);
-        ContainerHelper.saveAllItems(compoundTag, this.items, true);
-        compoundTag.putIntArray("CookingTimes", this.cookingProgress);
-        compoundTag.putIntArray("CookingTotalTimes", this.cookingTime);
-    }
-
-    @Override
-    public CompoundTag getUpdateTag() {
-        CompoundTag tag = new CompoundTag();
-        ContainerHelper.saveAllItems(tag, this.items, true);
-        return tag;
-    }
-
-    public Optional<CampfireCookingRecipe> getCookableRecipe(ItemStack itemStack) {
-        return this.items.stream().noneMatch(ItemStack::isEmpty) ? Optional.empty() : this.quickCheck.getRecipeFor(new SimpleContainer(itemStack), this.level);
-    }
-
-    public boolean placeFood(@Nullable Entity entity, ItemStack itemStack, int cookTime) {
-        for(int itemIndex = 0; itemIndex < this.items.size(); ++itemIndex) {
-            ItemStack item = this.items.get(itemIndex);
-            if (item.isEmpty()) {
-                this.cookingTime[itemIndex] = cookTime;
-                this.cookingProgress[itemIndex] = 0;
-                this.items.set(itemIndex, itemStack.split(1));
-                this.level.gameEvent(GameEvent.BLOCK_CHANGE, this.getBlockPos(), GameEvent.Context.of(entity, this.getBlockState()));
-                this.markUpdated();
-                return true;
-            }
-        }
-
-        return false;
-    }
-
     private void markUpdated() {
         this.setChanged();
         this.getLevel().sendBlockUpdated(this.getBlockPos(), this.getBlockState(), this.getBlockState(), 3);
-    }
-
-    @Override
-    public void clearContent() {
-        this.items.clear();
-    }
-
-    public void dowse() {
-        if (this.level != null) { this.markUpdated(); }
     }
 }
