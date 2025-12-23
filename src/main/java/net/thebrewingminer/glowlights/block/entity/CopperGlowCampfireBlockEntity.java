@@ -36,6 +36,7 @@ public class CopperGlowCampfireBlockEntity extends BlockEntity implements Cleara
     protected final int[] cookingTime;
     protected final RecipeManager.CachedCheck<Container, CampfireCookingRecipe> quickCheck;
 
+    protected static int floatToIntScale = 100;
     public static final int SMOKE_DELAY = 20;
 
     public CopperGlowCampfireBlockEntity(BlockPos pos, BlockState blockState) {
@@ -55,14 +56,14 @@ public class CopperGlowCampfireBlockEntity extends BlockEntity implements Cleara
         return WeatheringCopper.WeatherState.UNAFFECTED;
     }
 
-    public static int getCookSpeed(BlockState blockState){
-        int cookSpeed = 0;
+    public static float getCookSpeed(BlockState blockState){
+        float cookSpeed = 0;
         WeatheringCopper.WeatherState age = getWeatherState(blockState.getBlock());
 
-        if (age == WeatheringCopper.WeatherState.UNAFFECTED) { cookSpeed = 3; }
-        else if (age == WeatheringCopper.WeatherState.EXPOSED) { cookSpeed = 2; }
-        else if (age == WeatheringCopper.WeatherState.WEATHERED) { cookSpeed = 1; }
-        else if (age == WeatheringCopper.WeatherState.OXIDIZED ) { cookSpeed = 1; }
+        if (age == WeatheringCopper.WeatherState.UNAFFECTED) { cookSpeed = 2.00f; }
+        else if (age == WeatheringCopper.WeatherState.EXPOSED) { cookSpeed = 1.50f; }
+        else if (age == WeatheringCopper.WeatherState.WEATHERED) { cookSpeed = 1.00f; }
+        else if (age == WeatheringCopper.WeatherState.OXIDIZED ) { cookSpeed = 0.50f; }
 
         return cookSpeed;
     }
@@ -74,11 +75,11 @@ public class CopperGlowCampfireBlockEntity extends BlockEntity implements Cleara
             ItemStack itemStack = blockEntity.getItems().get(itemOnCampfire);
             if (!itemStack.isEmpty()) {
                 flag = true;
-                int cookSpeed = getCookSpeed(blockState);
-                blockEntity.cookingProgress[itemOnCampfire] += cookSpeed;
+                float cookSpeed = getCookSpeed(blockState);
+                int scaledCookSpeed = (int)(cookSpeed * floatToIntScale);
+                blockEntity.cookingProgress[itemOnCampfire] += scaledCookSpeed;
 
-
-                if (blockEntity.cookingProgress[itemOnCampfire] >= blockEntity.cookingTime[itemOnCampfire]) {
+                if (blockEntity.cookingProgress[itemOnCampfire] >= (blockEntity.cookingTime[itemOnCampfire] * floatToIntScale)) {
                     Container container = new SimpleContainer(itemStack);
                     ItemStack stack = blockEntity.quickCheck.getRecipeFor(container, level).map((campfireCookingRecipe) -> campfireCookingRecipe.assemble(container)).orElse(itemStack);
                     Containers.dropItemStack(level, pos.getX(), pos.getY(), pos.getZ(), stack);
@@ -97,12 +98,13 @@ public class CopperGlowCampfireBlockEntity extends BlockEntity implements Cleara
 
     public static void cooldownTick(Level level, BlockPos pos, BlockState blockState, CopperGlowCampfireBlockEntity blockEntity) {
         boolean flag = false;
-        int coolSpeed = getCookSpeed(blockState);
+        float coolSpeed = getCookSpeed(blockState);
+        int scaledCoolSpeed = (int)(coolSpeed * floatToIntScale);
 
         for(int itemIndex = 0; itemIndex < blockEntity.items.size(); ++itemIndex) {
             if (blockEntity.cookingProgress[itemIndex] > 0) {
                 flag = true;
-                blockEntity.cookingProgress[itemIndex] = Mth.clamp(blockEntity.cookingProgress[itemIndex] - coolSpeed, 0, blockEntity.cookingTime[itemIndex]);
+                blockEntity.cookingProgress[itemIndex] = Mth.clamp((blockEntity.cookingProgress[itemIndex] - scaledCoolSpeed), 0, blockEntity.cookingTime[itemIndex] * floatToIntScale);
             }
         }
 
