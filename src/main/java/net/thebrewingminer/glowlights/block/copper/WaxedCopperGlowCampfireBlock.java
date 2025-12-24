@@ -220,13 +220,6 @@ public class WaxedCopperGlowCampfireBlock extends BaseEntityBlock {
         boolean survivalMode = !(player.isCreative());
         boolean coalsPresent = hasAshWhenUnlit(state);
 
-        if (heldItem.is(Items.HONEYCOMB)){
-            IWeatheringCopper.getWaxed(block).ifPresent(waxed -> level.setBlock(pos, waxed.withPropertiesOf(state), 3));
-            if (survivalMode){ heldItem.shrink(1); }
-            level.levelEvent(player, 3003, pos, 0);
-            return InteractionResult.sidedSuccess(level.isClientSide);
-        }
-
         if (level.isClientSide()) return InteractionResult.PASS;
 
         if (isUnlit(state)){

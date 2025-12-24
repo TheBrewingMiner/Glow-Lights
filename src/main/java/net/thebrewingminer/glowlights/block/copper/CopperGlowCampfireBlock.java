@@ -3,10 +3,20 @@ package net.thebrewingminer.glowlights.block.copper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraftforge.common.Tags;
 import net.thebrewingminer.glowlights.block.copper.utils.IWeatheringCopper;
 
 public class CopperGlowCampfireBlock extends WaxedCopperGlowCampfireBlock implements IWeatheringCopper {
@@ -35,5 +45,43 @@ public class CopperGlowCampfireBlock extends WaxedCopperGlowCampfireBlock implem
     @Override
     public boolean isRandomlyTicking(BlockState state) {
         return IWeatheringCopper.getNext(state.getBlock()).isPresent();
+    }
+
+    @Override
+    public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand playerHand, BlockHitResult hitResult){
+        ItemStack heldItem = player.getItemInHand(playerHand);
+        Block block = state.getBlock();
+        BlockEntity blockEntity = level.getBlockEntity(pos);
+        boolean survivalMode = !(player.isCreative());
+        boolean coalsPresent = hasAshWhenUnlit(state);
+
+        if (heldItem.is(Items.HONEYCOMB)){
+            IWeatheringCopper.getWaxed(block).ifPresent(waxed -> level.setBlock(pos, waxed.withPropertiesOf(state), 3));
+            if (survivalMode){ heldItem.shrink(1); }
+            level.levelEvent(player, 3003, pos, 0);
+            return InteractionResult.sidedSuccess(level.isClientSide);
+        }
+
+        if (level.isClientSide()) return InteractionResult.PASS;
+
+        if (isUnlit(state)){
+            // If the campfire is NOT lit.
+            if (coalsPresent){ // If the coals are still in the campfire
+
+                // Handle lighting when appropriate.
+                if ((heldItem.is(Items.FLINT_AND_STEEL) || heldItem.is(Items.FIRE_CHARGE)) && state.getValue(HAS_ASH_UNLIT)) return handleLightingCampfire(level, player, playerHand, heldItem, state, pos, survivalMode);
+
+                // Handle "cleaning" the coals from the campfire.
+                if (heldItem.is(Tags.Items.TOOLS_SHOVELS)) return handleCleaningCampfire(level, player, playerHand, heldItem, state, pos, survivalMode);
+            } else {
+                // If coals are not still in the campfire
+                if (heldItem.is(ItemTags.COALS)) return handleRefuelingCampfire(level, state, pos, heldItem, survivalMode); // Handle refueling.
+            }
+        } else { // Handle interactions with a LIT campfire.
+            if (heldItem.is(Tags.Items.TOOLS_SHOVELS)) return handleDowsing(level, player, playerHand, heldItem, state, pos, survivalMode);
+        }
+
+        // Handle actions for campfire recipes (Vanilla).
+        return handleCampfireRecipe(level, player, heldItem, blockEntity);
     }
 }
