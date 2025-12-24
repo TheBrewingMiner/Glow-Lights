@@ -43,7 +43,7 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.common.Tags;
-import net.thebrewingminer.glowlights.block.copper.utils.IWeatheringCopper;
+import net.thebrewingminer.glowlights.block.copper.utils.ICopperCampfireVariant;
 import net.thebrewingminer.glowlights.block.entity.CopperGlowCampfireBlockEntity;
 import net.thebrewingminer.glowlights.init.ModBlockEntities;
 import net.thebrewingminer.glowlights.init.ModParticles;
@@ -51,7 +51,7 @@ import net.thebrewingminer.glowlights.init.ModParticles;
 import javax.annotation.Nullable;
 import java.util.Optional;
 
-public class WaxedCopperGlowCampfireBlock extends BaseEntityBlock {
+public class WaxedCopperGlowCampfireBlock extends BaseEntityBlock implements SimpleWaterloggedBlock, ICopperCampfireVariant {
     public static final BooleanProperty LIT;
     public static final BooleanProperty WATERLOGGED;
     public static final BooleanProperty SIGNAL_FIRE;
@@ -290,7 +290,7 @@ public class WaxedCopperGlowCampfireBlock extends BaseEntityBlock {
     public void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean isMoving) {
         Block newBlock = newState.getBlock();
 
-        if (newBlock instanceof WaxedCopperGlowCampfireBlock || newBlock instanceof CopperGlowCampfireBlock){
+        if (newBlock instanceof ICopperCampfireVariant){
             // Short-circuit if block oxidized or was waxed <-> unwaxed.
             return;
         }

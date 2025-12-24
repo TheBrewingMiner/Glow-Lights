@@ -17,9 +17,10 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraftforge.common.Tags;
+import net.thebrewingminer.glowlights.block.copper.utils.ICopperCampfireVariant;
 import net.thebrewingminer.glowlights.block.copper.utils.IWeatheringCopper;
 
-public class CopperGlowCampfireBlock extends WaxedCopperGlowCampfireBlock implements IWeatheringCopper {
+public class CopperGlowCampfireBlock extends WaxedCopperGlowCampfireBlock implements IWeatheringCopper, ICopperCampfireVariant {
     public static final int SUBMERGED_OXIDATION_FACTOR = 7;
     private final WeatheringCopper.WeatherState weatherState;
 
