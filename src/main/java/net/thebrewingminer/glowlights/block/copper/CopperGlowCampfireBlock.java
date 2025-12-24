@@ -4,6 +4,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.particles.SimpleParticleType;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
@@ -43,9 +44,9 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.common.Tags;
+import net.thebrewingminer.glowlights.block.GlowCampfireBlock;
 import net.thebrewingminer.glowlights.block.copper.utils.IWeatheringCopper;
 import net.thebrewingminer.glowlights.block.entity.CopperGlowCampfireBlockEntity;
-import net.thebrewingminer.glowlights.block.entity.GlowCampfireBlockEntity;
 import net.thebrewingminer.glowlights.init.ModBlockEntities;
 import net.thebrewingminer.glowlights.init.ModParticles;
 
@@ -72,6 +73,8 @@ public class CopperGlowCampfireBlock extends BaseEntityBlock implements IWeather
     public static final int WATERLOGGED_SOUND_DELAY = 75;
     public static final int DRY_SOUND_DELAY = 32;
 
+    public static final int SUBMERGED_OXIDATION_FACTOR = 7;
+
     static {
         LIT = BlockStateProperties.LIT;
         WATERLOGGED = BlockStateProperties.WATERLOGGED;
@@ -92,6 +95,19 @@ public class CopperGlowCampfireBlock extends BaseEntityBlock implements IWeather
     @Override
     public WeatherState getAge() {
         return this.weatherState;
+    }
+
+    @Override
+    public void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource randomSource) {
+        if (isWaterlogged(state)){
+            if (randomSource.nextInt(SUBMERGED_OXIDATION_FACTOR) == 0) this.onRandomTick(state, level, pos, randomSource);
+        } else this.onRandomTick(state, level, pos, randomSource);
+
+    }
+
+    @Override
+    public boolean isRandomlyTicking(BlockState state) {
+        return IWeatheringCopper.getNext(state.getBlock()).isPresent();
     }
 
     @Override
@@ -296,10 +312,26 @@ public class CopperGlowCampfireBlock extends BaseEntityBlock implements IWeather
 
     @Override
     public void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean isMoving) {
-        if (!state.is(newState.getBlock())) {
+//        if (!state.is(newState.getBlock())) {
+//            BlockEntity blockEntity = level.getBlockEntity(pos);
+//            if (blockEntity instanceof CopperGlowCampfireBlockEntity) {
+//                Containers.dropContents(level, pos, ((CopperGlowCampfireBlockEntity) blockEntity).getItems());
+//            }
+//
+//            super.onRemove(state, level, pos, newState, isMoving);
+//        }
+        Block newBlock = newState.getBlock();
+
+        if (newBlock instanceof CopperGlowCampfireBlock || newBlock instanceof GlowCampfireBlock){
+            // Short-circuit if block oxidized or was waxed <-> unwaxed.
+            return;
+        }
+
+        // Handle as usual if the block changed to anything else.
+        if (!state.is(newBlock)) {
             BlockEntity blockEntity = level.getBlockEntity(pos);
-            if (blockEntity instanceof CopperGlowCampfireBlockEntity) {
-                Containers.dropContents(level, pos, ((CopperGlowCampfireBlockEntity) blockEntity).getItems());
+            if (blockEntity instanceof CopperGlowCampfireBlockEntity copperGlowCampfireBlockEntity) {
+                Containers.dropContents(level, pos, copperGlowCampfireBlockEntity.getItems());
             }
 
             super.onRemove(state, level, pos, newState, isMoving);
