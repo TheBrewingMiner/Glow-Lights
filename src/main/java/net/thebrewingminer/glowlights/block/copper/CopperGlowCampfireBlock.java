@@ -240,9 +240,17 @@ public class CopperGlowCampfireBlock extends BaseEntityBlock implements IWeather
     @Override
     public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand playerHand, BlockHitResult hitResult){
         ItemStack heldItem = player.getItemInHand(playerHand);
+        Block block = state.getBlock();
         BlockEntity blockEntity = level.getBlockEntity(pos);
         boolean survivalMode = !(player.isCreative());
         boolean coalsPresent = hasAshWhenUnlit(state);
+
+        if (heldItem.is(Items.HONEYCOMB)){
+            IWeatheringCopper.getWaxed(block).ifPresent(waxed -> level.setBlock(pos, waxed.withPropertiesOf(state), 3));
+            if (survivalMode){ heldItem.shrink(1); }
+            level.levelEvent(player, 3003, pos, 0);
+            return InteractionResult.sidedSuccess(level.isClientSide);
+        }
 
         if (level.isClientSide()) return InteractionResult.PASS;
 
