@@ -60,8 +60,8 @@ public class CopperGlowCampfireBlockEntity extends BlockEntity implements Cleara
         float cookSpeed = 0;
         WeatheringCopper.WeatherState age = getWeatherState(blockState.getBlock());
 
-        if (age == WeatheringCopper.WeatherState.UNAFFECTED) { cookSpeed = 2.00f; }
-        else if (age == WeatheringCopper.WeatherState.EXPOSED) { cookSpeed = 1.50f; }
+        if (age == WeatheringCopper.WeatherState.UNAFFECTED) { cookSpeed = 1.50f; }
+        else if (age == WeatheringCopper.WeatherState.EXPOSED) { cookSpeed = 1.25f; }
         else if (age == WeatheringCopper.WeatherState.WEATHERED) { cookSpeed = 1.00f; }
         else if (age == WeatheringCopper.WeatherState.OXIDIZED ) { cookSpeed = 0.50f; }
 
