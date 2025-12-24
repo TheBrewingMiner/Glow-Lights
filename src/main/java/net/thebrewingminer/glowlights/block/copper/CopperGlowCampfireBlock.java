@@ -312,14 +312,6 @@ public class CopperGlowCampfireBlock extends BaseEntityBlock implements IWeather
 
     @Override
     public void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean isMoving) {
-//        if (!state.is(newState.getBlock())) {
-//            BlockEntity blockEntity = level.getBlockEntity(pos);
-//            if (blockEntity instanceof CopperGlowCampfireBlockEntity) {
-//                Containers.dropContents(level, pos, ((CopperGlowCampfireBlockEntity) blockEntity).getItems());
-//            }
-//
-//            super.onRemove(state, level, pos, newState, isMoving);
-//        }
         Block newBlock = newState.getBlock();
 
         if (newBlock instanceof CopperGlowCampfireBlock || newBlock instanceof GlowCampfireBlock){
