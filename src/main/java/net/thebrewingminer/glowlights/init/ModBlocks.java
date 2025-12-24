@@ -463,7 +463,7 @@ public class ModBlocks {
 
     public static final RegistryObject<Block> WAXED_COPPER_GLOW_CAMPFIRE = registerBlockAndItem(
         "waxed_copper_glow_campfire",
-        () -> new GlowCampfireBlock(
+        () -> new WaxedCopperGlowCampfireBlock(
             BlockBehaviour.Properties.copy(Blocks.WAXED_COPPER_BLOCK)
                 .lightLevel(GlowCampfireBlock::getLightLevel)
                 .noOcclusion(),
@@ -475,7 +475,7 @@ public class ModBlocks {
 
     public static final RegistryObject<Block> WAXED_EXPOSED_COPPER_GLOW_CAMPFIRE = registerBlockAndItem(
         "waxed_exposed_copper_glow_campfire",
-        () -> new GlowCampfireBlock(
+        () -> new WaxedCopperGlowCampfireBlock(
             BlockBehaviour.Properties.copy(Blocks.WAXED_EXPOSED_COPPER)
                 .lightLevel(GlowCampfireBlock::getLightLevel)
                 .noOcclusion(),
@@ -487,7 +487,7 @@ public class ModBlocks {
 
     public static final RegistryObject<Block> WAXED_WEATHERED_COPPER_GLOW_CAMPFIRE = registerBlockAndItem(
         "waxed_weathered_copper_glow_campfire",
-        () -> new GlowCampfireBlock(
+        () -> new WaxedCopperGlowCampfireBlock(
             BlockBehaviour.Properties.copy(Blocks.WAXED_WEATHERED_COPPER)
                 .lightLevel(GlowCampfireBlock::getLightLevel)
                 .noOcclusion(),
@@ -499,7 +499,7 @@ public class ModBlocks {
 
     public static final RegistryObject<Block> WAXED_OXIDIZED_COPPER_GLOW_CAMPFIRE = registerBlockAndItem(
         "waxed_oxidized_copper_glow_campfire",
-        () -> new GlowCampfireBlock(
+        () -> new WaxedCopperGlowCampfireBlock(
             BlockBehaviour.Properties.copy(Blocks.WAXED_OXIDIZED_COPPER)
                 .lightLevel(GlowCampfireBlock::getLightLevel)
                 .noOcclusion(),
@@ -511,7 +511,7 @@ public class ModBlocks {
 
     public static final RegistryObject<Block> WAXED_CUT_COPPER_GLOW_CAMPFIRE = registerBlockAndItem(
         "waxed_cut_copper_glow_campfire",
-        () -> new GlowCampfireBlock(
+        () -> new WaxedCopperGlowCampfireBlock(
             BlockBehaviour.Properties.copy(Blocks.WAXED_CUT_COPPER)
                 .lightLevel(GlowCampfireBlock::getLightLevel)
                 .noOcclusion(),
@@ -523,7 +523,7 @@ public class ModBlocks {
 
     public static final RegistryObject<Block> WAXED_EXPOSED_CUT_COPPER_GLOW_CAMPFIRE = registerBlockAndItem(
         "waxed_exposed_cut_copper_glow_campfire",
-        () -> new GlowCampfireBlock(
+        () -> new WaxedCopperGlowCampfireBlock(
             BlockBehaviour.Properties.copy(Blocks.WAXED_EXPOSED_CUT_COPPER)
                 .lightLevel(GlowCampfireBlock::getLightLevel)
                 .noOcclusion(),
@@ -535,7 +535,7 @@ public class ModBlocks {
 
     public static final RegistryObject<Block> WAXED_WEATHERED_CUT_COPPER_GLOW_CAMPFIRE = registerBlockAndItem(
         "waxed_weathered_cut_copper_glow_campfire",
-        () -> new GlowCampfireBlock(
+        () -> new WaxedCopperGlowCampfireBlock(
             BlockBehaviour.Properties.copy(Blocks.WAXED_WEATHERED_CUT_COPPER)
                 .lightLevel(GlowCampfireBlock::getLightLevel)
                 .noOcclusion(),
@@ -547,7 +547,7 @@ public class ModBlocks {
 
     public static final RegistryObject<Block> WAXED_OXIDIZED_CUT_COPPER_GLOW_CAMPFIRE = registerBlockAndItem(
         "waxed_oxidized_cut_copper_glow_campfire",
-        () -> new GlowCampfireBlock(
+        () -> new WaxedCopperGlowCampfireBlock(
             BlockBehaviour.Properties.copy(Blocks.WAXED_OXIDIZED_CUT_COPPER)
                 .lightLevel(GlowCampfireBlock::getLightLevel)
                 .noOcclusion(),
