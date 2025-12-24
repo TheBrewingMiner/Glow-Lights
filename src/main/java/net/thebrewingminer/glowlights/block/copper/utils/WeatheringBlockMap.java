@@ -62,11 +62,6 @@ public class WeatheringBlockMap {
                 .put(ModBlocks.WEATHERED_COPPER_GLOW_CAMPFIRE.get(), ModBlocks.WAXED_WEATHERED_COPPER_GLOW_CAMPFIRE.get())
                 .put(ModBlocks.OXIDIZED_COPPER_GLOW_CAMPFIRE.get(), ModBlocks.WAXED_OXIDIZED_COPPER_GLOW_CAMPFIRE.get())
 
-                .put(ModBlocks.COPPER_GLOW_CAMPFIRE.get(), ModBlocks.WAXED_COPPER_GLOW_CAMPFIRE.get())
-                .put(ModBlocks.EXPOSED_COPPER_GLOW_CAMPFIRE.get(), ModBlocks.WAXED_EXPOSED_COPPER_GLOW_CAMPFIRE.get())
-                .put(ModBlocks.WEATHERED_COPPER_GLOW_CAMPFIRE.get(), ModBlocks.WAXED_WEATHERED_COPPER_GLOW_CAMPFIRE.get())
-                .put(ModBlocks.OXIDIZED_COPPER_GLOW_CAMPFIRE.get(), ModBlocks.WAXED_OXIDIZED_COPPER_GLOW_CAMPFIRE.get())
-
                 .put(ModBlocks.CUT_COPPER_GLOW_CAMPFIRE.get(), ModBlocks.WAXED_CUT_COPPER_GLOW_CAMPFIRE.get())
                 .put(ModBlocks.EXPOSED_CUT_COPPER_GLOW_CAMPFIRE.get(), ModBlocks.WAXED_EXPOSED_CUT_COPPER_GLOW_CAMPFIRE.get())
                 .put(ModBlocks.WEATHERED_CUT_COPPER_GLOW_CAMPFIRE.get(), ModBlocks.WAXED_WEATHERED_CUT_COPPER_GLOW_CAMPFIRE.get())
