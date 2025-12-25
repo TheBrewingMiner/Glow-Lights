@@ -3,6 +3,24 @@
   "values": [
     "glowlights:prismarine_glow_campfire",
     "glowlights:prismarine_brick_glow_campfire",
-    "glowlights:dark_prismarine_glow_campfire"
+    "glowlights:dark_prismarine_glow_campfire",
+
+    "glowlights:copper_glow_campfire",
+    "glowlights:exposed_copper_glow_campfire",
+    "glowlights:weathered_copper_glow_campfire",
+    "glowlights:oxidized_copper_glow_campfire",
+    "glowlights:waxed_copper_glow_campfire",
+    "glowlights:waxed_exposed_copper_glow_campfire",
+    "glowlights:waxed_weathered_copper_glow_campfire",
+    "glowlights:waxed_oxidized_copper_glow_campfire",
+
+    "glowlights:cut_copper_glow_campfire",
+    "glowlights:exposed_cut_copper_glow_campfire",
+    "glowlights:weathered_cut_copper_glow_campfire",
+    "glowlights:oxidized_cut_copper_glow_campfire",
+    "glowlights:waxed_cut_copper_glow_campfire",
+    "glowlights:waxed_exposed_cut_copper_glow_campfire",
+    "glowlights:waxed_weathered_cut_copper_glow_campfire",
+    "glowlights:waxed_oxidized_cut_copper_glow_campfire"
   ]
 }
