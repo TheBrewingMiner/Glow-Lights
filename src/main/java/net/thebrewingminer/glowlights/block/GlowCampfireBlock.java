@@ -44,6 +44,7 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.common.Tags;
 import net.thebrewingminer.glowlights.block.entity.GlowCampfireBlockEntity;
+import net.thebrewingminer.glowlights.block.utils.BlockStateProperty;
 import net.thebrewingminer.glowlights.init.ModBlockEntities;
 import net.thebrewingminer.glowlights.init.ModParticles;
 
@@ -73,7 +74,7 @@ public class GlowCampfireBlock extends BaseEntityBlock implements SimpleWaterlog
         LIT = BlockStateProperties.LIT;
         WATERLOGGED = BlockStateProperties.WATERLOGGED;
         SIGNAL_FIRE = BlockStateProperties.SIGNAL_FIRE;
-        HAS_ASH_UNLIT = BooleanProperty.create("has_ash_unlit");
+        HAS_ASH_UNLIT = BlockStateProperty.HAS_ASH_UNLIT;
         FACING = BlockStateProperties.HORIZONTAL_FACING;
         VIRTUAL_FENCE_POST = Block.box(6.0, 0.0, 6.0, 10.0, 16.0, 10.0);
     }
