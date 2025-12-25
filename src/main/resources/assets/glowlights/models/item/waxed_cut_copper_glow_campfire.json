@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "glowlights:item/glow_campfire/copper/cut_copper_glow_campfire"
+  }
+}

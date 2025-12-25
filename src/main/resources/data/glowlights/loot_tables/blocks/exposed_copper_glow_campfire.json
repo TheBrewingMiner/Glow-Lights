@@ -24,7 +24,7 @@
                   }
                 }
               ],
-              "name": "glowlights:copper_glow_campfire"
+              "name": "glowlights:exposed_copper_glow_campfire"
             },
             {
               "type": "minecraft:group",
@@ -43,7 +43,7 @@
                 },
                 {
                   "type": "minecraft:item",
-                  "name": "minecraft:copper_block",
+                  "name": "minecraft:exposed_copper",
                   "weight": 2,
                   "functions": [
                     {

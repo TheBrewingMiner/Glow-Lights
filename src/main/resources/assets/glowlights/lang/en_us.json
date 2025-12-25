@@ -48,6 +48,26 @@
   "block.glowlights.waxed_weathered_copper_chain": "Waxed Weathered Copper Chain",
   "block.glowlights.waxed_oxidized_copper_chain": "Waxed Oxidized Copper Chain",
 
+  "block.glowlights.copper_glow_campfire": "Copper Glow Campfire",
+  "block.glowlights.exposed_copper_glow_campfire": "Exposed Copper Glow Campfire",
+  "block.glowlights.weathered_copper_glow_campfire": "Weathered Copper Glow Campfire",
+  "block.glowlights.oxidized_copper_glow_campfire": "Oxidized Copper Glow Campfire",
+
+  "block.glowlights.waxed_copper_glow_campfire": "Waxed Copper Glow Campfire",
+  "block.glowlights.waxed_exposed_copper_glow_campfire": "Waxed Exposed Copper Glow Campfire",
+  "block.glowlights.waxed_weathered_copper_glow_campfire": "Waxed Weathered Copper Glow Campfire",
+  "block.glowlights.waxed_oxidized_copper_glow_campfire": "Waxed Oxidized Copper Glow Campfire",
+
+  "block.glowlights.cut_copper_glow_campfire": "Cut Copper Glow Campfire",
+  "block.glowlights.exposed_cut_copper_glow_campfire": "Exposed Cut Copper Glow Campfire",
+  "block.glowlights.weathered_cut_copper_glow_campfire": "Weathered Cut Copper Glow Campfire",
+  "block.glowlights.oxidized_cut_copper_glow_campfire": "Oxidized Cut Copper Glow Campfire",
+
+  "block.glowlights.waxed_cut_copper_glow_campfire": "Waxed Cut Copper Glow Campfire",
+  "block.glowlights.waxed_exposed_cut_copper_glow_campfire": "Waxed Exposed Cut Copper Glow Campfire",
+  "block.glowlights.waxed_weathered_cut_copper_glow_campfire": "Waxed Weathered Cut Copper Glow Campfire",
+  "block.glowlights.waxed_oxidized_cut_copper_glow_campfire": "Waxed Oxidized Cut Copper Glow Campfire",
+
   "item.glowlights.copper_nugget": "Copper Nugget",
 
   "advancements.husbandry.wax_on_glowlight.title": "Glow Wax On",
