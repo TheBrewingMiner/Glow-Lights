@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "waxed_copper_block",
+  "ingredients": [
+    {
+      "item": "glowlights:exposed_copper_glow_campfire"
+    },
+    {
+      "item": "minecraft:honeycomb"
+    }
+  ],
+  "result": {
+    "item": "glowlights:waxed_exposed_copper_glow_campfire"
+  }
+}

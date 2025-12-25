@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "C": {
+      "tag": "minecraft:coals"
+    },
+    "P": {
+      "item": "minecraft:waxed_oxidized_copper"
+    },
+    "S": {
+      "item": "minecraft:glow_ink_sac"
+    }
+  },
+  "pattern": [
+    " S ",
+    "SCS",
+    "PPP"
+  ],
+  "result": {
+    "item": "glowlights:waxed_oxidized_copper_glow_campfire"
+  }
+}
