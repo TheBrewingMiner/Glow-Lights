@@ -158,9 +158,8 @@ public class WaxedCopperGlowCampfireBlock extends BaseEntityBlock implements Sim
         return InteractionResult.PASS;
     }
 
-    public InteractionResult handleLightingCampfire(Level level, Player player, InteractionHand playerHand, ItemStack heldItem, BlockState state, BlockPos pos, boolean survivalMode){
+    public static InteractionResult handleLightingCampfire(Level level, Player player, InteractionHand playerHand, ItemStack heldItem, BlockState state, BlockPos pos, boolean survivalMode){
         RandomSource randomSource = level.getRandom();
-//        level.setBlock(pos, state.setValue(LIT, true).setValue(HAS_ASH_UNLIT, false), 3);
         level.setBlock(pos, GlowCampfireUtils.litFromAsh(state), 3);
 
         if (heldItem.is(Items.FLINT_AND_STEEL)){
@@ -174,8 +173,7 @@ public class WaxedCopperGlowCampfireBlock extends BaseEntityBlock implements Sim
         return InteractionResult.SUCCESS;
     }
 
-    public InteractionResult handleCleaningCampfire(Level level, Player player, InteractionHand playerHand, ItemStack heldItem, BlockState state, BlockPos pos, boolean survivalMode){
-//        level.setBlock(pos, state.setValue(HAS_ASH_UNLIT, false), 3);
+    public static InteractionResult handleCleaningCampfire(Level level, Player player, InteractionHand playerHand, ItemStack heldItem, BlockState state, BlockPos pos, boolean survivalMode){
         level.setBlock(pos, GlowCampfireUtils.cleanAsh(state), 3);
         level.playSound(null, pos, SoundEvents.SHOVEL_FLATTEN, SoundSource.BLOCKS, 1.0F, 1.0F);
         if (survivalMode) {
@@ -190,16 +188,14 @@ public class WaxedCopperGlowCampfireBlock extends BaseEntityBlock implements Sim
         return InteractionResult.SUCCESS;
     }
 
-    public InteractionResult handleRefuelingCampfire(Level level, BlockState state, BlockPos pos, ItemStack heldItem, boolean survivalMode){
-//        level.setBlock(pos, state.setValue(HAS_ASH_UNLIT, true), 3);
+    public static InteractionResult handleRefuelingCampfire(Level level, BlockState state, BlockPos pos, ItemStack heldItem, boolean survivalMode){
         level.setBlock(pos, GlowCampfireUtils.addCoals(state), 3);
         level.playSound(null, pos, SoundEvents.BASALT_BREAK, SoundSource.BLOCKS, 1.0F, 1.0F);
         if (survivalMode) heldItem.shrink(1);
         return InteractionResult.SUCCESS;
     }
 
-    public InteractionResult handleDowsing(Level level, Player player, InteractionHand playerHand, ItemStack heldItem, BlockState state, BlockPos pos, boolean survivalMode){
-//        level.setBlock(pos, state.setValue(LIT, false).setValue(HAS_ASH_UNLIT, true), 3);
+    public static InteractionResult handleDowsing(Level level, Player player, InteractionHand playerHand, ItemStack heldItem, BlockState state, BlockPos pos, boolean survivalMode){
         level.setBlock(pos, GlowCampfireUtils.extinguishFlame(state), 3);
 
         if (isWaterlogged(state)){
