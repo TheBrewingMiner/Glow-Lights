@@ -3,6 +3,7 @@ package net.thebrewingminer.glowlights.block.copper.utils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
+import net.thebrewingminer.glowlights.block.utils.GlowCampfireUtils;
 
 import java.util.Optional;
 
@@ -26,6 +27,12 @@ public final class LightningUtils {
             if (state.getBlock() instanceof IWeatheringCopper) {
                 IWeatheringCopper.getPrevious(state).ifPresent(prev -> level.setBlockAndUpdate(candidate, prev));
                 level.levelEvent(3002, candidate, -1);
+
+                // If a copper glow campfire (unwaxed) is "walked" to and is fueled, light it.
+                if (GlowCampfireUtils.isGlowCampfire(state) && GlowCampfireUtils.hasAshWhenUnlit(state)){
+                    level.setBlock(candidate, GlowCampfireUtils.litFromAsh(state), 3);
+                }
+
                 return Optional.of(candidate);
             }
         }

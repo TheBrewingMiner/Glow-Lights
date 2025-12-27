@@ -9,6 +9,7 @@ import net.minecraft.world.level.block.LightningRodBlock;
 import net.minecraft.world.level.block.WeatheringCopper;
 import net.minecraft.world.level.block.state.BlockState;
 import net.thebrewingminer.glowlights.block.copper.utils.IWeatheringCopper;
+import net.thebrewingminer.glowlights.block.utils.GlowCampfireUtils;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -37,6 +38,11 @@ public class LightningBoltCleanCopperMixin {
         } else {
             targetPos = pos;
             targetState = state;
+        }
+
+        // Direct strike on any glow campfire
+        if (GlowCampfireUtils.isGlowCampfire(targetState) && GlowCampfireUtils.hasAshWhenUnlit(targetState)) {
+            level.setBlock(targetPos, GlowCampfireUtils.litFromAsh(targetState), 3);
         }
 
         Block block = targetState.getBlock();
