@@ -177,7 +177,15 @@ public class GlowCampfireBlock extends BaseEntityBlock implements SimpleWaterlog
 //        level.setBlock(pos, state.setValue(HAS_ASH_UNLIT, false), 3);
         level.setBlock(pos, GlowCampfireUtils.cleanAsh(state), 3);
         level.playSound(null, pos, SoundEvents.SHOVEL_FLATTEN, SoundSource.BLOCKS, 1.0F, 1.0F);
-        if (survivalMode) heldItem.hurtAndBreak(1, player, (p) -> p.broadcastBreakEvent(playerHand));
+        if (survivalMode) {
+            heldItem.hurtAndBreak(1, player, (p) -> p.broadcastBreakEvent(playerHand));
+
+            RandomSource random = level.getRandom();
+            if (random.nextFloat() < 0.65f) {
+                ItemStack recoveredCharcoal = new ItemStack(Items.CHARCOAL, 1);
+                Containers.dropItemStack(level, pos.getX(), pos.getY(), pos.getZ(), recoveredCharcoal);
+            }
+        }
         return InteractionResult.SUCCESS;
     }
 
