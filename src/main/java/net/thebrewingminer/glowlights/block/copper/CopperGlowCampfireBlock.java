@@ -20,6 +20,11 @@ import net.minecraftforge.common.Tags;
 import net.thebrewingminer.glowlights.block.copper.utils.ICopperCampfireVariant;
 import net.thebrewingminer.glowlights.block.copper.utils.IWeatheringCopper;
 
+import static net.thebrewingminer.glowlights.block.utils.GlowCampfireUtils.hasAshWhenUnlit;
+import static net.thebrewingminer.glowlights.block.utils.GlowCampfireUtils.isUnlit;
+import static net.thebrewingminer.glowlights.block.utils.GlowUtils.isWaterlogged;
+
+@SuppressWarnings({"NullableProblems", "deprecation"})
 public class CopperGlowCampfireBlock extends WaxedCopperGlowCampfireBlock implements IWeatheringCopper, ICopperCampfireVariant {
     public static final int SUBMERGED_OXIDATION_FACTOR = 7;
     private final WeatheringCopper.WeatherState weatherState;

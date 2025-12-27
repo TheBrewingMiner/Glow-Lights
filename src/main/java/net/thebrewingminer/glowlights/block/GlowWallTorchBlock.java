@@ -19,6 +19,8 @@ import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
 
+import static net.thebrewingminer.glowlights.block.utils.GlowUtils.isWaterlogged;
+
 public class GlowWallTorchBlock extends WallTorchBlock implements SimpleWaterloggedBlock{
     public static final DirectionProperty FACING;
     public static final BooleanProperty WATERLOGGED;
@@ -90,10 +92,6 @@ public class GlowWallTorchBlock extends WallTorchBlock implements SimpleWaterlog
     @Override
     public FluidState getFluidState(BlockState state) {
         return state.getValue(WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(state);
-    }
-
-    public static boolean isWaterlogged(BlockState state){
-        return state.getValue(WATERLOGGED);
     }
 
     public static int getLightLevel(BlockState state){

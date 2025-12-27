@@ -17,6 +17,8 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.thebrewingminer.glowlights.block.GlowLantern;
 import net.thebrewingminer.glowlights.block.copper.utils.IWeatheringCopper;
 
+import static net.thebrewingminer.glowlights.block.utils.GlowUtils.isWaterlogged;
+
 public class CopperGlowLantern extends GlowLantern implements IWeatheringCopper {
     private final WeatheringCopper.WeatherState weatherState;
     public static final int SUBMERGED_OXIDATION_FACTOR = 7;

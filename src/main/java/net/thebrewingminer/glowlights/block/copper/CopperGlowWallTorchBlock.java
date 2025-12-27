@@ -18,6 +18,7 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.thebrewingminer.glowlights.block.GlowWallTorchBlock;
 import net.thebrewingminer.glowlights.block.copper.utils.IWeatheringCopper;
 
+@SuppressWarnings({"NullableProblems", "deprecation"})
 public class CopperGlowWallTorchBlock extends GlowWallTorchBlock implements IWeatheringCopper {
     private final WeatheringCopper.WeatherState weatherState;
     public static final int SUBMERGED_OXIDATION_FACTOR = 7;

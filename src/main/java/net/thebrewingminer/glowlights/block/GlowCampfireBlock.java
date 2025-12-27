@@ -45,11 +45,15 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.common.Tags;
 import net.thebrewingminer.glowlights.block.entity.GlowCampfireBlockEntity;
 import net.thebrewingminer.glowlights.block.utils.BlockStateProperty;
+import net.thebrewingminer.glowlights.block.utils.GlowCampfireUtils;
 import net.thebrewingminer.glowlights.init.ModBlockEntities;
 import net.thebrewingminer.glowlights.init.ModParticles;
 
 import javax.annotation.Nullable;
 import java.util.Optional;
+
+import static net.thebrewingminer.glowlights.block.utils.GlowCampfireUtils.*;
+import static net.thebrewingminer.glowlights.block.utils.GlowUtils.isWaterlogged;
 
 @SuppressWarnings({"NullableProblems", "deprecation"})
 public class GlowCampfireBlock extends BaseEntityBlock implements SimpleWaterloggedBlock {
@@ -132,22 +136,6 @@ public class GlowCampfireBlock extends BaseEntityBlock implements SimpleWaterlog
         return state.rotate(mirror.getRotation(state.getValue(FACING)));
     }
 
-    public static boolean isLit(BlockState state){
-        return state.getValue(LIT);
-    }
-
-    public static boolean isUnlit(BlockState state){
-        return !isLit(state);
-    }
-
-    public static boolean hasAshWhenUnlit(BlockState state){
-        return state.getValue(HAS_ASH_UNLIT);
-    }
-
-    public static boolean isWaterlogged(BlockState state){
-        return state.getValue(WATERLOGGED);
-    }
-
     public static int getLightLevel(BlockState state){
         int lightLevel = 0;
         if (isLit(state)){ lightLevel = (isWaterlogged(state)) ? 15 : 10; }
@@ -171,7 +159,8 @@ public class GlowCampfireBlock extends BaseEntityBlock implements SimpleWaterlog
 
     public InteractionResult handleLightingCampfire(Level level, Player player, InteractionHand playerHand, ItemStack heldItem, BlockState state, BlockPos pos, boolean survivalMode){
         RandomSource randomSource = level.getRandom();
-        level.setBlock(pos, state.setValue(LIT, true).setValue(HAS_ASH_UNLIT, false), 3);
+//        level.setBlock(pos, state.setValue(LIT, true).setValue(HAS_ASH_UNLIT, false), 3);
+        level.setBlock(pos, GlowCampfireUtils.litFromAsh(state), 3);
 
         if (heldItem.is(Items.FLINT_AND_STEEL)){
             level.playSound(null, pos, SoundEvents.FLINTANDSTEEL_USE, SoundSource.BLOCKS, 1.0F, level.getRandom().nextFloat() * 0.4F + 0.8F);
@@ -185,21 +174,24 @@ public class GlowCampfireBlock extends BaseEntityBlock implements SimpleWaterlog
     }
 
     public InteractionResult handleCleaningCampfire(Level level, Player player, InteractionHand playerHand, ItemStack heldItem, BlockState state, BlockPos pos, boolean survivalMode){
-        level.setBlock(pos, state.setValue(HAS_ASH_UNLIT, false), 3);
+//        level.setBlock(pos, state.setValue(HAS_ASH_UNLIT, false), 3);
+        level.setBlock(pos, GlowCampfireUtils.cleanAsh(state), 3);
         level.playSound(null, pos, SoundEvents.SHOVEL_FLATTEN, SoundSource.BLOCKS, 1.0F, 1.0F);
         if (survivalMode) heldItem.hurtAndBreak(1, player, (p) -> p.broadcastBreakEvent(playerHand));
         return InteractionResult.SUCCESS;
     }
 
     public InteractionResult handleRefuelingCampfire(Level level, BlockState state, BlockPos pos, ItemStack heldItem, boolean survivalMode){
-        level.setBlock(pos, state.setValue(HAS_ASH_UNLIT, true), 3);
+//        level.setBlock(pos, state.setValue(HAS_ASH_UNLIT, true), 3);
+        level.setBlock(pos, GlowCampfireUtils.addCoals(state), 3);
         level.playSound(null, pos, SoundEvents.BASALT_BREAK, SoundSource.BLOCKS, 1.0F, 1.0F);
         if (survivalMode) heldItem.shrink(1);
         return InteractionResult.SUCCESS;
     }
 
     public InteractionResult handleDowsing(Level level, Player player, InteractionHand playerHand, ItemStack heldItem, BlockState state, BlockPos pos, boolean survivalMode){
-        level.setBlock(pos, state.setValue(LIT, false).setValue(HAS_ASH_UNLIT, true), 3);
+//        level.setBlock(pos, state.setValue(LIT, false).setValue(HAS_ASH_UNLIT, true), 3);
+        level.setBlock(pos, GlowCampfireUtils.extinguishFlame(state), 3);
 
         if (isWaterlogged(state)){
             level.playSound(null, pos, SoundEvents.GENERIC_EXTINGUISH_FIRE, SoundSource.BLOCKS, 0.5F, 1.0F);

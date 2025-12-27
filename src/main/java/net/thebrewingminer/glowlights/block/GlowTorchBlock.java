@@ -23,6 +23,8 @@ import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
+import static net.thebrewingminer.glowlights.block.utils.GlowUtils.isWaterlogged;
+
 @SuppressWarnings({"NullableProblems", "deprecation"})
 public class GlowTorchBlock extends TorchBlock implements SimpleWaterloggedBlock {
     protected static final VoxelShape AABB = Block.box(6.0, 0.0, 6.0, 10.0, 10.0, 10.0);
@@ -74,10 +76,6 @@ public class GlowTorchBlock extends TorchBlock implements SimpleWaterloggedBlock
     @Override
     public FluidState getFluidState(BlockState state) {
         return state.getValue(WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(state);
-    }
-    
-    public static boolean isWaterlogged(BlockState state){
-        return state.getValue(WATERLOGGED);
     }
 
     public static int getLightLevel(BlockState state){

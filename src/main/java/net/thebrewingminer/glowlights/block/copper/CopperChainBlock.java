@@ -17,7 +17,8 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import net.thebrewingminer.glowlights.block.copper.utils.IWeatheringCopper;
 
-import static net.thebrewingminer.glowlights.block.GlowLantern.isWaterlogged;
+import static net.thebrewingminer.glowlights.block.utils.GlowUtils.isWaterlogged;
+
 
 public class CopperChainBlock extends ChainBlock implements IWeatheringCopper {
     private final WeatheringCopper.WeatherState weatherState;
