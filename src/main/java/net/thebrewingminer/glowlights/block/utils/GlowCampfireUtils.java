@@ -6,7 +6,6 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 
 import static net.minecraft.world.level.block.state.properties.BlockStateProperties.LIT;
 import static net.thebrewingminer.glowlights.block.utils.BlockStateProperty.HAS_ASH_UNLIT;
-import static net.thebrewingminer.glowlights.block.utils.GlowUtils.isWaterlogged;
 
 public final class GlowCampfireUtils {
     private GlowCampfireUtils(){}
@@ -41,7 +40,7 @@ public final class GlowCampfireUtils {
 
     public static BlockState litFromAsh(BlockState blockState) {
         return blockState.setValue(BlockStateProperties.LIT, true)
-                    .setValue(BlockStateProperty.HAS_ASH_UNLIT, false);
+                         .setValue(BlockStateProperty.HAS_ASH_UNLIT, false);
     }
 
     public static BlockState extinguishFlame(BlockState blockState) {
