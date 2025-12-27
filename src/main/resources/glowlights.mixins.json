@@ -7,7 +7,8 @@
   "mixins": [
     "DispenserBehaviorRegistryAccessor",
     "FireChargeItemMixin",
-    "FlintAndSteelItemMixin"
+    "FlintAndSteelItemMixin",
+    "LightningBoltCleanCopperMixin"
   ],
   "injectors": {
     "defaultRequire": 1
