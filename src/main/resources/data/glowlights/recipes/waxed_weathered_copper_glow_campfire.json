@@ -1,6 +1,6 @@
 {
   "type": "minecraft:crafting_shapeless",
-  "group": "waxed_copper_block",
+  "group": "waxed_weathered_copper_glow_campfire",
   "ingredients": [
     {
       "item": "glowlights:weathered_copper_glow_campfire"

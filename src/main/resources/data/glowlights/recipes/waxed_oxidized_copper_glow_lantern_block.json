@@ -1,6 +1,5 @@
 {
   "type": "minecraft:crafting_shapeless",
-  "group": "waxed_copper_block",
   "ingredients": [
     {
       "item": "glowlights:oxidized_copper_glow_lantern_block"
