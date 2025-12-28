@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "C": {
+      "item": "minecraft:prismarine_crystals"
+    },
+    "N": {
+      "item": "glowlights:copper_nugget"
+    },
+    "I": {
+      "item": "minecraft:glow_ink_sac"
+    }
+  },
+  "pattern": [
+    "NCN",
+    "CIC",
+    "NCN"
+  ],
+  "result": {
+    "item": "glowlights:copper_glow_lantern_block"
+  }
+}
