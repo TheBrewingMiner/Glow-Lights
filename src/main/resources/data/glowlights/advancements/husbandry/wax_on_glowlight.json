@@ -12,9 +12,13 @@
           "block": {
             "blocks": [
               "glowlights:copper_glow_torch",
+              "glowlights:copper_glow_wall_torch",
               "glowlights:exposed_copper_glow_torch",
+              "glowlights:exposed_copper_glow_wall_torch",
               "glowlights:weathered_copper_glow_torch",
+              "glowlights:weathered_copper_glow_wall_torch",
               "glowlights:oxidized_copper_glow_torch",
+              "glowlights:oxidized_copper_glow_wall_torch",
               "glowlights:copper_chain",
               "glowlights:exposed_copper_chain",
               "glowlights:weathered_copper_chain",
@@ -22,7 +26,15 @@
               "glowlights:copper_glow_lantern",
               "glowlights:exposed_copper_glow_lantern",
               "glowlights:weathered_copper_glow_lantern",
-              "glowlights:oxidized_copper_glow_lantern"
+              "glowlights:oxidized_copper_glow_lantern",
+              "glowlights:copper_glow_campfire",
+              "glowlights:exposed_copper_glow_campfire",
+              "glowlights:weathered_copper_glow_campfire",
+              "glowlights:oxidized_copper_glow_campfire",
+              "glowlights:cut_copper_glow_campfire",
+              "glowlights:exposed_cut_copper_glow_campfire",
+              "glowlights:weathered_cut_copper_glow_campfire",
+              "glowlights:oxidized_cut_copper_glow_campfire"
             ]
           }
         }

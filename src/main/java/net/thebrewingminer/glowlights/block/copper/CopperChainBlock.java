@@ -14,9 +14,11 @@ import net.minecraft.world.level.block.ChainBlock;
 import net.minecraft.world.level.block.WeatheringCopper;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.BlockHitResult;
 import net.thebrewingminer.glowlights.block.copper.utils.IWeatheringCopper;
 
+import static net.thebrewingminer.glowlights.block.copper.WaxUtils.triggerOnHoneycomb;
 import static net.thebrewingminer.glowlights.block.utils.GlowUtils.isWaterlogged;
 
 
@@ -55,10 +57,20 @@ public class CopperChainBlock extends ChainBlock implements IWeatheringCopper {
 
         if (!(heldItem.is(Items.HONEYCOMB))) return super.use(state, level, pos, player, playerHand, hitResult);
 
-        IWeatheringCopper.getWaxed(block).ifPresent(waxed -> level.setBlock(pos, waxed.withPropertiesOf(state), 3));
-        if (survivalMode){ heldItem.shrink(1); }
-        level.levelEvent(player, 3003, pos, 0);
+        return IWeatheringCopper.getWaxed(state).map(waxed -> {
 
-        return InteractionResult.sidedSuccess(level.isClientSide);
+            // Trigger advancement
+            triggerOnHoneycomb(level, player, pos, heldItem);
+
+            // Apply wax
+            level.setBlock(pos, waxed, 3);
+
+            if (survivalMode) { heldItem.shrink(1); }
+
+            level.levelEvent(player, 3003, pos, 0);
+            level.gameEvent(GameEvent.BLOCK_CHANGE, pos, GameEvent.Context.of(player, waxed));
+
+            return InteractionResult.sidedSuccess(level.isClientSide);
+        }).orElse(InteractionResult.PASS);
     }
 }
