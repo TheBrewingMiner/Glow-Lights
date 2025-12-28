@@ -8,7 +8,9 @@ import net.thebrewingminer.glowlights.init.ModBlocks;
 
 import java.util.function.Supplier;
 
-public class WeatheringBlockMap {
+public final class WeatheringBlockMap {
+    private WeatheringBlockMap(){}
+
     public static Supplier<BiMap<Block, Block>> NEXT_BY_BLOCK = Suppliers.memoize(() -> {
         return ImmutableBiMap.<Block, Block>builder()
                 .put(ModBlocks.COPPER_GLOW_TORCH.get(), ModBlocks.EXPOSED_COPPER_GLOW_TORCH.get())
