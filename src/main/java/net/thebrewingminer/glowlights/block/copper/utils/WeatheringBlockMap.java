@@ -8,6 +8,7 @@ import net.thebrewingminer.glowlights.init.ModBlocks;
 
 import java.util.function.Supplier;
 
+@SuppressWarnings("CodeBlock2Expr")
 public final class WeatheringBlockMap {
     private WeatheringBlockMap(){}
 
@@ -35,6 +36,10 @@ public final class WeatheringBlockMap {
                 .put(ModBlocks.CUT_COPPER_GLOW_CAMPFIRE.get(), ModBlocks.EXPOSED_CUT_COPPER_GLOW_CAMPFIRE.get())
                 .put(ModBlocks.EXPOSED_CUT_COPPER_GLOW_CAMPFIRE.get(), ModBlocks.WEATHERED_CUT_COPPER_GLOW_CAMPFIRE.get())
                 .put(ModBlocks.WEATHERED_CUT_COPPER_GLOW_CAMPFIRE.get(), ModBlocks.OXIDIZED_CUT_COPPER_GLOW_CAMPFIRE.get())
+
+                .put(ModBlocks.COPPER_GLOW_LANTERN_BLOCK.get(), ModBlocks.EXPOSED_COPPER_GLOW_LANTERN_BLOCK.get())
+                .put(ModBlocks.EXPOSED_COPPER_GLOW_LANTERN_BLOCK.get(), ModBlocks.WEATHERED_COPPER_GLOW_LANTERN_BLOCK.get())
+                .put(ModBlocks.WEATHERED_COPPER_GLOW_LANTERN_BLOCK.get(), ModBlocks.OXIDIZED_COPPER_GLOW_LANTERN_BLOCK.get())
             .build();
     });
 
@@ -68,6 +73,11 @@ public final class WeatheringBlockMap {
                 .put(ModBlocks.EXPOSED_CUT_COPPER_GLOW_CAMPFIRE.get(), ModBlocks.WAXED_EXPOSED_CUT_COPPER_GLOW_CAMPFIRE.get())
                 .put(ModBlocks.WEATHERED_CUT_COPPER_GLOW_CAMPFIRE.get(), ModBlocks.WAXED_WEATHERED_CUT_COPPER_GLOW_CAMPFIRE.get())
                 .put(ModBlocks.OXIDIZED_CUT_COPPER_GLOW_CAMPFIRE.get(), ModBlocks.WAXED_OXIDIZED_CUT_COPPER_GLOW_CAMPFIRE.get())
+
+                .put(ModBlocks.COPPER_GLOW_LANTERN_BLOCK.get(), ModBlocks.WAXED_COPPER_GLOW_LANTERN_BLOCK.get())
+                .put(ModBlocks.EXPOSED_COPPER_GLOW_LANTERN_BLOCK.get(), ModBlocks.WAXED_EXPOSED_COPPER_GLOW_LANTERN_BLOCK.get())
+                .put(ModBlocks.WEATHERED_COPPER_GLOW_LANTERN_BLOCK.get(), ModBlocks.WAXED_WEATHERED_COPPER_GLOW_LANTERN_BLOCK.get())
+                .put(ModBlocks.OXIDIZED_COPPER_GLOW_LANTERN_BLOCK.get(), ModBlocks.WAXED_OXIDIZED_COPPER_GLOW_LANTERN_BLOCK.get())
             .build();
     });
 

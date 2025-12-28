@@ -34,7 +34,11 @@
               "glowlights:cut_copper_glow_campfire",
               "glowlights:exposed_cut_copper_glow_campfire",
               "glowlights:weathered_cut_copper_glow_campfire",
-              "glowlights:oxidized_cut_copper_glow_campfire"
+              "glowlights:oxidized_cut_copper_glow_campfire",
+              "glowlights:copper_glow_lantern_block",
+              "glowlights:exposed_copper_glow_lantern_block",
+              "glowlights:weathered_copper_glow_lantern_block",
+              "glowlights:oxidized_copper_glow_lantern_block"
             ]
           }
         }

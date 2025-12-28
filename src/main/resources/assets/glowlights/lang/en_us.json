@@ -68,6 +68,17 @@
   "block.glowlights.waxed_weathered_cut_copper_glow_campfire": "Waxed Weathered Cut Copper Glow Campfire",
   "block.glowlights.waxed_oxidized_cut_copper_glow_campfire": "Waxed Oxidized Cut Copper Glow Campfire",
 
+  "block.glowlights.copper_glow_lantern_block": "Copper Glow Lantern Block",
+  "block.glowlights.exposed_copper_glow_lantern_block": "Exposed Copper Glow Lantern Block",
+  "block.glowlights.weathered_copper_glow_lantern_block": "Weathered Copper Glow Lantern Block",
+  "block.glowlights.oxidized_copper_glow_lantern_block": "Oxidized Copper Glow Lantern Block",
+
+  "block.glowlights.waxed_copper_glow_lantern_block": "Waxed Copper Glow Lantern Block",
+  "block.glowlights.waxed_exposed_copper_glow_lantern_block": "Waxed Exposed Copper Glow Lantern Block",
+  "block.glowlights.waxed_weathered_copper_glow_lantern_block": "Waxed Weathered Copper Glow Lantern Block",
+  "block.glowlights.waxed_oxidized_copper_glow_lantern_block": "Waxed Oxidized Copper Glow Lantern Block",
+
+
   "item.glowlights.copper_nugget": "Copper Nugget",
 
   "advancements.husbandry.wax_on_glowlight.title": "Glow Wax On",
