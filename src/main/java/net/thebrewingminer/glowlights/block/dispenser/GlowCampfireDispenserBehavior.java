@@ -11,40 +11,11 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.DispenserBlock;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.gameevent.GameEvent;
-import net.thebrewingminer.glowlights.block.utils.BlockStateProperty;
 import net.thebrewingminer.glowlights.block.utils.GlowCampfireUtils;
 import net.thebrewingminer.glowlights.mixin.DispenserBehaviorRegistryAccessor;
 
 import java.util.Map;
-
-//        DispenserBlock.registerBehavior(
-//            Items.FLINT_AND_STEEL,
-//            new OptionalDispenseItemBehavior() {
-//
-//                @Override
-//                protected ItemStack execute(BlockSource source, ItemStack stack) {
-//                    Level level = source.getLevel();
-//                    Direction facing = source.getBlockState().getValue(DispenserBlock.FACING);
-//                    BlockPos pos = source.getPos().relative(facing);
-//                    BlockState state = level.getBlockState(pos);
-//
-//                    if (GlowCampfireUtils.canLight(state)){
-//                        level.setBlock(pos, state.setValue(BlockStateProperties.LIT, true), 11);
-//                        level.gameEvent(null, GameEvent.BLOCK_CHANGE, pos);
-//
-//                        if (stack.hurt(1, level.random, null)){ stack.setCount(0); }
-//
-//                        this.setSuccess(true);
-//                        return stack;
-//                    }
-//
-//                    this.setSuccess(false);
-//                    return super.execute(source, stack);
-//                }
-//            }
-//        );
 
 public final class GlowCampfireDispenserBehavior {
     private GlowCampfireDispenserBehavior(){}
@@ -67,7 +38,7 @@ public final class GlowCampfireDispenserBehavior {
 
                         if (GlowCampfireUtils.isGlowCampfire(state)) {
                             if (GlowCampfireUtils.canLight(state)) {
-                                BlockState newState = state.setValue(BlockStateProperties.LIT, true).setValue(BlockStateProperty.HAS_ASH_UNLIT, false);
+                                BlockState newState = GlowCampfireUtils.litFromAsh(state);
                                 level.setBlock(pos, newState, 11);
                                 level.gameEvent(null, GameEvent.BLOCK_CHANGE, pos);
 
