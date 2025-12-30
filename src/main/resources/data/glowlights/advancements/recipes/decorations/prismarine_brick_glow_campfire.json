@@ -1,0 +1,44 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "knows_prismarine_bricks_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "minecraft:prismarine_bricks"
+      }
+    },
+    "has_glow_ink": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "minecraft:glow_ink_sac"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "glowlights:prismarine_brick_glow_campfire"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_glow_ink",
+      "has_the_recipe"
+    ],
+    [
+      "knows_prismarine_bricks_recipe",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "glowlights:prismarine_brick_glow_campfire"
+    ]
+  }
+}
