@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_weathered_copper_glow_torch": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "glowlights:weathered_copper_glow_torch"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "glowlights:waxed_weathered_copper_glow_torch"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_weathered_copper_glow_torch",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "glowlights:waxed_weathered_copper_glow_torch"
+    ]
+  }
+}

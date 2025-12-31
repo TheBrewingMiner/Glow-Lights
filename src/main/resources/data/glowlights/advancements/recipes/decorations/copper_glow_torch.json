@@ -1,0 +1,44 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_copper_ingot": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "minecraft:copper_ingot"
+            ]
+          }
+        ]
+      }
+    },
+    "knows_glow_torch_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "glowlights:glow_torch"
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "glowlights:copper_glow_torch"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_copper_ingot",
+      "has_the_recipe"
+    ],
+    [
+      "knows_glow_torch_recipe",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "glowlights:copper_glow_torch"
+    ]
+  }
+}

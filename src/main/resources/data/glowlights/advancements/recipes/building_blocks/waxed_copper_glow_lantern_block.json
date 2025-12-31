@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_copper_glow_lantern_block": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "glowlights:copper_glow_lantern_block"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "glowlights:waxed_copper_glow_lantern_block"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_copper_glow_lantern_block",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "glowlights:waxed_copper_glow_lantern_block"
+    ]
+  }
+}
