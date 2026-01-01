@@ -4,7 +4,7 @@
     "logs": "minecraft:block/prismarine",
     "unlit_ash": "minecraft:block/campfire_log",
     "ash": "glowlights:block/glow_campfire/glow_ash",
-    "fire": "minecraft:block/soul_campfire_fire",
+    "fire": "glowlights:block/glow_campfire/glow_campfire_fire",
     "particle": "minecraft:block/prismarine"
   }
 }
