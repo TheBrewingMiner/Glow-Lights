@@ -1,0 +1,44 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_glow_torch": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "glowlights:glow_torch"
+            ]
+          }
+        ]
+      }
+    },
+    "knows_lantern_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "minecraft:lantern"
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "glowlights:glow_lantern"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_glow_torch",
+      "has_the_recipe"
+    ],
+    [
+      "knows_lantern_recipe",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "glowlights:glow_lantern"
+    ]
+  }
+}
