@@ -82,7 +82,7 @@ public abstract class AbstractGlowCampfireBlock extends BaseEntityBlock implemen
         super(properties);
         this.fireDamage = fireDamage;
         this.fireDamageDelay = fireDamageDelay;
-        this.registerDefaultState(this.stateDefinition.any().setValue(LIT, false).setValue(WATERLOGGED, false).setValue(FACING, Direction.NORTH).setValue(SIGNAL_FIRE, false).setValue(HAS_ASH_UNLIT, true));
+        this.registerDefaultState(this.stateDefinition.any().setValue(LIT, false).setValue(WATERLOGGED, false).setValue(FACING, Direction.NORTH).setValue(SIGNAL_FIRE, false).setValue(HAS_ASH_UNLIT, false));
     }
 
     @Override
