@@ -3,7 +3,7 @@
   "textures": {
     "logs": "minecraft:block/copper_block",
     "unlit_ash": "glowlights:block/empty",
-    "ash": "glowlights:block/glow_campfire/glow_ash",
+    "ash": "minecraft:block/campfire_log",
     "fire": "glowlights:block/empty",
     "particle": "minecraft:block/copper_block"
   }

@@ -3,8 +3,7 @@
   "textures": {
     "logs": "minecraft:block/prismarine",
     "unlit_ash": "glowlights:block/empty",
-    "ash": "glowlights:block/glow_campfire/glow_ash",
-    "fire": "glowlights:block/empty",
+    "ash": "minecraft:block/campfire_log",
     "particle": "minecraft:block/prismarine"
   }
 }

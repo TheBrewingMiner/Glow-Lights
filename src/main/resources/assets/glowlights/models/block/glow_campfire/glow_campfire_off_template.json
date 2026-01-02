@@ -13,7 +13,6 @@
     "logs": "block/stone",
     "unlit_ash": "block/campfire_log",
     "ash": "block/blackstone",
-    "fire": "block/soul_campfire_fire",
     "particle": "block/stone"
   },
   "elements": [
@@ -90,12 +89,6 @@
       "origin": [8, 8, 8],
       "color": 0,
       "children": [1, 2, 3, 4]
-    },
-    {
-      "name": "fire",
-      "origin": [8, 8, 8],
-      "color": 0,
-      "children": [5, 6]
     }
   ]
 }
