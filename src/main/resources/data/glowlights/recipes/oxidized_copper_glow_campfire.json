@@ -1,10 +1,7 @@
 {
   "type": "minecraft:crafting_shaped",
   "key": {
-    "C": {
-      "tag": "minecraft:coals"
-    },
-    "P": {
+    "L": {
       "item": "minecraft:oxidized_copper"
     },
     "S": {
@@ -13,8 +10,8 @@
   },
   "pattern": [
     " S ",
-    "SCS",
-    "PPP"
+    "S S",
+    "LLL"
   ],
   "result": {
     "item": "glowlights:oxidized_copper_glow_campfire"

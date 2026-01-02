@@ -1,10 +1,7 @@
 {
   "type": "minecraft:crafting_shaped",
   "key": {
-    "C": {
-      "tag": "minecraft:coals"
-    },
-    "P": {
+    "L": {
       "item": "minecraft:dark_prismarine"
     },
     "S": {
@@ -13,8 +10,8 @@
   },
   "pattern": [
     " S ",
-    "SCS",
-    "PPP"
+    "S S",
+    "LLL"
   ],
   "result": {
     "item": "glowlights:dark_prismarine_glow_campfire"
