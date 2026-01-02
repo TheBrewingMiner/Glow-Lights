@@ -11,7 +11,7 @@
   "render_type": "minecraft:cutout",
   "textures": {
     "logs": "block/stone",
-    "unlit_ash": "block/campfire_log",
+    "unlit_ash": "block/cobblestone",
     "ash": "block/blackstone",
     "fire": "block/soul_campfire_fire",
     "particle": "block/stone"
@@ -23,11 +23,11 @@
       "rotation": {"angle": 0, "axis": "y", "origin": [5, 0, 16]},
       "faces": {
         "north": {"uv": [5, 0, 11, 1], "texture": "#ash"},
-        "east": {"uv": [0, 18, 16, 19], "texture": "#missing", "cullface": "east"},
+        "east": {"uv": [0, 18, 16, 19], "texture": "#ash", "cullface": "east"},
         "south": {"uv": [5, 15, 11, 16], "texture": "#ash"},
-        "west": {"uv": [0, 17, 16, 18], "texture": "#missing", "cullface": "west"},
+        "west": {"uv": [0, 17, 16, 18], "texture": "#ash", "cullface": "west"},
         "up": {"uv": [16, 11, 0, 5], "rotation": 270, "texture": "#ash"},
-        "down": {"uv": [0, 9, 16, 16], "rotation": 90, "texture": "#unlit_ash"}
+        "down": {"uv": [0, 5, 16, 11], "rotation": 90, "texture": "#unlit_ash"}
       }
     },
     {
