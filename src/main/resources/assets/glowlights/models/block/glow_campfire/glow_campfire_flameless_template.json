@@ -36,7 +36,7 @@
       "faces": {
         "north": {"uv": [0, 8, 4, 4], "texture": "#logs"},
         "east": {"uv": [0, 0, 16, 4], "texture": "#logs"},
-        "south": {"uv": [0, 3, 4, 7], "texture": "#logs"},
+        "south": {"uv": [0, 4, 4, 8], "texture": "#logs"},
         "west": {"uv": [0, 0, 16, 4], "texture": "#logs"},
         "up": {"uv": [16, 4, 0, 0], "rotation": 90, "texture": "#logs"},
         "down": {"uv": [16, 0, 0, 4], "rotation": 90, "texture": "#logs"}
