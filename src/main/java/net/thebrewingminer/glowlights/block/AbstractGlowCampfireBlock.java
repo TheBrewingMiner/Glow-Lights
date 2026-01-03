@@ -186,11 +186,10 @@ public abstract class AbstractGlowCampfireBlock extends BaseEntityBlock implemen
         boolean survivalMode = !(player.isCreative());
         boolean coalsPresent = hasAshWhenUnlit(state);
 
-        if (level.isClientSide()) return InteractionResult.PASS;
-
         if (isUnlit(state)){
             // If the campfire is NOT lit.
-            if (coalsPresent){ // If the coals are still in the campfire (has ash when unlit)
+            if (coalsPresent){      // If the coals are still in the campfire (has ash when unlit)
+                if (level.isClientSide()) return InteractionResult.PASS;    // On the server only
 
                 // Handle lighting when appropriate.
                 if ((heldItem.is(Items.FLINT_AND_STEEL) || heldItem.is(Items.FIRE_CHARGE))) return handleLightingCampfire(level, player, playerHand, heldItem, state, pos, survivalMode);
@@ -199,6 +198,7 @@ public abstract class AbstractGlowCampfireBlock extends BaseEntityBlock implemen
                 if (heldItem.is(Tags.Items.TOOLS_SHOVELS)) return handleCleaningCampfire(level, player, playerHand, heldItem, state, pos, survivalMode);
             } else {
                 // If coals are not still in the campfire
+                if (level.isClientSide()) return InteractionResult.PASS;    // On the server only
                 if (heldItem.is(ItemTags.COALS)) return handleRefuelingCampfire(level, state, pos, heldItem, survivalMode); // Handle refueling.
             }
         } else { // Handle interactions with a LIT campfire.
