@@ -1,10 +1,9 @@
 {
-  "parent": "glowlights:block/glow_campfire/glow_campfire_template",
+  "parent": "glowlights:block/glow_campfire/glow_campfire_flameless_template",
   "textures": {
     "logs": "minecraft:block/cut_copper",
-    "unlit_ash": "glowlights:block/empty",
-    "ash": "glowlights:block/glow_campfire/glow_ash",
-    "fire": "glowlights:block/empty",
+    "unlit_ash": "glowlights:block/glow_campfire/campfire_ash",
+    "ash": "glowlights:block/glow_campfire/campfire_ash",
     "particle": "minecraft:block/cut_copper"
   }
 }

@@ -4,7 +4,6 @@
     "logs": "minecraft:block/prismarine_bricks",
     "unlit_ash": "glowlights:block/glow_campfire/campfire_ash",
     "ash": "glowlights:block/glow_campfire/campfire_ash",
-    "fire": "glowlights:block/empty",
     "particle": "minecraft:block/prismarine_bricks"
   }
 }
