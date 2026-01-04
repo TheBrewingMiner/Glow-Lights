@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "L": {
+      "tag": "minecraft:logs"
+    },
+    "S": {
+      "item": "minecraft:glow_ink_sac"
+    }
+  },
+  "pattern": [
+    " S ",
+    "S S",
+    "LLL"
+  ],
+  "result": {
+    "item": "glowlights:glow_campfire"
+  }
+}

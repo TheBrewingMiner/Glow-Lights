@@ -1,0 +1,64 @@
+{
+  "variants": {
+    "facing=east,lit=false,has_ash_unlit=false": {
+      "model": "glowlights:block/glow_campfire/wood/unlit",
+      "y": 270
+    },
+    "facing=east,lit=false,has_ash_unlit=true": {
+      "model": "glowlights:block/glow_campfire/wood/unlit_with_ash",
+      "y": 270
+    },
+    "facing=east,lit=true,waterlogged=false": {
+      "model": "glowlights:block/glow_campfire/wood/lit",
+      "y": 270
+    },
+    "facing=east,lit=true,waterlogged=true": {
+      "model": "glowlights:block/glow_campfire/wood/lit_submerged",
+      "y": 270
+    },
+    "facing=north,lit=false,has_ash_unlit=false": {
+      "model": "glowlights:block/glow_campfire/wood/unlit",
+      "y": 180
+    },
+    "facing=north,lit=false,has_ash_unlit=true": {
+      "model": "glowlights:block/glow_campfire/wood/unlit_with_ash",
+      "y": 180
+    },
+    "facing=north,lit=true,waterlogged=false": {
+      "model": "glowlights:block/glow_campfire/wood/lit",
+      "y": 180
+    },
+    "facing=north,lit=true,waterlogged=true": {
+      "model": "glowlights:block/glow_campfire/wood/lit_submerged",
+      "y": 180
+    },
+    "facing=south,lit=false,has_ash_unlit=false": {
+      "model": "glowlights:block/glow_campfire/wood/unlit"
+    },
+    "facing=south,lit=false,has_ash_unlit=true": {
+      "model": "glowlights:block/glow_campfire/wood/unlit_with_ash"
+    },
+    "facing=south,lit=true,waterlogged=false": {
+      "model": "glowlights:block/glow_campfire/wood/lit"
+    },
+    "facing=south,lit=true,waterlogged=true": {
+      "model": "glowlights:block/glow_campfire/wood/lit_submerged"
+    },
+    "facing=west,lit=false,has_ash_unlit=false": {
+      "model": "glowlights:block/glow_campfire/wood/unlit",
+      "y": 90
+    },
+    "facing=west,lit=false,has_ash_unlit=true": {
+      "model": "glowlights:block/glow_campfire/wood/unlit_with_ash",
+      "y": 90
+    },
+    "facing=west,lit=true,waterlogged=false": {
+      "model": "glowlights:block/glow_campfire/wood/lit",
+      "y": 90
+    },
+    "facing=west,lit=true,waterlogged=true": {
+      "model": "glowlights:block/glow_campfire/wood/lit_submerged",
+      "y": 90
+    }
+  }
+}

@@ -17,7 +17,8 @@ public class ModBlockEntities {
         () -> BlockEntityType.Builder.of(GlowCampfireBlockEntity::new,
                                         ModBlocks.PRISMARINE_GLOW_CAMPFIRE.get(),
                                         ModBlocks.PRISMARINE_BRICK_GLOW_CAMPFIRE.get(),
-                                        ModBlocks.DARK_PRISMARINE_GLOW_CAMPFIRE.get()
+                                        ModBlocks.DARK_PRISMARINE_GLOW_CAMPFIRE.get(),
+                                        ModBlocks.GLOW_CAMPFIRE.get()
         ).build(null)
     );
 

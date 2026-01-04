@@ -65,8 +65,8 @@ public class ModBlocks {
         "prismarine_glow_campfire",
         () -> new GlowCampfireBlock(
                 BlockBehaviour.Properties.copy(Blocks.PRISMARINE)
-                .lightLevel(GlowCampfireBlock::getLightLevel)
-                .noOcclusion(),
+                    .lightLevel(GlowCampfireBlock::getLightLevel)
+                    .noOcclusion(),
                 0.5f,
                 5
         ),
@@ -77,8 +77,8 @@ public class ModBlocks {
         "prismarine_brick_glow_campfire",
         () -> new GlowCampfireBlock(
                 BlockBehaviour.Properties.copy(Blocks.PRISMARINE_BRICKS)
-                .lightLevel(GlowCampfireBlock::getLightLevel)
-                .noOcclusion(),
+                    .lightLevel(GlowCampfireBlock::getLightLevel)
+                    .noOcclusion(),
                 0.5f,
                 5
         ),
@@ -89,9 +89,20 @@ public class ModBlocks {
         "dark_prismarine_glow_campfire",
         () -> new GlowCampfireBlock(
                 BlockBehaviour.Properties.copy(Blocks.DARK_PRISMARINE)
-                .lightLevel(GlowCampfireBlock::getLightLevel)
-                .noOcclusion(),
+                    .lightLevel(GlowCampfireBlock::getLightLevel)
+                    .noOcclusion(),
                 0.5f,
+                5
+        ),
+        CreativeModeTab.TAB_DECORATIONS
+    );
+
+    public static final RegistryObject<Block> GLOW_CAMPFIRE = registerBlockAndItem(
+        "glow_campfire",
+        () -> new GlowCampfireBlock(
+                BlockBehaviour.Properties.copy(Blocks.CAMPFIRE)
+                    .lightLevel(GlowCampfireBlock::getLightLevel),
+                1,
                 5
         ),
         CreativeModeTab.TAB_DECORATIONS

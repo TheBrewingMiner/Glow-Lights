@@ -1,0 +1,9 @@
+{
+  "parent": "glowlights:block/glow_campfire/glow_campfire_flameless_template",
+  "textures": {
+    "logs": "minecraft:block/campfire_log",
+    "unlit_ash": "glowlights:block/empty",
+    "ash": "glowlights:block/empty",
+    "particle": "minecraft:block/campfire_log"
+  }
+}
