@@ -161,11 +161,8 @@ public abstract class AbstractGlowCampfireBlock extends BaseEntityBlock implemen
         if (survivalMode) {
             heldItem.hurtAndBreak(1, player, (p) -> p.broadcastBreakEvent(playerHand));
 
-            RandomSource random = level.getRandom();
-            if (random.nextFloat() < 0.65f) {
-                ItemStack recoveredCharcoal = new ItemStack(Items.CHARCOAL, 1);
-                Containers.dropItemStack(level, pos.getX(), pos.getY(), pos.getZ(), recoveredCharcoal);
-            }
+            ItemStack recoveredCharcoal = new ItemStack(Items.CHARCOAL, 1);
+            Containers.dropItemStack(level, pos.getX(), pos.getY(), pos.getZ(), recoveredCharcoal);
         }
         return InteractionResult.SUCCESS;
     }
