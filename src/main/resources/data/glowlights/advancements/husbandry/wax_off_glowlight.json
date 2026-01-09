@@ -43,7 +43,15 @@
               "glowlights:waxed_copper_glow_lantern_block",
               "glowlights:waxed_exposed_copper_glow_lantern_block",
               "glowlights:waxed_weathered_copper_glow_lantern_block",
-              "glowlights:waxed_oxidized_copper_glow_lantern_block"
+              "glowlights:waxed_oxidized_copper_glow_lantern_block",
+              "glowlights:waxed_copper_glow_berry_lantern",
+              "glowlights:waxed_exposed_copper_glow_berry_lantern",
+              "glowlights:waxed_weathered_copper_glow_berry_lantern",
+              "glowlights:waxed_oxidized_copper_glow_berry_lantern",
+              "glowlights:waxed_copper_glow_berry_lantern_block",
+              "glowlights:waxed_exposed_copper_glow_berry_lantern_block",
+              "glowlights:waxed_weathered_copper_glow_berry_lantern_block",
+              "glowlights:waxed_oxidized_copper_glow_berry_lantern_block"
             ]
           }
         }
