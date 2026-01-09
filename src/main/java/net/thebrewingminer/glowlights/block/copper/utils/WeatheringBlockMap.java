@@ -40,6 +40,14 @@ public final class WeatheringBlockMap {
                 .put(ModBlocks.COPPER_GLOW_LANTERN_BLOCK.get(), ModBlocks.EXPOSED_COPPER_GLOW_LANTERN_BLOCK.get())
                 .put(ModBlocks.EXPOSED_COPPER_GLOW_LANTERN_BLOCK.get(), ModBlocks.WEATHERED_COPPER_GLOW_LANTERN_BLOCK.get())
                 .put(ModBlocks.WEATHERED_COPPER_GLOW_LANTERN_BLOCK.get(), ModBlocks.OXIDIZED_COPPER_GLOW_LANTERN_BLOCK.get())
+
+                .put(ModBlocks.COPPER_GLOW_BERRY_LANTERN.get(), ModBlocks.EXPOSED_COPPER_GLOW_BERRY_LANTERN.get())
+                .put(ModBlocks.EXPOSED_COPPER_GLOW_BERRY_LANTERN.get(), ModBlocks.WEATHERED_COPPER_GLOW_BERRY_LANTERN.get())
+                .put(ModBlocks.WEATHERED_COPPER_GLOW_BERRY_LANTERN.get(), ModBlocks.OXIDIZED_COPPER_GLOW_BERRY_LANTERN.get())
+
+                .put(ModBlocks.COPPER_GLOW_BERRY_LANTERN_BLOCK.get(), ModBlocks.EXPOSED_COPPER_GLOW_BERRY_LANTERN_BLOCK.get())
+                .put(ModBlocks.EXPOSED_COPPER_GLOW_BERRY_LANTERN_BLOCK.get(), ModBlocks.WEATHERED_COPPER_GLOW_BERRY_LANTERN_BLOCK.get())
+                .put(ModBlocks.WEATHERED_COPPER_GLOW_BERRY_LANTERN_BLOCK.get(), ModBlocks.OXIDIZED_COPPER_GLOW_BERRY_LANTERN_BLOCK.get())
             .build();
     });
 
@@ -78,6 +86,16 @@ public final class WeatheringBlockMap {
                 .put(ModBlocks.EXPOSED_COPPER_GLOW_LANTERN_BLOCK.get(), ModBlocks.WAXED_EXPOSED_COPPER_GLOW_LANTERN_BLOCK.get())
                 .put(ModBlocks.WEATHERED_COPPER_GLOW_LANTERN_BLOCK.get(), ModBlocks.WAXED_WEATHERED_COPPER_GLOW_LANTERN_BLOCK.get())
                 .put(ModBlocks.OXIDIZED_COPPER_GLOW_LANTERN_BLOCK.get(), ModBlocks.WAXED_OXIDIZED_COPPER_GLOW_LANTERN_BLOCK.get())
+
+                .put(ModBlocks.COPPER_GLOW_BERRY_LANTERN.get(), ModBlocks.WAXED_COPPER_GLOW_BERRY_LANTERN.get())
+                .put(ModBlocks.EXPOSED_COPPER_GLOW_BERRY_LANTERN.get(), ModBlocks.WAXED_EXPOSED_COPPER_GLOW_BERRY_LANTERN.get())
+                .put(ModBlocks.WEATHERED_COPPER_GLOW_BERRY_LANTERN.get(), ModBlocks.WAXED_WEATHERED_COPPER_GLOW_BERRY_LANTERN.get())
+                .put(ModBlocks.OXIDIZED_COPPER_GLOW_BERRY_LANTERN.get(), ModBlocks.WAXED_OXIDIZED_COPPER_GLOW_BERRY_LANTERN.get())
+
+                .put(ModBlocks.COPPER_GLOW_BERRY_LANTERN_BLOCK.get(), ModBlocks.WAXED_COPPER_GLOW_BERRY_LANTERN_BLOCK.get())
+                .put(ModBlocks.EXPOSED_COPPER_GLOW_BERRY_LANTERN_BLOCK.get(), ModBlocks.WAXED_EXPOSED_COPPER_GLOW_BERRY_LANTERN_BLOCK.get())
+                .put(ModBlocks.WEATHERED_COPPER_GLOW_BERRY_LANTERN_BLOCK.get(), ModBlocks.WAXED_WEATHERED_COPPER_GLOW_BERRY_LANTERN_BLOCK.get())
+                .put(ModBlocks.OXIDIZED_COPPER_GLOW_BERRY_LANTERN_BLOCK.get(), ModBlocks.WAXED_OXIDIZED_COPPER_GLOW_BERRY_LANTERN_BLOCK.get())
             .build();
     });
 
