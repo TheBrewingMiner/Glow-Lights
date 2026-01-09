@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "C": {
+      "item": "minecraft:prismarine_crystals"
+    },
+    "S": {
+      "item": "minecraft:prismarine_shard"
+    },
+    "B": {
+      "item": "minecraft:glow_berries"
+    }
+  },
+  "pattern": [
+    "SCS",
+    "CBC",
+    "SCS"
+  ],
+  "result": {
+    "item": "glowlights:glow_berry_lantern_block"
+  }
+}

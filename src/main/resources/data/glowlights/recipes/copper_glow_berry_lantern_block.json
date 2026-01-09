@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "C": {
+      "item": "minecraft:prismarine_crystals"
+    },
+    "N": {
+      "item": "glowlights:copper_nugget"
+    },
+    "B": {
+      "item": "minecraft:glow_berries"
+    }
+  },
+  "pattern": [
+    "NCN",
+    "CBC",
+    "NCN"
+  ],
+  "result": {
+    "item": "glowlights:copper_glow_berry_lantern_block"
+  }
+}

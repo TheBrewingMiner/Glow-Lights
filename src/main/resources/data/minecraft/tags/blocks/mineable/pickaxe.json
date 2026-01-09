@@ -40,6 +40,16 @@
     "glowlights:waxed_cut_copper_glow_campfire",
     "glowlights:waxed_exposed_cut_copper_glow_campfire",
     "glowlights:waxed_weathered_cut_copper_glow_campfire",
-    "glowlights:waxed_oxidized_cut_copper_glow_campfire"
+    "glowlights:waxed_oxidized_cut_copper_glow_campfire",
+
+    "glowlights:glow_berry_lantern",
+    "glowlights:copper_glow_berry_lantern",
+    "glowlights:exposed_copper_glow_berry_lantern",
+    "glowlights:weathered_copper_glow_berry_lantern",
+    "glowlights:oxidized_copper_glow_berry_lantern",
+    "glowlights:waxed_copper_glow_berry_lantern",
+    "glowlights:waxed_exposed_copper_glow_berry_lantern",
+    "glowlights:waxed_weathered_copper_glow_berry_lantern",
+    "glowlights:waxed_oxidized_copper_glow_berry_lantern"
   ]
 }

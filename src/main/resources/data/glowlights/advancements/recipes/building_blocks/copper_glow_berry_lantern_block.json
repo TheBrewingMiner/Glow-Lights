@@ -1,0 +1,44 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_copper_nuggets": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "glowlights:copper_nugget"
+            ]
+          }
+        ]
+      }
+    },
+    "knows_glow_berry_lantern_block_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "glowlights:glow_berry_lantern_block"
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "glowlights:copper_glow_berry_lantern_block"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_copper_nuggets",
+      "has_the_recipe"
+    ],
+    [
+      "knows_glow_berry_lantern_block_recipe",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "glowlights:copper_glow_berry_lantern_block"
+    ]
+  }
+}

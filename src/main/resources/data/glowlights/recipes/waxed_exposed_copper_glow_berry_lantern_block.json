@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "glowlights:exposed_copper_glow_berry_lantern_block"
+    },
+    {
+      "item": "minecraft:honeycomb"
+    }
+  ],
+  "result": {
+    "item": "glowlights:waxed_exposed_copper_glow_berry_lantern_block"
+  }
+}

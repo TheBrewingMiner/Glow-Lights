@@ -6,6 +6,7 @@ import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.material.Material;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -47,13 +48,13 @@ public class ModBlocks {
 
     public static final RegistryObject<Block> GLOW_LANTERN = registerBlockAndItem(
         "glow_lantern",
-        () -> new GlowLantern(BlockBehaviour.Properties.copy(Blocks.LANTERN).lightLevel(GlowLantern::getLightLevel)),
+        () -> new GlowLantern(BlockBehaviour.Properties.of(Material.METAL).strength(3.5F).sound(SoundType.LANTERN).lightLevel(GlowLantern::getLightLevel)),
         CreativeModeTab.TAB_DECORATIONS
     );
 
     public static final RegistryObject<Block> GLOW_BERRY_LANTERN = registerBlockAndItem(
         "glow_berry_lantern",
-        () -> new GlowLantern(BlockBehaviour.Properties.copy(Blocks.LANTERN).lightLevel((state) -> 15)),
+        () -> new GlowLantern(BlockBehaviour.Properties.copy(GLOW_LANTERN.get()).lightLevel((state) -> 15)),
         CreativeModeTab.TAB_DECORATIONS
     );
 
@@ -442,7 +443,7 @@ public class ModBlocks {
         "copper_glow_berry_lantern",
         () -> new CopperGlowLantern(
             WeatheringCopper.WeatherState.UNAFFECTED,
-            BlockBehaviour.Properties.copy(Blocks.LANTERN).lightLevel((state) -> 15)),
+            BlockBehaviour.Properties.copy(GLOW_BERRY_LANTERN.get()).sound(SoundType.COPPER).lightLevel((state) -> 15)),
         CreativeModeTab.TAB_DECORATIONS
     );
 
@@ -450,7 +451,7 @@ public class ModBlocks {
         "exposed_copper_glow_berry_lantern",
         () -> new CopperGlowLantern(
             WeatheringCopper.WeatherState.EXPOSED,
-            BlockBehaviour.Properties.copy(Blocks.LANTERN).lightLevel((state) -> 15)),
+            BlockBehaviour.Properties.copy(COPPER_GLOW_BERRY_LANTERN.get()).lightLevel((state) -> 15)),
         CreativeModeTab.TAB_DECORATIONS
     );
 
@@ -458,7 +459,7 @@ public class ModBlocks {
         "weathered_copper_glow_berry_lantern",
         () -> new CopperGlowLantern(
             WeatheringCopper.WeatherState.WEATHERED,
-            BlockBehaviour.Properties.copy(Blocks.LANTERN).lightLevel((state) -> 15)),
+            BlockBehaviour.Properties.copy(COPPER_GLOW_BERRY_LANTERN.get()).lightLevel((state) -> 15)),
         CreativeModeTab.TAB_DECORATIONS
     );
 
@@ -466,7 +467,7 @@ public class ModBlocks {
         "oxidized_copper_glow_berry_lantern",
         () -> new CopperGlowLantern(
             WeatheringCopper.WeatherState.OXIDIZED,
-            BlockBehaviour.Properties.copy(Blocks.LANTERN).lightLevel((state) -> 15)),
+            BlockBehaviour.Properties.copy(COPPER_GLOW_BERRY_LANTERN.get()).lightLevel((state) -> 15)),
         CreativeModeTab.TAB_DECORATIONS
     );
 
@@ -730,25 +731,25 @@ public class ModBlocks {
 
     public static final RegistryObject<Block> WAXED_COPPER_GLOW_BERRY_LANTERN = registerBlockAndItem(
         "waxed_copper_glow_berry_lantern",
-        () -> new GlowLantern(BlockBehaviour.Properties.copy(Blocks.LANTERN).lightLevel((state) -> 15)),
+        () -> new GlowLantern(BlockBehaviour.Properties.copy(COPPER_GLOW_BERRY_LANTERN.get()).lightLevel((state) -> 15)),
         CreativeModeTab.TAB_DECORATIONS
     );
 
     public static final RegistryObject<Block> WAXED_EXPOSED_COPPER_GLOW_BERRY_LANTERN = registerBlockAndItem(
         "waxed_exposed_copper_glow_berry_lantern",
-        () -> new GlowLantern(BlockBehaviour.Properties.copy(Blocks.LANTERN).lightLevel((state) -> 15)),
+        () -> new GlowLantern(BlockBehaviour.Properties.copy(COPPER_GLOW_BERRY_LANTERN.get()).lightLevel((state) -> 15)),
         CreativeModeTab.TAB_DECORATIONS
     );
 
     public static final RegistryObject<Block> WAXED_WEATHERED_COPPER_GLOW_BERRY_LANTERN = registerBlockAndItem(
         "waxed_weathered_copper_glow_berry_lantern",
-        () -> new GlowLantern(BlockBehaviour.Properties.copy(Blocks.LANTERN).lightLevel((state) -> 15)),
+        () -> new GlowLantern(BlockBehaviour.Properties.copy(COPPER_GLOW_BERRY_LANTERN.get()).lightLevel((state) -> 15)),
         CreativeModeTab.TAB_DECORATIONS
     );
 
     public static final RegistryObject<Block> WAXED_OXIDIZED_COPPER_GLOW_BERRY_LANTERN = registerBlockAndItem(
         "waxed_oxidized_copper_glow_berry_lantern",
-        () -> new GlowLantern(BlockBehaviour.Properties.copy(Blocks.LANTERN).lightLevel((state) -> 15)),
+        () -> new GlowLantern(BlockBehaviour.Properties.copy(COPPER_GLOW_BERRY_LANTERN.get()).lightLevel((state) -> 15)),
         CreativeModeTab.TAB_DECORATIONS
     );
 
