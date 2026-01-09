@@ -1,15 +1,25 @@
 {
   "block.glowlights.glow_lantern_block": "Glow Lantern Block",
 
+
+  "block.glowlights.glow_berry_lantern_block": "Glow Berry Lantern Block",
+
+
   "block.glowlights.glow_torch": "Glow Torch",
   "block.glowlights.glow_wall_torch": "Glow Wall Torch",
+
 
   "block.glowlights.glow_campfire": "Glow Campfire",
   "block.glowlights.prismarine_glow_campfire": "Prismarine Campfire",
   "block.glowlights.prismarine_brick_glow_campfire": "Prismarine Brick Campfire",
   "block.glowlights.dark_prismarine_glow_campfire": "Dark Prismarine Campfire",
 
+
   "block.glowlights.glow_lantern": "Glow Lantern",
+
+
+  "block.glowlights.glow_berry_lantern": "Glow Berry Lantern",
+
 
   "block.glowlights.copper_glow_torch": "Copper Glow Torch",
   "block.glowlights.copper_glow_wall_torch": "Copper Glow Wall Torch",
@@ -20,6 +30,7 @@
   "block.glowlights.oxidized_copper_glow_torch": "Oxidized Copper Glow Torch",
   "block.glowlights.oxidized_copper_glow_wall_torch": "Oxidized Copper Glow Wall Torch",
 
+
   "block.glowlights.waxed_copper_glow_torch": "Waxed Copper Glow Torch",
   "block.glowlights.waxed_copper_glow_wall_torch": "Waxed Copper Glow Wall Torch",
   "block.glowlights.waxed_exposed_copper_glow_torch": "Waxed Exposed Copper Glow Torch",
@@ -29,25 +40,42 @@
   "block.glowlights.waxed_oxidized_copper_glow_torch": "Waxed Oxidized Copper Glow Torch",
   "block.glowlights.waxed_oxidized_copper_glow_wall_torch": "Waxed Oxidized Copper Glow Wall Torch",
 
+
   "block.glowlights.copper_glow_lantern": "Copper Glow Lantern",
   "block.glowlights.exposed_copper_glow_lantern": "Exposed Copper Glow Lantern",
   "block.glowlights.weathered_copper_glow_lantern": "Weathered Copper Glow Lantern",
   "block.glowlights.oxidized_copper_glow_lantern": "Oxidized Copper Glow Lantern",
+
 
   "block.glowlights.waxed_copper_glow_lantern": "Waxed Copper Glow Lantern",
   "block.glowlights.waxed_exposed_copper_glow_lantern": "Waxed Exposed Copper Glow Lantern",
   "block.glowlights.waxed_weathered_copper_glow_lantern": "Waxed Weathered Copper Glow Lantern",
   "block.glowlights.waxed_oxidized_copper_glow_lantern": "Waxed Oxidized Copper Glow Lantern",
 
+
+  "block.glowlights.copper_glow_berry_lantern": "Copper Glow Berry Lantern",
+  "block.glowlights.exposed_copper_glow_berry_lantern": "Exposed Copper Glow Berry Lantern",
+  "block.glowlights.weathered_copper_glow_berry_lantern": "Weathered Copper Glow Berry Lantern",
+  "block.glowlights.oxidized_copper_glow_berry_lantern": "Oxidized Copper Glow Berry Lantern",
+
+
+  "block.glowlights.waxed_copper_glow_berry_lantern": "Waxed Copper Glow Berry Lantern",
+  "block.glowlights.waxed_exposed_copper_glow_berry_lantern": "Waxed Exposed Copper Glow Berry Lantern",
+  "block.glowlights.waxed_weathered_copper_glow_berry_lantern": "Waxed Weathered Copper Glow Berry Lantern",
+  "block.glowlights.waxed_oxidized_copper_glow_berry_lantern": "Waxed Oxidized Copper Glow Berry Lantern",
+
+
   "block.glowlights.copper_chain": "Copper Chain",
   "block.glowlights.exposed_copper_chain": "Exposed Copper Chain",
   "block.glowlights.weathered_copper_chain": "Weathered Copper Chain",
   "block.glowlights.oxidized_copper_chain": "Oxidized Copper Chain",
 
+
   "block.glowlights.waxed_copper_chain": "Waxed Copper Chain",
   "block.glowlights.waxed_exposed_copper_chain": "Waxed Exposed Copper Chain",
   "block.glowlights.waxed_weathered_copper_chain": "Waxed Weathered Copper Chain",
   "block.glowlights.waxed_oxidized_copper_chain": "Waxed Oxidized Copper Chain",
+
 
   "block.glowlights.copper_glow_campfire": "Copper Glow Campfire",
   "block.glowlights.exposed_copper_glow_campfire": "Exposed Copper Glow Campfire",
@@ -59,6 +87,7 @@
   "block.glowlights.waxed_weathered_copper_glow_campfire": "Waxed Weathered Copper Glow Campfire",
   "block.glowlights.waxed_oxidized_copper_glow_campfire": "Waxed Oxidized Copper Glow Campfire",
 
+
   "block.glowlights.cut_copper_glow_campfire": "Cut Copper Glow Campfire",
   "block.glowlights.exposed_cut_copper_glow_campfire": "Exposed Cut Copper Glow Campfire",
   "block.glowlights.weathered_cut_copper_glow_campfire": "Weathered Cut Copper Glow Campfire",
@@ -69,6 +98,7 @@
   "block.glowlights.waxed_weathered_cut_copper_glow_campfire": "Waxed Weathered Cut Copper Glow Campfire",
   "block.glowlights.waxed_oxidized_cut_copper_glow_campfire": "Waxed Oxidized Cut Copper Glow Campfire",
 
+
   "block.glowlights.copper_glow_lantern_block": "Copper Glow Lantern Block",
   "block.glowlights.exposed_copper_glow_lantern_block": "Exposed Copper Glow Lantern Block",
   "block.glowlights.weathered_copper_glow_lantern_block": "Weathered Copper Glow Lantern Block",
@@ -78,6 +108,17 @@
   "block.glowlights.waxed_exposed_copper_glow_lantern_block": "Waxed Exposed Copper Glow Lantern Block",
   "block.glowlights.waxed_weathered_copper_glow_lantern_block": "Waxed Weathered Copper Glow Lantern Block",
   "block.glowlights.waxed_oxidized_copper_glow_lantern_block": "Waxed Oxidized Copper Glow Lantern Block",
+
+
+  "block.glowlights.copper_glow_berry_lantern_block": "Copper Glow Berry Lantern Block",
+  "block.glowlights.exposed_copper_glow_berry_lantern_block": "Exposed Copper Glow Berry Lantern Block",
+  "block.glowlights.weathered_copper_glow_berry_lantern_block": "Weathered Copper Glow Berry Lantern Block",
+  "block.glowlights.oxidized_copper_glow_berry_lantern_block": "Oxidized Copper Glow Berry Lantern Block",
+
+  "block.glowlights.waxed_copper_glow_berry_lantern_block": "Waxed Copper Glow Berry Lantern Block",
+  "block.glowlights.waxed_exposed_copper_glow_berry_lantern_block": "Waxed Exposed Copper Glow Berry Lantern Block",
+  "block.glowlights.waxed_weathered_copper_glow_berry_lantern_block": "Waxed Weathered Copper Glow Berry Lantern Block",
+  "block.glowlights.waxed_oxidized_copper_glow_berry_lantern_block": "Waxed Oxidized Copper Glow Berry Lantern Block",
 
 
   "item.glowlights.copper_nugget": "Copper Nugget",

@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model":  "glowlights:block/glow_lantern_block/copper/weathered_copper_glow_berry_lantern_block"
+    }
+  }
+}
