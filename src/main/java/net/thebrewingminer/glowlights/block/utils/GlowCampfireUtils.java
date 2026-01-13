@@ -18,7 +18,7 @@ public final class GlowCampfireUtils {
         return !isLit(state);
     }
 
-    public static boolean hasAshWhenUnlit(BlockState state){
+    public static boolean hasAshWhileUnlit(BlockState state){
         return state.getValue(HAS_ASH_UNLIT);
     }
 
@@ -28,7 +28,7 @@ public final class GlowCampfireUtils {
     public static boolean canLight(BlockState blockState) {
         if (!blockState.is(BlockTags.CAMPFIRES)) return false;
         if (!blockState.hasProperty(HAS_ASH_UNLIT) || !blockState.hasProperty(LIT)) return false;
-        return (hasAshWhenUnlit(blockState) && isUnlit(blockState));
+        return (hasAshWhileUnlit(blockState) && isUnlit(blockState));
     }
 
     // Explicitly check if the blockstate is a glow campfire (Not just eligibility for lighting).

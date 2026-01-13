@@ -167,7 +167,7 @@ public abstract class AbstractGlowCampfireBlock extends BaseEntityBlock implemen
         ItemStack heldItem = player.getItemInHand(playerHand);
         BlockEntity blockEntity = level.getBlockEntity(pos);
         boolean survivalMode = !(player.isCreative());
-        boolean coalsPresent = hasAshWhenUnlit(state);
+        boolean coalsPresent = hasAshWhileUnlit(state);
 
         if (isUnlit(state)){ // If the campfire is NOT lit.
             if (level.isClientSide()) return InteractionResult.PASS;    // On the server only
@@ -247,7 +247,7 @@ public abstract class AbstractGlowCampfireBlock extends BaseEntityBlock implemen
     @Override
     public void onProjectileHit(Level level, BlockState blockState, BlockHitResult blockHitResult, Projectile projectile) {
         BlockPos blockpos = blockHitResult.getBlockPos();
-        if (!level.isClientSide() && projectile.isOnFire() && projectile.mayInteract(level, blockpos) && hasAshWhenUnlit(blockState)) {
+        if (!level.isClientSide() && projectile.isOnFire() && projectile.mayInteract(level, blockpos) && hasAshWhileUnlit(blockState)) {
             level.setBlock(blockpos, litFromAsh(blockState), 11);
         }
     }

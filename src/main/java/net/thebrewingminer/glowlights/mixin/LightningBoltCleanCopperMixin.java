@@ -41,7 +41,7 @@ public class LightningBoltCleanCopperMixin {
         }
 
         // Direct strike on any glow campfire
-        if (GlowCampfireUtils.isGlowCampfire(targetState) && GlowCampfireUtils.hasAshWhenUnlit(targetState)) {
+        if (GlowCampfireUtils.isGlowCampfire(targetState) && GlowCampfireUtils.hasAshWhileUnlit(targetState)) {
             level.setBlock(targetPos, GlowCampfireUtils.litFromAsh(targetState), 3);
         }
 
