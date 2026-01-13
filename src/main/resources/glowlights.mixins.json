@@ -6,9 +6,8 @@
   "refmap": "atmosphericnether.refmap.json",
   "mixins": [
     "DispenserBehaviorRegistryAccessor",
-    "FireChargeItemMixin",
-    "FlintAndSteelItemMixin",
-    "LightningBoltCleanCopperMixin"
+    "LightningBoltCleanCopperMixin",
+    "CampfireCanLightMixin"
   ],
   "injectors": {
     "defaultRequire": 1

@@ -24,6 +24,7 @@ import net.minecraft.world.level.gameevent.GameEvent;
 import net.thebrewingminer.glowlights.block.copper.CopperGlowCampfireBlock;
 import net.thebrewingminer.glowlights.block.copper.utils.IWeatheringCopper;
 import net.thebrewingminer.glowlights.block.copper.utils.WeatheringBlockMap;
+import net.thebrewingminer.glowlights.block.utils.GlowCampfireUtils;
 import net.thebrewingminer.glowlights.init.ModBlockEntities;
 
 import javax.annotation.Nullable;
@@ -70,6 +71,10 @@ public class CopperGlowCampfireBlockEntity extends BlockEntity implements Cleara
 
     public static void cookTick(Level level, BlockPos pos, BlockState blockState, CopperGlowCampfireBlockEntity blockEntity) {
         boolean flag = false;
+
+        // Check if the campfire has the ash-when-unlit property while being lit (which by design is meant to be an illegal state).
+        // If both properties are true, set HAS_ASH_UNLIT to false.
+        if (GlowCampfireUtils.hasAshWhenUnlit(blockState)){ level.setBlock(pos, GlowCampfireUtils.litFromAsh(blockState), 3); }
 
         for(int itemOnCampfire = 0; itemOnCampfire < blockEntity.getItems().size(); ++itemOnCampfire) {
             ItemStack itemStack = blockEntity.getItems().get(itemOnCampfire);

@@ -108,6 +108,7 @@ public abstract class AbstractGlowCampfireBlock extends BaseEntityBlock implemen
         return ( this.defaultBlockState().setValue(WATERLOGGED, inWater).setValue(LIT, false).setValue(FACING, blockPlaceContext.getHorizontalDirection()).setValue(SIGNAL_FIRE, this.isSmokeSource(levelAccessor.getBlockState(pos.below()))) );
     }
 
+    @Override
     public BlockState updateShape(BlockState blockState, Direction facing, BlockState facingState, LevelAccessor level, BlockPos currentPos, BlockPos facingPos) {
         if (blockState.getValue(WATERLOGGED)) {
             level.scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickDelay(level));
@@ -140,21 +141,6 @@ public abstract class AbstractGlowCampfireBlock extends BaseEntityBlock implemen
 
     public abstract InteractionResult handleCampfireRecipe(Level level, Player player, ItemStack heldItem, BlockEntity blockEntity);
 
-    public static InteractionResult handleLightingCampfire(Level level, Player player, InteractionHand playerHand, ItemStack heldItem, BlockState state, BlockPos pos, boolean survivalMode){
-        RandomSource randomSource = level.getRandom();
-        level.setBlock(pos, GlowCampfireUtils.litFromAsh(state), 3);
-
-        if (heldItem.is(Items.FLINT_AND_STEEL)){
-            level.playSound(null, pos, SoundEvents.FLINTANDSTEEL_USE, SoundSource.BLOCKS, 1.0F, level.getRandom().nextFloat() * 0.4F + 0.8F);
-            if (survivalMode) heldItem.hurtAndBreak(1, player, (p) -> p.broadcastBreakEvent(playerHand));
-        } else {
-            level.playSound(null, pos, SoundEvents.FIRECHARGE_USE, SoundSource.BLOCKS, 1.0F, (randomSource.nextFloat() - randomSource.nextFloat()) * 0.2F + 1.0F);
-            if (survivalMode) heldItem.shrink(1);
-        }
-
-        return InteractionResult.SUCCESS;
-    }
-
     public static InteractionResult handleCleaningCampfire(Level level, Player player, InteractionHand playerHand, ItemStack heldItem, BlockState state, BlockPos pos, boolean survivalMode){
         level.setBlock(pos, GlowCampfireUtils.cleanAsh(state), 3);
         level.playSound(null, pos, SoundEvents.SHOVEL_FLATTEN, SoundSource.BLOCKS, 1.0F, 1.0F);
@@ -183,22 +169,19 @@ public abstract class AbstractGlowCampfireBlock extends BaseEntityBlock implemen
         boolean survivalMode = !(player.isCreative());
         boolean coalsPresent = hasAshWhenUnlit(state);
 
-        if (isUnlit(state)){
-            // If the campfire is NOT lit.
-            if (coalsPresent){      // If the coals are still in the campfire (has ash when unlit)
-                if (level.isClientSide()) return InteractionResult.PASS;    // On the server only
+        if (isUnlit(state)){ // If the campfire is NOT lit.
+            if (level.isClientSide()) return InteractionResult.PASS;    // On the server only
 
-                // Handle lighting when appropriate.
-                if ((heldItem.is(Items.FLINT_AND_STEEL) || heldItem.is(Items.FIRE_CHARGE))) return handleLightingCampfire(level, player, playerHand, heldItem, state, pos, survivalMode);
-
-                // Handle "cleaning" the coals from the campfire.
+            if (coalsPresent){
+                // If the coals are still in the campfire (has ash when unlit)
+                // Handles "cleaning" the coals from the campfire.
                 if (heldItem.is(Tags.Items.TOOLS_SHOVELS)) return handleCleaningCampfire(level, player, playerHand, heldItem, state, pos, survivalMode);
             } else {
                 // If coals are not still in the campfire
-                if (level.isClientSide()) return InteractionResult.PASS;    // On the server only
-                if (heldItem.is(ItemTags.COALS)) return handleRefuelingCampfire(level, state, pos, heldItem, survivalMode); // Handle refueling.
+                if (heldItem.is(ItemTags.COALS)) return handleRefuelingCampfire(level, state, pos, heldItem, survivalMode); // Handles refueling.
             }
-        } else { // Handle interactions with a LIT campfire.
+        } else {
+            // Handle dowsing a LIT campfire.
             if (heldItem.is(Tags.Items.TOOLS_SHOVELS)) return handleDowsing(level, player, playerHand, heldItem, state, pos, survivalMode);
         }
 
