@@ -38,6 +38,7 @@ public class WaxedCopperGlowCampfireBlock extends AbstractGlowCampfireBlock impl
         super(properties, fireDamage, fireDamageDelay);
     }
 
+    // Handles campfire recipes just as Vanilla does.
     public InteractionResult handleCampfireRecipe(Level level, Player player, ItemStack heldItem, BlockEntity blockEntity){
         if (blockEntity instanceof CopperGlowCampfireBlockEntity copperGlowCampfireBlockEntity) {
             Optional<CampfireCookingRecipe> recipe = copperGlowCampfireBlockEntity.getCookableRecipe(heldItem);
@@ -52,6 +53,7 @@ public class WaxedCopperGlowCampfireBlock extends AbstractGlowCampfireBlock impl
         return InteractionResult.PASS;
     }
 
+    // Fills out tool interaction with sounds, sets the block's new state, and calls the block's dowse method.
     public InteractionResult handleDowsing(Level level, Player player, InteractionHand playerHand, ItemStack heldItem, BlockState state, BlockPos pos, boolean survivalMode){
         level.setBlock(pos, GlowCampfireUtils.extinguishFlame(state), 3);
 
@@ -72,6 +74,9 @@ public class WaxedCopperGlowCampfireBlock extends AbstractGlowCampfireBlock impl
         return new CopperGlowCampfireBlockEntity(pos, blockState);
     }
 
+    // For copper campfires, it is necessary to ensure nothing happens in the case of a change to another copper campfire,
+    // as oxidation, scraping, and waxing events change the block. This preserves the block entity across blockstate changes
+    // and allows a degree of continuity/permanence. May still work on in-game setblock command.
     @Override
     public void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean isMoving) {
         Block newBlock = newState.getBlock();
@@ -93,7 +98,8 @@ public class WaxedCopperGlowCampfireBlock extends AbstractGlowCampfireBlock impl
         }
     }
 
-
+    // Makes a batch of particles along with glow squid ink particles upon dowsing a flame.
+    // Also communicates the dowsing through the block entity.
     public void dowse(@Nullable Entity entity, LevelAccessor levelAccessor, BlockPos pos, BlockState state) {
         if (levelAccessor.isClientSide()){
             for (int i = 0; i < 20; ++i){
@@ -106,6 +112,7 @@ public class WaxedCopperGlowCampfireBlock extends AbstractGlowCampfireBlock impl
         levelAccessor.gameEvent(entity, GameEvent.BLOCK_CHANGE, pos);
     }
 
+    // Choose the ticking method appropriate for the client, server, and block state.
     @Override
     @Nullable
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState blockState, BlockEntityType<T> blockEntityType) {

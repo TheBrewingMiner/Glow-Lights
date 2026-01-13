@@ -139,8 +139,11 @@ public abstract class AbstractGlowCampfireBlock extends BaseEntityBlock implemen
         return lightLevel;
     }
 
+    // Child classes are expected to implement handling of campfire recipes with their respective block-entities.
     public abstract InteractionResult handleCampfireRecipe(Level level, Player player, ItemStack heldItem, BlockEntity blockEntity);
 
+    // Handles interactions with ShovelItem objects when the campfire is unlit with ash.
+    // Updates the block's state, plays a sound, and returns a piece of charcoal in survival mode.
     public static InteractionResult handleCleaningCampfire(Level level, Player player, InteractionHand playerHand, ItemStack heldItem, BlockState state, BlockPos pos, boolean survivalMode){
         level.setBlock(pos, GlowCampfireUtils.cleanAsh(state), 3);
         level.playSound(null, pos, SoundEvents.SHOVEL_FLATTEN, SoundSource.BLOCKS, 1.0F, 1.0F);
@@ -153,6 +156,8 @@ public abstract class AbstractGlowCampfireBlock extends BaseEntityBlock implemen
         return InteractionResult.SUCCESS;
     }
 
+    // Handles interactions with items in the coals tag.
+    // Sets HAS_ASH_UNLIT to true and plays a sound.
     public static InteractionResult handleRefuelingCampfire(Level level, BlockState state, BlockPos pos, ItemStack heldItem, boolean survivalMode){
         level.setBlock(pos, GlowCampfireUtils.addCoals(state), 3);
         level.playSound(null, pos, SoundEvents.BASALT_BREAK, SoundSource.BLOCKS, 1.0F, 1.0F);
@@ -160,6 +165,7 @@ public abstract class AbstractGlowCampfireBlock extends BaseEntityBlock implemen
         return InteractionResult.SUCCESS;
     }
 
+    // Child objects are expected to implement dowsing handling with their respective block-entities.
     public abstract InteractionResult handleDowsing(Level level, Player player, InteractionHand playerHand, ItemStack heldItem, BlockState state, BlockPos pos, boolean survivalMode);
 
     @Override
@@ -189,12 +195,14 @@ public abstract class AbstractGlowCampfireBlock extends BaseEntityBlock implemen
         return handleCampfireRecipe(level, player, heldItem, blockEntity);
     }
 
+    // Ambient glow squid particle with a specified 1/[delay] chance of occurring.
     public static void addAmbientGlowParticle(Level level, BlockPos pos, RandomSource randomSource, int delay){
         if (randomSource.nextInt(delay) == 0) {
             level.addParticle(ParticleTypes.GLOW, (double) pos.getX() + 0.5, (double) pos.getY() + 0.5, (double) pos.getZ() + 0.5, randomSource.nextFloat() / 2.0F, 5.0E-5, randomSource.nextFloat() / 2.0F);
         }
     }
 
+    // Ambient campfire sound with a specified 1/[delay] chance of occurring.
     public static void playAmbientSound(Level level, BlockPos pos, RandomSource randomSource, int delay){
         if (randomSource.nextInt(delay) == 0){
             level.playLocalSound((double)pos.getX() + 0.5, (double)pos.getY() + 0.5, (double)pos.getZ() + 0.5, SoundEvents.CAMPFIRE_CRACKLE, SoundSource.BLOCKS, 0.5F + randomSource.nextFloat(), randomSource.nextFloat() * 0.7F + 0.6F, false);
@@ -203,8 +211,9 @@ public abstract class AbstractGlowCampfireBlock extends BaseEntityBlock implemen
 
     @Override
     public void animateTick(BlockState blockState, Level level, BlockPos pos, RandomSource randomSource){
-        if (isUnlit(blockState)) return;
+        if (isUnlit(blockState)) return;    // Nothing happens if there is no flame.
 
+        // Ambient events using specified delays to reduce the amount of sounds and particles.
         if (isWaterlogged(blockState)){
             addAmbientGlowParticle(level, pos, randomSource, WATERLOGGED_PARTICLE_DELAY);
             playAmbientSound(level, pos, randomSource, WATERLOGGED_SOUND_DELAY);
@@ -216,6 +225,7 @@ public abstract class AbstractGlowCampfireBlock extends BaseEntityBlock implemen
 
     @Override
     public void entityInside(BlockState state, Level level, BlockPos pos, Entity entity) {
+        // Damage eligible entities; more so if in water.
         if (isLit(state) && entity instanceof LivingEntity && !EnchantmentHelper.hasFrostWalker((LivingEntity)entity)) {
             if (isWaterlogged(state)){
                 entity.hurt(DamageSource.IN_FIRE, this.fireDamage * 2.5f);
@@ -227,23 +237,28 @@ public abstract class AbstractGlowCampfireBlock extends BaseEntityBlock implemen
         super.entityInside(state, level, pos, entity);
     }
 
+    // Child classes are expected to add their block entity to the world.
     @Override
     public abstract BlockEntity newBlockEntity(BlockPos pos, BlockState blockState);
 
+    // Called by the game to handle removing the block.
     @Override
     public void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean isMoving){
-        if (!state.is(newState.getBlock())) {
-            onBlockEntityRemoved(level, pos);
-            super.onRemove(state, level, pos, newState, isMoving);
+        if (!state.is(newState.getBlock())) {   // If the block changed
+            onBlockEntityRemoved(level, pos);   // Call to handle block entity removal.
+            super.onRemove(state, level, pos, newState, isMoving);  // Superclass's method handles removal of the block entity.
         }
     }
 
+    // Child classes are expected to implement handling of the block-entity upon removal.
     protected abstract void onBlockEntityRemoved(Level level, BlockPos pos);
 
+    // Called to determine if a hay block is underneath (passed-in blockstate is below the block).
     protected boolean isSmokeSource(BlockState pState) {
         return pState.is(Blocks.HAY_BLOCK);
     }
 
+    // Handles projectile interactions (e.g. flaming arrows, dispensed fire charge).
     @Override
     public void onProjectileHit(Level level, BlockState blockState, BlockHitResult blockHitResult, Projectile projectile) {
         BlockPos blockpos = blockHitResult.getBlockPos();
@@ -252,6 +267,7 @@ public abstract class AbstractGlowCampfireBlock extends BaseEntityBlock implemen
         }
     }
 
+    // Used to handle particle spawning. Intended to be called by particleTick method in a blockEntity and by dowsing method(s).
     public static void makeParticles(Level level, BlockPos pos, boolean isSignalFire, boolean spawnExtraSmoke) {
         RandomSource randomsource = level.getRandom();
         SimpleParticleType simpleParticleType = isSignalFire ? ModParticles.SIGNAL_GLOW_SMOKE.get() : ModParticles.COZY_GLOW_SMOKE.get();
@@ -261,8 +277,10 @@ public abstract class AbstractGlowCampfireBlock extends BaseEntityBlock implemen
         }
     }
 
+    // Child classes are expected to implement dowsing of the campfire.
     public abstract void dowse(@Nullable Entity entity, LevelAccessor levelAccessor, BlockPos pos, BlockState state);
 
+    // Child classes are expected to implement ticking methods for the block entity.
     @Override
     @Nullable
     public abstract <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState blockState, BlockEntityType<T> blockEntityType);

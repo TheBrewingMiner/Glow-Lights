@@ -36,6 +36,7 @@ public class GlowCampfireBlock extends AbstractGlowCampfireBlock implements Simp
         super(properties, fireDamage, fireDamageDelay);
     }
 
+    // Handles campfire recipes just as Vanilla does.
     @Override
     public InteractionResult handleCampfireRecipe(Level level, Player player, ItemStack heldItem, BlockEntity blockEntity){
         if (blockEntity instanceof GlowCampfireBlockEntity glowCampfireBlockEntity) {
@@ -51,6 +52,7 @@ public class GlowCampfireBlock extends AbstractGlowCampfireBlock implements Simp
         return InteractionResult.PASS;
     }
 
+    // Fills out tool interaction with sounds, sets the block's new state, and calls the block's dowse method.
     @Override
     public InteractionResult handleDowsing(Level level, Player player, InteractionHand playerHand, ItemStack heldItem, BlockState state, BlockPos pos, boolean survivalMode){
         level.setBlock(pos, GlowCampfireUtils.extinguishFlame(state), 3);
@@ -80,6 +82,8 @@ public class GlowCampfireBlock extends AbstractGlowCampfireBlock implements Simp
         }
     }
 
+    // Makes a batch of particles along with glow squid ink particles upon dowsing a flame.
+    // Also communicates the dowsing through the block entity.
     @Override
     public void dowse(@Nullable Entity entity, LevelAccessor levelAccessor, BlockPos pos, BlockState state) {
         if (levelAccessor.isClientSide()){
@@ -93,6 +97,7 @@ public class GlowCampfireBlock extends AbstractGlowCampfireBlock implements Simp
         levelAccessor.gameEvent(entity, GameEvent.BLOCK_CHANGE, pos);
     }
 
+    // Choose the ticking method appropriate for the client, server, and block state.
     @Override
     @Nullable
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState blockState, BlockEntityType<T> blockEntityType) {

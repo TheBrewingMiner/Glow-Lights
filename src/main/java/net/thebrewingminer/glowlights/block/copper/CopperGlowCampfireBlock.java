@@ -25,11 +25,13 @@ public class CopperGlowCampfireBlock extends WaxedCopperGlowCampfireBlock implem
     public static final int SUBMERGED_OXIDATION_FACTOR = 7;
     private final WeatheringCopper.WeatherState weatherState;
 
+    // WaxedCopperGlowCampfireBlock handles everything the campfire normally does.
     public CopperGlowCampfireBlock(WeatheringCopper.WeatherState weatherState, BlockBehaviour.Properties properties, float fireDamage, float fireDamageDelay) {
         super(properties, fireDamage, fireDamageDelay);
         this.weatherState = weatherState;
     }
 
+    // Copper-related methods required to implement.
     @Override
     public WeatherState getAge() {
         return this.weatherState;
@@ -43,11 +45,14 @@ public class CopperGlowCampfireBlock extends WaxedCopperGlowCampfireBlock implem
 
     }
 
+    // Checks if the block can still oxidize, and thus is still eligible for ticking.
     @Override
     public boolean isRandomlyTicking(BlockState state) {
         return IWeatheringCopper.getNext(state.getBlock()).isPresent();
     }
 
+    // Handles use of honeycomb to wax the copper block, and otherwise calls
+    // the superclass's method to handle everything else as usual.
     @Override
     public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand playerHand, BlockHitResult hitResult){
         ItemStack heldItem = player.getItemInHand(playerHand);

@@ -48,6 +48,8 @@ public class CopperGlowCampfireBlockEntity extends BlockEntity implements Cleara
         this.quickCheck = RecipeManager.createCheck(RecipeType.CAMPFIRE_COOKING);
     }
 
+    // Gets the weather state (enum) from the copper block at the block-entity's position.
+    // If the block is a waxed version, get the information from WAX_OFF_BY_BLOCK map.
     public static WeatheringCopper.WeatherState getWeatherState(Block block) {
         if (block instanceof IWeatheringCopper copper) return copper.getAge();
 
@@ -57,8 +59,9 @@ public class CopperGlowCampfireBlockEntity extends BlockEntity implements Cleara
         return WeatheringCopper.WeatherState.UNAFFECTED;
     }
 
+    // Calculates a bonus/penalty as a float based on a copper weather state.
     public static float getCookSpeed(BlockState blockState){
-        float cookSpeed = 0;
+        float cookSpeed = 1.00f;
         WeatheringCopper.WeatherState age = getWeatherState(blockState.getBlock());
 
         if (age == WeatheringCopper.WeatherState.UNAFFECTED) { cookSpeed = 1.50f; }
@@ -72,7 +75,7 @@ public class CopperGlowCampfireBlockEntity extends BlockEntity implements Cleara
     public static void cookTick(Level level, BlockPos pos, BlockState blockState, CopperGlowCampfireBlockEntity blockEntity) {
         boolean flag = false;
 
-        // Check if the campfire has the ash-when-unlit property while being lit (which by design is meant to be an illegal state).
+        // Check if the campfire has the ash-while-unlit property while being lit (which by design is meant to be an illegal state).
         // If both properties are true, set HAS_ASH_UNLIT to false.
         if (GlowCampfireUtils.hasAshWhileUnlit(blockState)){ level.setBlock(pos, GlowCampfireUtils.litFromAsh(blockState), 3); }
 
@@ -80,8 +83,8 @@ public class CopperGlowCampfireBlockEntity extends BlockEntity implements Cleara
             ItemStack itemStack = blockEntity.getItems().get(itemOnCampfire);
             if (!itemStack.isEmpty()) {
                 flag = true;
-                float cookSpeed = getCookSpeed(blockState);
-                int scaledCookSpeed = (int)(cookSpeed * floatToIntScale);
+                float cookSpeed = getCookSpeed(blockState); // Calculate cook speed based off of weather state of the block.
+                int scaledCookSpeed = (int)(cookSpeed * floatToIntScale);   // Scale the cook speed into an integer value for later serialization.
                 blockEntity.cookingProgress[itemOnCampfire] += scaledCookSpeed;
 
                 if (blockEntity.cookingProgress[itemOnCampfire] >= (blockEntity.cookingTime[itemOnCampfire] * floatToIntScale)) {
@@ -103,8 +106,8 @@ public class CopperGlowCampfireBlockEntity extends BlockEntity implements Cleara
 
     public static void cooldownTick(Level level, BlockPos pos, BlockState blockState, CopperGlowCampfireBlockEntity blockEntity) {
         boolean flag = false;
-        float coolSpeed = getCookSpeed(blockState);
-        int scaledCoolSpeed = (int)(coolSpeed * floatToIntScale);
+        float coolSpeed = getCookSpeed(blockState); // Get the cool down speed (equal to cook speed for copper campfires).
+        int scaledCoolSpeed = (int)(coolSpeed * floatToIntScale);   // Scale the cool speed to an integer value for later serialization.
 
         for(int itemIndex = 0; itemIndex < blockEntity.items.size(); ++itemIndex) {
             if (blockEntity.cookingProgress[itemIndex] > 0) {
