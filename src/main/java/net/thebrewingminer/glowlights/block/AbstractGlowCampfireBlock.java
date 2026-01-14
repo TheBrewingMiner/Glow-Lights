@@ -114,7 +114,7 @@ public abstract class AbstractGlowCampfireBlock extends BaseEntityBlock implemen
             level.scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickDelay(level));
         }
 
-        return super.updateShape(blockState, facing, facingState, level, currentPos, facingPos);
+        return (facing == Direction.DOWN ? blockState.setValue(SIGNAL_FIRE, this.isSmokeSource(facingState)) : super.updateShape(blockState, facing, facingState, level, currentPos, facingPos));
     }
 
     @Override
