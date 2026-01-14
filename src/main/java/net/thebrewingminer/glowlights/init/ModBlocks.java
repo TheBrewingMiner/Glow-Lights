@@ -19,12 +19,15 @@ import java.util.function.Supplier;
 
 
 public class ModBlocks {
+    // Create the registry for custom blocks of this mod.
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, GlowLights.MOD_ID);
 
+    // Registers a new item of this mod with the given block information.
     private static <T extends Block> RegistryObject<Item> registerBlockItem(String name, RegistryObject<T> block, CreativeModeTab tab){
         return ModItems.ITEMS.register(name, () -> new BlockItem(block.get(), new Item.Properties().tab(tab)));
     }
 
+    // Registers a new block AND its corresponding item.
     private static <T extends Block> RegistryObject<T> registerBlockAndItem(String name, Supplier<T> block, CreativeModeTab tab){
         RegistryObject<T> toReturn = BLOCKS.register(name, block);
         registerBlockItem(name, toReturn, tab);
@@ -753,6 +756,7 @@ public class ModBlocks {
         CreativeModeTab.TAB_DECORATIONS
     );
 
+    // Make this registry known to the event bus.
     public static void register(IEventBus eventBus) {
         BLOCKS.register(eventBus);
     }

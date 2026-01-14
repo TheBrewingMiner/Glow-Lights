@@ -40,6 +40,7 @@ public class CopperGlowCampfireBlockEntity extends BlockEntity implements Cleara
     protected static int floatToIntScale = 100;
     public static final int SMOKE_DELAY = 20;
 
+    // CampfireBlockEntity-like object for CopperGlowCampfireBlock.
     public CopperGlowCampfireBlockEntity(BlockPos pos, BlockState blockState) {
         super(ModBlockEntities.COPPER_GLOW_CAMPFIRE.get(), pos, blockState);
         this.items = NonNullList.withSize(NUM_SLOTS, ItemStack.EMPTY);
@@ -72,6 +73,7 @@ public class CopperGlowCampfireBlockEntity extends BlockEntity implements Cleara
         return cookSpeed;
     }
 
+    // Processes cooking for lit campfires.
     public static void cookTick(Level level, BlockPos pos, BlockState blockState, CopperGlowCampfireBlockEntity blockEntity) {
         boolean flag = false;
 
@@ -104,6 +106,7 @@ public class CopperGlowCampfireBlockEntity extends BlockEntity implements Cleara
 
     }
 
+    // Processes cooling from any remaining cookTick logic when the campfire is unlit.
     public static void cooldownTick(Level level, BlockPos pos, BlockState blockState, CopperGlowCampfireBlockEntity blockEntity) {
         boolean flag = false;
         float coolSpeed = getCookSpeed(blockState); // Get the cool down speed (equal to cook speed for copper campfires).
@@ -119,7 +122,7 @@ public class CopperGlowCampfireBlockEntity extends BlockEntity implements Cleara
         if (flag) { setChanged(level, pos, blockState); }
     }
 
-
+    // Makes particles for the client to render.
     public static void particleTick(Level level, BlockPos pos, BlockState blockState, CopperGlowCampfireBlockEntity blockEntity) {
         RandomSource randomSource = level.random;
         int i;
@@ -151,10 +154,12 @@ public class CopperGlowCampfireBlockEntity extends BlockEntity implements Cleara
         }
     }
 
+    // Gets stored items.
     public NonNullList<ItemStack> getItems() {
         return this.items;
     }
 
+    // Loads information from saved data.
     @Override
     public void load(CompoundTag compoundTag) {
         super.load(compoundTag);
@@ -173,6 +178,7 @@ public class CopperGlowCampfireBlockEntity extends BlockEntity implements Cleara
 
     }
 
+    // Saves data.
     @Override
     protected void saveAdditional(CompoundTag compoundTag) {
         super.saveAdditional(compoundTag);
@@ -193,10 +199,12 @@ public class CopperGlowCampfireBlockEntity extends BlockEntity implements Cleara
         return tag;
     }
 
+    // Gets the recipe for the passed-in item stack if it exists.
     public Optional<CampfireCookingRecipe> getCookableRecipe(ItemStack itemStack) {
         return this.items.stream().noneMatch(ItemStack::isEmpty) ? Optional.empty() : this.quickCheck.getRecipeFor(new SimpleContainer(itemStack), this.level);
     }
 
+    // Processes the player placing food into the campfire. Returns true if it succeeds.
     public boolean placeFood(@Nullable Entity entity, ItemStack itemStack, int cookTime) {
         for(int itemIndex = 0; itemIndex < this.items.size(); ++itemIndex) {
             ItemStack item = this.items.get(itemIndex);

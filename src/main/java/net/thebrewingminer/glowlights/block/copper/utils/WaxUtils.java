@@ -1,4 +1,4 @@
-package net.thebrewingminer.glowlights.block.copper;
+package net.thebrewingminer.glowlights.block.copper.utils;
 
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.BlockPos;

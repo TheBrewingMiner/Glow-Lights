@@ -22,40 +22,52 @@ public final class GlowCampfireDispenserBehavior {
 
     public static void register() {
 
+        // Accessor mixin allows getting the dispenser behavior registry (which is package-private).
         Map<Item, DispenseItemBehavior> registry = DispenserBehaviorRegistryAccessor.getDispenserRegistry();
+
+        // Gets the value of the key Items.FLINT_AND_STEEL in the map,
+        // which is the registered behavior for flint and steel by common setup.
         DispenseItemBehavior vanillaBehavior = registry.get(Items.FLINT_AND_STEEL);
 
-            DispenserBlock.registerBehavior(
-                Items.FLINT_AND_STEEL,
-                new OptionalDispenseItemBehavior() {
+        // Reregister behavior for Items.FLINT_AND_STEEL, which replaces the behavior previously in the registry.
+        DispenserBlock.registerBehavior(
+            Items.FLINT_AND_STEEL,  // The key of this mapped relationship
+            new OptionalDispenseItemBehavior() {    // Anonymous class that dictates what the dispenser does when it dispenses the item of the key
 
-                    @Override
-                    protected ItemStack execute(BlockSource source, ItemStack stack) {
-                        Level level = source.getLevel();
-                        Direction facing = source.getBlockState().getValue(DispenserBlock.FACING);
-                        BlockPos pos = source.getPos().relative(facing);
-                        BlockState state = level.getBlockState(pos);
+                @Override
+                protected ItemStack execute(BlockSource source, ItemStack stack) {
+                    Level level = source.getLevel();
+                    Direction facing = source.getBlockState().getValue(DispenserBlock.FACING);
+                    BlockPos pos = source.getPos().relative(facing);
+                    BlockState state = level.getBlockState(pos);
 
-                        if (GlowCampfireUtils.isGlowCampfire(state)) {
-                            if (GlowCampfireUtils.canLight(state)) {
-                                BlockState newState = GlowCampfireUtils.litFromAsh(state);
-                                level.setBlock(pos, newState, 11);
-                                level.gameEvent(null, GameEvent.BLOCK_CHANGE, pos);
+                    // Check if the block in front of the dispenser is a glow campfire
+                    if (GlowCampfireUtils.isGlowCampfire(state)) {
+                        // Respect custom lighting logic for Glow Campfires.
+                        if (GlowCampfireUtils.canLight(state)) {
+                            // Light the campfire!
+                            BlockState newState = GlowCampfireUtils.litFromAsh(state);
+                            level.setBlock(pos, newState, 11);
+                            level.gameEvent(null, GameEvent.BLOCK_CHANGE, pos);
 
-                                if (stack.hurt(1, level.random, null)) { stack.setCount(0); }
+                            if (stack.hurt(1, level.random, null)) { stack.setCount(0); }
+                            this.setSuccess(true);
 
-                                this.setSuccess(true);
-                            } else {
-                                this.setSuccess(false);
-                            }
-
-                            return stack;
+                        } else {
+                            // Nothing happens.
+                            this.setSuccess(false);
                         }
 
-                        return vanillaBehavior.dispense(source, stack);
+                        return stack;
                     }
+
+                    // Otherwise, use the stored vanilla behavior we saved before rewriting the key
+                    // to handle all other behaviors as usual.
+                    return vanillaBehavior.dispense(source, stack);
                 }
-            );
-        System.out.println("Glowlights: Running DispenserBlock.registerBehavior()");
+            }
+        );
+
+        System.out.println("Glowlights: Running DispenserBlock.registerBehavior()");    // Sanity check.
     }
 }

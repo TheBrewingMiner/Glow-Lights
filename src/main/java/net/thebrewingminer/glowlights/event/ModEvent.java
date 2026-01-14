@@ -10,6 +10,7 @@ import net.thebrewingminer.glowlights.particle.GlowSmokeParticle;
 @Mod.EventBusSubscriber(modid = GlowLights.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ModEvent {
 
+    // Register particles for the client to use
     @SubscribeEvent
     public static void registerParticles(RegisterParticleProvidersEvent particleProvidersEvent){
         particleProvidersEvent.register(ModParticles.COZY_GLOW_SMOKE.get(), GlowSmokeParticle.CosyGlowProvider::new);

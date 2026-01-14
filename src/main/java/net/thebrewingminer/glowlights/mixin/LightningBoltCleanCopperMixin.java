@@ -20,6 +20,17 @@ import static net.thebrewingminer.glowlights.block.copper.utils.LightningUtils.r
 @Mixin(LightningBolt.class)
 public class LightningBoltCleanCopperMixin {
 
+    // Copies Vanilla logic and makes it apply to GlowLights' custom copper blocks, then injects it
+    // at the end of LightningBolt.cleanCopperOnLightningStrike(Level, BlockPos).
+    // It also adds direct-lightning-strike lighting of any glow campfire.
+
+    // While the custom copper blocks are still instances of Vanilla's WeatheringCopper, their oxidation
+    // and waxing relationships are stored in custom block maps that the original method does not call.
+
+    // The logic then runs parallel to Vanilla's logic, giving the in-game appearance of them working together.
+    // They do not overlap because Vanilla's copper block maps and GlowLights' block maps are disjoint— don't overlap—
+    // and while IWeatheringCopper is instanceof WeatheringCopper, WeatheringCopper is not instanceof IWeatheringCopper.
+
     @Inject(
         method = "clearCopperOnLightningStrike",
         at = @At("TAIL")

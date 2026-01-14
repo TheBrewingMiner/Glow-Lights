@@ -12,6 +12,7 @@ import java.util.function.Supplier;
 public final class WeatheringBlockMap {
     private WeatheringBlockMap(){}
 
+    // Stores oxidation relationships from unaffected -> most affected.
     public static Supplier<BiMap<Block, Block>> NEXT_BY_BLOCK = Suppliers.memoize(() -> {
         return ImmutableBiMap.<Block, Block>builder()
                 .put(ModBlocks.COPPER_GLOW_TORCH.get(), ModBlocks.EXPOSED_COPPER_GLOW_TORCH.get())
@@ -51,6 +52,7 @@ public final class WeatheringBlockMap {
             .build();
     });
 
+    // Stores waxed copper relationships from unwaxed -> waxed.
     public static Supplier<BiMap<Block, Block>> WAXABLES = Suppliers.memoize(() -> {
         return ImmutableBiMap.<Block, Block>builder()
                 .put(ModBlocks.COPPER_GLOW_TORCH.get(), ModBlocks.WAXED_COPPER_GLOW_TORCH.get())
@@ -99,6 +101,9 @@ public final class WeatheringBlockMap {
             .build();
     });
 
+    // Stores oxidation relationships from most affected -> unaffected.
     public static Supplier<BiMap<Block, Block>> PREVIOUS_BY_BLOCK = Suppliers.memoize(() -> NEXT_BY_BLOCK.get().inverse());
+
+    // Stores waxed copper relationships from waxed -> unwaxed.
     public static Supplier<BiMap<Block, Block>> WAX_OFF_BY_BLOCK = Suppliers.memoize(() -> WAXABLES.get().inverse());
 }

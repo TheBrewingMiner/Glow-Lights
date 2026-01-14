@@ -11,6 +11,7 @@ import java.util.Map;
 @Mixin(DispenserBlock.class)
 public interface DispenserBehaviorRegistryAccessor {
 
+    // Define and inject a getter for package-private DISPENSER_REGISTRY
     @Accessor("DISPENSER_REGISTRY")
     static Map<Item, DispenseItemBehavior> getDispenserRegistry() {
         throw new AssertionError();

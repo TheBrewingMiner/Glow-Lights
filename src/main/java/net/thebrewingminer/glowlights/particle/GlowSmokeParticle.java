@@ -6,6 +6,7 @@ import net.minecraft.core.particles.SimpleParticleType;
 
 public class GlowSmokeParticle extends TextureSheetParticle {
 
+    // Mimics properties of campfire smoke particles, but with glow particle textures and sizes.
     GlowSmokeParticle(ClientLevel level, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed, boolean isSignal) {
         super(level, x, y, z);
         this.friction = 0.96F;
@@ -19,6 +20,8 @@ public class GlowSmokeParticle extends TextureSheetParticle {
             this.lifetime = this.random.nextInt(50) + 80;
         }
 
+        // Randomly set color of particle to the bright green of glow squid glow particles,
+        // or to a plain white color.
         if (level.random.nextBoolean()){
             this.setColor(0.6F, 1.0F, 0.8F);
         }

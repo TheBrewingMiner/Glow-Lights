@@ -7,17 +7,21 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import static net.minecraft.world.level.block.state.properties.BlockStateProperties.LIT;
 import static net.thebrewingminer.glowlights.block.utils.BlockStateProperty.HAS_ASH_UNLIT;
 
+// State check helpers for Glow Campfire logic and readability.
 public final class GlowCampfireUtils {
     private GlowCampfireUtils(){}
 
+    // Checks the passed-in state's LIT property.
     public static boolean isLit(BlockState state){
         return state.getValue(LIT);
     }
 
+    // Inverse of isLit.
     public static boolean isUnlit(BlockState state){
         return !isLit(state);
     }
 
+    // Checks passed-in state's HAS_ASH_UNLIT property.
     public static boolean hasAshWhileUnlit(BlockState state){
         return state.getValue(HAS_ASH_UNLIT);
     }
@@ -38,20 +42,24 @@ public final class GlowCampfireUtils {
                 && blockState.hasProperty(BlockStateProperty.HAS_ASH_UNLIT));
     }
 
+    // Maintains blockstate invariant for lighting glow campfires.
     public static BlockState litFromAsh(BlockState blockState) {
         return blockState.setValue(BlockStateProperties.LIT, true)
                          .setValue(BlockStateProperty.HAS_ASH_UNLIT, false);
     }
 
+    // Maintains blockstate invariant for dowsing glow campfires.
     public static BlockState extinguishFlame(BlockState blockState) {
         return blockState.setValue(BlockStateProperties.LIT, false)
                          .setValue(BlockStateProperty.HAS_ASH_UNLIT, true);
     }
 
+    // Setter for HAS_ASH_UNLIT to false.
     public static BlockState cleanAsh(BlockState blockState) {
         return blockState.setValue(BlockStateProperty.HAS_ASH_UNLIT, false);
     }
 
+    // Setter for HAS_ASH_UNLIT to true.
     public static BlockState addCoals(BlockState blockState) {
         return blockState.setValue(BlockStateProperty.HAS_ASH_UNLIT, true);
     }

@@ -40,22 +40,27 @@ public class GlowTorchBlock extends TorchBlock implements SimpleWaterloggedBlock
         WATERLOGGED = BlockStateProperties.WATERLOGGED;
     }
 
+    // Instantiates a block that essentially copies a TorchBlock object, but adds WATERLOGGED property.
+    // By default, WATERLOGGED is false.
     public GlowTorchBlock(BlockBehaviour.Properties properties, ParticleOptions particle) {
         super(properties, particle);
         this.flameParticle = particle;
         this.registerDefaultState(this.stateDefinition.any().setValue(WATERLOGGED, false));
     }
 
+    // Adds WATERLOGGED blockstate property to the state definition of the block.
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder){
         builder.add(WATERLOGGED);
     }
 
+    // Returns the class's VoxelShape.
     @Override
     public VoxelShape getShape(BlockState state, BlockGetter getter, BlockPos pos, CollisionContext context) {
         return AABB;
     }
 
+    // Ensures that waterlogged instances properly tick fluid, as well as check if it is still supported.
     @Override
     public BlockState updateShape(BlockState pState, Direction pFacing, BlockState pFacingState, LevelAccessor pLevel, BlockPos pCurrentPos, BlockPos pFacingPos) {
         if (pState.getValue(WATERLOGGED)) {
@@ -65,6 +70,7 @@ public class GlowTorchBlock extends TorchBlock implements SimpleWaterloggedBlock
         return pFacing == Direction.DOWN && !this.canSurvive(pState, pLevel, pCurrentPos) ? Blocks.AIR.defaultBlockState() : super.updateShape(pState, pFacing, pFacingState, pLevel, pCurrentPos, pFacingPos);
     }
 
+    // Allows objects placed in water to be immediately waterlogged, as if placing into water.
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext context) {
         LevelAccessor levelAccessor = context.getLevel();
@@ -78,10 +84,13 @@ public class GlowTorchBlock extends TorchBlock implements SimpleWaterloggedBlock
         return state.getValue(WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(state);
     }
 
+    // The light level behavior expected of this block.
+    // Method reference is supplied to the block property call for light level in ModBlocks.
     public static int getLightLevel(BlockState state){
         return (isWaterlogged(state)) ? 15 : 10;
     }
 
+    // Used to add torch's flame particle at variable intervals.
     public static void addFlameParticle(ParticleOptions particle, Level level, BlockPos pos, RandomSource randomSource, int delay){
         double x = (double)pos.getX() + 0.5;
         double y = (double)pos.getY() + 0.7;
@@ -94,7 +103,9 @@ public class GlowTorchBlock extends TorchBlock implements SimpleWaterloggedBlock
             level.addParticle(particle, x, y, z, xSpeed, ySpeed, zSpeed);
         }
     }
-    
+
+    // Calls addFlameParticle with delays appropriate for the state.
+    // This method is called by the game.
     @Override
     public void animateTick(BlockState state, Level level, BlockPos pos, RandomSource randomSource) {
         if (state.getValue(WATERLOGGED)) {

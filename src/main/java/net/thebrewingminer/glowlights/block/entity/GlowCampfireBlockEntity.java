@@ -37,6 +37,7 @@ public class GlowCampfireBlockEntity extends BlockEntity implements Clearable {
 
     public static final int SMOKE_DELAY = 20;
 
+    // CampfireBlockEntity-like object for GlowCampfireBlock.
     public GlowCampfireBlockEntity(BlockPos pos, BlockState blockState) {
         super(ModBlockEntities.GLOW_CAMPFIRE.get(), pos, blockState);
         this.items = NonNullList.withSize(NUM_SLOTS, ItemStack.EMPTY);
@@ -45,6 +46,7 @@ public class GlowCampfireBlockEntity extends BlockEntity implements Clearable {
         this.quickCheck = RecipeManager.createCheck(RecipeType.CAMPFIRE_COOKING);
     }
 
+    // Processes cooking for lit campfires.
     public static void cookTick(Level level, BlockPos pos, BlockState blockState, GlowCampfireBlockEntity blockEntity) {
         boolean flag = false;
 
@@ -75,6 +77,7 @@ public class GlowCampfireBlockEntity extends BlockEntity implements Clearable {
 
     }
 
+    // Processes cooling from any remaining cookTick logic when the campfire is unlit.
     public static void cooldownTick(Level level, BlockPos pos, BlockState blockState, GlowCampfireBlockEntity blockEntity) {
         boolean flag = false;
 
@@ -88,6 +91,7 @@ public class GlowCampfireBlockEntity extends BlockEntity implements Clearable {
         if (flag) { setChanged(level, pos, blockState); }
     }
 
+    // Makes particles for the client to render.
     public static void particleTick(Level level, BlockPos pos, BlockState blockState, GlowCampfireBlockEntity blockEntity) {
         RandomSource randomSource = level.random;
         int i;
@@ -119,10 +123,12 @@ public class GlowCampfireBlockEntity extends BlockEntity implements Clearable {
         }
     }
 
+    // Gets stored items.
     public NonNullList<ItemStack> getItems() {
         return this.items;
     }
 
+    // Loads information from saved data.
     @Override
     public void load(CompoundTag compoundTag) {
         super.load(compoundTag);
@@ -141,6 +147,7 @@ public class GlowCampfireBlockEntity extends BlockEntity implements Clearable {
 
     }
 
+    // Saves data.
     @Override
     protected void saveAdditional(CompoundTag compoundTag) {
         super.saveAdditional(compoundTag);
@@ -161,10 +168,12 @@ public class GlowCampfireBlockEntity extends BlockEntity implements Clearable {
         return tag;
     }
 
+    // Gets the recipe for the passed-in item stack if it exists.
     public Optional<CampfireCookingRecipe> getCookableRecipe(ItemStack itemStack) {
         return this.items.stream().noneMatch(ItemStack::isEmpty) ? Optional.empty() : this.quickCheck.getRecipeFor(new SimpleContainer(itemStack), this.level);
     }
 
+    // Processes the player placing food into the campfire. Returns true if it succeeds.
     public boolean placeFood(@Nullable Entity entity, ItemStack itemStack, int cookTime) {
         for(int itemIndex = 0; itemIndex < this.items.size(); ++itemIndex) {
             ItemStack item = this.items.get(itemIndex);

@@ -1,7 +1,6 @@
 package net.thebrewingminer.glowlights;
 
 import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
@@ -18,6 +17,7 @@ public class GlowLights {
     public GlowLights() {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
+        // Register all registries.
         ModItems.register(modEventBus);
         ModBlocks.register(modEventBus);
         ModBlockEntities.register(modEventBus);
@@ -27,6 +27,6 @@ public class GlowLights {
     }
 
     private void onCommonSetup(FMLCommonSetupEvent event) {
-        event.enqueueWork(GlowCampfireDispenserBehavior::register);
+        event.enqueueWork(GlowCampfireDispenserBehavior::register); // Register custom dispenser behavior.
     }
 }

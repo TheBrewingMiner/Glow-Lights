@@ -15,6 +15,7 @@ import net.thebrewingminer.glowlights.block.copper.utils.IWeatheringCopper;
 @Mod.EventBusSubscriber(modid = GlowLights.MOD_ID)
 public class ScrapeEvent {
 
+    // Handle scraping for custom copper when an axe is used on it.
     @SubscribeEvent
     public static void scrapeOxidation(BlockEvent.BlockToolModificationEvent toolEvent){
         UseOnContext useOnContext = toolEvent.getContext();
@@ -34,6 +35,7 @@ public class ScrapeEvent {
         IWeatheringCopper.getPrevious(block).ifPresent(scraped -> toolEvent.setFinalState(scraped.withPropertiesOf(blockState)));
     }
 
+    // Handle scraping wax for custom waxed copper when an axe is used on it.
     @SubscribeEvent
     public static void scrapeWax(BlockEvent.BlockToolModificationEvent toolEvent){
         UseOnContext useOnContext = toolEvent.getContext();

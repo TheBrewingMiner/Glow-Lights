@@ -17,21 +17,26 @@ public class GlowLanternBlock extends Block implements SimpleWaterloggedBlock {
 
     static { WATERLOGGED = BlockStateProperties.WATERLOGGED; }
 
+    // Instantiates a custom block whose state includes Waterlogged block state property.
     public GlowLanternBlock(Properties properties){
         super(properties);
         this.registerDefaultState(this.stateDefinition.any().setValue(WATERLOGGED, false));
     }
 
+    // Adds WATERLOGGED blockstate property to the state definition of the block.
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder){
         builder.add(WATERLOGGED);
     }
+
 
     @Override
     public FluidState getFluidState(BlockState state) {
         return state.getValue(WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(state);
     }
 
+    // The light level behavior expected of this block.
+    // Method reference is supplied to the block property call for light level in ModBlocks.
     public static int getLightLevel(BlockState state){
         return (isWaterlogged(state)) ? 15 : 10;
     }

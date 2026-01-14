@@ -12,6 +12,7 @@ import net.thebrewingminer.glowlights.block.entity.render.GlowCampfireRenderer;
 @Mod.EventBusSubscriber(modid = GlowLights.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class ClientEvent {
 
+    // Register block-entity renderers for the client to use.
     @SubscribeEvent
     public static void registerBlockEntityRenderer(EntityRenderersEvent.RegisterRenderers renderersEvent){
         renderersEvent.registerBlockEntityRenderer(ModBlockEntities.GLOW_CAMPFIRE.get(), GlowCampfireRenderer::new);

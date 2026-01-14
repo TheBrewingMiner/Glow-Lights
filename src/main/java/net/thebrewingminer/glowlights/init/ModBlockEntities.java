@@ -10,8 +10,10 @@ import net.thebrewingminer.glowlights.block.entity.CopperGlowCampfireBlockEntity
 import net.thebrewingminer.glowlights.block.entity.GlowCampfireBlockEntity;
 
 public class ModBlockEntities {
+    // Creates a registry for custom block entities for this mod.
     public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITY_TYPES, GlowLights.MOD_ID);
 
+    // Registers GlowCampfireBlockEntity and ties it to its proper blocks.
     public static final RegistryObject<BlockEntityType<GlowCampfireBlockEntity>> GLOW_CAMPFIRE = BLOCK_ENTITIES.register(
         "glow_campfire",
         () -> BlockEntityType.Builder.of(GlowCampfireBlockEntity::new,
@@ -22,6 +24,7 @@ public class ModBlockEntities {
         ).build(null)
     );
 
+    // Registers CopperGlowCampfireBlockEntity and ties it to its proper blocks.
     public static final RegistryObject<BlockEntityType<CopperGlowCampfireBlockEntity>> COPPER_GLOW_CAMPFIRE = BLOCK_ENTITIES.register(
             "copper_glow_campfire",
             () -> BlockEntityType.Builder.of(CopperGlowCampfireBlockEntity::new,
@@ -45,6 +48,7 @@ public class ModBlockEntities {
             ).build(null)
     );
 
+    // Make the registry known to the event bus.
     public static void register(IEventBus eventBus){
         BLOCK_ENTITIES.register(eventBus);
     }

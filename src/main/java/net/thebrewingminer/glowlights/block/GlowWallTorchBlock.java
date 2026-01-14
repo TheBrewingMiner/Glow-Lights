@@ -35,16 +35,20 @@ public class GlowWallTorchBlock extends WallTorchBlock implements SimpleWaterlog
         WATERLOGGED = BlockStateProperties.WATERLOGGED;
     }
 
+    // Instantiates a block that essentially copies a WallTorchBlock object, but adds WATERLOGGED property.
+    // By default, WATERLOGGED is false.
     public GlowWallTorchBlock(BlockBehaviour.Properties properties, ParticleOptions particle) {
         super(properties, particle);
         this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(WATERLOGGED, false));
     }
 
+    // Adds FACING and WATERLOGGED to the object's state definition.
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         builder.add(FACING, WATERLOGGED);
     }
 
+    // Copied from superclass. Checks that the wall the torch is on is still there/still sturdy.
     @Override
     public boolean canSurvive(BlockState state, LevelReader reader, BlockPos pos) {
         Direction facindDirection = state.getValue(FACING);
@@ -53,6 +57,8 @@ public class GlowWallTorchBlock extends WallTorchBlock implements SimpleWaterlog
         return blockState.isFaceSturdy(reader, oppositePos, facindDirection);
     }
 
+    // Same as superclass (which checks for the direction to place the torch), but also checks if it is being placed
+    // in water, like GlowTorchBlock does.
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext context) {
         BlockState blockState = this.defaultBlockState();
@@ -80,6 +86,7 @@ public class GlowWallTorchBlock extends WallTorchBlock implements SimpleWaterlog
         return null;
     }
 
+    // Ensures that waterlogged instances properly tick fluid, as well as check if it is still supported.
     @Override
     public BlockState updateShape(BlockState pState, Direction pFacing, BlockState pFacingState, LevelAccessor pLevel, BlockPos pCurrentPos, BlockPos pFacingPos) {
         if (pState.getValue(WATERLOGGED)) {
@@ -94,10 +101,13 @@ public class GlowWallTorchBlock extends WallTorchBlock implements SimpleWaterlog
         return state.getValue(WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(state);
     }
 
+    // The light level behavior expected of this block.
+    // Method reference is supplied to the block property call for light level in ModBlocks.
     public static int getLightLevel(BlockState state){
         return ((isWaterlogged(state)) ? 15 : 10);
     }
 
+    // Used to add torch's flame particle at variable intervals, with direction of the torch accounted for.
     public static void addFlameParticle(ParticleOptions particle, Level level, BlockState blockState, BlockPos pos, RandomSource randomSource, int delay){
         Direction facingDirection = blockState.getValue(FACING);
         Direction directionOpposite = facingDirection.getOpposite();
@@ -121,6 +131,8 @@ public class GlowWallTorchBlock extends WallTorchBlock implements SimpleWaterlog
         }
     }
 
+    // Calls addFlameParticle with delays appropriate for the state.
+    // This method is called by the game.
     @Override
     public void animateTick(BlockState blockState, Level level, BlockPos pos, RandomSource randomSource) {
         if (blockState.getValue(WATERLOGGED)){

@@ -7,6 +7,7 @@ import static net.minecraft.world.level.block.state.properties.BlockStatePropert
 public final class GlowUtils {
     private GlowUtils(){}
 
+    // Checks passed-in blockstate's WATERLOGGED property.
     public static boolean isWaterlogged(BlockState state){
         return state.getValue(WATERLOGGED);
     }

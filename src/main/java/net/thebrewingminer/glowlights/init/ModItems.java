@@ -8,6 +8,7 @@ import net.minecraftforge.registries.RegistryObject;
 import net.thebrewingminer.glowlights.GlowLights;
 
 public class ModItems {
+    // Create the registry for custom items of this mod.
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, GlowLights.MOD_ID);
 
     /* Items */
@@ -103,6 +104,7 @@ public class ModItems {
         )
     );
 
+    // Make this registry known to the event bus
     public static void register(IEventBus eventBus){
         ITEMS.register(eventBus);
     }

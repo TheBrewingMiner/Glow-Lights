@@ -17,7 +17,7 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.thebrewingminer.glowlights.block.copper.utils.ICopperCampfireVariant;
 import net.thebrewingminer.glowlights.block.copper.utils.IWeatheringCopper;
 
-import static net.thebrewingminer.glowlights.block.copper.WaxUtils.triggerOnHoneycomb;
+import static net.thebrewingminer.glowlights.block.copper.utils.WaxUtils.triggerOnHoneycomb;
 import static net.thebrewingminer.glowlights.block.utils.GlowUtils.isWaterlogged;
 
 @SuppressWarnings({"NullableProblems", "deprecation"})
@@ -26,6 +26,7 @@ public class CopperGlowCampfireBlock extends WaxedCopperGlowCampfireBlock implem
     private final WeatheringCopper.WeatherState weatherState;
 
     // WaxedCopperGlowCampfireBlock handles everything the campfire normally does.
+    // Stores copper weather state.
     public CopperGlowCampfireBlock(WeatheringCopper.WeatherState weatherState, BlockBehaviour.Properties properties, float fireDamage, float fireDamageDelay) {
         super(properties, fireDamage, fireDamageDelay);
         this.weatherState = weatherState;
@@ -37,6 +38,8 @@ public class CopperGlowCampfireBlock extends WaxedCopperGlowCampfireBlock implem
         return this.weatherState;
     }
 
+    // Called by the game to randomly tick the block.
+    // This implementation variates the block's random tick calls with time if WATERLOGGED is true.
     @Override
     public void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource randomSource) {
         if (isWaterlogged(state)){
@@ -45,7 +48,7 @@ public class CopperGlowCampfireBlock extends WaxedCopperGlowCampfireBlock implem
 
     }
 
-    // Checks if the block can still oxidize, and thus is still eligible for ticking.
+    // Checks if the block can oxidize further, and thus is still eligible for ticking.
     @Override
     public boolean isRandomlyTicking(BlockState state) {
         return IWeatheringCopper.getNext(state.getBlock()).isPresent();
@@ -61,14 +64,15 @@ public class CopperGlowCampfireBlock extends WaxedCopperGlowCampfireBlock implem
         if (heldItem.is(Items.HONEYCOMB)){
             return IWeatheringCopper.getWaxed(state).map(waxed -> {
 
-                // Trigger advancement
+                // Trigger advancement via helper method
                 triggerOnHoneycomb(level, player, pos, heldItem);
 
-                // Apply wax
+                // Apply wax on block
                 level.setBlock(pos, waxed, 3);
 
                 if (survivalMode) { heldItem.shrink(1); }
 
+                // Trigger events
                 level.levelEvent(player, 3003, pos, 0);
                 level.gameEvent(GameEvent.BLOCK_CHANGE, pos, GameEvent.Context.of(player, waxed));
 
