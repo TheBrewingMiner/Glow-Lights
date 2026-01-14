@@ -78,6 +78,7 @@ public abstract class AbstractGlowCampfireBlock extends BaseEntityBlock implemen
         VIRTUAL_FENCE_POST = Block.box(6.0, 0.0, 6.0, 10.0, 16.0, 10.0);
     }
 
+    // Creates an object that mimics CampfireBlock with shared logic for both GlowCampfireBlock and CopperGlowCampfireBlock.
     protected AbstractGlowCampfireBlock(BlockBehaviour.Properties properties, float fireDamage, float fireDamageDelay) {
         super(properties);
         this.fireDamage = fireDamage;
@@ -85,21 +86,25 @@ public abstract class AbstractGlowCampfireBlock extends BaseEntityBlock implemen
         this.registerDefaultState(this.stateDefinition.any().setValue(LIT, false).setValue(WATERLOGGED, false).setValue(FACING, Direction.NORTH).setValue(SIGNAL_FIRE, false).setValue(HAS_ASH_UNLIT, false));
     }
 
+    // Return this object's VoxelShape
     @Override
     public VoxelShape getShape(BlockState state, BlockGetter getter, BlockPos pos, CollisionContext context) {
         return SHAPE;
     }
 
+    // Return this object's RenderShape
     @Override
     public RenderShape getRenderShape(BlockState pState) {
         return RenderShape.MODEL;
     }
 
+    // Add LIT, WATERLOGGED, FACING, SIGNAL_FIRE, and HAS_ASH_UNLIT blockstate properties to the state definition of this object.
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder){
         builder.add(LIT, WATERLOGGED, FACING, SIGNAL_FIRE, HAS_ASH_UNLIT);
     }
 
+    // Check if the block is placed in water for direct waterlogging and if a hay bale is underneath for SIGNAL_FIRE upon placement,
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext blockPlaceContext){
         LevelAccessor levelAccessor = blockPlaceContext.getLevel();
@@ -108,6 +113,7 @@ public abstract class AbstractGlowCampfireBlock extends BaseEntityBlock implemen
         return ( this.defaultBlockState().setValue(WATERLOGGED, inWater).setValue(LIT, false).setValue(FACING, blockPlaceContext.getHorizontalDirection()).setValue(SIGNAL_FIRE, this.isSmokeSource(levelAccessor.getBlockState(pos.below()))) );
     }
 
+    // Ensure fluid is ticked properly if waterlogged, and that changes in the block below affect SIGNAL_FIRE as expected.
     @Override
     public BlockState updateShape(BlockState blockState, Direction facing, BlockState facingState, LevelAccessor level, BlockPos currentPos, BlockPos facingPos) {
         if (blockState.getValue(WATERLOGGED)) {
@@ -117,6 +123,7 @@ public abstract class AbstractGlowCampfireBlock extends BaseEntityBlock implemen
         return (facing == Direction.DOWN ? blockState.setValue(SIGNAL_FIRE, this.isSmokeSource(facingState)) : super.updateShape(blockState, facing, facingState, level, currentPos, facingPos));
     }
 
+    // Return false for being not pathfindable for mobs.
     @Override
     public boolean isPathfindable(BlockState state, BlockGetter getter, BlockPos pos, PathComputationType type) {
         return false;
@@ -132,6 +139,8 @@ public abstract class AbstractGlowCampfireBlock extends BaseEntityBlock implemen
         return state.rotate(mirror.getRotation(state.getValue(FACING)));
     }
 
+    // The light level behavior expected of this block.
+    // Method reference is supplied to the block property call for light level in ModBlocks.
     public static int getLightLevel(BlockState state){
         int lightLevel = 0;
         if (isLit(state)){ lightLevel = (isWaterlogged(state)) ? 15 : 10; }
