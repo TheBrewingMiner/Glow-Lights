@@ -43,11 +43,18 @@ public class GlowCampfireRenderer implements BlockEntityRenderer<GlowCampfireBlo
 
             // Change position slightly in time to simulate bobbing in water.
             if (GlowUtils.isWaterlogged(blockState)){
-                float phase = (float)(itemIndex * Math.PI / 2);
+                long seed = blockEntity.getBlockPos().asLong()
+                                ^ (long)itemIndex * 31L
+                                ^ itemStack.getItem().hashCode();
+
+                float mixedSeed = RenderUtils.mixSeed(seed);
+
+                float phase = mixedSeed * Mth.TWO_PI;
+                float radius = 0.04f;
                 float speed = 0.03f;
 
-                float x = Mth.cos(partialTime * speed + phase) * 0.04f;
-                float z = Mth.sin(partialTime * speed + phase) * 0.04f;
+                float x = Mth.cos(partialTime * speed + phase) * radius;
+                float z = Mth.sin(partialTime * speed + phase) * radius;
 
                 float raw_y = Mth.sin(partialTime * 0.08f + phase) * 0.015f;
                 float y = Math.max(0.0f, raw_y);
