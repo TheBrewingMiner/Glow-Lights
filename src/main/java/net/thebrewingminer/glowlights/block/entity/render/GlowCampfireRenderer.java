@@ -14,6 +14,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.CampfireBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.thebrewingminer.glowlights.block.entity.GlowCampfireBlockEntity;
+import net.thebrewingminer.glowlights.block.entity.render.utils.RenderUtils;
 import net.thebrewingminer.glowlights.block.utils.GlowUtils;
 
 public class GlowCampfireRenderer implements BlockEntityRenderer<GlowCampfireBlockEntity> {
