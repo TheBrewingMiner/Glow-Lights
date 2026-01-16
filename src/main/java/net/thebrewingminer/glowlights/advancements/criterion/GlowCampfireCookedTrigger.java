@@ -11,8 +11,9 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.thebrewingminer.glowlights.GlowLights;
+import net.thebrewingminer.glowlights.block.utils.GlowUtils;
+import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nullable;
 
 @SuppressWarnings("NullableProblems")
 public class GlowCampfireCookedTrigger extends SimpleCriterionTrigger<GlowCampfireCookedTrigger.TriggerInstance> {
@@ -26,17 +27,13 @@ public class GlowCampfireCookedTrigger extends SimpleCriterionTrigger<GlowCampfi
     @Override
     protected TriggerInstance createInstance(JsonObject json, EntityPredicate.Composite player, DeserializationContext context) {
         Block block = deserializeBlock(json);
-
-        Boolean waterlogged = json.has("waterlogged")
-                ? json.get("waterlogged").getAsBoolean()
-                : null;
+        boolean waterlogged = json.has("waterlogged") ? json.get("waterlogged").getAsBoolean() : false;
 
         return new TriggerInstance(player, block, waterlogged);
     }
 
-    @Nullable
-    private static Block deserializeBlock(JsonObject json) {
-        if (!json.has("block")) return null;
+    private static @NotNull Block deserializeBlock(JsonObject json) {
+        if (!json.has("block")) throw new JsonSyntaxException("Missing required 'block' field for glow_campfire_cooked trigger");
 
         ResourceLocation id = new ResourceLocation(GsonHelper.getAsString(json, "block"));
         Block block = ForgeRegistries.BLOCKS.getValue(id);
@@ -57,25 +54,31 @@ public class GlowCampfireCookedTrigger extends SimpleCriterionTrigger<GlowCampfi
 
     public static class TriggerInstance extends AbstractCriterionTriggerInstance {
 
-        private final @Nullable Block block;
-        private final @Nullable Boolean waterlogged;
+        private final Block block;
+        private final boolean waterlogged;
 
-        public TriggerInstance(EntityPredicate.Composite player, @Nullable Block block, @Nullable Boolean waterlogged) {
+        public TriggerInstance(EntityPredicate.Composite player, Block block, boolean waterlogged) {
             super(GlowCampfireCookedTrigger.ID, player);
             this.block = block;
             this.waterlogged = waterlogged;
         }
 
         public boolean matches(BlockState state) {
-            if (block != null && !state.is(block)) return false;
+            if (!state.is(block)) return false;
+            if (!state.hasProperty(BlockStateProperties.WATERLOGGED)) return false;
 
-            if (waterlogged != null) {
-                if (!state.hasProperty(BlockStateProperties.WATERLOGGED)) return false;
-
-                if (state.getValue(BlockStateProperties.WATERLOGGED) != waterlogged) return false;
-            }
-
-            return true;
+            return GlowUtils.isWaterlogged(state) == waterlogged;
         }
+
+        @Override
+        public JsonObject serializeToJson(SerializationContext conditions) {
+            JsonObject json = super.serializeToJson(conditions);
+
+            json.addProperty("block", ForgeRegistries.BLOCKS.getKey(block).toString());
+            json.addProperty("waterlogged", waterlogged);
+
+            return json;
+        }
+
     }
 }

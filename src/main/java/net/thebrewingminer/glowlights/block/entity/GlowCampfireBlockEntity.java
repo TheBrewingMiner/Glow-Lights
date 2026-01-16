@@ -1,11 +1,13 @@
 package net.thebrewingminer.glowlights.block.entity;
 
+import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.*;
@@ -20,6 +22,8 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.level.gameevent.GameEvent.Context;
+import net.minecraft.world.phys.AABB;
+import net.thebrewingminer.glowlights.advancements.ModCriteriaTriggers;
 import net.thebrewingminer.glowlights.block.GlowCampfireBlock;
 import net.thebrewingminer.glowlights.block.utils.GlowCampfireUtils;
 import net.thebrewingminer.glowlights.init.ModBlockEntities;
@@ -65,6 +69,15 @@ public class GlowCampfireBlockEntity extends BlockEntity implements Clearable {
                     ItemStack stack = blockEntity.quickCheck.getRecipeFor(container, level).map((campfireCookingRecipe) -> campfireCookingRecipe.assemble(container)).orElse(itemStack);
                     Containers.dropItemStack(level, pos.getX(), pos.getY(), pos.getZ(), stack);
                     blockEntity.items.set(itemOnCampfire, ItemStack.EMPTY);
+
+                    double i = pos.getX();
+                    double j = pos.getY();
+                    double k = pos.getZ();
+
+                    for (ServerPlayer serverPlayer : level.getEntitiesOfClass(ServerPlayer.class, (new AABB(i, j, k, i, j, k).inflate(10.0D, 5.0D, 10.0D)))) {
+                        ModCriteriaTriggers.GLOW_CAMPFIRE_COOKED_TRIGGER.trigger(serverPlayer, blockState);
+                    }
+
                     level.sendBlockUpdated(pos, blockState, blockState, 3);
                     level.gameEvent(GameEvent.BLOCK_CHANGE, pos, Context.of(blockState));
                 }
