@@ -9,9 +9,13 @@ import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.renderer.entity.ItemRenderer;
 import net.minecraft.core.Direction;
 import net.minecraft.core.NonNullList;
+import net.minecraft.util.Mth;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.CampfireBlock;
+import net.minecraft.world.level.block.state.BlockState;
 import net.thebrewingminer.glowlights.block.entity.CopperGlowCampfireBlockEntity;
+import net.thebrewingminer.glowlights.block.entity.render.utils.RenderUtils;
+import net.thebrewingminer.glowlights.block.utils.GlowUtils;
 
 public class CopperGlowCampfireRenderer implements BlockEntityRenderer<CopperGlowCampfireBlockEntity> {
     private static final float SIZE = 0.375F;
@@ -22,25 +26,57 @@ public class CopperGlowCampfireRenderer implements BlockEntityRenderer<CopperGlo
     }
 
     // Renders items on the copper glow campfire.
-    public void render(CopperGlowCampfireBlockEntity pBlockEntity, float partialTick, PoseStack pPoseStack, MultiBufferSource multiBufferSource, int packedLight, int packedOverlay) {
-        Direction direction = pBlockEntity.getBlockState().getValue(CampfireBlock.FACING);
-        NonNullList<ItemStack> blockEntityItems = pBlockEntity.getItems();
-        int longPos = (int)pBlockEntity.getBlockPos().asLong();
+    @SuppressWarnings("NullableProblems")
+    public void render(CopperGlowCampfireBlockEntity blockEntity, float partialTick, PoseStack poseStack, MultiBufferSource multiBufferSource, int packedLight, int packedOverlay){
+        Direction direction = blockEntity.getBlockState().getValue(CampfireBlock.FACING);
+        BlockState blockState = blockEntity.getBlockState();
+        NonNullList<ItemStack> items = blockEntity.getItems();
+        int longPos = (int)blockEntity.getBlockPos().asLong();
 
-        for(int itemIndex = 0; itemIndex < blockEntityItems.size(); ++itemIndex) {
-            ItemStack itemStack = blockEntityItems.get(itemIndex);
-            if (itemStack != ItemStack.EMPTY) {
-                pPoseStack.pushPose();
-                pPoseStack.translate(0.5, 0.44921875, 0.5);
-                Direction directionFrom2DDataValue = Direction.from2DDataValue((itemIndex + direction.get2DDataValue()) % 4);
-                float toYRotation = -directionFrom2DDataValue.toYRot();
-                pPoseStack.mulPose(Vector3f.YP.rotationDegrees(toYRotation));
-                pPoseStack.mulPose(Vector3f.XP.rotationDegrees(90.0F));
-                pPoseStack.translate(-0.3125, -0.3125, 0.0);
-                pPoseStack.scale(SIZE, SIZE, SIZE);
-                this.itemRenderer.renderStatic(itemStack, ItemTransforms.TransformType.FIXED, packedLight, packedOverlay, pPoseStack, multiBufferSource, longPos + itemIndex);
-                pPoseStack.popPose();
+        long time = blockEntity.getLevel() != null ? blockEntity.getLevel().getGameTime() : 0;
+        float partialTime = time + partialTick;
+
+        for (int itemIndex = 0; itemIndex < items.size(); itemIndex++){
+            ItemStack itemStack = items.get(itemIndex);
+            if (itemStack.isEmpty()) continue;
+
+            poseStack.pushPose();
+            poseStack.translate(0.5, 0.44921875, 0.5);
+
+            // Change position slightly in time to simulate bobbing in water.
+            if (GlowUtils.isWaterlogged(blockState)){
+                long seed = blockEntity.getBlockPos().asLong()
+                        ^ (long)itemIndex * 31L
+                        ^ itemStack.getItem().hashCode();
+
+                long mixedSeed = RenderUtils.mixSeed(seed);
+
+                float phase = RenderUtils.unitFloat(mixedSeed, 0) * Mth.TWO_PI;
+                float radius = RenderUtils.unitFloat(mixedSeed, 16) * 0.04f;
+                float speed = 0.03f;
+
+                float bobSpeed = 0.04f;
+                float frequencyJitter = 0.85f + RenderUtils.unitFloat(mixedSeed, 48) * 0.3f;
+
+                float x = Mth.cos(partialTime * speed + phase) * radius;
+                float z = Mth.sin(partialTime * speed + phase) * radius;
+
+                float raw_y = Mth.sin(partialTime * bobSpeed * frequencyJitter + phase) * 0.015f;
+                float y = Math.max(0.0f, raw_y);
+
+                poseStack.translate(x, y, z);
             }
+
+            Direction directionFrom2DDataValue = Direction.from2DDataValue((itemIndex + direction.get2DDataValue()) % 4);
+            float toYRotation = -directionFrom2DDataValue.toYRot();
+            poseStack.mulPose(Vector3f.YP.rotationDegrees(toYRotation));
+            poseStack.mulPose(Vector3f.XP.rotationDegrees(90.0F));
+
+            poseStack.translate(-0.3125, -0.3125, 0.0);
+            poseStack.scale(SIZE, SIZE, SIZE);
+
+            this.itemRenderer.renderStatic(itemStack, ItemTransforms.TransformType.FIXED, packedLight, packedOverlay, poseStack, multiBufferSource, longPos + itemIndex);
+            poseStack.popPose();
         }
     }
 }

@@ -26,6 +26,7 @@ public class GlowCampfireRenderer implements BlockEntityRenderer<GlowCampfireBlo
     }
 
     @SuppressWarnings("NullableProblems")
+    // Renders the items on the campfire.
     public void render(GlowCampfireBlockEntity blockEntity, float partialTick, PoseStack poseStack, MultiBufferSource multiBufferSource, int packedLight, int packedOverlay){
         Direction direction = blockEntity.getBlockState().getValue(CampfireBlock.FACING);
         BlockState blockState = blockEntity.getBlockState();
