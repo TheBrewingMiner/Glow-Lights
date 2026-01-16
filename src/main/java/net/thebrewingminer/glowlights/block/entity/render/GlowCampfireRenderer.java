@@ -47,16 +47,19 @@ public class GlowCampfireRenderer implements BlockEntityRenderer<GlowCampfireBlo
                                 ^ (long)itemIndex * 31L
                                 ^ itemStack.getItem().hashCode();
 
-                float mixedSeed = RenderUtils.mixSeed(seed);
+                long mixedSeed = RenderUtils.mixSeed(seed);
 
-                float phase = mixedSeed * Mth.TWO_PI;
-                float radius = 0.04f;
+                float phase = RenderUtils.unitFloat(mixedSeed, 0) * Mth.TWO_PI;
+                float radius = RenderUtils.unitFloat(mixedSeed, 16) * 0.04f;
                 float speed = 0.03f;
+
+                float bobSpeed = 0.04f;
+                float frequencyJitter = 0.85f + RenderUtils.unitFloat(mixedSeed, 48) * 0.3f;
 
                 float x = Mth.cos(partialTime * speed + phase) * radius;
                 float z = Mth.sin(partialTime * speed + phase) * radius;
 
-                float raw_y = Mth.sin(partialTime * 0.08f + phase) * 0.015f;
+                float raw_y = Mth.sin(partialTime * bobSpeed * frequencyJitter + phase) * 0.015f;
                 float y = Math.max(0.0f, raw_y);
 
                 poseStack.translate(x, y, z);
@@ -74,27 +77,4 @@ public class GlowCampfireRenderer implements BlockEntityRenderer<GlowCampfireBlo
             poseStack.popPose();
         }
     }
-
-    // Renders items on the glow campfire.
-//    public void render(GlowCampfireBlockEntity pBlockEntity, float partialTick, PoseStack pPoseStack, MultiBufferSource multiBufferSource, int packedLight, int packedOverlay) {
-//        Direction direction = pBlockEntity.getBlockState().getValue(CampfireBlock.FACING);
-//        NonNullList<ItemStack> blockEntityItems = pBlockEntity.getItems();
-//        int longPos = (int)pBlockEntity.getBlockPos().asLong();
-//
-//        for(int itemIndex = 0; itemIndex < blockEntityItems.size(); ++itemIndex) {
-//            ItemStack itemStack = blockEntityItems.get(itemIndex);
-//            if (itemStack != ItemStack.EMPTY) {
-//                pPoseStack.pushPose();
-//                pPoseStack.translate(0.5, 0.44921875, 0.5);
-//                Direction directionFrom2DDataValue = Direction.from2DDataValue((itemIndex + direction.get2DDataValue()) % 4);
-//                float toYRotation = -directionFrom2DDataValue.toYRot();
-//                pPoseStack.mulPose(Vector3f.YP.rotationDegrees(toYRotation));
-//                pPoseStack.mulPose(Vector3f.XP.rotationDegrees(90.0F));
-//                pPoseStack.translate(-0.3125, -0.3125, 0.0);
-//                pPoseStack.scale(SIZE, SIZE, SIZE);
-//                this.itemRenderer.renderStatic(itemStack, ItemTransforms.TransformType.FIXED, packedLight, packedOverlay, pPoseStack, multiBufferSource, longPos + itemIndex);
-//                pPoseStack.popPose();
-//            }
-//        }
-//    }
 }
