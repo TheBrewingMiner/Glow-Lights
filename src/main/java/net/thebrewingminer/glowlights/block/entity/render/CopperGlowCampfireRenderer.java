@@ -67,9 +67,6 @@ public class CopperGlowCampfireRenderer implements BlockEntityRenderer<CopperGlo
         NonNullList<ItemStack> items = blockEntity.getItems();
         int longPos = (int)blockEntity.getBlockPos().asLong();
 
-        long time = blockEntity.getLevel() != null ? blockEntity.getLevel().getGameTime() : 0;
-        float partialTime = time + partialTick;
-
         for (int itemIndex = 0; itemIndex < items.size(); itemIndex++){
             ItemStack itemStack = items.get(itemIndex);
             if (itemStack.isEmpty()) continue;
