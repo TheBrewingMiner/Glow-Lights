@@ -103,7 +103,7 @@ public class CopperGlowCampfireBlockEntity extends BlockEntity implements Cleara
                     double k = pos.getZ();
 
                     for (ServerPlayer serverPlayer : level.getEntitiesOfClass(ServerPlayer.class, (new AABB(i, j, k, i, j, k).inflate(10.0D, 5.0D, 10.0D)))) {
-                        ModCriteriaTriggers.GLOW_CAMPFIRE_COOKED_TRIGGER.trigger(serverPlayer, blockState);
+                        ModCriteriaTriggers.GLOW_CAMPFIRE_COOKED_TRIGGER.trigger(serverPlayer, pos);
                     }
 
                     level.sendBlockUpdated(pos, blockState, blockState, 3);

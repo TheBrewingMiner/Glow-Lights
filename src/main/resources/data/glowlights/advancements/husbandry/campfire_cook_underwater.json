@@ -2,11 +2,17 @@
   "parent": "minecraft:husbandry/root",
   "criteria": {
     "beacon": {
+      "trigger": "glowlights:glow_campfire_cooked",
       "conditions": {
-        "block": "glowlights:prismarine_glow_campfire",
-        "waterlogged": true
-      },
-      "trigger": "glowlights:glow_campfire_cooked"
+        "location": {
+          "block": {
+            "tag": "glowlights:glow_campfires",
+            "state": {
+              "waterlogged": "true"
+            }
+          }
+        }
+      }
     }
   },
   "display": {

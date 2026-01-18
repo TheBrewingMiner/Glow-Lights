@@ -1,18 +1,12 @@
 package net.thebrewingminer.glowlights.advancements.criterion;
 
 import com.google.gson.JsonObject;
-import com.google.gson.JsonSyntaxException;
 import net.minecraft.advancements.critereon.*;
+import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.util.GsonHelper;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraftforge.registries.ForgeRegistries;
 import net.thebrewingminer.glowlights.GlowLights;
-import net.thebrewingminer.glowlights.block.utils.GlowUtils;
-import org.jetbrains.annotations.NotNull;
 
 
 @SuppressWarnings("NullableProblems")
@@ -20,64 +14,37 @@ public class GlowCampfireCookedTrigger extends SimpleCriterionTrigger<GlowCampfi
     static final ResourceLocation ID = new ResourceLocation(GlowLights.MOD_ID, "glow_campfire_cooked");
 
     @Override
-    public ResourceLocation getId() {
-        return ID;
-    }
+    public ResourceLocation getId() { return ID; }
 
     @Override
     protected TriggerInstance createInstance(JsonObject json, EntityPredicate.Composite player, DeserializationContext context) {
-        Block block = deserializeBlock(json);
-        boolean waterlogged = json.has("waterlogged") ? json.get("waterlogged").getAsBoolean() : false;
-
-        return new TriggerInstance(player, block, waterlogged);
+        LocationPredicate location = LocationPredicate.fromJson(json.get("location"));
+        return new TriggerInstance(player, location);
     }
 
-    private static @NotNull Block deserializeBlock(JsonObject json) {
-        if (!json.has("block")) throw new JsonSyntaxException("Missing required 'block' field for glow_campfire_cooked trigger");
-
-        ResourceLocation id = new ResourceLocation(GsonHelper.getAsString(json, "block"));
-        Block block = ForgeRegistries.BLOCKS.getValue(id);
-
-        if (block == null) {
-            throw new JsonSyntaxException("Unknown block: '" + id + "'");
-        }
-
-        return block;
+    public void trigger(ServerPlayer player, BlockPos pos) {
+        this.trigger(player, instance -> instance.matches(player.getLevel(), pos));
     }
 
-    public void trigger(ServerPlayer player, BlockState state) {
-        this.trigger(
-                        player,
-            instance -> instance.matches(state)
-        );
-    }
-
+    // Inner TriggerInstance class defines the core behavior for each instance of the trigger.
     public static class TriggerInstance extends AbstractCriterionTriggerInstance {
+        private final LocationPredicate locationPredicate;
 
-        private final Block block;
-        private final boolean waterlogged;
-
-        public TriggerInstance(EntityPredicate.Composite player, Block block, boolean waterlogged) {
+        public TriggerInstance(EntityPredicate.Composite player, LocationPredicate locationPredicate) {
             super(GlowCampfireCookedTrigger.ID, player);
-            this.block = block;
-            this.waterlogged = waterlogged;
+            this.locationPredicate = locationPredicate;
         }
 
-        public boolean matches(BlockState state) {
-            if (!state.is(block)) return false;
-            if (!state.hasProperty(BlockStateProperties.WATERLOGGED)) return false;
-
-            return GlowUtils.isWaterlogged(state) == waterlogged;
+        public boolean matches(ServerLevel level, BlockPos pos) {
+            return this.locationPredicate.matches(level, pos.getX(), pos.getY(), pos.getZ());
         }
 
         @Override
         public JsonObject serializeToJson(SerializationContext conditions) {
-            JsonObject json = super.serializeToJson(conditions);
+            JsonObject obj = super.serializeToJson(conditions);
+            obj.add("location", this.locationPredicate.serializeToJson());
 
-            json.addProperty("block", ForgeRegistries.BLOCKS.getKey(block).toString());
-            json.addProperty("waterlogged", waterlogged);
-
-            return json;
+            return obj;
         }
 
     }
