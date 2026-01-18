@@ -123,12 +123,22 @@
 
   "item.glowlights.copper_nugget": "Copper Nugget",
 
+
   "advancements.husbandry.wax_on_glowlight.title": "Glow Wax On",
   "advancements.husbandry.wax_on_glowlight.description": "Apply Honeycomb to a Copper Glowlight or chain!",
 
   "advancements.husbandry.wax_off_glowlight.title": "Glow Wax Off",
   "advancements.husbandry.wax_off_glowlight.description": "Scrape Wax off of a Copper Glowlight or chain!",
 
+  "advancements.husbandry.obtain_glow_campfire.title": "Glowing Hot!",
+  "advancements.husbandry.obtain_glow_campfire.description": "Obtain your first glow campfire",
+
   "advancements.husbandry.glow_campfire_boil.title": "Just Keep Boiling",
-  "advancements.husbandry.glow_campfire_boil.description": "Cook underwater with a glow campfire"
+  "advancements.husbandry.glow_campfire_boil.description": "Cook underwater with a glow campfire",
+
+  "advancements.husbandry.copper_glow_campfire_cooked.title": "Fast Food",
+  "advancements.husbandry.copper_glow_campfire_cooked.description": "Use a copper glow campfire to cook quickly",
+
+  "advancements.husbandry.oxidized_copper_glow_campfire_cooked.title": "Kitchen Nightmares",
+  "advancements.husbandry.oxidized_copper_glow_campfire_cooked.description": "Slowly cook with an oxidized copper glow campfire. Maybe clean your cookware?"
 }

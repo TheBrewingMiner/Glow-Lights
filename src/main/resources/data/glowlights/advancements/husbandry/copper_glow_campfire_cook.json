@@ -1,0 +1,40 @@
+{
+  "parent": "glowlights:husbandry/obtain_glow_campfire",
+  "criteria": {
+    "copper_glow_campfire_cooked": {
+      "trigger": "glowlights:glow_campfire_cooked",
+      "conditions": {
+        "location": {
+          "block": {
+            "blocks": [
+              "glowlights:copper_glow_campfire",
+              "glowlights:waxed_copper_glow_campfire",
+              "glowlights:cut_copper_glow_campfire",
+              "glowlights:waxed_cut_copper_glow_campfire"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancements.husbandry.copper_glow_campfire_cooked.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "glowlights:copper_glow_campfire"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.husbandry.copper_glow_campfire_cooked.title"
+    }
+  },
+  "requirements": [
+    [
+      "copper_glow_campfire_cooked"
+    ]
+  ]
+}

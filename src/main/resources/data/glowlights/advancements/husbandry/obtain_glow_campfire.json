@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:husbandry/root",
+  "criteria": {
+    "obtain_glow_campfire": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "glowlights:glow_campfires"
+          }
+        ]
+      }
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancements.husbandry.obtain_glow_campfire.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "glowlights:glow_campfire"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.husbandry.obtain_glow_campfire.title"
+    }
+  },
+  "requirements": [
+    [
+      "obtain_glow_campfire"
+    ]
+  ]
+}
