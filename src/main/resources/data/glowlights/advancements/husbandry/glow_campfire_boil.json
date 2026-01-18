@@ -1,7 +1,7 @@
 {
   "parent": "minecraft:husbandry/root",
   "criteria": {
-    "beacon": {
+    "boiling_campfire": {
       "trigger": "glowlights:glow_campfire_cooked",
       "conditions": {
         "location": {
@@ -18,21 +18,21 @@
   "display": {
     "announce_to_chat": true,
     "description": {
-      "translate": "advancements.nether.create_beacon.description"
+      "translate": "advancements.husbandry.glow_campfire_boil.description"
     },
     "frame": "task",
     "hidden": false,
     "icon": {
-      "item": "minecraft:beacon"
+      "item": "glowlights:prismarine_glow_campfire"7
     },
     "show_toast": true,
     "title": {
-      "translate": "advancements.nether.create_beacon.title"
+      "translate": "advancements.husbandry.glow_campfire_boil.title"
     }
   },
   "requirements": [
     [
-      "beacon"
+      "boiling_campfire"
     ]
   ]
 }
