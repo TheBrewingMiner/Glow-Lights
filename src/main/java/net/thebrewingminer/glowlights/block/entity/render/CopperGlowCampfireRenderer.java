@@ -13,6 +13,7 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.CampfireBlock;
 import net.minecraft.world.level.block.state.BlockState;
+import net.thebrewingminer.glowlights.block.copper.CopperGlowCampfireBlock;
 import net.thebrewingminer.glowlights.block.entity.CopperGlowCampfireBlockEntity;
 import net.thebrewingminer.glowlights.block.entity.render.utils.RenderUtils;
 import net.thebrewingminer.glowlights.block.utils.GlowCampfireUtils;
@@ -62,7 +63,7 @@ public class CopperGlowCampfireRenderer implements BlockEntityRenderer<CopperGlo
     // Renders items on the copper glow campfire.
     @SuppressWarnings("NullableProblems")
     public void render(CopperGlowCampfireBlockEntity blockEntity, float partialTick, PoseStack poseStack, MultiBufferSource multiBufferSource, int packedLight, int packedOverlay){
-        Direction direction = blockEntity.getBlockState().getValue(CampfireBlock.FACING);
+        Direction direction = blockEntity.getBlockState().getValue(CopperGlowCampfireBlock.FACING);
         BlockState blockState = blockEntity.getBlockState();
         NonNullList<ItemStack> items = blockEntity.getItems();
         int longPos = (int)blockEntity.getBlockPos().asLong();
