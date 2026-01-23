@@ -41,10 +41,11 @@ public class GlowCampfireRenderer implements BlockEntityRenderer<GlowCampfireBlo
 
         long mixedSeed = RenderUtils.mixSeed(seed);
 
-        float energy = lit ? 1.25f : 1.0f;
+        float energy = lit ? 1.30f : 1.0f;
 
         float phase = RenderUtils.unitFloat(mixedSeed, 0) * Mth.TWO_PI;
-        float radius = RenderUtils.unitFloat(mixedSeed, 16) * 0.04f;
+        float base_radius = RenderUtils.unitFloat(mixedSeed, 16) * 0.04f;
+        float radius = lit ? base_radius * 1.25f : base_radius;
         float speed = 0.03f * energy;
 
         float bobSpeed = 0.04f * energy;
