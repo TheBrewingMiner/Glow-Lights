@@ -11,7 +11,6 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.NonNullList;
 import net.minecraft.util.Mth;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.block.CampfireBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.thebrewingminer.glowlights.block.copper.CopperGlowCampfireBlock;
 import net.thebrewingminer.glowlights.block.entity.CopperGlowCampfireBlockEntity;
@@ -44,8 +43,8 @@ public class CopperGlowCampfireRenderer implements BlockEntityRenderer<CopperGlo
         float energy = lit ? 1.30f : 1.0f;
 
         float phase = RenderUtils.unitFloat(mixedSeed, 0) * Mth.TWO_PI;
-        float base_radius = RenderUtils.unitFloat(mixedSeed, 16) * 0.04f;
-        float radius = lit ? base_radius * 1.25f : base_radius;
+        float base_radius = RenderUtils.unitFloat(mixedSeed, 16) * 0.032f;
+        float radius = lit ? base_radius * 1.4f : base_radius;
         float speed = 0.03f * energy;
 
         float bobSpeed = 0.04f * energy;
