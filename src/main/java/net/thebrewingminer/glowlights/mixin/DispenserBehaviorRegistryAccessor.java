@@ -9,11 +9,11 @@ import org.spongepowered.asm.mixin.gen.Accessor;
 import java.util.Map;
 
 @Mixin(DispenserBlock.class)
-public interface DispenserBehaviorRegistryAccessor {
+public abstract class DispenserBehaviorRegistryAccessor {
 
     // Define and inject a getter for package-private DISPENSER_REGISTRY
     @Accessor("DISPENSER_REGISTRY")
-    static Map<Item, DispenseItemBehavior> getDispenserRegistry() {
+    public static Map<Item, DispenseItemBehavior> getDispenserRegistry() {
         throw new AssertionError();
     }
 }
