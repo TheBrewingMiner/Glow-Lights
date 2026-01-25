@@ -1,4 +1,4 @@
-package net.thebrewingminer.glowlights.advancements;
+package net.thebrewingminer.glowlights.init;
 
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.advancements.CriterionTrigger;

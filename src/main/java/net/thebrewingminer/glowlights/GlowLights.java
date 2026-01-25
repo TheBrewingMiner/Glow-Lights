@@ -4,7 +4,7 @@ import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import net.thebrewingminer.glowlights.advancements.ModCriteriaTriggers;
+import net.thebrewingminer.glowlights.init.ModCriteriaTriggers;
 import net.thebrewingminer.glowlights.block.dispenser.GlowCampfireDispenserBehavior;
 import net.thebrewingminer.glowlights.init.ModBlocks;
 import net.thebrewingminer.glowlights.init.ModBlockEntities;
