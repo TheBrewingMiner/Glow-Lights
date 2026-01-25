@@ -3,7 +3,7 @@
   "minVersion": "0.8",
   "package": "net.thebrewingminer.glowlights.mixin",
   "compatibilityLevel": "JAVA_17",
-  "refmap": "atmosphericnether.refmap.json",
+  "refmap": "glowlights.refmap.json",
   "mixins": [
     "DispenserBehaviorRegistryAccessor",
     "LightningBoltCleanCopperMixin",
