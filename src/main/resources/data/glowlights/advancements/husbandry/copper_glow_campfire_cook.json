@@ -10,7 +10,11 @@
               "glowlights:copper_glow_campfire",
               "glowlights:waxed_copper_glow_campfire",
               "glowlights:cut_copper_glow_campfire",
-              "glowlights:waxed_cut_copper_glow_campfire"
+              "glowlights:waxed_cut_copper_glow_campfire",
+              "glowlights:exposed_copper_glow_campfire",
+              "glowlights:waxed_exposed_copper_glow_campfire",
+              "glowlights:exposed_cut_copper_glow_campfire",
+              "glowlights:waxed_exposed_cut_copper_glow_campfire"
             ]
           }
         }
