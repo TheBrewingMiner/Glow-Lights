@@ -1,6 +1,5 @@
 package net.thebrewingminer.glowlights.block.entity;
 
-import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.NonNullList;
@@ -23,7 +22,7 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.level.gameevent.GameEvent.Context;
 import net.minecraft.world.phys.AABB;
-import net.thebrewingminer.glowlights.advancements.ModCriteriaTriggers;
+import net.thebrewingminer.glowlights.init.ModCriteriaTriggers;
 import net.thebrewingminer.glowlights.block.GlowCampfireBlock;
 import net.thebrewingminer.glowlights.block.utils.GlowCampfireUtils;
 import net.thebrewingminer.glowlights.init.ModBlockEntities;

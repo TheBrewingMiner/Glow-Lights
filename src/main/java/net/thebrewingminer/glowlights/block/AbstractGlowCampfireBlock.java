@@ -293,5 +293,4 @@ public abstract class AbstractGlowCampfireBlock extends BaseEntityBlock implemen
     @Override
     @Nullable
     public abstract <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState blockState, BlockEntityType<T> blockEntityType);
-
 }

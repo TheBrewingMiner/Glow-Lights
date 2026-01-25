@@ -23,7 +23,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.AABB;
-import net.thebrewingminer.glowlights.advancements.ModCriteriaTriggers;
+import net.thebrewingminer.glowlights.init.ModCriteriaTriggers;
 import net.thebrewingminer.glowlights.block.copper.CopperGlowCampfireBlock;
 import net.thebrewingminer.glowlights.block.copper.utils.IWeatheringCopper;
 import net.thebrewingminer.glowlights.block.copper.utils.WeatheringBlockMap;

@@ -10,6 +10,7 @@ import net.minecraft.world.level.Level;
 public final class WaxUtils {
     private WaxUtils(){}
 
+    // A wrapper method of the advancement trigger logic.
     public static void triggerOnHoneycomb(Level level, Player player, BlockPos pos, ItemStack heldItem){
         if (!level.isClientSide() && player instanceof ServerPlayer serverPlayer) {
             CriteriaTriggers.ITEM_USED_ON_BLOCK.trigger(serverPlayer, pos, heldItem);
