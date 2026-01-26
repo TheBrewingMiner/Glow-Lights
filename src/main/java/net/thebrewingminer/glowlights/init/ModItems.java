@@ -1,5 +1,6 @@
 package net.thebrewingminer.glowlights.init;
 
+import net.minecraft.core.Direction;
 import net.minecraft.world.item.*;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
@@ -17,7 +18,8 @@ public class ModItems {
         () -> new StandingAndWallBlockItem(
             ModBlocks.GLOW_TORCH.get(),
             ModBlocks.GLOW_WALL_TORCH.get(),
-            new Item.Properties().tab(CreativeModeTab.TAB_DECORATIONS)
+            new Item.Properties(),
+            Direction.DOWN
         )
     );
 
@@ -28,7 +30,8 @@ public class ModItems {
         () -> new StandingAndWallBlockItem(
             ModBlocks.COPPER_GLOW_TORCH.get(),
             ModBlocks.COPPER_GLOW_WALL_TORCH.get(),
-            new Item.Properties().tab(CreativeModeTab.TAB_DECORATIONS)
+            new Item.Properties(),
+            Direction.DOWN
         )
     );
 
@@ -37,7 +40,8 @@ public class ModItems {
         () -> new StandingAndWallBlockItem(
             ModBlocks.EXPOSED_COPPER_GLOW_TORCH.get(),
             ModBlocks.EXPOSED_COPPER_GLOW_WALL_TORCH.get(),
-            new Item.Properties().tab(CreativeModeTab.TAB_DECORATIONS)
+            new Item.Properties(),
+            Direction.DOWN
         )
     );
 
@@ -46,7 +50,8 @@ public class ModItems {
         () -> new StandingAndWallBlockItem(
             ModBlocks.WEATHERED_COPPER_GLOW_TORCH.get(),
             ModBlocks.WEATHERED_COPPER_GLOW_WALL_TORCH.get(),
-            new Item.Properties().tab(CreativeModeTab.TAB_DECORATIONS)
+            new Item.Properties(),
+            Direction.DOWN
         )
     );
 
@@ -55,7 +60,8 @@ public class ModItems {
         () -> new StandingAndWallBlockItem(
             ModBlocks.OXIDIZED_COPPER_GLOW_TORCH.get(),
             ModBlocks.OXIDIZED_COPPER_GLOW_WALL_TORCH.get(),
-            new Item.Properties().tab(CreativeModeTab.TAB_DECORATIONS)
+            new Item.Properties(),
+            Direction.DOWN
         )
     );
 
@@ -66,7 +72,8 @@ public class ModItems {
         () -> new StandingAndWallBlockItem(
             ModBlocks.WAXED_COPPER_GLOW_TORCH.get(),
             ModBlocks.WAXED_COPPER_GLOW_WALL_TORCH.get(),
-            new Item.Properties().tab(CreativeModeTab.TAB_DECORATIONS)
+            new Item.Properties(),
+            Direction.DOWN
         )
     );
 
@@ -75,7 +82,8 @@ public class ModItems {
         () -> new StandingAndWallBlockItem(
             ModBlocks.WAXED_EXPOSED_COPPER_GLOW_TORCH.get(),
             ModBlocks.WAXED_EXPOSED_COPPER_GLOW_WALL_TORCH.get(),
-            new Item.Properties().tab(CreativeModeTab.TAB_DECORATIONS)
+            new Item.Properties(),
+            Direction.DOWN
         )
     );
 
@@ -84,7 +92,8 @@ public class ModItems {
         () -> new StandingAndWallBlockItem(
             ModBlocks.WAXED_WEATHERED_COPPER_GLOW_TORCH.get(),
             ModBlocks.WAXED_WEATHERED_COPPER_GLOW_WALL_TORCH.get(),
-            new Item.Properties().tab(CreativeModeTab.TAB_DECORATIONS)
+            new Item.Properties(),
+            Direction.DOWN
         )
     );
 
@@ -93,14 +102,15 @@ public class ModItems {
         () -> new StandingAndWallBlockItem(
             ModBlocks.WAXED_OXIDIZED_COPPER_GLOW_TORCH.get(),
             ModBlocks.WAXED_OXIDIZED_COPPER_GLOW_WALL_TORCH.get(),
-            new Item.Properties().tab(CreativeModeTab.TAB_DECORATIONS)
+            new Item.Properties(),
+            Direction.DOWN
         )
     );
 
     public static final RegistryObject<Item> COPPER_NUGGET = ITEMS.register(
         "copper_nugget",
         () -> new Item(
-            new Item.Properties().tab(CreativeModeTab.TAB_MATERIALS)
+            new Item.Properties()
         )
     );
 
