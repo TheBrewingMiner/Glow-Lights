@@ -6,8 +6,8 @@ plugins {
     id 'org.spongepowered.mixin' version '0.7.+'
 }
 
-version = '1.1.0-1.19.2'
-group = 'net.thebrewingminer.glowlights' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
+version = '1.1.0-1.19.3'
+group = 'net.thebrewingminer.glowlights'
 archivesBaseName = 'glowlights'
 
 // Mojang ships Java 17 to end users in 1.18+, so your mod should target Java 17.
@@ -16,7 +16,25 @@ java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 println "Java: ${System.getProperty 'java.version'}, JVM: ${System.getProperty 'java.vm.version'} (${System.getProperty 'java.vendor'}), Arch: ${System.getProperty 'os.arch'}"
 minecraft {
 
-    mappings channel: 'parchment', version: '2022.08.14-1.19.2'
+    mappings channel: 'parchment', version: '2023.06.25-1.19.3'
+
+    dependencies {
+
+        minecraft 'net.minecraftforge:forge:1.19.3-44.1.0'
+        annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
+
+        compileOnly(fg.deobf("mezz.jei:jei-${mc_version}-common-api:${jei_version}"))
+        compileOnly(fg.deobf("mezz.jei:jei-${mc_version}-forge-api:${jei_version}"))
+        runtimeOnly(fg.deobf("mezz.jei:jei-${mc_version}-forge:${jei_version}"))
+    }
+
+    mixin {
+        add sourceSets.main, 'glowlights.refmap.json'
+        config 'glowlights.mixins.json'
+
+        debug.verbose = true
+        debug.export = true
+    }
 
     // accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg') // Currently, this location cannot be changed from the default.
 
@@ -119,24 +137,6 @@ repositories {
         name = "ModMaven"
         url = "https://modmaven.dev"
     }
-}
-
-dependencies {
-
-    minecraft 'net.minecraftforge:forge:1.19.2-43.3.0'
-    annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
-
-    compileOnly(fg.deobf("mezz.jei:jei-${mc_version}-common-api:${jei_version}"))
-    compileOnly(fg.deobf("mezz.jei:jei-${mc_version}-forge-api:${jei_version}"))
-    runtimeOnly(fg.deobf("mezz.jei:jei-${mc_version}-forge:${jei_version}"))
-}
-
-mixin {
-    add sourceSets.main, 'glowlights.refmap.json'
-    config 'glowlights.mixins.json'
-
-    debug.verbose = true
-    debug.export = true
 }
 
 // Example for how to get properties into the manifest for reading at runtime.
