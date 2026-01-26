@@ -1,7 +1,7 @@
 package net.thebrewingminer.glowlights.block.entity.render;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.math.Vector3f;
+import com.mojang.math.Axis;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.block.model.ItemTransforms;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
@@ -80,8 +80,8 @@ public class GlowCampfireRenderer implements BlockEntityRenderer<GlowCampfireBlo
 
             Direction directionFrom2DDataValue = Direction.from2DDataValue((itemIndex + direction.get2DDataValue()) % 4);
             float toYRotation = -directionFrom2DDataValue.toYRot();
-            poseStack.mulPose(Vector3f.YP.rotationDegrees(toYRotation));
-            poseStack.mulPose(Vector3f.XP.rotationDegrees(90.0F));
+            poseStack.mulPose(Axis.YP.rotationDegrees(toYRotation));
+            poseStack.mulPose(Axis.XP.rotationDegrees(90.0F));
 
             poseStack.translate(-0.3125, -0.3125, 0.0);
             poseStack.scale(SIZE, SIZE, SIZE);
