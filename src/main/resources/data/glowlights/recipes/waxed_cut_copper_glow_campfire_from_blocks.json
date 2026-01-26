@@ -1,5 +1,6 @@
 {
   "type": "minecraft:crafting_shaped",
+  "category": "misc",
   "group": "waxed_cut_copper_glow_campfire",
   "key": {
     "L": {
