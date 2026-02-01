@@ -1,5 +1,6 @@
 package net.thebrewingminer.glowlights;
 
+import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraftforge.event.CreativeModeTabEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -28,6 +29,7 @@ public class GlowLights {
         ModCriteriaTriggers.init();
 
         modEventBus.addListener(this::onCommonSetup);
+        modEventBus.addListener(this::addToCreativeTab);
     }
 
     private void onCommonSetup(FMLCommonSetupEvent event) {
@@ -35,8 +37,121 @@ public class GlowLights {
     }
 
     private void addToCreativeTab(CreativeModeTabEvent.BuildContents event){
-        if (event.getTab() == CreativeModeTabs.BUILDING_BLOCKS){
-            //
+        CreativeModeTab tab = event.getTab();
+
+        if (tab == CreativeModeTabs.BUILDING_BLOCKS){
+
+            event.accept(ModBlocks.GLOW_LANTERN_BLOCK);
+            event.accept(ModBlocks.GLOW_BERRY_LANTERN_BLOCK);
+
+            event.accept(ModBlocks.COPPER_CHAIN);
+
+            event.accept(ModBlocks.COPPER_GLOW_LANTERN_BLOCK);
+            event.accept(ModBlocks.EXPOSED_COPPER_GLOW_LANTERN_BLOCK);
+            event.accept(ModBlocks.WEATHERED_COPPER_GLOW_LANTERN_BLOCK);
+            event.accept(ModBlocks.OXIDIZED_COPPER_GLOW_LANTERN_BLOCK);
+
+            event.accept(ModBlocks.COPPER_GLOW_BERRY_LANTERN_BLOCK);
+            event.accept(ModBlocks.EXPOSED_COPPER_GLOW_BERRY_LANTERN_BLOCK);
+            event.accept(ModBlocks.WEATHERED_COPPER_GLOW_BERRY_LANTERN_BLOCK);
+            event.accept(ModBlocks.OXIDIZED_COPPER_GLOW_BERRY_LANTERN_BLOCK);
+
+
+            event.accept(ModBlocks.WAXED_COPPER_GLOW_LANTERN_BLOCK);
+            event.accept(ModBlocks.WAXED_EXPOSED_COPPER_GLOW_LANTERN_BLOCK);
+            event.accept(ModBlocks.WAXED_WEATHERED_COPPER_GLOW_LANTERN_BLOCK);
+            event.accept(ModBlocks.WAXED_OXIDIZED_COPPER_GLOW_LANTERN_BLOCK);
+
+            event.accept(ModBlocks.WAXED_COPPER_GLOW_BERRY_LANTERN_BLOCK);
+            event.accept(ModBlocks.WAXED_EXPOSED_COPPER_GLOW_BERRY_LANTERN_BLOCK);
+            event.accept(ModBlocks.WAXED_WEATHERED_COPPER_GLOW_BERRY_LANTERN_BLOCK);
+            event.accept(ModBlocks.WAXED_OXIDIZED_COPPER_GLOW_BERRY_LANTERN_BLOCK);
+        }
+
+        if (tab == CreativeModeTabs.FUNCTIONAL_BLOCKS){
+
+            event.accept(ModItems.GLOW_TORCH);
+            event.accept(ModBlocks.GLOW_LANTERN);
+            event.accept(ModBlocks.GLOW_BERRY_LANTERN);
+            event.accept(ModBlocks.GLOW_LANTERN_BLOCK);
+            event.accept(ModBlocks.GLOW_BERRY_LANTERN_BLOCK);
+            event.accept(ModBlocks.GLOW_CAMPFIRE);
+            event.accept(ModBlocks.PRISMARINE_GLOW_CAMPFIRE);
+            event.accept(ModBlocks.PRISMARINE_BRICK_GLOW_CAMPFIRE);
+            event.accept(ModBlocks.DARK_PRISMARINE_GLOW_CAMPFIRE);
+
+            event.accept(ModBlocks.COPPER_CHAIN);
+
+            event.accept(ModItems.COPPER_GLOW_TORCH);
+            event.accept(ModItems.EXPOSED_COPPER_GLOW_TORCH);
+            event.accept(ModItems.WEATHERED_COPPER_GLOW_TORCH);
+            event.accept(ModItems.OXIDIZED_COPPER_GLOW_TORCH);
+
+            event.accept(ModBlocks.COPPER_GLOW_LANTERN);
+            event.accept(ModBlocks.EXPOSED_COPPER_GLOW_LANTERN);
+            event.accept(ModBlocks.WEATHERED_COPPER_GLOW_LANTERN);
+            event.accept(ModBlocks.OXIDIZED_COPPER_GLOW_LANTERN);
+
+            event.accept(ModBlocks.COPPER_GLOW_BERRY_LANTERN);
+            event.accept(ModBlocks.EXPOSED_COPPER_GLOW_BERRY_LANTERN);
+            event.accept(ModBlocks.WEATHERED_COPPER_GLOW_BERRY_LANTERN);
+            event.accept(ModBlocks.OXIDIZED_COPPER_GLOW_BERRY_LANTERN);
+
+            event.accept(ModBlocks.COPPER_GLOW_LANTERN_BLOCK);
+            event.accept(ModBlocks.EXPOSED_COPPER_GLOW_LANTERN_BLOCK);
+            event.accept(ModBlocks.WEATHERED_COPPER_GLOW_LANTERN_BLOCK);
+            event.accept(ModBlocks.OXIDIZED_COPPER_GLOW_LANTERN_BLOCK);
+
+            event.accept(ModBlocks.COPPER_GLOW_BERRY_LANTERN_BLOCK);
+            event.accept(ModBlocks.EXPOSED_COPPER_GLOW_BERRY_LANTERN_BLOCK);
+            event.accept(ModBlocks.WEATHERED_COPPER_GLOW_BERRY_LANTERN_BLOCK);
+            event.accept(ModBlocks.OXIDIZED_COPPER_GLOW_BERRY_LANTERN_BLOCK);
+
+            event.accept(ModBlocks.COPPER_GLOW_CAMPFIRE);
+            event.accept(ModBlocks.EXPOSED_COPPER_GLOW_CAMPFIRE);
+            event.accept(ModBlocks.WEATHERED_COPPER_GLOW_CAMPFIRE);
+            event.accept(ModBlocks.OXIDIZED_COPPER_GLOW_CAMPFIRE);
+
+            event.accept(ModBlocks.CUT_COPPER_GLOW_CAMPFIRE);
+            event.accept(ModBlocks.EXPOSED_CUT_COPPER_GLOW_CAMPFIRE);
+            event.accept(ModBlocks.WEATHERED_CUT_COPPER_GLOW_CAMPFIRE);
+            event.accept(ModBlocks.OXIDIZED_CUT_COPPER_GLOW_CAMPFIRE);
+
+
+            event.accept(ModItems.WAXED_COPPER_GLOW_TORCH);
+            event.accept(ModItems.WAXED_EXPOSED_COPPER_GLOW_TORCH);
+            event.accept(ModItems.WAXED_WEATHERED_COPPER_GLOW_TORCH);
+            event.accept(ModItems.WAXED_OXIDIZED_COPPER_GLOW_TORCH);
+
+            event.accept(ModBlocks.WAXED_COPPER_GLOW_LANTERN);
+            event.accept(ModBlocks.WAXED_EXPOSED_COPPER_GLOW_LANTERN);
+            event.accept(ModBlocks.WAXED_WEATHERED_COPPER_GLOW_LANTERN);
+            event.accept(ModBlocks.WAXED_OXIDIZED_COPPER_GLOW_LANTERN);
+
+            event.accept(ModBlocks.WAXED_COPPER_GLOW_BERRY_LANTERN);
+            event.accept(ModBlocks.WAXED_EXPOSED_COPPER_GLOW_BERRY_LANTERN);
+            event.accept(ModBlocks.WAXED_WEATHERED_COPPER_GLOW_BERRY_LANTERN);
+            event.accept(ModBlocks.WAXED_OXIDIZED_COPPER_GLOW_BERRY_LANTERN);
+
+            event.accept(ModBlocks.WAXED_COPPER_GLOW_LANTERN_BLOCK);
+            event.accept(ModBlocks.WAXED_EXPOSED_COPPER_GLOW_LANTERN_BLOCK);
+            event.accept(ModBlocks.WAXED_WEATHERED_COPPER_GLOW_LANTERN_BLOCK);
+            event.accept(ModBlocks.WAXED_OXIDIZED_COPPER_GLOW_LANTERN_BLOCK);
+
+            event.accept(ModBlocks.WAXED_COPPER_GLOW_BERRY_LANTERN_BLOCK);
+            event.accept(ModBlocks.WAXED_EXPOSED_COPPER_GLOW_BERRY_LANTERN_BLOCK);
+            event.accept(ModBlocks.WAXED_WEATHERED_COPPER_GLOW_BERRY_LANTERN_BLOCK);
+            event.accept(ModBlocks.WAXED_OXIDIZED_COPPER_GLOW_BERRY_LANTERN_BLOCK);
+
+            event.accept(ModBlocks.WAXED_COPPER_GLOW_CAMPFIRE);
+            event.accept(ModBlocks.WAXED_EXPOSED_COPPER_GLOW_CAMPFIRE);
+            event.accept(ModBlocks.WAXED_WEATHERED_COPPER_GLOW_CAMPFIRE);
+            event.accept(ModBlocks.WAXED_OXIDIZED_COPPER_GLOW_CAMPFIRE);
+
+            event.accept(ModBlocks.WAXED_CUT_COPPER_GLOW_CAMPFIRE);
+            event.accept(ModBlocks.WAXED_EXPOSED_CUT_COPPER_GLOW_CAMPFIRE);
+            event.accept(ModBlocks.WAXED_WEATHERED_CUT_COPPER_GLOW_CAMPFIRE);
+            event.accept(ModBlocks.WAXED_OXIDIZED_CUT_COPPER_GLOW_CAMPFIRE);
         }
     }
 }
