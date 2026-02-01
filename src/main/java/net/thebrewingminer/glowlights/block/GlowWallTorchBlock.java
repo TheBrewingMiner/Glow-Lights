@@ -21,6 +21,7 @@ import net.minecraft.world.level.material.Fluids;
 
 import static net.thebrewingminer.glowlights.block.utils.GlowUtils.isWaterlogged;
 
+@SuppressWarnings({"NullableProblems", "deprecation"})
 public class GlowWallTorchBlock extends WallTorchBlock implements SimpleWaterloggedBlock{
     public static final DirectionProperty FACING;
     public static final BooleanProperty WATERLOGGED;

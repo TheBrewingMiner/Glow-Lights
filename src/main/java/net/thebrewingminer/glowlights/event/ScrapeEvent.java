@@ -1,10 +1,10 @@
 package net.thebrewingminer.glowlights.event;
 
+import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.ToolActions;
 import net.minecraftforge.event.level.BlockEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -25,7 +25,7 @@ public class ScrapeEvent {
         Block block = blockState.getBlock();
 
         boolean isCopper = (block instanceof IWeatheringCopper);
-        boolean usingAxe = heldItem.is(Tags.Items.TOOLS_AXES);
+        boolean usingAxe = heldItem.is(ItemTags.AXES);
         boolean isScrapingOff = (toolEvent.getToolAction() == ToolActions.AXE_SCRAPE);
 
         if (!isCopper) return;
@@ -44,7 +44,7 @@ public class ScrapeEvent {
         BlockState blockState = toolEvent.getState();
         Block block = blockState.getBlock();
 
-        boolean usingAxe = heldItem.is(Tags.Items.TOOLS_AXES);
+        boolean usingAxe = heldItem.is(ItemTags.AXES);
         boolean isWaxingOff = (toolEvent.getToolAction() == ToolActions.AXE_WAX_OFF);
 
         if (!usingAxe) return;

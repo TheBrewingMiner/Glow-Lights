@@ -7,6 +7,7 @@ import net.minecraft.world.level.block.state.BlockState;
 
 import java.util.Optional;
 
+@SuppressWarnings({"NullableProblems", "rawtypes"})
 public interface IWeatheringCopper extends WeatheringCopper {
 
     // Maps passed-in Block to its corresponding block in the weathering state map.

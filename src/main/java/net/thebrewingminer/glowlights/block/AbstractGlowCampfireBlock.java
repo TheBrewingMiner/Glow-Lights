@@ -11,7 +11,6 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -39,7 +38,6 @@ import net.minecraft.world.level.pathfinder.PathComputationType;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.minecraftforge.common.Tags;
 import net.thebrewingminer.glowlights.block.utils.BlockStateProperty;
 import net.thebrewingminer.glowlights.block.utils.GlowCampfireUtils;
 import net.thebrewingminer.glowlights.init.ModParticles;
@@ -190,14 +188,14 @@ public abstract class AbstractGlowCampfireBlock extends BaseEntityBlock implemen
             if (coalsPresent){
                 // If the coals are still in the campfire (has ash when unlit)
                 // Handles "cleaning" the coals from the campfire.
-                if (heldItem.is(Tags.Items.TOOLS_SHOVELS)) return handleCleaningCampfire(level, player, playerHand, heldItem, state, pos, survivalMode);
+                if (heldItem.is(ItemTags.SHOVELS)) return handleCleaningCampfire(level, player, playerHand, heldItem, state, pos, survivalMode);
             } else {
                 // If coals are not still in the campfire
                 if (heldItem.is(ItemTags.COALS)) return handleRefuelingCampfire(level, state, pos, heldItem, survivalMode); // Handles refueling.
             }
         } else {
             // Handle dowsing a LIT campfire.
-            if (heldItem.is(Tags.Items.TOOLS_SHOVELS)) return handleDowsing(level, player, playerHand, heldItem, state, pos, survivalMode);
+            if (heldItem.is(ItemTags.SHOVELS)) return handleDowsing(level, player, playerHand, heldItem, state, pos, survivalMode);
         }
 
         // Handle actions for campfire recipes (Vanilla).
@@ -236,11 +234,10 @@ public abstract class AbstractGlowCampfireBlock extends BaseEntityBlock implemen
     public void entityInside(BlockState state, Level level, BlockPos pos, Entity entity) {
         // Damage eligible entities; more so if in water.
         if (isLit(state) && entity instanceof LivingEntity && !EnchantmentHelper.hasFrostWalker((LivingEntity)entity)) {
-            if (isWaterlogged(state)){
-                entity.hurt(DamageSource.IN_FIRE, this.fireDamage * 2.5f);
-            } else {
-                entity.hurt(DamageSource.IN_FIRE, this.fireDamage);
-            }
+            float damageMultiplier = isWaterlogged(state) ? 2.5f : 1.0f;
+            float damage = this.fireDamage * damageMultiplier;
+
+            entity.hurt(level.damageSources().inFire(), damage);
         }
 
         super.entityInside(state, level, pos, entity);

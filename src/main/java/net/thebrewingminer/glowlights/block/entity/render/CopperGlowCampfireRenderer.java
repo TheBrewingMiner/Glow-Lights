@@ -3,13 +3,13 @@ package net.thebrewingminer.glowlights.block.entity.render;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.block.model.ItemTransforms;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.renderer.entity.ItemRenderer;
 import net.minecraft.core.Direction;
 import net.minecraft.core.NonNullList;
 import net.minecraft.util.Mth;
+import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.state.BlockState;
 import net.thebrewingminer.glowlights.block.copper.CopperGlowCampfireBlock;
@@ -86,7 +86,7 @@ public class CopperGlowCampfireRenderer implements BlockEntityRenderer<CopperGlo
             poseStack.translate(-0.3125, -0.3125, 0.0);
             poseStack.scale(SIZE, SIZE, SIZE);
 
-            this.itemRenderer.renderStatic(itemStack, ItemTransforms.TransformType.FIXED, packedLight, packedOverlay, poseStack, multiBufferSource, longPos + itemIndex);
+            this.itemRenderer.renderStatic(itemStack, ItemDisplayContext.FIXED, packedLight, packedOverlay, poseStack, multiBufferSource, blockEntity.getLevel(), longPos + itemIndex);
             poseStack.popPose();
         }
     }

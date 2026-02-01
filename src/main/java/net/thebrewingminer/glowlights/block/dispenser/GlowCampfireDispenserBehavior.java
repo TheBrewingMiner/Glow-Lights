@@ -17,6 +17,7 @@ import net.thebrewingminer.glowlights.mixin.DispenserBehaviorRegistryAccessor;
 
 import java.util.Map;
 
+@SuppressWarnings({"NullableProblems"})
 public final class GlowCampfireDispenserBehavior {
     private GlowCampfireDispenserBehavior(){}
 

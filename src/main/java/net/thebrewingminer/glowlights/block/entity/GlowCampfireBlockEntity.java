@@ -30,6 +30,7 @@ import net.thebrewingminer.glowlights.init.ModBlockEntities;
 import javax.annotation.Nullable;
 import java.util.Optional;
 
+@SuppressWarnings({"NullableProblems"})
 public class GlowCampfireBlockEntity extends BlockEntity implements Clearable {
     protected static final int BURN_COOL_SPEED = 2;
     protected static final int NUM_SLOTS = 4;
@@ -65,7 +66,7 @@ public class GlowCampfireBlockEntity extends BlockEntity implements Clearable {
 
                 if (blockEntity.cookingProgress[itemOnCampfire] >= blockEntity.cookingTime[itemOnCampfire]) {
                     Container container = new SimpleContainer(itemStack);
-                    ItemStack stack = blockEntity.quickCheck.getRecipeFor(container, level).map((campfireCookingRecipe) -> campfireCookingRecipe.assemble(container)).orElse(itemStack);
+                    ItemStack stack = blockEntity.quickCheck.getRecipeFor(container, level).map((campfireCookingRecipe) -> campfireCookingRecipe.assemble(container, level.registryAccess())).orElse(itemStack);
                     Containers.dropItemStack(level, pos.getX(), pos.getY(), pos.getZ(), stack);
                     blockEntity.items.set(itemOnCampfire, ItemStack.EMPTY);
 

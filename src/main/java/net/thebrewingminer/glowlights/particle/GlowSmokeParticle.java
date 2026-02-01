@@ -4,6 +4,7 @@ import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.*;
 import net.minecraft.core.particles.SimpleParticleType;
 
+@SuppressWarnings("NullableProblems")
 public class GlowSmokeParticle extends TextureSheetParticle {
 
     // Mimics properties of campfire smoke particles, but with glow particle textures and sizes.
@@ -59,6 +60,7 @@ public class GlowSmokeParticle extends TextureSheetParticle {
         public GlowSignalProvider(SpriteSet pSprites) {
             this.sprites = pSprites;
         }
+
 
         public Particle createParticle(SimpleParticleType type, ClientLevel level, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
             GlowSmokeParticle signalGlowSmoke = new GlowSmokeParticle(level, x, y, z, xSpeed, ySpeed, xSpeed, true);

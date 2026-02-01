@@ -19,6 +19,7 @@ import net.thebrewingminer.glowlights.block.copper.utils.IWeatheringCopper;
 
 import static net.thebrewingminer.glowlights.block.copper.utils.WaxUtils.triggerOnHoneycomb;
 
+@SuppressWarnings({"NullableProblems", "deprecation"})
 public class CopperFullBlock extends Block implements IWeatheringCopper {
     private final WeatheringCopper.WeatherState weatherState;
 

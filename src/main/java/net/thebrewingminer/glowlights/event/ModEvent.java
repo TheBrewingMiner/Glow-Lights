@@ -13,7 +13,7 @@ public class ModEvent {
     // Register particles for the client to use
     @SubscribeEvent
     public static void registerParticles(RegisterParticleProvidersEvent particleProvidersEvent){
-        particleProvidersEvent.register(ModParticles.COZY_GLOW_SMOKE.get(), GlowSmokeParticle.CosyGlowProvider::new);
-        particleProvidersEvent.register(ModParticles.SIGNAL_GLOW_SMOKE.get(), GlowSmokeParticle.GlowSignalProvider::new);
+        particleProvidersEvent.registerSpriteSet(ModParticles.COZY_GLOW_SMOKE.get(), GlowSmokeParticle.CosyGlowProvider::new);
+        particleProvidersEvent.registerSpriteSet(ModParticles.SIGNAL_GLOW_SMOKE.get(), GlowSmokeParticle.GlowSignalProvider::new);
     }
 }
