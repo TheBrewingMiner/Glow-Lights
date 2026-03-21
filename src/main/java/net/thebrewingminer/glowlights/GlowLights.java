@@ -1,8 +1,9 @@
 package net.thebrewingminer.glowlights;
 
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
-import net.minecraftforge.event.CreativeModeTabEvent;
+import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
@@ -36,8 +37,8 @@ public class GlowLights {
         event.enqueueWork(GlowCampfireDispenserBehavior::register); // Register custom dispenser behavior.
     }
 
-    private void addToCreativeTab(CreativeModeTabEvent.BuildContents event){
-        CreativeModeTab tab = event.getTab();
+    private void addToCreativeTab(BuildCreativeModeTabContentsEvent event){
+        ResourceKey<CreativeModeTab> tab = event.getTabKey();
 
         if (tab == CreativeModeTabs.BUILDING_BLOCKS){
 
