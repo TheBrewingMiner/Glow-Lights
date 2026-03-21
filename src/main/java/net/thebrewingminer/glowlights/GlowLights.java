@@ -19,8 +19,8 @@ import net.thebrewingminer.glowlights.init.ModParticles;
 public class GlowLights {
     public static final String MOD_ID = "glowlights";
 
-    public GlowLights(FMLJavaModLoadingContext context) {
-        IEventBus modEventBus = context.getModEventBus();
+    public GlowLights() {
+        IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
         // Register all registries.
         ModItems.register(modEventBus);
