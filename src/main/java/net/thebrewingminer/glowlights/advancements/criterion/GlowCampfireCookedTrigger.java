@@ -23,7 +23,7 @@ public abstract class GlowCampfireCookedTrigger extends SimpleCriterionTrigger<G
     }
 
     public void trigger(ServerPlayer player, BlockPos pos) {
-        this.trigger(player, instance -> instance.matches((ServerLevel)player.getLevel(), pos));
+        this.trigger(player, instance -> instance.matches(player.serverLevel(), pos));
     }
 
     // Inner TriggerInstance class defines the core behavior for each instance of the trigger.
