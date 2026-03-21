@@ -10,7 +10,7 @@ import net.thebrewingminer.glowlights.GlowLights;
 
 
 @SuppressWarnings("NullableProblems")
-public abstract class GlowCampfireCookedTrigger extends SimpleCriterionTrigger<GlowCampfireCookedTrigger.TriggerInstance> {
+public class GlowCampfireCookedTrigger extends SimpleCriterionTrigger<GlowCampfireCookedTrigger.TriggerInstance> {
     static final ResourceLocation ID = new ResourceLocation(GlowLights.MOD_ID, "glow_campfire_cooked");
 
     @Override
