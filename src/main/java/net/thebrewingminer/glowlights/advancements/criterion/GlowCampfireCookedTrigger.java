@@ -10,28 +10,28 @@ import net.thebrewingminer.glowlights.GlowLights;
 
 
 @SuppressWarnings("NullableProblems")
-public class GlowCampfireCookedTrigger extends SimpleCriterionTrigger<GlowCampfireCookedTrigger.TriggerInstance> {
-    static final ResourceLocation ID = ResourceLocation.fromNamespaceAndPath(GlowLights.MOD_ID, "glow_campfire_cooked");
+public abstract class GlowCampfireCookedTrigger extends SimpleCriterionTrigger<GlowCampfireCookedTrigger.TriggerInstance> {
+    static final ResourceLocation ID = new ResourceLocation(GlowLights.MOD_ID, "glow_campfire_cooked");
 
     @Override
     public ResourceLocation getId() { return ID; }
 
     @Override
-    protected TriggerInstance createInstance(JsonObject json, EntityPredicate.Composite player, DeserializationContext context) {
+    protected TriggerInstance createInstance(JsonObject json, ContextAwarePredicate contextAwarePredicate, DeserializationContext context) {
         LocationPredicate location = LocationPredicate.fromJson(json.get("location"));
-        return new TriggerInstance(player, location);
+        return new TriggerInstance(contextAwarePredicate, location);
     }
 
     public void trigger(ServerPlayer player, BlockPos pos) {
-        this.trigger(player, instance -> instance.matches(player.getLevel(), pos));
+        this.trigger(player, instance -> instance.matches((ServerLevel)player.getLevel(), pos));
     }
 
     // Inner TriggerInstance class defines the core behavior for each instance of the trigger.
     public static class TriggerInstance extends AbstractCriterionTriggerInstance {
         private final LocationPredicate locationPredicate;
 
-        public TriggerInstance(EntityPredicate.Composite player, LocationPredicate locationPredicate) {
-            super(GlowCampfireCookedTrigger.ID, player);
+        public TriggerInstance(ContextAwarePredicate contextAwarePredicate, LocationPredicate locationPredicate) {
+            super(GlowCampfireCookedTrigger.ID, contextAwarePredicate);
             this.locationPredicate = locationPredicate;
         }
 
