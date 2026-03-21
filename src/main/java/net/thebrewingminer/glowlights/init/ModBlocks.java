@@ -5,7 +5,7 @@ import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.minecraft.world.level.material.Material;
+import net.minecraft.world.level.material.MapColor;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -47,7 +47,7 @@ public class ModBlocks {
 
     public static final RegistryObject<Block> GLOW_LANTERN = registerBlockAndItem(
         "glow_lantern",
-        () -> new GlowLantern(BlockBehaviour.Properties.of(Material.METAL).strength(3.5F).sound(SoundType.LANTERN).lightLevel(GlowLantern::getLightLevel))
+        () -> new GlowLantern(BlockBehaviour.Properties.of().mapColor(MapColor.METAL).forceSolidOn().strength(3.5F).sound(SoundType.LANTERN).lightLevel(GlowLantern::getLightLevel))
     );
 
     public static final RegistryObject<Block> GLOW_BERRY_LANTERN = registerBlockAndItem(
