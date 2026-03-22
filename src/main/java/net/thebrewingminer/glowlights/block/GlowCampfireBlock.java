@@ -11,6 +11,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.CampfireCookingRecipe;
+import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.*;
@@ -40,9 +41,9 @@ public class GlowCampfireBlock extends AbstractGlowCampfireBlock implements Simp
     @Override
     public InteractionResult handleCampfireRecipe(Level level, Player player, ItemStack heldItem, BlockEntity blockEntity){
         if (blockEntity instanceof GlowCampfireBlockEntity glowCampfireBlockEntity) {
-            Optional<CampfireCookingRecipe> recipe = glowCampfireBlockEntity.getCookableRecipe(heldItem);
+            Optional<RecipeHolder<CampfireCookingRecipe>> recipe = glowCampfireBlockEntity.getCookableRecipe(heldItem);
             if (recipe.isPresent()) {
-                if (!level.isClientSide() && glowCampfireBlockEntity.placeFood(player, player.getAbilities().instabuild ? heldItem.copy() : heldItem, recipe.get().getCookingTime())) {
+                if (!level.isClientSide() && glowCampfireBlockEntity.placeFood(player, player.getAbilities().instabuild ? heldItem.copy() : heldItem, recipe.get().value().getCookingTime())) {
                     player.awardStat(Stats.INTERACT_WITH_CAMPFIRE);
                     return InteractionResult.SUCCESS;
                 }
