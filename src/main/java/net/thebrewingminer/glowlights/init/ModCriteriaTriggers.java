@@ -8,11 +8,11 @@ import java.util.function.Supplier;
 
 public class ModCriteriaTriggers {
 
-    public static <T extends CriterionTrigger<?>> T register(Supplier<T> criteria){
-        return CriteriaTriggers.register(criteria.get());
+    public static <T extends CriterionTrigger<?>> T register(String name, Supplier<T> criteria){
+        return CriteriaTriggers.register(name, criteria.get());
     }
 
-    public static final GlowCampfireCookedTrigger GLOW_CAMPFIRE_COOKED_TRIGGER = register(GlowCampfireCookedTrigger::new);
+    public static final GlowCampfireCookedTrigger GLOW_CAMPFIRE_COOKED_TRIGGER = register("glowlights:glow_campfire_cooked", GlowCampfireCookedTrigger::new);
 
     public static void init() {
         // Static method call causes class to load, and thus the field(s).
