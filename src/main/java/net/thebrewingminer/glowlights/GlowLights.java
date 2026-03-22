@@ -40,6 +40,10 @@ public class GlowLights {
     private void addToCreativeTab(BuildCreativeModeTabContentsEvent event){
         ResourceKey<CreativeModeTab> tab = event.getTabKey();
 
+        if (tab == CreativeModeTabs.INGREDIENTS){
+            event.accept(ModItems.COPPER_NUGGET);
+        }
+
         if (tab == CreativeModeTabs.BUILDING_BLOCKS){
 
             event.accept(ModBlocks.GLOW_LANTERN_BLOCK);
