@@ -1,8 +1,8 @@
 package net.thebrewingminer.glowlights.block.dispenser;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.BlockSource;
 import net.minecraft.core.Direction;
+import net.minecraft.core.dispenser.BlockSource;
 import net.minecraft.core.dispenser.DispenseItemBehavior;
 import net.minecraft.core.dispenser.OptionalDispenseItemBehavior;
 import net.minecraft.world.item.Item;
@@ -37,9 +37,9 @@ public final class GlowCampfireDispenserBehavior {
 
                 @Override
                 protected ItemStack execute(BlockSource source, ItemStack stack) {
-                    Level level = source.getLevel();
-                    Direction facing = source.getBlockState().getValue(DispenserBlock.FACING);
-                    BlockPos pos = source.getPos().relative(facing);
+                    Level level = source.level();
+                    Direction facing = source.state().getValue(DispenserBlock.FACING);
+                    BlockPos pos = source.pos().relative(facing);
                     BlockState state = level.getBlockState(pos);
 
                     // Check if the block in front of the dispenser is a glow campfire
