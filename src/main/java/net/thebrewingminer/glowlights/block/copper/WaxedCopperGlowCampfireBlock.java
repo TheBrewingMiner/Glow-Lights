@@ -11,6 +11,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.CampfireCookingRecipe;
+import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.*;
@@ -41,9 +42,9 @@ public class WaxedCopperGlowCampfireBlock extends AbstractGlowCampfireBlock impl
     // Handles campfire recipes just as Vanilla does.
     public InteractionResult handleCampfireRecipe(Level level, Player player, ItemStack heldItem, BlockEntity blockEntity){
         if (blockEntity instanceof CopperGlowCampfireBlockEntity copperGlowCampfireBlockEntity) {
-            Optional<CampfireCookingRecipe> recipe = copperGlowCampfireBlockEntity.getCookableRecipe(heldItem);
+            Optional<RecipeHolder<CampfireCookingRecipe>> recipe = copperGlowCampfireBlockEntity.getCookableRecipe(heldItem);
             if (recipe.isPresent()) {
-                if (!level.isClientSide() && copperGlowCampfireBlockEntity.placeFood(player, player.getAbilities().instabuild ? heldItem.copy() : heldItem, recipe.get().getCookingTime())) {
+                if (!level.isClientSide() && copperGlowCampfireBlockEntity.placeFood(player, player.getAbilities().instabuild ? heldItem.copy() : heldItem, recipe.get().value().getCookingTime())) {
                     player.awardStat(Stats.INTERACT_WITH_CAMPFIRE);
                     return InteractionResult.SUCCESS;
                 }
