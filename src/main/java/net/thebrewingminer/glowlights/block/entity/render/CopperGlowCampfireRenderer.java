@@ -18,6 +18,7 @@ import net.thebrewingminer.glowlights.block.entity.render.utils.RenderUtils;
 import net.thebrewingminer.glowlights.block.utils.GlowCampfireUtils;
 import net.thebrewingminer.glowlights.block.utils.GlowUtils;
 
+@SuppressWarnings("ClassCanBeRecord")
 public class CopperGlowCampfireRenderer implements BlockEntityRenderer<CopperGlowCampfireBlockEntity> {
     private static final float SIZE = 0.375F;
     private final ItemRenderer itemRenderer;
