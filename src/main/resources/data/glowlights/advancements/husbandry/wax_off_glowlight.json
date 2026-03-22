@@ -3,58 +3,66 @@
   "criteria": {
     "wax_off": {
       "conditions": {
-        "item": {
-          "items": [
-            "minecraft:wooden_axe",
-            "minecraft:golden_axe",
-            "minecraft:stone_axe",
-            "minecraft:iron_axe",
-            "minecraft:diamond_axe",
-            "minecraft:netherite_axe"
-          ]
-        },
-        "location": {
-          "block": {
-            "blocks": [
-              "glowlights:waxed_copper_glow_torch",
-              "glowlights:waxed_copper_glow_wall_torch",
-              "glowlights:waxed_exposed_copper_glow_torch",
-              "glowlights:waxed_exposed_copper_glow_wall_torch",
-              "glowlights:waxed_weathered_copper_glow_torch",
-              "glowlights:waxed_weathered_copper_glow_wall_torch",
-              "glowlights:waxed_oxidized_copper_glow_torch",
-              "glowlights:waxed_oxidized_copper_glow_wall_torch",
-              "glowlights:waxed_copper_chain",
-              "glowlights:waxed_exposed_copper_chain",
-              "glowlights:waxed_weathered_copper_chain",
-              "glowlights:waxed_oxidized_copper_chain",
-              "glowlights:waxed_copper_glow_lantern",
-              "glowlights:waxed_exposed_copper_glow_lantern",
-              "glowlights:waxed_weathered_copper_glow_lantern",
-              "glowlights:waxed_oxidized_copper_glow_lantern",
-              "glowlights:waxed_copper_glow_campfire",
-              "glowlights:waxed_exposed_copper_glow_campfire",
-              "glowlights:waxed_weathered_copper_glow_campfire",
-              "glowlights:waxed_oxidized_copper_glow_campfire",
-              "glowlights:waxed_cut_copper_glow_campfire",
-              "glowlights:waxed_exposed_cut_copper_glow_campfire",
-              "glowlights:waxed_weathered_cut_copper_glow_campfire",
-              "glowlights:waxed_oxidized_cut_copper_glow_campfire",
-              "glowlights:waxed_copper_glow_lantern_block",
-              "glowlights:waxed_exposed_copper_glow_lantern_block",
-              "glowlights:waxed_weathered_copper_glow_lantern_block",
-              "glowlights:waxed_oxidized_copper_glow_lantern_block",
-              "glowlights:waxed_copper_glow_berry_lantern",
-              "glowlights:waxed_exposed_copper_glow_berry_lantern",
-              "glowlights:waxed_weathered_copper_glow_berry_lantern",
-              "glowlights:waxed_oxidized_copper_glow_berry_lantern",
-              "glowlights:waxed_copper_glow_berry_lantern_block",
-              "glowlights:waxed_exposed_copper_glow_berry_lantern_block",
-              "glowlights:waxed_weathered_copper_glow_berry_lantern_block",
-              "glowlights:waxed_oxidized_copper_glow_berry_lantern_block"
-            ]
+        "location": [
+          {
+            "condition": "minecraft:location_check",
+            "predicate": {
+              "block": {
+                "blocks": [
+                  "glowlights:waxed_copper_glow_torch",
+                  "glowlights:waxed_copper_glow_wall_torch",
+                  "glowlights:waxed_exposed_copper_glow_torch",
+                  "glowlights:waxed_exposed_copper_glow_wall_torch",
+                  "glowlights:waxed_weathered_copper_glow_torch",
+                  "glowlights:waxed_weathered_copper_glow_wall_torch",
+                  "glowlights:waxed_oxidized_copper_glow_torch",
+                  "glowlights:waxed_oxidized_copper_glow_wall_torch",
+                  "glowlights:waxed_copper_chain",
+                  "glowlights:waxed_exposed_copper_chain",
+                  "glowlights:waxed_weathered_copper_chain",
+                  "glowlights:waxed_oxidized_copper_chain",
+                  "glowlights:waxed_copper_glow_lantern",
+                  "glowlights:waxed_exposed_copper_glow_lantern",
+                  "glowlights:waxed_weathered_copper_glow_lantern",
+                  "glowlights:waxed_oxidized_copper_glow_lantern",
+                  "glowlights:waxed_copper_glow_campfire",
+                  "glowlights:waxed_exposed_copper_glow_campfire",
+                  "glowlights:waxed_weathered_copper_glow_campfire",
+                  "glowlights:waxed_oxidized_copper_glow_campfire",
+                  "glowlights:waxed_cut_copper_glow_campfire",
+                  "glowlights:waxed_exposed_cut_copper_glow_campfire",
+                  "glowlights:waxed_weathered_cut_copper_glow_campfire",
+                  "glowlights:waxed_oxidized_cut_copper_glow_campfire",
+                  "glowlights:waxed_copper_glow_lantern_block",
+                  "glowlights:waxed_exposed_copper_glow_lantern_block",
+                  "glowlights:waxed_weathered_copper_glow_lantern_block",
+                  "glowlights:waxed_oxidized_copper_glow_lantern_block",
+                  "glowlights:waxed_copper_glow_berry_lantern",
+                  "glowlights:waxed_exposed_copper_glow_berry_lantern",
+                  "glowlights:waxed_weathered_copper_glow_berry_lantern",
+                  "glowlights:waxed_oxidized_copper_glow_berry_lantern",
+                  "glowlights:waxed_copper_glow_berry_lantern_block",
+                  "glowlights:waxed_exposed_copper_glow_berry_lantern_block",
+                  "glowlights:waxed_weathered_copper_glow_berry_lantern_block",
+                  "glowlights:waxed_oxidized_copper_glow_berry_lantern_block"
+                ]
+              }
+            }
+          },
+          {
+            "condition": "minecraft:match_tool",
+            "predicate": {
+              "items": [
+                "minecraft:wooden_axe",
+                "minecraft:golden_axe",
+                "minecraft:stone_axe",
+                "minecraft:iron_axe",
+                "minecraft:diamond_axe",
+                "minecraft:netherite_axe"
+              ]
+            }
           }
-        }
+        ]
       },
       "trigger": "minecraft:item_used_on_block"
     }
