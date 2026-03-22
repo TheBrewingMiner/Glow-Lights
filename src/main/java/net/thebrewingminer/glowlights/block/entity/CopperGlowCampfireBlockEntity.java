@@ -13,6 +13,7 @@ import net.minecraft.world.*;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.CampfireCookingRecipe;
+import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
@@ -95,7 +96,8 @@ public class CopperGlowCampfireBlockEntity extends BlockEntity implements Cleara
 
                 if (blockEntity.cookingProgress[itemOnCampfire] >= (blockEntity.cookingTime[itemOnCampfire] * floatToIntScale)) {
                     Container container = new SimpleContainer(itemStack);
-                    ItemStack stack = blockEntity.quickCheck.getRecipeFor(container, level).map((campfireCookingRecipe) -> campfireCookingRecipe.assemble(container, level.registryAccess())).orElse(itemStack);
+//                    ItemStack stack = blockEntity.quickCheck.getRecipeFor(container, level).map((campfireCookingRecipe) -> campfireCookingRecipe.assemble(container, level.registryAccess())).orElse(itemStack);
+                    ItemStack stack = blockEntity.quickCheck.getRecipeFor(container, level).map((campfireCookingRecipeHolder) -> campfireCookingRecipeHolder.value().assemble(container, level.registryAccess())).orElse(itemStack);
                     Containers.dropItemStack(level, pos.getX(), pos.getY(), pos.getZ(), stack);
                     blockEntity.items.set(itemOnCampfire, ItemStack.EMPTY);
 
@@ -213,7 +215,7 @@ public class CopperGlowCampfireBlockEntity extends BlockEntity implements Cleara
     }
 
     // Gets the recipe for the passed-in item stack if it exists.
-    public Optional<CampfireCookingRecipe> getCookableRecipe(ItemStack itemStack) {
+    public Optional<RecipeHolder<CampfireCookingRecipe>> getCookableRecipe(ItemStack itemStack) {
         return this.items.stream().noneMatch(ItemStack::isEmpty) ? Optional.empty() : this.quickCheck.getRecipeFor(new SimpleContainer(itemStack), this.level);
     }
 
