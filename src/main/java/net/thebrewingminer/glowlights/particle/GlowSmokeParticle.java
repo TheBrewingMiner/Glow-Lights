@@ -54,6 +54,7 @@ public class GlowSmokeParticle extends TextureSheetParticle {
         return ParticleRenderType.PARTICLE_SHEET_TRANSLUCENT;
     }
 
+    @SuppressWarnings("ClassCanBeRecord")
     public static class GlowSignalProvider implements ParticleProvider<SimpleParticleType> {
         private final SpriteSet sprites;
 
@@ -71,6 +72,7 @@ public class GlowSmokeParticle extends TextureSheetParticle {
         }
     }
 
+    @SuppressWarnings("ClassCanBeRecord")
     public static class CosyGlowProvider implements ParticleProvider<SimpleParticleType> {
         private final SpriteSet sprites;
 
