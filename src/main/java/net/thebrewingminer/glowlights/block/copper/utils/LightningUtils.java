@@ -3,6 +3,7 @@ package net.thebrewingminer.glowlights.block.copper.utils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.WeatheringCopper;
 import net.minecraft.world.level.block.state.BlockState;
 import net.thebrewingminer.glowlights.block.utils.GlowCampfireUtils;
 
@@ -35,13 +36,20 @@ public final class LightningUtils {
             BlockState state = level.getBlockState(candidate);
             Block block = state.getBlock();
 
-            if (block instanceof IWeatheringCopper) {
-                IWeatheringCopper.getPrevious(state).ifPresent(prev -> level.setBlockAndUpdate(candidate, prev));
-                level.levelEvent(3002, candidate, -1);
+            // If this block is an instance of unwaxed copper, mark this position as a candidate.
+            if (block instanceof WeatheringCopper) {
+                // If this is a custom copper block, apply cleaning logic to it.
+                if (block instanceof IWeatheringCopper){
+                    Optional<BlockState> prevState = IWeatheringCopper.getPrevious(state);
+                    BlockState newState = prevState.orElse(state);
 
-                // If a copper glow campfire (unwaxed) is "walked" to and is fueled, light it.
-                if (GlowCampfireUtils.isGlowCampfire(state) && GlowCampfireUtils.canLight(state)){
-                    level.setBlock(candidate, GlowCampfireUtils.litFromAsh(state), 3);
+                    // If a copper glow campfire (unwaxed) is "walked" to and is fueled, light it.
+                    if (GlowCampfireUtils.isGlowCampfire(state) && GlowCampfireUtils.canLight(state)){
+                        newState = GlowCampfireUtils.litFromAsh(newState);
+                    }
+
+                    level.setBlockAndUpdate(candidate, newState);
+                    level.levelEvent(3002, candidate, -1);
                 }
 
                 return Optional.of(candidate);  // Next position for the random walk to step from is this position.
@@ -53,6 +61,6 @@ public final class LightningUtils {
             }
         }
 
-        return Optional.empty();    // ... but will stop the random walk at its position.
+        return Optional.empty();    // The walk is stopped at a non-copper block.
     }
 }
