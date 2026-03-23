@@ -28,7 +28,7 @@ public class LightningBoltCleanCopperMixin {
     // and waxing relationships are stored in custom block maps that the original method does not call.
 
     // The logic then runs parallel to Vanilla's logic, giving the in-game appearance of them working together.
-    // They do not overlap because Vanilla's copper block maps and GlowLights' block maps are disjoint— don't overlap—
+    // They do not overlap because Vanilla's copper block maps and GlowLights' block maps are disjoint (don't overlap)
     // and while IWeatheringCopper is instanceof WeatheringCopper, WeatheringCopper is not instanceof IWeatheringCopper.
 
     @Inject(
