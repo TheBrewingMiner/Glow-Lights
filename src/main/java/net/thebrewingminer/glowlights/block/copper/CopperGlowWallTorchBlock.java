@@ -36,7 +36,7 @@ public class CopperGlowWallTorchBlock extends GlowWallTorchBlock implements IWea
     @Override
     public void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource randomSource) {
         if (randomSource.nextInt(SUBMERGED_OXIDATION_FACTOR) == 0){
-            this.onRandomTick(state, level, pos, randomSource);
+            this.changeOverTime(state, level, pos, randomSource);
         }
     }
 

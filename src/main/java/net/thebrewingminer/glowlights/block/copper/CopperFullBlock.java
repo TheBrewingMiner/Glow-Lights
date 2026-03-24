@@ -34,7 +34,7 @@ public class CopperFullBlock extends Block implements IWeatheringCopper {
     // Called by the game to randomly tick the block.
     @Override
     public void randomTick(BlockState pState, ServerLevel pLevel, BlockPos pPos, RandomSource pRandom) {
-        this.onRandomTick(pState, pLevel, pPos, pRandom);   // Applies copper ticking logic.
+        this.changeOverTime(pState, pLevel, pPos, pRandom);   // Applies copper ticking logic.
     }
 
     // Called by the game to query if the block should be randomly ticking.

@@ -38,8 +38,8 @@ public class CopperChainBlock extends ChainBlock implements IWeatheringCopper {
     @Override
     public void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource randomSource) {
         if (isWaterlogged(state)){
-            if (randomSource.nextInt(SUBMERGED_OXIDATION_FACTOR) == 0) this.onRandomTick(state, level, pos, randomSource);
-        } else this.onRandomTick(state, level, pos, randomSource);
+            if (randomSource.nextInt(SUBMERGED_OXIDATION_FACTOR) == 0) this.changeOverTime(state, level, pos, randomSource);
+        } else this.changeOverTime(state, level, pos, randomSource);
     }
 
     // Called by the game to query if the block should be randomly ticking.

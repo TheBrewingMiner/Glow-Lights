@@ -38,7 +38,7 @@ public class CopperGlowLanternBlock extends GlowLanternBlock implements IWeather
     // Called by the game to randomly tick the block.
     @Override
     public void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource randomSource) {
-        this.onRandomTick(state, level, pos, randomSource);
+        this.changeOverTime(state, level, pos, randomSource);
     }
 
     // Called by the game to query if the block should be randomly ticking.
