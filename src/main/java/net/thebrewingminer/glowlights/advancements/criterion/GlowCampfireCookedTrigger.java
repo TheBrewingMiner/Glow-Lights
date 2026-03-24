@@ -1,10 +1,12 @@
 package net.thebrewingminer.glowlights.advancements.criterion;
 
-import com.google.gson.JsonObject;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.advancements.critereon.*;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.util.ExtraCodecs;
 
 import java.util.Optional;
 
@@ -12,10 +14,8 @@ import java.util.Optional;
 @SuppressWarnings("NullableProblems")
 public class GlowCampfireCookedTrigger extends SimpleCriterionTrigger<GlowCampfireCookedTrigger.TriggerInstance> {
 
-    @Override
-    protected TriggerInstance createInstance(JsonObject json, Optional<ContextAwarePredicate> contextAwarePredicate, DeserializationContext context) {
-        Optional<LocationPredicate> location = LocationPredicate.fromJson(json.get("location"));
-        return new TriggerInstance(contextAwarePredicate, location);
+    public Codec<GlowCampfireCookedTrigger.TriggerInstance> codec() {
+        return GlowCampfireCookedTrigger.TriggerInstance.CODEC;
     }
 
     public void trigger(ServerPlayer player, BlockPos pos) {
@@ -23,24 +23,21 @@ public class GlowCampfireCookedTrigger extends SimpleCriterionTrigger<GlowCampfi
     }
 
     // Inner TriggerInstance class defines the core behavior for each instance of the trigger.
-    public static class TriggerInstance extends AbstractCriterionTriggerInstance {
-        private final Optional<LocationPredicate> locationPredicate;
-
-        public TriggerInstance(Optional<ContextAwarePredicate> contextAwarePredicate, Optional<LocationPredicate> locationPredicate) {
-            super(contextAwarePredicate);
-            this.locationPredicate = locationPredicate;
-        }
+    @SuppressWarnings("CodeBlock2Expr")
+    public record TriggerInstance(Optional<ContextAwarePredicate> player, Optional<LocationPredicate> location) implements SimpleCriterionTrigger.SimpleInstance {
+        public static final Codec<GlowCampfireCookedTrigger.TriggerInstance> CODEC = RecordCodecBuilder.create((instance) -> {
+            return instance.group(ExtraCodecs.strictOptionalField(EntityPredicate.ADVANCEMENT_CODEC, "player").forGetter(TriggerInstance::player),
+                    ExtraCodecs.strictOptionalField(LocationPredicate.CODEC, "location").forGetter(GlowCampfireCookedTrigger.TriggerInstance::location)).apply(instance, GlowCampfireCookedTrigger.TriggerInstance::new);
+            }
+        );
 
         public boolean matches(ServerLevel level, BlockPos pos) {
-            return (this.locationPredicate.isEmpty() || this.locationPredicate.get().matches(level, pos.getX(), pos.getY(), pos.getZ()));
+            return (this.location.isEmpty() || this.location.get().matches(level, pos.getX(), pos.getY(), pos.getZ()));
         }
 
         @Override
-        public JsonObject serializeToJson() {
-            JsonObject obj = super.serializeToJson();
-            this.locationPredicate.ifPresent((p -> obj.add("location", p.serializeToJson())));
-            return obj;
+        public Optional<ContextAwarePredicate> player() {
+            return this.player;
         }
-
     }
 }
