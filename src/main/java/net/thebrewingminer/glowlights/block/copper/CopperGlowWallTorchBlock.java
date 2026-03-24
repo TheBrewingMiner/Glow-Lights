@@ -1,7 +1,7 @@
 package net.thebrewingminer.glowlights.block.copper;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.particles.ParticleOptions;
+import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
@@ -26,7 +26,7 @@ public class CopperGlowWallTorchBlock extends GlowWallTorchBlock implements IWea
     public static final int SUBMERGED_OXIDATION_FACTOR = 7;
 
 
-    public CopperGlowWallTorchBlock(WeatheringCopper.WeatherState weatherState, BlockBehaviour.Properties properties, ParticleOptions particle) {
+    public CopperGlowWallTorchBlock(WeatheringCopper.WeatherState weatherState, BlockBehaviour.Properties properties, SimpleParticleType particle) {
         super(properties, particle);
         this.weatherState = weatherState;
     }

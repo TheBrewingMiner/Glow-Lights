@@ -1,7 +1,7 @@
 package net.thebrewingminer.glowlights.block.copper;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.particles.ParticleOptions;
+import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
@@ -27,7 +27,7 @@ public class CopperGlowTorchBlock extends GlowTorchBlock implements IWeatheringC
 
     // Superclass (GlowTorchBlock) handles most of the object.
     // This object handles copper weather state itself.
-    public CopperGlowTorchBlock(WeatheringCopper.WeatherState weatherState, BlockBehaviour.Properties properties, ParticleOptions particle) {
+    public CopperGlowTorchBlock(WeatheringCopper.WeatherState weatherState, BlockBehaviour.Properties properties, SimpleParticleType particle) {
         super(properties, particle);
         this.weatherState = weatherState;
     }

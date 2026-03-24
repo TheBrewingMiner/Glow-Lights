@@ -4,6 +4,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
@@ -42,8 +43,8 @@ public class GlowTorchBlock extends TorchBlock implements SimpleWaterloggedBlock
 
     // Instantiates a block that essentially copies a TorchBlock object, but adds WATERLOGGED property.
     // By default, WATERLOGGED is false.
-    public GlowTorchBlock(BlockBehaviour.Properties properties, ParticleOptions particle) {
-        super(properties, particle);
+    public GlowTorchBlock(BlockBehaviour.Properties properties, SimpleParticleType particle) {
+        super(particle, properties);
         this.flameParticle = particle;
         this.registerDefaultState(this.stateDefinition.any().setValue(WATERLOGGED, false));
     }

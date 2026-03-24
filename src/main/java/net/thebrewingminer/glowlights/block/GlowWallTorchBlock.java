@@ -4,6 +4,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.Level;
@@ -38,8 +39,8 @@ public class GlowWallTorchBlock extends WallTorchBlock implements SimpleWaterlog
 
     // Instantiates a block that essentially copies a WallTorchBlock object, but adds WATERLOGGED property.
     // By default, WATERLOGGED is false.
-    public GlowWallTorchBlock(BlockBehaviour.Properties properties, ParticleOptions particle) {
-        super(properties, particle);
+    public GlowWallTorchBlock(BlockBehaviour.Properties properties, SimpleParticleType particle) {
+        super(particle, properties);
         this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(WATERLOGGED, false));
     }
 
