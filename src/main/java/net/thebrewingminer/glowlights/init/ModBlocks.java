@@ -37,12 +37,12 @@ public class ModBlocks {
 
     public static final RegistryObject<Block> GLOW_LANTERN_BLOCK = registerBlockAndItem(
         "glow_lantern_block",
-        () -> new GlowLanternBlock(BlockBehaviour.Properties.copy(Blocks.SEA_LANTERN).lightLevel(GlowLanternBlock::getLightLevel))
+        () -> new GlowLanternBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.SEA_LANTERN).lightLevel(GlowLanternBlock::getLightLevel))
     );
 
     public static final RegistryObject<Block> GLOW_BERRY_LANTERN_BLOCK = registerBlockAndItem(
         "glow_berry_lantern_block",
-        () -> new Block(BlockBehaviour.Properties.copy(Blocks.SEA_LANTERN).lightLevel((state) -> 15))
+        () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.SEA_LANTERN).lightLevel((state) -> 15))
     );
 
     public static final RegistryObject<Block> GLOW_LANTERN = registerBlockAndItem(
@@ -52,13 +52,13 @@ public class ModBlocks {
 
     public static final RegistryObject<Block> GLOW_BERRY_LANTERN = registerBlockAndItem(
         "glow_berry_lantern",
-        () -> new GlowLantern(BlockBehaviour.Properties.copy(GLOW_LANTERN.get()).lightLevel((state) -> 15))
+        () -> new GlowLantern(BlockBehaviour.Properties.ofFullCopy(GLOW_LANTERN.get()).lightLevel((state) -> 15))
     );
 
     public static final RegistryObject<Block> GLOW_TORCH = BLOCKS.register(
         "glow_torch",
         () -> new GlowTorchBlock(
-            BlockBehaviour.Properties.copy(Blocks.TORCH).lightLevel(GlowTorchBlock::getLightLevel),
+            BlockBehaviour.Properties.ofFullCopy(Blocks.TORCH).lightLevel(GlowTorchBlock::getLightLevel),
             ParticleTypes.GLOW
         )
     );
@@ -66,7 +66,7 @@ public class ModBlocks {
     public static final RegistryObject<Block> GLOW_WALL_TORCH = BLOCKS.register(
         "glow_wall_torch",
         () -> new GlowWallTorchBlock(
-            BlockBehaviour.Properties.copy(Blocks.WALL_TORCH).lightLevel(GlowWallTorchBlock::getLightLevel),
+            BlockBehaviour.Properties.ofFullCopy(Blocks.WALL_TORCH).lightLevel(GlowWallTorchBlock::getLightLevel),
             ParticleTypes.GLOW
         )
     );
@@ -74,7 +74,7 @@ public class ModBlocks {
     public static final RegistryObject<Block> PRISMARINE_GLOW_CAMPFIRE = registerBlockAndItem(
         "prismarine_glow_campfire",
         () -> new GlowCampfireBlock(
-            BlockBehaviour.Properties.copy(Blocks.PRISMARINE)
+            BlockBehaviour.Properties.ofFullCopy(Blocks.PRISMARINE)
                 .lightLevel(GlowCampfireBlock::getLightLevel)
                 .noOcclusion(),
             0.5f,
@@ -85,7 +85,7 @@ public class ModBlocks {
     public static final RegistryObject<Block> PRISMARINE_BRICK_GLOW_CAMPFIRE = registerBlockAndItem(
         "prismarine_brick_glow_campfire",
         () -> new GlowCampfireBlock(
-            BlockBehaviour.Properties.copy(Blocks.PRISMARINE_BRICKS)
+            BlockBehaviour.Properties.ofFullCopy(Blocks.PRISMARINE_BRICKS)
                 .lightLevel(GlowCampfireBlock::getLightLevel)
                 .noOcclusion(),
             0.5f,
@@ -96,7 +96,7 @@ public class ModBlocks {
     public static final RegistryObject<Block> DARK_PRISMARINE_GLOW_CAMPFIRE = registerBlockAndItem(
         "dark_prismarine_glow_campfire",
         () -> new GlowCampfireBlock(
-            BlockBehaviour.Properties.copy(Blocks.DARK_PRISMARINE)
+            BlockBehaviour.Properties.ofFullCopy(Blocks.DARK_PRISMARINE)
                 .lightLevel(GlowCampfireBlock::getLightLevel)
                 .noOcclusion(),
             0.5f,
@@ -107,7 +107,7 @@ public class ModBlocks {
     public static final RegistryObject<Block> GLOW_CAMPFIRE = registerBlockAndItem(
         "glow_campfire",
         () -> new GlowCampfireBlock(
-            BlockBehaviour.Properties.copy(Blocks.CAMPFIRE)
+            BlockBehaviour.Properties.ofFullCopy(Blocks.CAMPFIRE)
                 .lightLevel(GlowCampfireBlock::getLightLevel),
             1,
             5
@@ -120,7 +120,7 @@ public class ModBlocks {
         "copper_glow_torch",
         () -> new CopperGlowTorchBlock(
             WeatheringCopper.WeatherState.UNAFFECTED,
-            BlockBehaviour.Properties.copy(Blocks.TORCH).sound(SoundType.COPPER).lightLevel(CopperGlowTorchBlock::getLightLevel),
+            BlockBehaviour.Properties.ofFullCopy(Blocks.TORCH).sound(SoundType.COPPER).lightLevel(CopperGlowTorchBlock::getLightLevel),
             ParticleTypes.GLOW
         )
     );
@@ -129,7 +129,7 @@ public class ModBlocks {
         "copper_glow_wall_torch",
         () -> new CopperGlowWallTorchBlock(
             WeatheringCopper.WeatherState.UNAFFECTED,
-            BlockBehaviour.Properties.copy(Blocks.WALL_TORCH).sound(SoundType.COPPER).sound(SoundType.COPPER).lightLevel(CopperGlowWallTorchBlock::getLightLevel),
+            BlockBehaviour.Properties.ofFullCopy(Blocks.WALL_TORCH).sound(SoundType.COPPER).sound(SoundType.COPPER).lightLevel(CopperGlowWallTorchBlock::getLightLevel),
             ParticleTypes.GLOW
         )
     );
@@ -138,7 +138,7 @@ public class ModBlocks {
         "exposed_copper_glow_torch",
         () -> new CopperGlowTorchBlock(
             WeatheringCopper.WeatherState.EXPOSED,
-            BlockBehaviour.Properties.copy(Blocks.TORCH).sound(SoundType.COPPER).lightLevel(CopperGlowTorchBlock::getLightLevel),
+            BlockBehaviour.Properties.ofFullCopy(Blocks.TORCH).sound(SoundType.COPPER).lightLevel(CopperGlowTorchBlock::getLightLevel),
             ParticleTypes.GLOW
         )
     );
@@ -147,7 +147,7 @@ public class ModBlocks {
         "exposed_copper_glow_wall_torch",
         () -> new CopperGlowWallTorchBlock(
             WeatheringCopper.WeatherState.EXPOSED,
-            BlockBehaviour.Properties.copy(Blocks.WALL_TORCH).sound(SoundType.COPPER).lightLevel(CopperGlowWallTorchBlock::getLightLevel),
+            BlockBehaviour.Properties.ofFullCopy(Blocks.WALL_TORCH).sound(SoundType.COPPER).lightLevel(CopperGlowWallTorchBlock::getLightLevel),
             ParticleTypes.GLOW
         )
     );
@@ -156,7 +156,7 @@ public class ModBlocks {
         "weathered_copper_glow_torch",
         () -> new CopperGlowTorchBlock(
             WeatheringCopper.WeatherState.WEATHERED,
-            BlockBehaviour.Properties.copy(Blocks.TORCH).sound(SoundType.COPPER).lightLevel(CopperGlowTorchBlock::getLightLevel),
+            BlockBehaviour.Properties.ofFullCopy(Blocks.TORCH).sound(SoundType.COPPER).lightLevel(CopperGlowTorchBlock::getLightLevel),
             ParticleTypes.GLOW
         )
     );
@@ -165,7 +165,7 @@ public class ModBlocks {
         "weathered_copper_glow_wall_torch",
         () -> new CopperGlowWallTorchBlock(
             WeatheringCopper.WeatherState.WEATHERED,
-            BlockBehaviour.Properties.copy(Blocks.WALL_TORCH).sound(SoundType.COPPER).lightLevel(CopperGlowWallTorchBlock::getLightLevel),
+            BlockBehaviour.Properties.ofFullCopy(Blocks.WALL_TORCH).sound(SoundType.COPPER).lightLevel(CopperGlowWallTorchBlock::getLightLevel),
             ParticleTypes.GLOW
         )
     );
@@ -174,7 +174,7 @@ public class ModBlocks {
         "oxidized_copper_glow_torch",
         () -> new CopperGlowTorchBlock(
             WeatheringCopper.WeatherState.OXIDIZED,
-            BlockBehaviour.Properties.copy(Blocks.TORCH).sound(SoundType.COPPER).lightLevel(CopperGlowTorchBlock::getLightLevel),
+            BlockBehaviour.Properties.ofFullCopy(Blocks.TORCH).sound(SoundType.COPPER).lightLevel(CopperGlowTorchBlock::getLightLevel),
             ParticleTypes.GLOW
         )
     );
@@ -183,7 +183,7 @@ public class ModBlocks {
         "oxidized_copper_glow_wall_torch",
         () -> new CopperGlowWallTorchBlock(
             WeatheringCopper.WeatherState.OXIDIZED,
-            BlockBehaviour.Properties.copy(Blocks.WALL_TORCH).sound(SoundType.COPPER).lightLevel(CopperGlowWallTorchBlock::getLightLevel),
+            BlockBehaviour.Properties.ofFullCopy(Blocks.WALL_TORCH).sound(SoundType.COPPER).lightLevel(CopperGlowWallTorchBlock::getLightLevel),
             ParticleTypes.GLOW
         )
     );
@@ -192,7 +192,7 @@ public class ModBlocks {
         "copper_glow_lantern",
         () -> new CopperGlowLantern(
             WeatheringCopper.WeatherState.UNAFFECTED,
-            BlockBehaviour.Properties.copy(GLOW_LANTERN.get()).sound(SoundType.COPPER).lightLevel(CopperGlowLantern::getLightLevel)
+            BlockBehaviour.Properties.ofFullCopy(GLOW_LANTERN.get()).sound(SoundType.COPPER).lightLevel(CopperGlowLantern::getLightLevel)
         )
     );
 
@@ -200,7 +200,7 @@ public class ModBlocks {
         "exposed_copper_glow_lantern",
         () -> new CopperGlowLantern(
             WeatheringCopper.WeatherState.EXPOSED,
-            BlockBehaviour.Properties.copy(COPPER_GLOW_LANTERN.get()).lightLevel(CopperGlowLantern::getLightLevel)
+            BlockBehaviour.Properties.ofFullCopy(COPPER_GLOW_LANTERN.get()).lightLevel(CopperGlowLantern::getLightLevel)
         )
     );
 
@@ -208,7 +208,7 @@ public class ModBlocks {
         "weathered_copper_glow_lantern",
         () -> new CopperGlowLantern(
             WeatheringCopper.WeatherState.WEATHERED,
-            BlockBehaviour.Properties.copy(COPPER_GLOW_LANTERN.get()).lightLevel(CopperGlowLantern::getLightLevel)
+            BlockBehaviour.Properties.ofFullCopy(COPPER_GLOW_LANTERN.get()).lightLevel(CopperGlowLantern::getLightLevel)
         )
     );
 
@@ -216,7 +216,7 @@ public class ModBlocks {
         "oxidized_copper_glow_lantern",
         () -> new CopperGlowLantern(
             WeatheringCopper.WeatherState.OXIDIZED,
-            BlockBehaviour.Properties.copy(COPPER_GLOW_LANTERN.get()).lightLevel(CopperGlowLantern::getLightLevel)
+            BlockBehaviour.Properties.ofFullCopy(COPPER_GLOW_LANTERN.get()).lightLevel(CopperGlowLantern::getLightLevel)
         )
     );
 
@@ -224,7 +224,7 @@ public class ModBlocks {
         "copper_chain",
         () -> new CopperChainBlock(
             WeatheringCopper.WeatherState.UNAFFECTED,
-            BlockBehaviour.Properties.copy(Blocks.CHAIN)
+            BlockBehaviour.Properties.ofFullCopy(Blocks.CHAIN)
         )
     );
 
@@ -232,7 +232,7 @@ public class ModBlocks {
             "exposed_copper_chain",
         () -> new CopperChainBlock(
             WeatheringCopper.WeatherState.EXPOSED,
-            BlockBehaviour.Properties.copy(Blocks.CHAIN)
+            BlockBehaviour.Properties.ofFullCopy(Blocks.CHAIN)
         )
     );
 
@@ -240,7 +240,7 @@ public class ModBlocks {
         "weathered_copper_chain",
         () -> new CopperChainBlock(
             WeatheringCopper.WeatherState.WEATHERED,
-            BlockBehaviour.Properties.copy(Blocks.CHAIN)
+            BlockBehaviour.Properties.ofFullCopy(Blocks.CHAIN)
         )
     );
 
@@ -248,7 +248,7 @@ public class ModBlocks {
         "oxidized_copper_chain",
         () -> new CopperChainBlock(
             WeatheringCopper.WeatherState.OXIDIZED,
-            BlockBehaviour.Properties.copy(Blocks.CHAIN)
+            BlockBehaviour.Properties.ofFullCopy(Blocks.CHAIN)
         )
     );
 
@@ -256,7 +256,7 @@ public class ModBlocks {
     "copper_glow_campfire",
         () -> new CopperGlowCampfireBlock(
             WeatheringCopper.WeatherState.UNAFFECTED,
-            BlockBehaviour.Properties.copy(Blocks.COPPER_BLOCK)
+            BlockBehaviour.Properties.ofFullCopy(Blocks.COPPER_BLOCK)
                 .lightLevel(CopperGlowCampfireBlock::getLightLevel)
                 .noOcclusion(),
             0.75f,
@@ -268,7 +268,7 @@ public class ModBlocks {
         "exposed_copper_glow_campfire",
         () -> new CopperGlowCampfireBlock(
             WeatheringCopper.WeatherState.EXPOSED,
-            BlockBehaviour.Properties.copy(Blocks.EXPOSED_COPPER)
+            BlockBehaviour.Properties.ofFullCopy(Blocks.EXPOSED_COPPER)
                 .lightLevel(CopperGlowCampfireBlock::getLightLevel)
                 .noOcclusion(),
             0.65f,
@@ -280,7 +280,7 @@ public class ModBlocks {
         "weathered_copper_glow_campfire",
         () -> new CopperGlowCampfireBlock(
             WeatheringCopper.WeatherState.WEATHERED,
-            BlockBehaviour.Properties.copy(Blocks.WEATHERED_COPPER)
+            BlockBehaviour.Properties.ofFullCopy(Blocks.WEATHERED_COPPER)
                 .lightLevel(CopperGlowCampfireBlock::getLightLevel)
                 .noOcclusion(),
             0.5f,
@@ -292,7 +292,7 @@ public class ModBlocks {
         "oxidized_copper_glow_campfire",
         () -> new CopperGlowCampfireBlock(
             WeatheringCopper.WeatherState.OXIDIZED,
-            BlockBehaviour.Properties.copy(Blocks.OXIDIZED_COPPER)
+            BlockBehaviour.Properties.ofFullCopy(Blocks.OXIDIZED_COPPER)
                 .lightLevel(CopperGlowCampfireBlock::getLightLevel)
                 .noOcclusion(),
             0.5f,
@@ -304,7 +304,7 @@ public class ModBlocks {
         "cut_copper_glow_campfire",
         () -> new CopperGlowCampfireBlock(
             WeatheringCopper.WeatherState.UNAFFECTED,
-            BlockBehaviour.Properties.copy(Blocks.CUT_COPPER)
+            BlockBehaviour.Properties.ofFullCopy(Blocks.CUT_COPPER)
                 .lightLevel(CopperGlowCampfireBlock::getLightLevel)
                 .noOcclusion(),
             0.75f,
@@ -316,7 +316,7 @@ public class ModBlocks {
         "exposed_cut_copper_glow_campfire",
         () -> new CopperGlowCampfireBlock(
             WeatheringCopper.WeatherState.EXPOSED,
-            BlockBehaviour.Properties.copy(Blocks.EXPOSED_CUT_COPPER)
+            BlockBehaviour.Properties.ofFullCopy(Blocks.EXPOSED_CUT_COPPER)
                 .lightLevel(CopperGlowCampfireBlock::getLightLevel)
                 .noOcclusion(),
             0.65f,
@@ -328,7 +328,7 @@ public class ModBlocks {
         "weathered_cut_copper_glow_campfire",
         () -> new CopperGlowCampfireBlock(
             WeatheringCopper.WeatherState.WEATHERED,
-            BlockBehaviour.Properties.copy(Blocks.WEATHERED_CUT_COPPER)
+            BlockBehaviour.Properties.ofFullCopy(Blocks.WEATHERED_CUT_COPPER)
                 .lightLevel(CopperGlowCampfireBlock::getLightLevel)
                 .noOcclusion(),
             0.5f,
@@ -340,7 +340,7 @@ public class ModBlocks {
         "oxidized_cut_copper_glow_campfire",
         () -> new CopperGlowCampfireBlock(
             WeatheringCopper.WeatherState.OXIDIZED,
-            BlockBehaviour.Properties.copy(Blocks.OXIDIZED_CUT_COPPER)
+            BlockBehaviour.Properties.ofFullCopy(Blocks.OXIDIZED_CUT_COPPER)
                 .lightLevel(CopperGlowCampfireBlock::getLightLevel)
                 .noOcclusion(),
             0.5f,
@@ -352,7 +352,7 @@ public class ModBlocks {
         "copper_glow_lantern_block",
         () -> new CopperGlowLanternBlock(
             WeatheringCopper.WeatherState.UNAFFECTED,
-            BlockBehaviour.Properties.copy(Blocks.SEA_LANTERN).lightLevel(CopperGlowLanternBlock::getLightLevel)
+            BlockBehaviour.Properties.ofFullCopy(Blocks.SEA_LANTERN).lightLevel(CopperGlowLanternBlock::getLightLevel)
         )
     );
 
@@ -360,7 +360,7 @@ public class ModBlocks {
         "exposed_copper_glow_lantern_block",
         () -> new CopperGlowLanternBlock(
             WeatheringCopper.WeatherState.EXPOSED,
-            BlockBehaviour.Properties.copy(Blocks.SEA_LANTERN).lightLevel(CopperGlowLanternBlock::getLightLevel)
+            BlockBehaviour.Properties.ofFullCopy(Blocks.SEA_LANTERN).lightLevel(CopperGlowLanternBlock::getLightLevel)
         )
     );
 
@@ -368,7 +368,7 @@ public class ModBlocks {
         "weathered_copper_glow_lantern_block",
         () -> new CopperGlowLanternBlock(
             WeatheringCopper.WeatherState.WEATHERED,
-            BlockBehaviour.Properties.copy(Blocks.SEA_LANTERN).lightLevel(CopperGlowLanternBlock::getLightLevel)
+            BlockBehaviour.Properties.ofFullCopy(Blocks.SEA_LANTERN).lightLevel(CopperGlowLanternBlock::getLightLevel)
         )
     );
 
@@ -376,7 +376,7 @@ public class ModBlocks {
         "oxidized_copper_glow_lantern_block",
         () -> new CopperGlowLanternBlock(
             WeatheringCopper.WeatherState.OXIDIZED,
-            BlockBehaviour.Properties.copy(Blocks.SEA_LANTERN).lightLevel(CopperGlowLanternBlock::getLightLevel)
+            BlockBehaviour.Properties.ofFullCopy(Blocks.SEA_LANTERN).lightLevel(CopperGlowLanternBlock::getLightLevel)
         )
     );
 
@@ -384,7 +384,7 @@ public class ModBlocks {
     "copper_glow_berry_lantern_block",
         () -> new CopperFullBlock(
             WeatheringCopper.WeatherState.UNAFFECTED,
-            BlockBehaviour.Properties.copy(Blocks.SEA_LANTERN).lightLevel((state) -> 15)
+            BlockBehaviour.Properties.ofFullCopy(Blocks.SEA_LANTERN).lightLevel((state) -> 15)
         )
     );
 
@@ -392,7 +392,7 @@ public class ModBlocks {
         "exposed_copper_glow_berry_lantern_block",
         () -> new CopperFullBlock(
             WeatheringCopper.WeatherState.EXPOSED,
-            BlockBehaviour.Properties.copy(Blocks.SEA_LANTERN).lightLevel((state) -> 15)
+            BlockBehaviour.Properties.ofFullCopy(Blocks.SEA_LANTERN).lightLevel((state) -> 15)
         )
     );
 
@@ -400,7 +400,7 @@ public class ModBlocks {
         "weathered_copper_glow_berry_lantern_block",
         () -> new CopperFullBlock(
             WeatheringCopper.WeatherState.WEATHERED,
-            BlockBehaviour.Properties.copy(Blocks.SEA_LANTERN).lightLevel((state) -> 15)
+            BlockBehaviour.Properties.ofFullCopy(Blocks.SEA_LANTERN).lightLevel((state) -> 15)
         )
     );
 
@@ -408,7 +408,7 @@ public class ModBlocks {
         "oxidized_copper_glow_berry_lantern_block",
         () -> new CopperFullBlock(
             WeatheringCopper.WeatherState.OXIDIZED,
-            BlockBehaviour.Properties.copy(Blocks.SEA_LANTERN).lightLevel((state) -> 15)
+            BlockBehaviour.Properties.ofFullCopy(Blocks.SEA_LANTERN).lightLevel((state) -> 15)
         )
     );
 
@@ -416,7 +416,7 @@ public class ModBlocks {
         "copper_glow_berry_lantern",
         () -> new CopperGlowLantern(
             WeatheringCopper.WeatherState.UNAFFECTED,
-            BlockBehaviour.Properties.copy(GLOW_BERRY_LANTERN.get()).sound(SoundType.COPPER).lightLevel((state) -> 15)
+            BlockBehaviour.Properties.ofFullCopy(GLOW_BERRY_LANTERN.get()).sound(SoundType.COPPER).lightLevel((state) -> 15)
         )
     );
 
@@ -424,7 +424,7 @@ public class ModBlocks {
         "exposed_copper_glow_berry_lantern",
         () -> new CopperGlowLantern(
             WeatheringCopper.WeatherState.EXPOSED,
-            BlockBehaviour.Properties.copy(COPPER_GLOW_BERRY_LANTERN.get()).lightLevel((state) -> 15)
+            BlockBehaviour.Properties.ofFullCopy(COPPER_GLOW_BERRY_LANTERN.get()).lightLevel((state) -> 15)
         )
     );
 
@@ -432,7 +432,7 @@ public class ModBlocks {
         "weathered_copper_glow_berry_lantern",
         () -> new CopperGlowLantern(
             WeatheringCopper.WeatherState.WEATHERED,
-            BlockBehaviour.Properties.copy(COPPER_GLOW_BERRY_LANTERN.get()).lightLevel((state) -> 15)
+            BlockBehaviour.Properties.ofFullCopy(COPPER_GLOW_BERRY_LANTERN.get()).lightLevel((state) -> 15)
         )
     );
 
@@ -440,7 +440,7 @@ public class ModBlocks {
         "oxidized_copper_glow_berry_lantern",
         () -> new CopperGlowLantern(
             WeatheringCopper.WeatherState.OXIDIZED,
-            BlockBehaviour.Properties.copy(COPPER_GLOW_BERRY_LANTERN.get()).lightLevel((state) -> 15)
+            BlockBehaviour.Properties.ofFullCopy(COPPER_GLOW_BERRY_LANTERN.get()).lightLevel((state) -> 15)
         )
     );
 
@@ -449,7 +449,7 @@ public class ModBlocks {
     public static final RegistryObject<Block> WAXED_COPPER_GLOW_TORCH = BLOCKS.register(
         "waxed_copper_glow_torch",
         () -> new GlowTorchBlock(
-            BlockBehaviour.Properties.copy(Blocks.TORCH).sound(SoundType.COPPER).lightLevel(GlowTorchBlock::getLightLevel),
+            BlockBehaviour.Properties.ofFullCopy(Blocks.TORCH).sound(SoundType.COPPER).lightLevel(GlowTorchBlock::getLightLevel),
             ParticleTypes.GLOW
         )
     );
@@ -457,7 +457,7 @@ public class ModBlocks {
     public static final RegistryObject<Block> WAXED_COPPER_GLOW_WALL_TORCH = BLOCKS.register(
         "waxed_copper_glow_wall_torch",
         () -> new GlowWallTorchBlock(
-            BlockBehaviour.Properties.copy(Blocks.WALL_TORCH).sound(SoundType.COPPER).sound(SoundType.COPPER).lightLevel(GlowWallTorchBlock::getLightLevel),
+            BlockBehaviour.Properties.ofFullCopy(Blocks.WALL_TORCH).sound(SoundType.COPPER).sound(SoundType.COPPER).lightLevel(GlowWallTorchBlock::getLightLevel),
             ParticleTypes.GLOW
         )
     );
@@ -465,7 +465,7 @@ public class ModBlocks {
     public static final RegistryObject<Block> WAXED_EXPOSED_COPPER_GLOW_TORCH = BLOCKS.register(
         "waxed_exposed_copper_glow_torch",
         () -> new GlowTorchBlock(
-            BlockBehaviour.Properties.copy(Blocks.TORCH).sound(SoundType.COPPER).lightLevel(GlowTorchBlock::getLightLevel),
+            BlockBehaviour.Properties.ofFullCopy(Blocks.TORCH).sound(SoundType.COPPER).lightLevel(GlowTorchBlock::getLightLevel),
             ParticleTypes.GLOW
         )
     );
@@ -473,7 +473,7 @@ public class ModBlocks {
     public static final RegistryObject<Block> WAXED_EXPOSED_COPPER_GLOW_WALL_TORCH = BLOCKS.register(
         "waxed_exposed_copper_glow_wall_torch",
         () -> new GlowWallTorchBlock(
-            BlockBehaviour.Properties.copy(Blocks.WALL_TORCH).sound(SoundType.COPPER).sound(SoundType.COPPER).lightLevel(GlowWallTorchBlock::getLightLevel),
+            BlockBehaviour.Properties.ofFullCopy(Blocks.WALL_TORCH).sound(SoundType.COPPER).sound(SoundType.COPPER).lightLevel(GlowWallTorchBlock::getLightLevel),
             ParticleTypes.GLOW
         )
     );
@@ -481,7 +481,7 @@ public class ModBlocks {
     public static final RegistryObject<Block> WAXED_WEATHERED_COPPER_GLOW_TORCH = BLOCKS.register(
         "waxed_weathered_copper_glow_torch",
         () -> new GlowTorchBlock(
-            BlockBehaviour.Properties.copy(Blocks.TORCH).sound(SoundType.COPPER).lightLevel(GlowTorchBlock::getLightLevel),
+            BlockBehaviour.Properties.ofFullCopy(Blocks.TORCH).sound(SoundType.COPPER).lightLevel(GlowTorchBlock::getLightLevel),
             ParticleTypes.GLOW
         )
     );
@@ -489,7 +489,7 @@ public class ModBlocks {
     public static final RegistryObject<Block> WAXED_WEATHERED_COPPER_GLOW_WALL_TORCH = BLOCKS.register(
         "waxed_weathered_copper_glow_wall_torch",
         () -> new GlowWallTorchBlock(
-            BlockBehaviour.Properties.copy(Blocks.WALL_TORCH).sound(SoundType.COPPER).sound(SoundType.COPPER).lightLevel(GlowWallTorchBlock::getLightLevel),
+            BlockBehaviour.Properties.ofFullCopy(Blocks.WALL_TORCH).sound(SoundType.COPPER).sound(SoundType.COPPER).lightLevel(GlowWallTorchBlock::getLightLevel),
             ParticleTypes.GLOW
         )
     );
@@ -497,7 +497,7 @@ public class ModBlocks {
     public static final RegistryObject<Block> WAXED_OXIDIZED_COPPER_GLOW_TORCH = BLOCKS.register(
     "waxed_oxidized_copper_glow_torch",
         () -> new GlowTorchBlock(
-            BlockBehaviour.Properties.copy(Blocks.TORCH).sound(SoundType.COPPER).lightLevel(GlowTorchBlock::getLightLevel),
+            BlockBehaviour.Properties.ofFullCopy(Blocks.TORCH).sound(SoundType.COPPER).lightLevel(GlowTorchBlock::getLightLevel),
             ParticleTypes.GLOW
         )
     );
@@ -505,55 +505,55 @@ public class ModBlocks {
     public static final RegistryObject<Block> WAXED_OXIDIZED_COPPER_GLOW_WALL_TORCH = BLOCKS.register(
         "waxed_oxidized_copper_glow_wall_torch",
         () -> new GlowWallTorchBlock(
-            BlockBehaviour.Properties.copy(Blocks.WALL_TORCH).sound(SoundType.COPPER).sound(SoundType.COPPER).lightLevel(GlowWallTorchBlock::getLightLevel),
+            BlockBehaviour.Properties.ofFullCopy(Blocks.WALL_TORCH).sound(SoundType.COPPER).sound(SoundType.COPPER).lightLevel(GlowWallTorchBlock::getLightLevel),
             ParticleTypes.GLOW
         )
     );
 
     public static final RegistryObject<Block> WAXED_COPPER_GLOW_LANTERN = registerBlockAndItem(
         "waxed_copper_glow_lantern",
-        () -> new GlowLantern(BlockBehaviour.Properties.copy(COPPER_GLOW_LANTERN.get()).lightLevel(GlowLantern::getLightLevel))
+        () -> new GlowLantern(BlockBehaviour.Properties.ofFullCopy(COPPER_GLOW_LANTERN.get()).lightLevel(GlowLantern::getLightLevel))
     );
 
     public static final RegistryObject<Block> WAXED_EXPOSED_COPPER_GLOW_LANTERN = registerBlockAndItem(
         "waxed_exposed_copper_glow_lantern",
-        () -> new GlowLantern(BlockBehaviour.Properties.copy(COPPER_GLOW_LANTERN.get()).lightLevel(GlowLantern::getLightLevel))
+        () -> new GlowLantern(BlockBehaviour.Properties.ofFullCopy(COPPER_GLOW_LANTERN.get()).lightLevel(GlowLantern::getLightLevel))
     );
 
     public static final RegistryObject<Block> WAXED_WEATHERED_COPPER_GLOW_LANTERN = registerBlockAndItem(
         "waxed_weathered_copper_glow_lantern",
-        () -> new GlowLantern(BlockBehaviour.Properties.copy(COPPER_GLOW_LANTERN.get()).lightLevel(GlowLantern::getLightLevel))
+        () -> new GlowLantern(BlockBehaviour.Properties.ofFullCopy(COPPER_GLOW_LANTERN.get()).lightLevel(GlowLantern::getLightLevel))
     );
 
     public static final RegistryObject<Block> WAXED_OXIDIZED_COPPER_GLOW_LANTERN = registerBlockAndItem(
         "waxed_oxidized_copper_glow_lantern",
-        () -> new GlowLantern(BlockBehaviour.Properties.copy(COPPER_GLOW_LANTERN.get()).lightLevel(GlowLantern::getLightLevel))
+        () -> new GlowLantern(BlockBehaviour.Properties.ofFullCopy(COPPER_GLOW_LANTERN.get()).lightLevel(GlowLantern::getLightLevel))
     );
 
     public static final RegistryObject<Block> WAXED_COPPER_CHAIN = registerBlockAndItem(
         "waxed_copper_chain",
-        () -> new ChainBlock(BlockBehaviour.Properties.copy(Blocks.CHAIN))
+        () -> new ChainBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.CHAIN))
     );
 
     public static final RegistryObject<Block> WAXED_EXPOSED_COPPER_CHAIN = registerBlockAndItem(
         "waxed_exposed_copper_chain",
-        () -> new ChainBlock(BlockBehaviour.Properties.copy(Blocks.CHAIN))
+        () -> new ChainBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.CHAIN))
     );
 
     public static final RegistryObject<Block> WAXED_WEATHERED_COPPER_CHAIN = registerBlockAndItem(
             "waxed_weathered_copper_chain",
-            () -> new ChainBlock(BlockBehaviour.Properties.copy(Blocks.CHAIN))
+            () -> new ChainBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.CHAIN))
     );
 
     public static final RegistryObject<Block> WAXED_OXIDIZED_COPPER_CHAIN = registerBlockAndItem(
             "waxed_oxidized_copper_chain",
-            () -> new ChainBlock(BlockBehaviour.Properties.copy(Blocks.CHAIN))
+            () -> new ChainBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.CHAIN))
     );
 
     public static final RegistryObject<Block> WAXED_COPPER_GLOW_CAMPFIRE = registerBlockAndItem(
         "waxed_copper_glow_campfire",
         () -> new WaxedCopperGlowCampfireBlock(
-            BlockBehaviour.Properties.copy(Blocks.WAXED_COPPER_BLOCK)
+            BlockBehaviour.Properties.ofFullCopy(Blocks.WAXED_COPPER_BLOCK)
                 .lightLevel(GlowCampfireBlock::getLightLevel)
                 .noOcclusion(),
             0.75f,
@@ -564,7 +564,7 @@ public class ModBlocks {
     public static final RegistryObject<Block> WAXED_EXPOSED_COPPER_GLOW_CAMPFIRE = registerBlockAndItem(
         "waxed_exposed_copper_glow_campfire",
         () -> new WaxedCopperGlowCampfireBlock(
-            BlockBehaviour.Properties.copy(Blocks.WAXED_EXPOSED_COPPER)
+            BlockBehaviour.Properties.ofFullCopy(Blocks.WAXED_EXPOSED_COPPER)
                 .lightLevel(GlowCampfireBlock::getLightLevel)
                 .noOcclusion(),
             0.65f,
@@ -575,7 +575,7 @@ public class ModBlocks {
     public static final RegistryObject<Block> WAXED_WEATHERED_COPPER_GLOW_CAMPFIRE = registerBlockAndItem(
         "waxed_weathered_copper_glow_campfire",
         () -> new WaxedCopperGlowCampfireBlock(
-            BlockBehaviour.Properties.copy(Blocks.WAXED_WEATHERED_COPPER)
+            BlockBehaviour.Properties.ofFullCopy(Blocks.WAXED_WEATHERED_COPPER)
                 .lightLevel(GlowCampfireBlock::getLightLevel)
                 .noOcclusion(),
             0.5f,
@@ -586,7 +586,7 @@ public class ModBlocks {
     public static final RegistryObject<Block> WAXED_OXIDIZED_COPPER_GLOW_CAMPFIRE = registerBlockAndItem(
         "waxed_oxidized_copper_glow_campfire",
         () -> new WaxedCopperGlowCampfireBlock(
-            BlockBehaviour.Properties.copy(Blocks.WAXED_OXIDIZED_COPPER)
+            BlockBehaviour.Properties.ofFullCopy(Blocks.WAXED_OXIDIZED_COPPER)
                 .lightLevel(GlowCampfireBlock::getLightLevel)
                 .noOcclusion(),
             0.5f,
@@ -597,7 +597,7 @@ public class ModBlocks {
     public static final RegistryObject<Block> WAXED_CUT_COPPER_GLOW_CAMPFIRE = registerBlockAndItem(
         "waxed_cut_copper_glow_campfire",
         () -> new WaxedCopperGlowCampfireBlock(
-            BlockBehaviour.Properties.copy(Blocks.WAXED_CUT_COPPER)
+            BlockBehaviour.Properties.ofFullCopy(Blocks.WAXED_CUT_COPPER)
                 .lightLevel(GlowCampfireBlock::getLightLevel)
                 .noOcclusion(),
             0.75f,
@@ -608,7 +608,7 @@ public class ModBlocks {
     public static final RegistryObject<Block> WAXED_EXPOSED_CUT_COPPER_GLOW_CAMPFIRE = registerBlockAndItem(
         "waxed_exposed_cut_copper_glow_campfire",
         () -> new WaxedCopperGlowCampfireBlock(
-            BlockBehaviour.Properties.copy(Blocks.WAXED_EXPOSED_CUT_COPPER)
+            BlockBehaviour.Properties.ofFullCopy(Blocks.WAXED_EXPOSED_CUT_COPPER)
                 .lightLevel(GlowCampfireBlock::getLightLevel)
                 .noOcclusion(),
             0.65f,
@@ -619,7 +619,7 @@ public class ModBlocks {
     public static final RegistryObject<Block> WAXED_WEATHERED_CUT_COPPER_GLOW_CAMPFIRE = registerBlockAndItem(
         "waxed_weathered_cut_copper_glow_campfire",
         () -> new WaxedCopperGlowCampfireBlock(
-            BlockBehaviour.Properties.copy(Blocks.WAXED_WEATHERED_CUT_COPPER)
+            BlockBehaviour.Properties.ofFullCopy(Blocks.WAXED_WEATHERED_CUT_COPPER)
                 .lightLevel(GlowCampfireBlock::getLightLevel)
                 .noOcclusion(),
             0.5f,
@@ -630,7 +630,7 @@ public class ModBlocks {
     public static final RegistryObject<Block> WAXED_OXIDIZED_CUT_COPPER_GLOW_CAMPFIRE = registerBlockAndItem(
         "waxed_oxidized_cut_copper_glow_campfire",
         () -> new WaxedCopperGlowCampfireBlock(
-            BlockBehaviour.Properties.copy(Blocks.WAXED_OXIDIZED_CUT_COPPER)
+            BlockBehaviour.Properties.ofFullCopy(Blocks.WAXED_OXIDIZED_CUT_COPPER)
                 .lightLevel(GlowCampfireBlock::getLightLevel)
                 .noOcclusion(),
             0.5f,
@@ -640,62 +640,62 @@ public class ModBlocks {
 
     public static final RegistryObject<Block> WAXED_COPPER_GLOW_LANTERN_BLOCK = registerBlockAndItem(
         "waxed_copper_glow_lantern_block",
-        () -> new GlowLanternBlock(BlockBehaviour.Properties.copy(Blocks.SEA_LANTERN).lightLevel(GlowLanternBlock::getLightLevel))
+        () -> new GlowLanternBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.SEA_LANTERN).lightLevel(GlowLanternBlock::getLightLevel))
     );
 
     public static final RegistryObject<Block> WAXED_EXPOSED_COPPER_GLOW_LANTERN_BLOCK = registerBlockAndItem(
         "waxed_exposed_copper_glow_lantern_block",
-        () -> new GlowLanternBlock(BlockBehaviour.Properties.copy(Blocks.SEA_LANTERN).lightLevel(GlowLanternBlock::getLightLevel))
+        () -> new GlowLanternBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.SEA_LANTERN).lightLevel(GlowLanternBlock::getLightLevel))
     );
 
     public static final RegistryObject<Block> WAXED_WEATHERED_COPPER_GLOW_LANTERN_BLOCK = registerBlockAndItem(
         "waxed_weathered_copper_glow_lantern_block",
-        () -> new GlowLanternBlock(BlockBehaviour.Properties.copy(Blocks.SEA_LANTERN).lightLevel(GlowLanternBlock::getLightLevel))
+        () -> new GlowLanternBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.SEA_LANTERN).lightLevel(GlowLanternBlock::getLightLevel))
     );
 
     public static final RegistryObject<Block> WAXED_OXIDIZED_COPPER_GLOW_LANTERN_BLOCK = registerBlockAndItem(
         "waxed_oxidized_copper_glow_lantern_block",
-        () -> new GlowLanternBlock(BlockBehaviour.Properties.copy(Blocks.SEA_LANTERN).lightLevel(GlowLanternBlock::getLightLevel))
+        () -> new GlowLanternBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.SEA_LANTERN).lightLevel(GlowLanternBlock::getLightLevel))
     );
 
     public static final RegistryObject<Block> WAXED_COPPER_GLOW_BERRY_LANTERN_BLOCK = registerBlockAndItem(
         "waxed_copper_glow_berry_lantern_block",
-        () -> new Block(BlockBehaviour.Properties.copy(Blocks.SEA_LANTERN).lightLevel((state) -> 15))
+        () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.SEA_LANTERN).lightLevel((state) -> 15))
     );
 
     public static final RegistryObject<Block> WAXED_EXPOSED_COPPER_GLOW_BERRY_LANTERN_BLOCK = registerBlockAndItem(
         "waxed_exposed_copper_glow_berry_lantern_block",
-        () -> new Block(BlockBehaviour.Properties.copy(Blocks.SEA_LANTERN).lightLevel((state) -> 15))
+        () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.SEA_LANTERN).lightLevel((state) -> 15))
     );
 
     public static final RegistryObject<Block> WAXED_WEATHERED_COPPER_GLOW_BERRY_LANTERN_BLOCK = registerBlockAndItem(
         "waxed_weathered_copper_glow_berry_lantern_block",
-        () -> new Block(BlockBehaviour.Properties.copy(Blocks.SEA_LANTERN).lightLevel((state) -> 15))
+        () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.SEA_LANTERN).lightLevel((state) -> 15))
     );
 
     public static final RegistryObject<Block> WAXED_OXIDIZED_COPPER_GLOW_BERRY_LANTERN_BLOCK = registerBlockAndItem(
         "waxed_oxidized_copper_glow_berry_lantern_block",
-        () -> new Block(BlockBehaviour.Properties.copy(Blocks.SEA_LANTERN).lightLevel((state) -> 15))
+        () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.SEA_LANTERN).lightLevel((state) -> 15))
     );
 
     public static final RegistryObject<Block> WAXED_COPPER_GLOW_BERRY_LANTERN = registerBlockAndItem(
         "waxed_copper_glow_berry_lantern",
-        () -> new GlowLantern(BlockBehaviour.Properties.copy(COPPER_GLOW_BERRY_LANTERN.get()).lightLevel((state) -> 15))
+        () -> new GlowLantern(BlockBehaviour.Properties.ofFullCopy(COPPER_GLOW_BERRY_LANTERN.get()).lightLevel((state) -> 15))
     );
 
     public static final RegistryObject<Block> WAXED_EXPOSED_COPPER_GLOW_BERRY_LANTERN = registerBlockAndItem(
         "waxed_exposed_copper_glow_berry_lantern",
-        () -> new GlowLantern(BlockBehaviour.Properties.copy(COPPER_GLOW_BERRY_LANTERN.get()).lightLevel((state) -> 15))
+        () -> new GlowLantern(BlockBehaviour.Properties.ofFullCopy(COPPER_GLOW_BERRY_LANTERN.get()).lightLevel((state) -> 15))
     );
 
     public static final RegistryObject<Block> WAXED_WEATHERED_COPPER_GLOW_BERRY_LANTERN = registerBlockAndItem(
         "waxed_weathered_copper_glow_berry_lantern",
-        () -> new GlowLantern(BlockBehaviour.Properties.copy(COPPER_GLOW_BERRY_LANTERN.get()).lightLevel((state) -> 15))
+        () -> new GlowLantern(BlockBehaviour.Properties.ofFullCopy(COPPER_GLOW_BERRY_LANTERN.get()).lightLevel((state) -> 15))
     );
 
     public static final RegistryObject<Block> WAXED_OXIDIZED_COPPER_GLOW_BERRY_LANTERN = registerBlockAndItem(
         "waxed_oxidized_copper_glow_berry_lantern",
-        () -> new GlowLantern(BlockBehaviour.Properties.copy(COPPER_GLOW_BERRY_LANTERN.get()).lightLevel((state) -> 15))
+        () -> new GlowLantern(BlockBehaviour.Properties.ofFullCopy(COPPER_GLOW_BERRY_LANTERN.get()).lightLevel((state) -> 15))
     );
 
     // Make this registry known to the event bus.
