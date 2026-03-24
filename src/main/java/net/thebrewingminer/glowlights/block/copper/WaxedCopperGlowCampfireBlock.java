@@ -1,5 +1,8 @@
 package net.thebrewingminer.glowlights.block.copper;
 
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -34,9 +37,21 @@ import static net.thebrewingminer.glowlights.block.utils.GlowCampfireUtils.*;
 import static net.thebrewingminer.glowlights.block.utils.GlowUtils.isWaterlogged;
 
 public class WaxedCopperGlowCampfireBlock extends AbstractGlowCampfireBlock implements SimpleWaterloggedBlock, ICopperCampfireVariant {
+    public static final MapCodec<WaxedCopperGlowCampfireBlock> CODEC = RecordCodecBuilder.mapCodec((instance) ->
+        instance.group(
+            propertiesCodec(),
+            Codec.FLOAT.fieldOf("fire_damage").forGetter((block) -> block.fireDamage),
+            Codec.FLOAT.fieldOf("fire_damage_delay").forGetter((block) -> block.fireDamageDelay)
+        ).apply(instance, WaxedCopperGlowCampfireBlock::new)
+    );
 
     public WaxedCopperGlowCampfireBlock(BlockBehaviour.Properties properties, float fireDamage, float fireDamageDelay) {
         super(properties, fireDamage, fireDamageDelay);
+    }
+
+    @Override
+    public MapCodec<? extends WaxedCopperGlowCampfireBlock> codec() {
+        return CODEC;
     }
 
     // Handles campfire recipes just as Vanilla does.

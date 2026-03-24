@@ -1,5 +1,8 @@
 package net.thebrewingminer.glowlights.block.copper;
 
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
@@ -24,12 +27,25 @@ import static net.thebrewingminer.glowlights.block.utils.GlowUtils.isWaterlogged
 public class CopperGlowCampfireBlock extends WaxedCopperGlowCampfireBlock implements IWeatheringCopper, ICopperCampfireVariant {
     public static final int SUBMERGED_OXIDATION_FACTOR = 7;
     private final WeatheringCopper.WeatherState weatherState;
+    public static final MapCodec<CopperGlowCampfireBlock> CODEC = RecordCodecBuilder.mapCodec((instance) ->
+        instance.group(
+            WeatheringCopper.WeatherState.CODEC.fieldOf("weathering_state").forGetter(CopperGlowCampfireBlock::getAge),
+            propertiesCodec(),
+            Codec.FLOAT.fieldOf("fire_damage").forGetter((block) -> block.fireDamage),
+            Codec.FLOAT.fieldOf("fire_damage_delay").forGetter((block) -> block.fireDamageDelay)
+        ).apply(instance, CopperGlowCampfireBlock::new)
+    );
 
     // WaxedCopperGlowCampfireBlock handles everything the campfire normally does.
     // Stores copper weather state.
     public CopperGlowCampfireBlock(WeatheringCopper.WeatherState weatherState, BlockBehaviour.Properties properties, float fireDamage, float fireDamageDelay) {
         super(properties, fireDamage, fireDamageDelay);
         this.weatherState = weatherState;
+    }
+
+    @Override
+    public MapCodec<CopperGlowCampfireBlock> codec() {
+        return CODEC;
     }
 
     // Copper-related methods required to implement.
@@ -43,8 +59,8 @@ public class CopperGlowCampfireBlock extends WaxedCopperGlowCampfireBlock implem
     @Override
     public void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource randomSource) {
         if (isWaterlogged(state)){
-            if (randomSource.nextInt(SUBMERGED_OXIDATION_FACTOR) == 0) this.onRandomTick(state, level, pos, randomSource);
-        } else this.onRandomTick(state, level, pos, randomSource);
+            if (randomSource.nextInt(SUBMERGED_OXIDATION_FACTOR) == 0) this.changeOverTime(state, level, pos, randomSource);
+        } else this.changeOverTime(state, level, pos, randomSource);
 
     }
 
