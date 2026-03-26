@@ -27,7 +27,6 @@ public class GlowLights {
         ModBlocks.register(modEventBus);
         ModBlockEntities.register(modEventBus);
         ModParticles.register(modEventBus);
-        ModCriteriaTriggers.init();
 
         modEventBus.addListener(this::onCommonSetup);
         modEventBus.addListener(this::addToCreativeTab);
@@ -35,6 +34,7 @@ public class GlowLights {
 
     private void onCommonSetup(FMLCommonSetupEvent event) {
         event.enqueueWork(GlowCampfireDispenserBehavior::register); // Register custom dispenser behavior.
+        ModCriteriaTriggers.init();
     }
 
     private void addToCreativeTab(BuildCreativeModeTabContentsEvent event){
