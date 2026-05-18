@@ -14,9 +14,12 @@ import net.thebrewingminer.glowlights.block.copper.utils.IWeatheringCopper;
 
 @Mod.EventBusSubscriber(modid = GlowLights.MOD_ID)
 public class ScrapeEvent {
+    // Disabled both from event registration to handle custom logic in the blocks themselves.
+    // It seems that in Forge 1.20.3, the event is broadcasted for axes ONLY when the tool action is AXE_STRIP.
+
 
     // Handle scraping for custom copper when an axe is used on it.
-    @SubscribeEvent
+//    @SubscribeEvent
     public static void scrapeOxidation(BlockEvent.BlockToolModificationEvent toolEvent){
         UseOnContext useOnContext = toolEvent.getContext();
         ItemStack heldItem = useOnContext.getItemInHand();
@@ -36,7 +39,7 @@ public class ScrapeEvent {
     }
 
     // Handle scraping wax for custom waxed copper when an axe is used on it.
-    @SubscribeEvent
+//    @SubscribeEvent
     public static void scrapeWax(BlockEvent.BlockToolModificationEvent toolEvent){
         UseOnContext useOnContext = toolEvent.getContext();
         ItemStack heldItem = useOnContext.getItemInHand();
