@@ -2,6 +2,7 @@ package net.thebrewingminer.glowlights.block.entity;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
@@ -66,6 +67,7 @@ public class CopperGlowCampfireBlockEntity extends BlockEntity implements Cleara
     }
 
     // Calculates a bonus/penalty as a float based on a copper weather state.
+    @SuppressWarnings("DataFlowIssue")
     public static float getCookSpeed(BlockState blockState){
         float cookSpeed = 1.00f;
         WeatheringCopper.WeatherState age = getWeatherState(blockState.getBlock());
@@ -176,10 +178,10 @@ public class CopperGlowCampfireBlockEntity extends BlockEntity implements Cleara
 
     // Loads information from saved data.
     @Override
-    public void load(CompoundTag compoundTag) {
-        super.load(compoundTag);
+    public void loadAdditional(CompoundTag compoundTag, HolderLookup.Provider lookupProvider) {
+        super.loadAdditional(compoundTag, lookupProvider);
         this.items.clear();
-        ContainerHelper.loadAllItems(compoundTag, this.items);
+        ContainerHelper.loadAllItems(compoundTag, this.items, lookupProvider);
         int[] $$2;
         if (compoundTag.contains("CookingTimes", 11)) {
             $$2 = compoundTag.getIntArray("CookingTimes");
@@ -195,9 +197,9 @@ public class CopperGlowCampfireBlockEntity extends BlockEntity implements Cleara
 
     // Saves data.
     @Override
-    protected void saveAdditional(CompoundTag compoundTag) {
-        super.saveAdditional(compoundTag);
-        ContainerHelper.saveAllItems(compoundTag, this.items, true);
+    protected void saveAdditional(CompoundTag compoundTag, HolderLookup.Provider lookupProvider) {
+        super.saveAdditional(compoundTag, lookupProvider);
+        ContainerHelper.saveAllItems(compoundTag, this.items, true, lookupProvider);
         compoundTag.putIntArray("CookingTimes", this.cookingProgress);
         compoundTag.putIntArray("CookingTotalTimes", this.cookingTime);
     }
@@ -208,9 +210,9 @@ public class CopperGlowCampfireBlockEntity extends BlockEntity implements Cleara
     }
 
     @Override
-    public CompoundTag getUpdateTag() {
+    public CompoundTag getUpdateTag(HolderLookup.Provider lookupProvider) {
         CompoundTag tag = new CompoundTag();
-        ContainerHelper.saveAllItems(tag, this.items, true);
+        ContainerHelper.saveAllItems(tag, this.items, true, lookupProvider);
         return tag;
     }
 

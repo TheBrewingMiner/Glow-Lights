@@ -26,7 +26,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 
 import static net.thebrewingminer.glowlights.block.utils.GlowUtils.isWaterlogged;
 
-@SuppressWarnings({"NullableProblems", "deprecation"})
+@SuppressWarnings({"NullableProblems"})
 public class GlowTorchBlock extends TorchBlock implements SimpleWaterloggedBlock {
     protected static final VoxelShape AABB = Block.box(6.0, 0.0, 6.0, 10.0, 10.0, 10.0);
     protected final ParticleOptions flameParticle;

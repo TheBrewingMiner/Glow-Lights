@@ -9,7 +9,7 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
+import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -55,22 +55,22 @@ public class WaxedCopperGlowCampfireBlock extends AbstractGlowCampfireBlock impl
     }
 
     // Handles campfire recipes just as Vanilla does.
-    public InteractionResult handleCampfireRecipe(Level level, Player player, ItemStack heldItem, BlockEntity blockEntity){
+    public ItemInteractionResult handleCampfireRecipe(Level level, Player player, ItemStack heldItem, BlockEntity blockEntity){
         if (blockEntity instanceof CopperGlowCampfireBlockEntity copperGlowCampfireBlockEntity) {
             Optional<RecipeHolder<CampfireCookingRecipe>> recipe = copperGlowCampfireBlockEntity.getCookableRecipe(heldItem);
             if (recipe.isPresent()) {
                 if (!level.isClientSide() && copperGlowCampfireBlockEntity.placeFood(player, player.getAbilities().instabuild ? heldItem.copy() : heldItem, recipe.get().value().getCookingTime())) {
                     player.awardStat(Stats.INTERACT_WITH_CAMPFIRE);
-                    return InteractionResult.SUCCESS;
+                    return ItemInteractionResult.SUCCESS;
                 }
-                return InteractionResult.CONSUME;
+                return ItemInteractionResult.CONSUME;
             }
         }
-        return InteractionResult.PASS;
+        return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
     }
 
     // Fills out tool interaction with sounds, sets the block's new state, and calls the block's dowse method.
-    public InteractionResult handleDowsing(Level level, Player player, InteractionHand playerHand, ItemStack heldItem, BlockState state, BlockPos pos, boolean survivalMode){
+    public ItemInteractionResult handleDowsing(Level level, Player player, InteractionHand playerHand, ItemStack heldItem, BlockState state, BlockPos pos, boolean survivalMode){
         level.setBlock(pos, GlowCampfireUtils.extinguishFlame(state), 3);
 
         if (isWaterlogged(state)){
@@ -80,9 +80,9 @@ public class WaxedCopperGlowCampfireBlock extends AbstractGlowCampfireBlock impl
         }
 
         dowse(player, level, pos, state);
-        if (survivalMode){ heldItem.hurtAndBreak(1, player, (p) -> p.broadcastBreakEvent(playerHand)); }
+        if (survivalMode){ heldItem.hurtAndBreak(1, player, heldItem.getEquipmentSlot()); }
 
-        return InteractionResult.SUCCESS;
+        return ItemInteractionResult.SUCCESS;
     }
 
     @Override

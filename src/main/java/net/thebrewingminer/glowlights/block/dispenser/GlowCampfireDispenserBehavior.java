@@ -36,7 +36,7 @@ public final class GlowCampfireDispenserBehavior {
             new OptionalDispenseItemBehavior() {    // Anonymous class that dictates what the dispenser does when it dispenses the item of the key
 
                 @Override
-                protected ItemStack execute(BlockSource source, ItemStack stack) {
+                protected ItemStack execute(BlockSource source, ItemStack itemStack) {
                     Level level = source.level();
                     Direction facing = source.state().getValue(DispenserBlock.FACING);
                     BlockPos pos = source.pos().relative(facing);
@@ -51,7 +51,6 @@ public final class GlowCampfireDispenserBehavior {
                             level.setBlock(pos, newState, 11);
                             level.gameEvent(null, GameEvent.BLOCK_CHANGE, pos);
 
-                            if (stack.hurt(1, level.random, null)) { stack.setCount(0); }
                             this.setSuccess(true);
 
                         } else {
@@ -59,12 +58,14 @@ public final class GlowCampfireDispenserBehavior {
                             this.setSuccess(false);
                         }
 
-                        return stack;
+                        if (this.isSuccess()){ itemStack.hurtAndBreak(1, level.getRandom(), null, () -> itemStack.setCount(0)); }
+
+                        return itemStack;
                     }
 
                     // Otherwise, use the stored vanilla behavior we saved before rewriting the key
                     // to handle all other behaviors as usual.
-                    return vanillaBehavior.dispense(source, stack);
+                    return vanillaBehavior.dispense(source, itemStack);
                 }
             }
         );

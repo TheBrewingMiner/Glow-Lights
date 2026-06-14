@@ -11,7 +11,7 @@ import net.minecraft.world.level.material.Fluids;
 
 import static net.thebrewingminer.glowlights.block.utils.GlowUtils.isWaterlogged;
 
-@SuppressWarnings({"NullableProblems", "deprecation"})
+@SuppressWarnings({"NullableProblems"})
 public class GlowLanternBlock extends Block implements SimpleWaterloggedBlock {
     public static final BooleanProperty WATERLOGGED;
 

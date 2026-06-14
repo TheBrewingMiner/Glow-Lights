@@ -10,7 +10,7 @@ import net.minecraft.tags.ItemTags;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
+import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -123,7 +123,7 @@ public abstract class AbstractGlowCampfireBlock extends BaseEntityBlock implemen
 
     // Return false for being not pathfindable for mobs.
     @Override
-    public boolean isPathfindable(BlockState state, BlockGetter getter, BlockPos pos, PathComputationType type) {
+    protected boolean isPathfindable(BlockState p_51264_, PathComputationType p_51267_) {
         return false;
     }
 
@@ -147,48 +147,48 @@ public abstract class AbstractGlowCampfireBlock extends BaseEntityBlock implemen
     }
 
     // Child classes are expected to implement handling of campfire recipes with their respective block-entities.
-    public abstract InteractionResult handleCampfireRecipe(Level level, Player player, ItemStack heldItem, BlockEntity blockEntity);
+    public abstract ItemInteractionResult handleCampfireRecipe(Level level, Player player, ItemStack heldItem, BlockEntity blockEntity);
 
     // Handles interactions with ShovelItem objects when the campfire is unlit with ash.
     // Updates the block's state, plays a sound, and returns a piece of charcoal in survival mode.
-    public static InteractionResult handleCleaningCampfire(Level level, Player player, InteractionHand playerHand, ItemStack heldItem, BlockState state, BlockPos pos, boolean survivalMode){
+    public static ItemInteractionResult handleCleaningCampfire(Level level, Player player, ItemStack heldItem, BlockState state, BlockPos pos, boolean survivalMode){
         level.setBlock(pos, GlowCampfireUtils.cleanAsh(state), 3);
         level.playSound(null, pos, SoundEvents.SHOVEL_FLATTEN, SoundSource.BLOCKS, 1.0F, 1.0F);
         if (survivalMode) {
-            heldItem.hurtAndBreak(1, player, (p) -> p.broadcastBreakEvent(playerHand));
+            heldItem.hurtAndBreak(1, player, heldItem.getEquipmentSlot());
 
             ItemStack recoveredCharcoal = new ItemStack(Items.CHARCOAL, 1);
             Containers.dropItemStack(level, pos.getX(), pos.getY(), pos.getZ(), recoveredCharcoal);
         }
-        return InteractionResult.SUCCESS;
+        return ItemInteractionResult.SUCCESS;
     }
 
     // Handles interactions with items in the coals tag.
     // Sets HAS_ASH_UNLIT to true and plays a sound.
-    public static InteractionResult handleRefuelingCampfire(Level level, BlockState state, BlockPos pos, ItemStack heldItem, boolean survivalMode){
+    public static ItemInteractionResult handleRefuelingCampfire(Level level, BlockState state, BlockPos pos, ItemStack heldItem, boolean survivalMode){
         level.setBlock(pos, GlowCampfireUtils.addCoals(state), 3);
         level.playSound(null, pos, SoundEvents.BASALT_BREAK, SoundSource.BLOCKS, 1.0F, 1.0F);
         if (survivalMode) heldItem.shrink(1);
-        return InteractionResult.SUCCESS;
+        return ItemInteractionResult.SUCCESS;
     }
 
     // Child objects are expected to implement dowsing handling with their respective block-entities.
-    public abstract InteractionResult handleDowsing(Level level, Player player, InteractionHand playerHand, ItemStack heldItem, BlockState state, BlockPos pos, boolean survivalMode);
+    public abstract ItemInteractionResult handleDowsing(Level level, Player player, InteractionHand playerHand, ItemStack heldItem, BlockState state, BlockPos pos, boolean survivalMode);
 
     @Override
-    public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand playerHand, BlockHitResult hitResult){
-        ItemStack heldItem = player.getItemInHand(playerHand);
+    public ItemInteractionResult useItemOn(ItemStack heldItem, BlockState state, Level level, BlockPos pos, Player player, InteractionHand playerHand, BlockHitResult hitResult){
+//        ItemStack heldItem = player.getItemInHand(playerHand);
         BlockEntity blockEntity = level.getBlockEntity(pos);
         boolean survivalMode = !(player.isCreative());
         boolean coalsPresent = hasAshWhileUnlit(state);
 
         if (isUnlit(state)){ // If the campfire is NOT lit.
-            if (level.isClientSide()) return InteractionResult.PASS;    // On the server only
+            if (level.isClientSide()) return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;    // On the server only
 
             if (coalsPresent){
                 // If the coals are still in the campfire (has ash when unlit)
                 // Handles "cleaning" the coals from the campfire.
-                if (heldItem.is(ItemTags.SHOVELS)) return handleCleaningCampfire(level, player, playerHand, heldItem, state, pos, survivalMode);
+                if (heldItem.is(ItemTags.SHOVELS)) return handleCleaningCampfire(level, player, heldItem, state, pos, survivalMode);
             } else {
                 // If coals are not still in the campfire
                 if (heldItem.is(ItemTags.COALS)) return handleRefuelingCampfire(level, state, pos, heldItem, survivalMode); // Handles refueling.
