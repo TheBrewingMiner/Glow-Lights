@@ -6,7 +6,6 @@ import net.minecraft.advancements.critereon.*;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.util.ExtraCodecs;
 
 import java.util.Optional;
 
@@ -26,8 +25,10 @@ public class GlowCampfireCookedTrigger extends SimpleCriterionTrigger<GlowCampfi
     @SuppressWarnings("CodeBlock2Expr")
     public record TriggerInstance(Optional<ContextAwarePredicate> player, Optional<LocationPredicate> location) implements SimpleCriterionTrigger.SimpleInstance {
         public static final Codec<GlowCampfireCookedTrigger.TriggerInstance> CODEC = RecordCodecBuilder.create((instance) -> {
-            return instance.group(ExtraCodecs.strictOptionalField(EntityPredicate.ADVANCEMENT_CODEC, "player").forGetter(TriggerInstance::player),
-                    ExtraCodecs.strictOptionalField(LocationPredicate.CODEC, "location").forGetter(GlowCampfireCookedTrigger.TriggerInstance::location)).apply(instance, GlowCampfireCookedTrigger.TriggerInstance::new);
+            return instance.group(
+                    EntityPredicate.ADVANCEMENT_CODEC.optionalFieldOf("player").forGetter(GlowCampfireCookedTrigger.TriggerInstance::player),
+                    LocationPredicate.CODEC.optionalFieldOf("location").forGetter((GlowCampfireCookedTrigger.TriggerInstance::location))
+                ).apply(instance, GlowCampfireCookedTrigger.TriggerInstance::new);
             }
         );
 
