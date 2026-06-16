@@ -36,7 +36,9 @@ import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.level.pathfinder.PathComputationType;
 import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.shapes.BooleanOp;
 import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.thebrewingminer.glowlights.block.utils.BlockStateProperty;
 import net.thebrewingminer.glowlights.block.utils.GlowCampfireUtils;
@@ -155,7 +157,7 @@ public abstract class AbstractGlowCampfireBlock extends BaseEntityBlock implemen
         level.setBlock(pos, GlowCampfireUtils.cleanAsh(state), 3);
         level.playSound(null, pos, SoundEvents.SHOVEL_FLATTEN, SoundSource.BLOCKS, 1.0F, 1.0F);
         if (survivalMode) {
-            heldItem.hurtAndBreak(1, player, heldItem.getEquipmentSlot());
+            heldItem.hurtAndBreak(1, player, LivingEntity.getEquipmentSlotForItem(heldItem));
 
             ItemStack recoveredCharcoal = new ItemStack(Items.CHARCOAL, 1);
             Containers.dropItemStack(level, pos.getX(), pos.getY(), pos.getZ(), recoveredCharcoal);
@@ -262,6 +264,24 @@ public abstract class AbstractGlowCampfireBlock extends BaseEntityBlock implemen
     // Called to determine if a hay block is underneath (passed-in blockstate is below the block).
     protected boolean isSmokeSource(BlockState pState) {
         return pState.is(Blocks.HAY_BLOCK);
+    }
+
+    public static boolean isSmokeyPos(Level level, BlockPos pos) {
+        for (int i = 1; i <= 5; i++) {
+            BlockPos blockpos = pos.below(i);
+            BlockState blockstate = level.getBlockState(blockpos);
+            if (GlowCampfireUtils.canLight(blockstate)) {
+                return true;
+            }
+
+            boolean flag = Shapes.joinIsNotEmpty(VIRTUAL_FENCE_POST, blockstate.getCollisionShape(level, blockpos, CollisionContext.empty()), BooleanOp.AND); // FORGE: Fix MC-201374
+            if (flag) {
+                BlockState blockstate1 = level.getBlockState(blockpos.below());
+                return GlowCampfireUtils.canLight(blockstate1);
+            }
+        }
+
+        return false;
     }
 
     // Handles projectile interactions (e.g. flaming arrows, dispensed fire charge).
