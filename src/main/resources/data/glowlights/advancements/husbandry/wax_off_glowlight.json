@@ -75,8 +75,8 @@
     "frame": "task",
     "hidden": false,
     "icon": {
-      "item": "minecraft:iron_axe",
-      "nbt": "{Damage:0}"
+      "id": "minecraft:iron_axe",
+      "count": 1
     },
     "show_toast": true,
     "title": {

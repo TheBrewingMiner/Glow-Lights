@@ -70,7 +70,8 @@
     "frame": "task",
     "hidden": false,
     "icon": {
-      "item": "glowlights:copper_glow_torch"
+      "count": 1,
+      "id": "glowlights:copper_glow_torch"
     },
     "show_toast": true,
     "title": {

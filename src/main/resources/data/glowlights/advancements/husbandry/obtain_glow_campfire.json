@@ -20,7 +20,8 @@
     "frame": "task",
     "hidden": false,
     "icon": {
-      "item": "glowlights:glow_campfire"
+      "id": "glowlights:glow_campfire",
+      "count": 1
     },
     "show_toast": true,
     "title": {
