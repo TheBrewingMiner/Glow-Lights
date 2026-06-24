@@ -6,7 +6,7 @@
       "conditions": {
         "items": [
           {
-            "tag": "glowlights:glow_campfires"
+            "items": "#glowlights:glow_campfires"
           }
         ]
       }
