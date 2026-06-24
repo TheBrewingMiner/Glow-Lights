@@ -15,7 +15,7 @@
     "LLL"
   ],
   "result": {
-    "item": "glowlights:copper_glow_campfire",
+    "id": "glowlights:copper_glow_campfire",
     "count": 3
   }
 }

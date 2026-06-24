@@ -13,6 +13,6 @@
     "CCC"
   ],
   "result": {
-    "item": "minecraft:copper_ingot"
+    "id": "minecraft:copper_ingot"
   }
 }

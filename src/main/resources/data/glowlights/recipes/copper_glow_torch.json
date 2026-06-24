@@ -18,7 +18,7 @@
     }
   },
   "result": {
-    "item": "glowlights:copper_glow_torch",
+    "id": "glowlights:copper_glow_torch",
     "count": 4
   }
 }
