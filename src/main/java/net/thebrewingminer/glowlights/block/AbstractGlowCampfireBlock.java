@@ -18,7 +18,6 @@ import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.context.BlockPlaceContext;
-import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
@@ -153,11 +152,11 @@ public abstract class AbstractGlowCampfireBlock extends BaseEntityBlock implemen
 
     // Handles interactions with ShovelItem objects when the campfire is unlit with ash.
     // Updates the block's state, plays a sound, and returns a piece of charcoal in survival mode.
-    public static ItemInteractionResult handleCleaningCampfire(Level level, Player player, ItemStack heldItem, BlockState state, BlockPos pos, boolean survivalMode){
+    public static ItemInteractionResult handleCleaningCampfire(Level level, Player player, InteractionHand hand, ItemStack heldItem, BlockState state, BlockPos pos, boolean survivalMode){
         level.setBlock(pos, GlowCampfireUtils.cleanAsh(state), 3);
         level.playSound(null, pos, SoundEvents.SHOVEL_FLATTEN, SoundSource.BLOCKS, 1.0F, 1.0F);
         if (survivalMode) {
-            heldItem.hurtAndBreak(1, player, LivingEntity.getEquipmentSlotForItem(heldItem));
+            heldItem.hurtAndBreak(1, player, LivingEntity.getSlotForHand(hand));
 
             ItemStack recoveredCharcoal = new ItemStack(Items.CHARCOAL, 1);
             Containers.dropItemStack(level, pos.getX(), pos.getY(), pos.getZ(), recoveredCharcoal);
@@ -190,7 +189,7 @@ public abstract class AbstractGlowCampfireBlock extends BaseEntityBlock implemen
             if (coalsPresent){
                 // If the coals are still in the campfire (has ash when unlit)
                 // Handles "cleaning" the coals from the campfire.
-                if (heldItem.is(ItemTags.SHOVELS)) return handleCleaningCampfire(level, player, heldItem, state, pos, survivalMode);
+                if (heldItem.is(ItemTags.SHOVELS)) return handleCleaningCampfire(level, player, playerHand, heldItem, state, pos, survivalMode);
             } else {
                 // If coals are not still in the campfire
                 if (heldItem.is(ItemTags.COALS)) return handleRefuelingCampfire(level, state, pos, heldItem, survivalMode); // Handles refueling.
@@ -235,11 +234,11 @@ public abstract class AbstractGlowCampfireBlock extends BaseEntityBlock implemen
     @Override
     public void entityInside(BlockState state, Level level, BlockPos pos, Entity entity) {
         // Damage eligible entities; more so if in water.
-        if (isLit(state) && entity instanceof LivingEntity && !EnchantmentHelper.hasFrostWalker((LivingEntity)entity)) {
+        if (isLit(state) && entity instanceof LivingEntity) {
             float damageMultiplier = isWaterlogged(state) ? 2.5f : 1.0f;
             float damage = this.fireDamage * damageMultiplier;
 
-            entity.hurt(level.damageSources().inFire(), damage);
+            entity.hurt(level.damageSources().campfire(), damage);
         }
 
         super.entityInside(state, level, pos, entity);
