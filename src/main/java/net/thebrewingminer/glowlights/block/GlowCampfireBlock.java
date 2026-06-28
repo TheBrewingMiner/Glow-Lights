@@ -80,7 +80,7 @@ public class GlowCampfireBlock extends AbstractGlowCampfireBlock implements Simp
         }
 
         dowse(player, level, pos, state);
-//        if (survivalMode){ heldItem.hurtAndBreak(1, player, (p) -> p.broadcastBreakEvent(playerHand)); }
+        if (survivalMode){ heldItem.hurtAndBreak(1, player, heldItem.getEquipmentSlot()); }
 
         return ItemInteractionResult.SUCCESS;
     }
