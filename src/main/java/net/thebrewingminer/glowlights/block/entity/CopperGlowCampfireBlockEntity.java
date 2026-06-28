@@ -13,10 +13,7 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.*;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.CampfireCookingRecipe;
-import net.minecraft.world.item.crafting.RecipeHolder;
-import net.minecraft.world.item.crafting.RecipeManager;
-import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.WeatheringCopper;
@@ -41,7 +38,7 @@ public class CopperGlowCampfireBlockEntity extends BlockEntity implements Cleara
     protected final NonNullList<ItemStack> items;
     protected final int[] cookingProgress;
     protected final int[] cookingTime;
-    protected final RecipeManager.CachedCheck<Container, CampfireCookingRecipe> quickCheck;
+    protected final RecipeManager.CachedCheck<SingleRecipeInput, CampfireCookingRecipe> quickCheck = RecipeManager.createCheck(RecipeType.CAMPFIRE_COOKING);
 
     protected static int floatToIntScale = 100;
     public static final int SMOKE_DELAY = 20;
@@ -52,7 +49,6 @@ public class CopperGlowCampfireBlockEntity extends BlockEntity implements Cleara
         this.items = NonNullList.withSize(NUM_SLOTS, ItemStack.EMPTY);
         this.cookingProgress = new int[NUM_SLOTS];
         this.cookingTime = new int[NUM_SLOTS];
-        this.quickCheck = RecipeManager.createCheck(RecipeType.CAMPFIRE_COOKING);
     }
 
     // Gets the weather state (enum) from the copper block at the block-entity's position.
@@ -97,9 +93,12 @@ public class CopperGlowCampfireBlockEntity extends BlockEntity implements Cleara
                 blockEntity.cookingProgress[itemOnCampfire] += scaledCookSpeed;
 
                 if (blockEntity.cookingProgress[itemOnCampfire] >= (blockEntity.cookingTime[itemOnCampfire] * floatToIntScale)) {
-                    Container container = new SimpleContainer(itemStack);
-//                    ItemStack stack = blockEntity.quickCheck.getRecipeFor(container, level).map((campfireCookingRecipe) -> campfireCookingRecipe.assemble(container, level.registryAccess())).orElse(itemStack);
-                    ItemStack stack = blockEntity.quickCheck.getRecipeFor(container, level).map((campfireCookingRecipeHolder) -> campfireCookingRecipeHolder.value().assemble(container, level.registryAccess())).orElse(itemStack);
+                    SingleRecipeInput singleRecipeInput = new SingleRecipeInput(itemStack);
+//                    ItemStack stack = blockEntity.quickCheck.getRecipeFor(container, level).map((campfireCookingRecipeHolder) -> campfireCookingRecipeHolder.value().assemble(container, level.registryAccess())).orElse(itemStack);
+                    ItemStack stack = blockEntity.quickCheck
+                            .getRecipeFor(singleRecipeInput, level)
+                            .map(recipeHolder -> recipeHolder.value().assemble(singleRecipeInput, level.registryAccess()))
+                            .orElse(itemStack);
                     Containers.dropItemStack(level, pos.getX(), pos.getY(), pos.getZ(), stack);
                     blockEntity.items.set(itemOnCampfire, ItemStack.EMPTY);
 
@@ -218,7 +217,7 @@ public class CopperGlowCampfireBlockEntity extends BlockEntity implements Cleara
 
     // Gets the recipe for the passed-in item stack if it exists.
     public Optional<RecipeHolder<CampfireCookingRecipe>> getCookableRecipe(ItemStack itemStack) {
-        return this.items.stream().noneMatch(ItemStack::isEmpty) ? Optional.empty() : this.quickCheck.getRecipeFor(new SimpleContainer(itemStack), this.level);
+        return this.items.stream().noneMatch(ItemStack::isEmpty) ? Optional.empty() : this.quickCheck.getRecipeFor(new SingleRecipeInput(itemStack), this.level);
     }
 
     // Processes the player placing food into the campfire. Returns true if it succeeds.

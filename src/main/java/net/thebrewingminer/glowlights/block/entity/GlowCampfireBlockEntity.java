@@ -13,10 +13,7 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.*;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.CampfireCookingRecipe;
-import net.minecraft.world.item.crafting.RecipeHolder;
-import net.minecraft.world.item.crafting.RecipeManager;
-import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
@@ -39,7 +36,7 @@ public class GlowCampfireBlockEntity extends BlockEntity implements Clearable {
     protected final NonNullList<ItemStack> items;
     protected final int[] cookingProgress;
     protected final int[] cookingTime;
-    protected final RecipeManager.CachedCheck<Container, CampfireCookingRecipe> quickCheck;
+    protected final RecipeManager.CachedCheck<SingleRecipeInput, CampfireCookingRecipe> quickCheck = RecipeManager.createCheck(RecipeType.CAMPFIRE_COOKING);
 
     public static final int SMOKE_DELAY = 20;
 
@@ -49,7 +46,6 @@ public class GlowCampfireBlockEntity extends BlockEntity implements Clearable {
         this.items = NonNullList.withSize(NUM_SLOTS, ItemStack.EMPTY);
         this.cookingProgress = new int[NUM_SLOTS];
         this.cookingTime = new int[NUM_SLOTS];
-        this.quickCheck = RecipeManager.createCheck(RecipeType.CAMPFIRE_COOKING);
     }
 
     // Processes cooking for lit campfires.
@@ -67,8 +63,12 @@ public class GlowCampfireBlockEntity extends BlockEntity implements Clearable {
                 blockEntity.cookingProgress[itemOnCampfire]++;
 
                 if (blockEntity.cookingProgress[itemOnCampfire] >= blockEntity.cookingTime[itemOnCampfire]) {
-                    Container container = new SimpleContainer(itemStack);
-                    ItemStack stack = blockEntity.quickCheck.getRecipeFor(container, level).map((campfireCookingRecipe) -> campfireCookingRecipe.value().assemble(container, level.registryAccess())).orElse(itemStack);
+                    SingleRecipeInput singleRecipeInput = new SingleRecipeInput(itemStack);
+//                    ItemStack stack = blockEntity.quickCheck.getRecipeFor(singleRecipeInput, level).map((campfireCookingRecipe) -> campfireCookingRecipe.value().assemble(singleRecipeInput, level.registryAccess())).orElse(itemStack);
+                    ItemStack stack = blockEntity.quickCheck
+                            .getRecipeFor(singleRecipeInput, level)
+                            .map(recipeHolder -> recipeHolder.value().assemble(singleRecipeInput, level.registryAccess()))
+                            .orElse(itemStack);
                     Containers.dropItemStack(level, pos.getX(), pos.getY(), pos.getZ(), stack);
                     blockEntity.items.set(itemOnCampfire, ItemStack.EMPTY);
 
@@ -185,7 +185,7 @@ public class GlowCampfireBlockEntity extends BlockEntity implements Clearable {
 
     // Gets the recipe for the passed-in item stack if it exists.
     public Optional<RecipeHolder<CampfireCookingRecipe>> getCookableRecipe(ItemStack itemStack) {
-        return this.items.stream().noneMatch(ItemStack::isEmpty) ? Optional.empty() : this.quickCheck.getRecipeFor(new SimpleContainer(itemStack), this.level);
+        return this.items.stream().noneMatch(ItemStack::isEmpty) ? Optional.empty() : this.quickCheck.getRecipeFor(new SingleRecipeInput(itemStack), this.level);
     }
 
     // Processes the player placing food into the campfire. Returns true if it succeeds.
