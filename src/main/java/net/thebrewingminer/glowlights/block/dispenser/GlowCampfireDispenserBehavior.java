@@ -5,10 +5,11 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.dispenser.BlockSource;
 import net.minecraft.core.dispenser.DispenseItemBehavior;
 import net.minecraft.core.dispenser.OptionalDispenseItemBehavior;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.DispenserBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
@@ -37,7 +38,7 @@ public final class GlowCampfireDispenserBehavior {
 
                 @Override
                 protected ItemStack execute(BlockSource source, ItemStack itemStack) {
-                    Level level = source.level();
+                    ServerLevel level = source.level();
                     Direction facing = source.state().getValue(DispenserBlock.FACING);
                     BlockPos pos = source.pos().relative(facing);
                     BlockState state = level.getBlockState(pos);
@@ -58,7 +59,7 @@ public final class GlowCampfireDispenserBehavior {
                             this.setSuccess(false);
                         }
 
-                        if (this.isSuccess()){ itemStack.hurtAndBreak(1, level.getRandom(), null, () -> itemStack.setCount(0)); }
+                        if (this.isSuccess()){ itemStack.hurtAndBreak(1, level, null, (item) -> {}); }
 
                         return itemStack;
                     }
@@ -69,7 +70,5 @@ public final class GlowCampfireDispenserBehavior {
                 }
             }
         );
-
-        System.out.println("Glowlights: Running DispenserBlock.registerBehavior()");    // Sanity check.
     }
 }
