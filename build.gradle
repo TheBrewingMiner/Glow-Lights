@@ -61,6 +61,10 @@ repositories {
 
 dependencies {
     minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
+
+//     compileOnly "mezz.jei:jei-${minecraft_version}-common-api:${jei_version}"
+//     compileOnly "mezz.jei:jei-${minecraft_version}-forge-api:${jei_version}"
+//     runtimeOnly "mezz.jei:jei-${minecraft_version}-forge:${jei_version}"
 }
 
 mixin {
